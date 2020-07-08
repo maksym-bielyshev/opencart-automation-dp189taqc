@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
-from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton
+from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, LocatorSortBy, LocatorCategoryProducts, LocatorShowNumberProducts
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
@@ -44,7 +44,7 @@ class ShopCartDropdown:
 
 class BaseNavBar:
     """This class describes the top nav bar of the base page"""
-    def __init__(self, driver):
+    def __init__(self, driver: Remote):
         self._driver = driver
         self._currency = driver.find_element(*LocatorsNavBar.CURRENCY)
         self._nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
@@ -106,3 +106,23 @@ class BaseRightMenu:
     def click_newsletter(self):
         self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
 
+
+class LeftCategoryMenuComponent:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self.left_category_menu = driver.find_element(*LocatorCategoryProducts.CATEGORY_CONTENT)
+
+
+class SortByDropdownComponent:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self._drop_down = driver.find_element(*LocatorSortBy.DROP_DOWN)
+
+    def click_drop_down(self):
+        self._drop_down.click()
+
+
+class ShowNumberProductsDropdownComponent:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self.show_number_products = driver.find_element(*LocatorShowNumberProducts.DROP_DOWN)

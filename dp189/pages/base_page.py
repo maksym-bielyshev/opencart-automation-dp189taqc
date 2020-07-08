@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 
-from ..components import SearchArea, BaseNavBar, ShopCartButton
-from ..locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
+from dp189.components import SearchArea, BaseNavBar, ShopCartButton
+from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
 
 class BasePage:
     def __init__(self, driver):
@@ -47,4 +47,3 @@ class BasePage:
         self._my_account.click()
         self._my_account.find_element(*LocatorsNavBar.REGISTER).click()
         #return RegisterPage(self._driver)
-

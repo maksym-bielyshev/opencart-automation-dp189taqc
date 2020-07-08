@@ -59,3 +59,19 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorLeftCategoryMenu:
+    LEFT_CATEGORY_MENU = (By.ID, "column-left")
+
+
+class LocatorSortBy:
+    DROP_DOWN = (By.ID, "input-sort")
+
+
+class LocatorShowNumberProducts:
+    DROP_DOWN = (By.ID, "input-limit")
+
+
+class LocatorCategoryProducts:
+    CATEGORY_CONTENT = (By.ID, "content")
