@@ -1,10 +1,10 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
-from .pages.home_page import HomePage
+from core.pages.home_page import HomePage
 
 options = Options()
 options.add_argument('--ignore-certificate-errors')
-driver = Chrome('/Users/olexiyusov/PycharmProjects/selenium_project/drivers/chromedriver', options=options)
+driver = Chrome(options=options)
 driver.maximize_window()
 
 
