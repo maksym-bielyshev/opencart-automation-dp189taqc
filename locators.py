@@ -71,3 +71,29 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorsShoppingCartPage:
+    COUPON_FIELD = (By.ID, 'input-coupon')
+    COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
+
+    COUNTRY_SELECTOR = (By.ID, 'input-country')
+    REGION_SELECTOR = (By.ID, 'input-zone')
+    POST_CODE_FIELD = (By.ID, 'input-postcode')
+    GET_QUOTES_BUTTON = (By.ID, 'button-quote')
+
+    CERTIFICATE_FIELD = (By.ID, 'input-voucher')
+    CERTIFICATE_APPLY_BUTTON = (By.ID, 'button-voucher')
+
+    # PRODUCT_LINE = (By.XPATH, '//h1/following-sibling::form//tbody/tr')
+    PRODUCT_LINE = (By.CSS_SELECTOR, 'h1 ~ form tbody tr')
+
+    COUPON_PANEL = (By.XPATH, '//a[text() = "Use Coupon Code "]')
+    ESTIMATE_SHIPPING_PANEL = (By.XPATH, '//a[text() = "Estimate Shipping & Taxes "]')
+    GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
+
+    CONTINUE_SHIPPING_BUTTON = (By.XPATH, '//a[text()="Continue Shopping"]')
+    CHECKOUT_BUTTON = (By.XPATH, '//a[text()="Checkout"]')
+
+    SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
+    TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
