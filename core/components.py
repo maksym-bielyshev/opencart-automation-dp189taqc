@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
-from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton
+from core.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
