@@ -63,6 +63,23 @@ class LocatorsHomePage:
 
 class LocatorLeftCategoryMenu:
     LEFT_CATEGORY_MENU = (By.ID, 'column-left')
+    DESKTOPS = (By.XPATH, "//a[contains(text(),'Desktops (')]")
+    PC = (By.XPATH, "//a[contains(text(),'PC (')]")
+    MAC = (By.XPATH, "//a[contains(text(),'PC (')]")
+    LAPTOPS_AND_NOTEBOOKS = (By.XPATH, "//a[contains(text(),'Laptops & Notebooks (')]")
+    MACS = (By.XPATH, "//a[contains(text(),'Macs (')]")
+    WINDOWS = (By.XPATH, "//a[contains(text(),'Windows (')]")
+    COMPONENTS = (By.XPATH, "//a[contains(text(),'Components (')]")
+    MICE_AND_TRACKBALLS = (By.XPATH, "//a[contains(text(),'Mice and Trackballs (')]")
+    MONITORS = (By.XPATH, "//a[contains(text(),'Monitors (')]")
+    PRINTERS = (By.XPATH, "//a[contains(text(),'Printers (')]")
+    SCANNERS = (By.XPATH, "//a[contains(text(),'Scanners (')]")
+    WEB_CAMERAS = (By.XPATH, "//a[contains(text(),'Web Cameras (')]")
+    TABLETS = (By.XPATH, "//a[contains(text(),'Tablets (')]")
+    SOFTWARE = (By.XPATH, "//a[contains(text(),'Software (')]")
+    PHONES_AND_PDAS = (By.XPATH, "//a[contains(text(),'Phones & PDAs (')]")
+    CAMERAS = (By.XPATH, "//a[contains(text(),'Cameras (')]")
+    MP3_PLAYERS = (By.XPATH, "//a[contains(text(),'MP3 Players (')]")
 
 
 class LocatorSortBy:
