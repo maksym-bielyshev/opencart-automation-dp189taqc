@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, \
-    LocatorProductCompareLink
+    LocatorProductCompareLink, LocatorListViewButton, LocatorGridViewButton
 
 
 class SearchArea:
@@ -282,3 +282,12 @@ class ProductCompareLinkComponent:
 
     def click_product_compare_link(self):
         self._product_compare_link.click()
+
+
+class ListViewComponent:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self._list_view = driver.find_element(*LocatorListViewButton.BUTTON)
+
+    def click_list_view(self):
+        self._list_view.click()
