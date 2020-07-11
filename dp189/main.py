@@ -1,6 +1,6 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
-from .pages.home_page import HomePage
+from dp189.pages.home_page import HomePage
 
 options = Options()
 options.add_argument('--ignore-certificate-errors')
