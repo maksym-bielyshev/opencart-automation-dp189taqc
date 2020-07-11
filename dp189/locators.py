@@ -113,3 +113,7 @@ class LocatorProductCompareLink:
 
 class LocatorListViewButton:
     BUTTON = (By.ID, 'list-view')
+
+
+class LocatorGridViewButton:
+    BUTTON = (By.ID, 'grid-view')
