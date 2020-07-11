@@ -2,7 +2,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu, LocatorShowNumberProducts
+    LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, \
+    LocatorProductCompareLink
 
 
 class SearchArea:
@@ -272,3 +273,12 @@ class ShowNumberProductsDropdownComponent:
     def click_hundred(self):
         self.click_drop_down()
         self._hundred.click()
+
+
+class ProductCompareLink:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self._product_compare_link = driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE)
+
+    def click_product_compare_link(self):
+        self._product_compare_link.click()
