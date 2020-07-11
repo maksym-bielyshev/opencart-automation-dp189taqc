@@ -84,6 +84,15 @@ class LocatorsLeftCategoryMenu:
 
 class LocatorSortBy:
     DROP_DOWN = (By.ID, "input-sort")
+    DEFAULT = (By.XPATH, '//*[@id="input-sort"]/option[1]')
+    NAME_A_Z = (By.XPATH, '//*[@id="input-sort"]/option[2]')
+    NAME_Z_A = (By.XPATH, '//*[@id="input-sort"]/option[3]')
+    PRICE_LOW_HIGH = (By.XPATH, '//*[@id="input-sort"]/option[4]')
+    PRICE_HIGH_LOW = (By.XPATH, '//*[@id="input-sort"]/option[5]')
+    RATING_HIGHEST = (By.XPATH, '//*[@id="input-sort"]/option[6]')
+    RATING_LOWEST = (By.XPATH, '//*[@id="input-sort"]/option[7]')
+    MODEL_A_Z = (By.XPATH, '//*[@id="input-sort"]/option[8]')
+    MODEL_Z_A = (By.XPATH, '//*[@id="input-sort"]/option[9]')
 
 
 class LocatorShowNumberProducts:
