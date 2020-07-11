@@ -275,7 +275,7 @@ class ShowNumberProductsDropdownComponent:
         self._hundred.click()
 
 
-class ProductCompareLink:
+class ProductCompareLinkComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
         self._product_compare_link = driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE)
