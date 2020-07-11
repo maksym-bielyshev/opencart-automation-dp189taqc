@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LocatorsSearch:
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
     SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
@@ -10,14 +11,13 @@ class LocatorsNavBar:
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH,'.//ul/li[3]/button')
+    USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
-
     # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    #MY_ACCOUNT = (By.XPATH, './/li[2]/a')
+    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -62,6 +62,8 @@ class LocatorsHomePage:
 
 
 class LocatorsLeftCategoryMenu:
+    """Locators for a left menu in category page."""
+
     LEFT_CATEGORY_MENU = (By.ID, 'column-left')
 
     DESKTOPS = (By.XPATH, "//a[contains(text(),'Desktops (')]")
@@ -84,6 +86,8 @@ class LocatorsLeftCategoryMenu:
 
 
 class LocatorSortBy:
+    """Locators for a 'Sort By' drop-down."""
+
     DROP_DOWN = (By.ID, "input-sort")
 
     DEFAULT = (By.XPATH, '//*[@id="input-sort"]/option[1]')
@@ -98,6 +102,8 @@ class LocatorSortBy:
 
 
 class LocatorShowNumberProducts:
+    """Locator for a 'Show' (number of products) drop-down."""
+
     DROP_DOWN = (By.ID, "input-limit")
 
     FIFTEEN = (By.XPATH, '//*[@id="input-limit"]/option[1]')
@@ -108,12 +114,18 @@ class LocatorShowNumberProducts:
 
 
 class LocatorProductCompareLink:
+    """Locator for a 'Product Compare' link."""
+
     PRODUCT_COMPARE = (By.ID, 'compare-total')
 
 
 class LocatorListViewButton:
+    """Locator for a 'List' (view) button."""
+
     BUTTON = (By.ID, 'list-view')
 
 
 class LocatorGridViewButton:
+    """Locator for a 'Grid' (view) button."""
+
     BUTTON = (By.ID, 'grid-view')
