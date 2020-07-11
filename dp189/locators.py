@@ -105,3 +105,7 @@ class LocatorShowNumberProducts:
     FIFTY = (By.XPATH, '//*[@id="input-limit"]/option[3]')
     SEVENTY_FIVE = (By.XPATH, '//*[@id="input-limit"]/option[4]')
     HUNDRED = (By.XPATH, '//*[@id="input-limit"]/option[5]')
+
+
+class LocatorProductCompare:
+    PRODUCT_COMPARE = (By.ID, 'compare-total')
