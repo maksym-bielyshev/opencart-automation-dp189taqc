@@ -114,15 +114,15 @@ class LeftCategoryMenuComponent:
         self.left_category_menu = driver.find_element(*LocatorCategoryProducts.CATEGORY_CONTENT)
 
 
-class ProductWidgetComponent:
+class CategoryProductWidgetComponent:
     def __init__(self, driver, product_title):
         self.driver = driver
 
-        self.product_title = f"//*[contains(@class, 'product-thumb')]//a[contains(text(),'{product_title}')]"
+        self.product_title = f"//*[contains(@class, 'product-thumb')]//a[(text()='{product_title}')]"
 
-        self.shopping_cart_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[1]")
-        self.wish_list_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[2]")
-        self.compare_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[3]")
+        self.shopping_cart_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[1]")
+        self.wish_list_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[2]")
+        self.compare_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[3]")
 
     def add_to_shopping_cart(self):
         self.shopping_cart_button.click()
