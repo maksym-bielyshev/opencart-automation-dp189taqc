@@ -109,3 +109,7 @@ class LocatorShowNumberProducts:
 
 class LocatorProductCompareLink:
     PRODUCT_COMPARE = (By.ID, 'compare-total')
+
+
+class LocatorListViewButton:
+    BUTTON = (By.ID, 'list-view')
