@@ -2,7 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu
+    LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu, LocatorShowNumberProducts
 
 
 class SearchArea:
@@ -243,4 +243,32 @@ class SortByDropdownComponent:
 class ShowNumberProductsDropdownComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
-        self.show_number_products = driver.find_element(*LocatorShowNumberProducts.DROP_DOWN)
+        self._drop_down = driver.find_element(*LocatorShowNumberProducts.DROP_DOWN)
+        self._fifteen = driver.find_element(*LocatorShowNumberProducts.FIFTEEN)
+        self._twenty_five = driver.find_element(*LocatorShowNumberProducts.TWENTY_FIVE)
+        self._fifty = driver.find_element(*LocatorShowNumberProducts.FIFTY)
+        self._seventy_five = driver.find_element(*LocatorShowNumberProducts.SEVENTY_FIVE)
+        self._hundred = driver.find_element(*LocatorShowNumberProducts.HUNDRED)
+
+    def click_drop_down(self):
+        self._drop_down.click()
+
+    def click_fifteen(self):
+        self.click_drop_down()
+        self._fifteen.click()
+
+    def click_twenty_five(self):
+        self.click_drop_down()
+        self._twenty_five.click()
+
+    def click_fifty(self):
+        self.click_drop_down()
+        self._fifty.click()
+
+    def click_seventy_five(self):
+        self.click_drop_down()
+        self._seventy_five.click()
+
+    def click_hundred(self):
+        self.click_drop_down()
+        self._hundred.click()
