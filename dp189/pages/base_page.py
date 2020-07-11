@@ -1,9 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.keys import Keys
-
 from dp189.components import SearchArea, BaseNavBar, ShopCartButton
-from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
+from dp189.locators import LocatorYourStoreLink, LocatorsNavBar
 
 class BasePage:
     def __init__(self, driver):
