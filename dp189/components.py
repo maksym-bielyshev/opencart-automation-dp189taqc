@@ -291,3 +291,12 @@ class ListViewComponent:
 
     def click_list_view(self):
         self._list_view.click()
+
+
+class GridViewComponent:
+    def __init__(self, driver) -> None:
+        self._driver = driver
+        self._grid_view = driver.find_element(*LocatorGridViewButton.BUTTON)
+
+    def click_grid_view(self):
+        self._grid_view.click()
