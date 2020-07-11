@@ -62,7 +62,7 @@ class LocatorsHomePage:
 
 
 class LocatorLeftCategoryMenu:
-    LEFT_CATEGORY_MENU = (By.ID, "column-left")
+    LEFT_CATEGORY_MENU = (By.ID, 'column-left')
 
 
 class LocatorSortBy:

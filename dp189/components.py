@@ -1,4 +1,5 @@
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, LocatorSortBy, LocatorCategoryProducts, LocatorShowNumberProducts
 
@@ -111,6 +112,26 @@ class LeftCategoryMenuComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
         self.left_category_menu = driver.find_element(*LocatorCategoryProducts.CATEGORY_CONTENT)
+
+
+class ProductWidgetComponent:
+    def __init__(self, driver, product_title):
+        self.driver = driver
+
+        self.product_title = f"//*[contains(@class, 'product-thumb')]//a[contains(text(),'{product_title}')]"
+
+        self.shopping_cart_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[1]")
+        self.wish_list_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[2]")
+        self.compare_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[3]/button[3]")
+
+    def add_to_shopping_cart(self):
+        self.shopping_cart_button.click()
+
+    def add_to_wish_list(self):
+        self.wish_list_button.click()
+
+    def add_to_compare_button(self):
+        self.compare_button.click()
 
 
 class SortByDropdownComponent:
