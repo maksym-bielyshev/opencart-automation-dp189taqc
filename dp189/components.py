@@ -190,9 +190,54 @@ class SortByDropdownComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
         self._drop_down = driver.find_element(*LocatorSortBy.DROP_DOWN)
+        self._default = driver.find_element(*LocatorSortBy.DEFAULT)
+        self._name_a_z = driver.find_element(*LocatorSortBy.NAME_A_Z)
+        self._name_z_a = driver.find_element(*LocatorSortBy.NAME_Z_A)
+        self._price_low_high = driver.find_element(*LocatorSortBy.PRICE_LOW_HIGH)
+        self._price_high_low = driver.find_element(*LocatorSortBy.PRICE_HIGH_LOW)
+        self._rating_highest = driver.find_element(*LocatorSortBy.RATING_HIGHEST)
+        self._rating_lowest = driver.find_element(*LocatorSortBy.RATING_LOWEST)
+        self._model_a_z = driver.find_element(*LocatorSortBy.MODEL_A_Z)
+        self._model_z_a = driver.find_element(*LocatorSortBy.MODEL_Z_A)
 
     def click_drop_down(self):
         self._drop_down.click()
+
+    def click_default(self):
+        self.click_drop_down()
+        self._default()
+
+    def click_name_a_z(self):
+        self.click_drop_down()
+        self._name_a_z.click()
+
+    def click_name_z_a(self):
+        self.click_drop_down()
+        self._name_z_a.click()
+
+    def click_price_low_high(self):
+        self.click_drop_down()
+        self._price_low_high.click()
+
+    def click_price_high_low(self):
+        self.click_drop_down()
+        self._price_high_low.click()
+
+    def click_rating_highest(self):
+        self.click_drop_down()
+        self._rating_highest.click()
+
+    def click_rating_lowest(self):
+        self.click_drop_down()
+        self._rating_lowest.click()
+
+    def click_model_a_z(self):
+        self.click_drop_down()
+        self._model_a_z.click()
+
+    def click_model_z_a(self):
+        self.click_drop_down()
+        self._model_z_a.click()
 
 
 class ShowNumberProductsDropdownComponent:
