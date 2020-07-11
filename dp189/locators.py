@@ -63,6 +63,7 @@ class LocatorsHomePage:
 
 class LocatorsLeftCategoryMenu:
     LEFT_CATEGORY_MENU = (By.ID, 'column-left')
+
     DESKTOPS = (By.XPATH, "//a[contains(text(),'Desktops (')]")
     PC = (By.XPATH, "//a[contains(text(),'PC (')]")
     MAC = (By.XPATH, "//a[contains(text(),'PC (')]")
@@ -84,6 +85,7 @@ class LocatorsLeftCategoryMenu:
 
 class LocatorSortBy:
     DROP_DOWN = (By.ID, "input-sort")
+
     DEFAULT = (By.XPATH, '//*[@id="input-sort"]/option[1]')
     NAME_A_Z = (By.XPATH, '//*[@id="input-sort"]/option[2]')
     NAME_Z_A = (By.XPATH, '//*[@id="input-sort"]/option[3]')
@@ -98,6 +100,8 @@ class LocatorSortBy:
 class LocatorShowNumberProducts:
     DROP_DOWN = (By.ID, "input-limit")
 
-
-class LocatorCategoryProducts:
-    CATEGORY_CONTENT = (By.ID, "content")
+    FIFTEEN = (By.XPATH, '//*[@id="input-limit"]/option[1]')
+    TWENTY_FIVE = (By.XPATH, '//*[@id="input-limit"]/option[2]')
+    FIFTY = (By.XPATH, '//*[@id="input-limit"]/option[3]')
+    SEVENTY_FIVE = (By.XPATH, '//*[@id="input-limit"]/option[4]')
+    HUNDRED = (By.XPATH, '//*[@id="input-limit"]/option[5]')
