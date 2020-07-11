@@ -1,7 +1,9 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
-from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, LocatorSortBy, LocatorCategoryProducts, LocatorShowNumberProducts
+from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorSortBy, LocatorShowNumberProducts, LocatorsLeftCategoryMenu
+
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
@@ -111,7 +113,57 @@ class BaseRightMenu:
 class LeftCategoryMenuComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
-        self.left_category_menu = driver.find_element(*LocatorCategoryProducts.CATEGORY_CONTENT)
+
+    def click_desktops(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.DESKTOPS).click()
+
+    def click_pc(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.PC).click()
+
+    def click_mac(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.MAC).click()
+
+    def click_laptops_and_notebooks(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.LAPTOPS_AND_NOTEBOOKS).click()
+
+    def click_macs(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.MACS).click()
+
+    def click_windows(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.WINDOWS).click()
+
+    def click_components(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.COMPONENTS).click()
+
+    def click_mice_and_trackballs(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.MICE_AND_TRACKBALLS).click()
+
+    def click_monitors(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.MONITORS).click()
+
+    def click_printers(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.PRINTERS).click()
+
+    def click_scanners(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.SCANNERS).click()
+
+    def click_web_cameras(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.WEB_CAMERAS).click()
+
+    def click_tablets(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.TABLETS).click()
+
+    def click_software(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.SOFTWARE).click()
+
+    def click_phones_and_pdas(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.PHONES_AND_PDAS).click()
+
+    def click_cameras(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.CAMERAS).click()
+
+    def click_mp3_players(self):
+        self._driver.find_element(*LocatorsLeftCategoryMenu.MP3_PLAYERS).click()
 
 
 class CategoryProductWidgetComponent:

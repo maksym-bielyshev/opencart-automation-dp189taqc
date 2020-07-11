@@ -61,7 +61,7 @@ class LocatorsHomePage:
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
 
 
-class LocatorLeftCategoryMenu:
+class LocatorsLeftCategoryMenu:
     LEFT_CATEGORY_MENU = (By.ID, 'column-left')
     DESKTOPS = (By.XPATH, "//a[contains(text(),'Desktops (')]")
     PC = (By.XPATH, "//a[contains(text(),'PC (')]")
