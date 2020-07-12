@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorSortBy, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, LocatorProductCompareLink, \
-    LocatorListViewButton, LocatorGridViewButton, LocatorsShopCartDropdown
+    LocatorListViewButton, LocatorGridViewButton
 
 
 class SearchArea:
