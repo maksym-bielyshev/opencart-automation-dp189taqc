@@ -129,3 +129,10 @@ class LocatorGridViewButton:
     """Locator for a 'Grid' (view) button."""
 
     BUTTON = (By.ID, 'grid-view')
+
+
+class LocatorsShopCartDropdown:
+    """Locators for a black shop cart button."""
+
+    VIEW_CART = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[1]")
+    CHECKOUT = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[2]")
