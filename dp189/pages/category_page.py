@@ -10,9 +10,9 @@ class CategoryPage(BasePage):
     """Category page class."""
 
     def __init__(self, driver: Remote) -> None:
-        """All objects on product page.
+        """All objects on the category page.
 
-        :param driver: Remote
+        :param driver: Remote driver.
         """
         super().__init__(driver)
         self.category_title = driver.find_element_by_id("content")
