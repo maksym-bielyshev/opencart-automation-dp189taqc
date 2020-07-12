@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorSortBy, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, LocatorProductCompareLink, \
-    LocatorListViewButton, LocatorGridViewButton
+    LocatorListViewButton, LocatorGridViewButton, LocatorsShopCartDropdown
 
 
 class SearchArea:
@@ -42,8 +42,24 @@ class ShopCartButton:
 
 
 class ShopCartDropdown:
-    def __init__(self, driver):
-        pass
+    def __init__(self, driver, product_title):
+        self._driver = driver
+        self._product_title = driver.find_element(By.XPATH, f"//*[@id='cart']//ul//li//table//tbody//tr//td[2]//a[(text()='{product_title}')]")
+        self._remove_button = driver.find_element(By.XPATH, f"{self._product_title}/../../td[5]/button")
+        self._view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
+        self._checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
+
+    def click_product_title(self):
+        self._product_title.click()
+
+    def click_remove_button(self):
+        self._remove_button.click()
+
+    def click_view_cart_link(self):
+        self._view_cart_link.click()
+
+    def click_checkout_link(self):
+        self._checkout_link.click()
 
 
 class BaseNavBar:
