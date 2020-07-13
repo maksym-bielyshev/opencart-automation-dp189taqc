@@ -131,3 +131,7 @@ class LocatorGridViewButton:
     """Locator for a 'Grid' (view) button."""
 
     BUTTON = (By.ID, 'grid-view')
+
+
+class LocatorProductWidget:
+    PRODUCT_WIDGET = (By.CLASS_NAME, 'product-thumb')

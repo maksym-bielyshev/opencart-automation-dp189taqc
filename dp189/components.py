@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorSortBy, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, LocatorProductCompareLink, \
-    LocatorListViewButton, LocatorGridViewButton
+    LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget
 
 
 class SearchArea:
@@ -515,3 +515,13 @@ class GridViewComponent:
         :return: None
         """
         self._grid_view.click()
+
+
+class ListProductWidgetsComponent:
+    def __init__(self, driver):
+        self._driver = driver
+        self._list_product_widgets = []
+
+    def get_list_product_widgets(self):
+        self._list_product_widgets = self._driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
+        return self._list_product_widgets
