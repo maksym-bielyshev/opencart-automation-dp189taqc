@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
-
+#MacOS imports
 from ..components import SearchArea, BaseNavBar, ShopCartButton
 from ..locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
 

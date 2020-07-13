@@ -1,5 +1,7 @@
+print(__name__)
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
+#MacOS imports
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton
 
 class SearchArea:
