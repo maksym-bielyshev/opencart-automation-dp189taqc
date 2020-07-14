@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 
 from ..components import SearchArea, BaseNavBar, ShopCartButton
 from ..locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
+# from dp189.pages.shopping_cart_page import ShoppingCartPage
+
 
 class BasePage:
     def __init__(self, driver):
@@ -11,7 +13,7 @@ class BasePage:
         self._top_nav_bar = BaseNavBar(driver)
         self._my_account = driver.find_element(*LocatorsNavBar.MY_ACCOUNT)
         self._your_store_link = driver.find_element(*LocatorYourStoreLink.YOUR_STORE)
-        self._search = SearchArea(driver)
+        self.search = SearchArea(driver)
         self._shop_cart_button = ShopCartButton(self._driver)
     
     def click_currency_euro(self):
@@ -33,7 +35,7 @@ class BasePage:
 
     def click_shopping_cart(self):
         self._top_nav_bar.click_shopping_cart()
-        #return ShoppingCartPage(self._driver)
+        # return ShoppingCartPage(self._driver)
     
     def click_my_account(self):
         self._my_account.click()

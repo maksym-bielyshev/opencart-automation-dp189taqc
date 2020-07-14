@@ -1,18 +1,35 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
-from .pages.home_page import HomePage
-
-options = Options()
-options.add_argument('--ignore-certificate-errors')
-driver = Chrome('/Users/olexiyusov/PycharmProjects/selenium_project/drivers/chromedriver', options=options)
-driver.maximize_window()
+from dp189.pages.shopping_cart_page import ShoppingCartPage
+from selenium.webdriver.common.by import By
 
 
-driver.get('http://34.71.14.206/index.php?route=common/home')
+if __name__ == '__main__':
 
-#driver.implicitly_wait(15)
+    options = Options()
+    options.add_argument('--ignore-certificate-errors')
+    # driver = Chrome('C:/Users/Home/Downloads/chromedriver_win32/chromedriver.exe', options=options)
+    driver = Chrome(options=options)
+    driver.implicitly_wait(30)
+    # driver.maximize_window()
 
-page = HomePage(driver)
-page.add_product_to_cart('iPhone')
-#login_page = page.click_account_and_go_to_login()
-#login_page.login('smith@mail.com','12345')
+
+    driver.get('http://34.71.14.206/index.php?route=product/product&product_id=40')
+    driver.find_element(By.ID, 'button-cart').click()
+    driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=48')
+    driver.find_element(By.ID, 'button-cart').click()
+    driver.get('http://34.71.14.206/index.php?route=checkout/cart')
+
+    cart = ShoppingCartPage(driver)
+
+    cart.get_products_list()
+    # cart.change_product_quantity('iPod Classic', 5)
+    # driver.implicitly_wait(15)
+    # print(cart.get_product_quantity('iPod Classic'))
+    # print(cart.products_list)
+
+    # cart.get_product_total_price(48)
+
+    # txt = "http://34.71.14.206/index.php?route=product/product&product_id=42"
+    # x = txt.rsplit("product_id=")
+    # print(x[1])

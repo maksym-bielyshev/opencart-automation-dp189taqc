@@ -59,3 +59,44 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorsShoppingCartPage:
+    COUPON_FIELD = (By.ID, 'input-coupon')
+    COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
+
+    COUNTRY_SELECTOR = (By.ID, 'input-country')
+    REGION_SELECTOR = (By.ID, 'input-zone')
+    POST_CODE_FIELD = (By.ID, 'input-postcode')
+    GET_QUOTES_BUTTON = (By.ID, 'button-quote')
+    MODAL_SHIPPING_APPlY_BUTTON = (By.ID, 'button-shipping')
+
+    CERTIFICATE_FIELD = (By.ID, 'input-voucher')
+    CERTIFICATE_APPLY_BUTTON = (By.ID, 'button-voucher')
+
+    PRODUCT_LINES = (By.XPATH, '//h1/following-sibling::form//tbody/tr')
+    # PRODUCT_LINES = (By.CSS_SELECTOR, 'h1 ~ form tbody tr')
+
+    PRODUCT_NAME = (By.XPATH, './/td[2]/a')
+    PRODUCT_MODEL = (By.XPATH, './/td[3]')
+    PRODUCT_UNIT_PRICE = (By.XPATH, './/td[5]')
+    PRODUCT_TOTAL_PRICE = (By.XPATH, './/td[6]')
+    PRODUCT_QUANTITY = (By.XPATH, './/input')
+    PRODUCT_UPDATE_QUANTITY_BUTTON = (By.XPATH, './/button[@data-original-title="Update"]')
+    PRODUCT_REMOVE_BUTTON = (By.XPATH, './/button[@data-original-title="Remove"]')
+
+
+    COUPON_PANEL = (By.XPATH, '//a[text() = "Use Coupon Code "]')
+    ESTIMATE_SHIPPING_PANEL = (By.XPATH, '//a[text() = "Estimate Shipping & Taxes "]')
+    GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
+
+    MODAL_SHIPPING_CANCEL_BUTTON = (By.XPATH, '//*[@id="modal-shipping"]//button[text()="Cancel"]')
+
+    CONTINUE_SHIPPING_BUTTON = (By.XPATH, '//a[text()="Continue Shopping"]')
+    CHECKOUT_BUTTON = (By.XPATH, '//a[text()="Checkout"]')
+
+    FLAT_SHIPPING_RATE = (By.XPATH, '//td/strong[text()="Flat Shipping Rate:"]/../following-sibling::td')
+    COUPON_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Coupon")]'
+                            '/../following-sibling::td')
+    SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
+    TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
