@@ -193,9 +193,16 @@ class CategoryProductWidgetComponent:
 
         self.product_title = f"//*[contains(@class, 'product-thumb')]//a[(text()='{product_title}')]"
 
-        self.shopping_cart_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[1]")
-        self.wish_list_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[2]")
-        self.compare_button = driver.find_element(By.XPATH, f"{self.product_title}/../../../div[2]/button[3]")
+        SHOPPING_CART_BUTTON = 1
+        ADD_TO_WISH_LIST_BUTTON = 2
+        COMPARE_THIS_PRODUCT_BUTTON = 3
+
+        self.shopping_cart_button = driver.find_element\
+            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{SHOPPING_CART_BUTTON}]")
+        self.wish_list_button = driver.find_element\
+            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{ADD_TO_WISH_LIST_BUTTON}]")
+        self.compare_button = driver.find_element\
+            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{COMPARE_THIS_PRODUCT_BUTTON}]")
 
     def click_add_to_shopping_cart_button(self) -> None:
         """Click on the "Add to shopping cart" button.
