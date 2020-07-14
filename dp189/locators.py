@@ -59,3 +59,29 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorsProductPage:
+    PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
+    NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
+    PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
+    DESCRIPTION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[1]/a')
+    SPECIFICATION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[2]/a')
+    REVIEW_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
+    CONTINUE = (By.ID, 'button-review')
+    YOUR_NAME = (By.ID, 'input-name')
+    YOUR_REVIEW = (By.ID, 'input-review')
+    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
+    COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
+
+
+class LocatorsAvailableOptions:
+    ALL_OPTIONS = (By.CSS_SELECTOR, "#product")
+    CHECKBOX_GROUP = (By.XPATH, "//div[@class='checkbox']")
+    QUANTITY = (By.ID, 'input-quantity')
+    ADD_TO_CART = (By.ID, 'button-cart')
+    TEXT_FIELD = (By.XPATH, "//input[@value='test']")
+    DATE = (By.XPATH, "//input[@data-date-format='YYYY-MM-DD']")
+    TIME = (By.XPATH, "//input[@data-date-format='HH:mm']")
+    DATE_AND_TIME = (By.XPATH, "//input[@data-date-format='YYYY-MM-DD HH:mm']")
+    UPLOAD_FILE = (By.XPATH, "//*[text()[contains(.,'Upload File')]]/../input")
