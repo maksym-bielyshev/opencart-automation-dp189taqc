@@ -100,3 +100,24 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
+
+
+class LocatorsYourPersonalDetailsComponent:
+    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
+    LAST_NAME_FIELD = (By.ID, 'input-lastname')
+    EMAIL_FIELD = (By.ID, 'input-email')
+    TELEPHONE_FIELD = (By.ID, 'input-telephone')
+
+
+class LocatorsYourPasswordComponent:
+    PASSWORD_FIELD = (By.ID, 'input-password')
+    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
+
+
+class LocatorsRegisterPage:
+    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+
+
+class LocatorsNewsletterComponent:
+    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
