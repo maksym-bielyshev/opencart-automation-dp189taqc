@@ -72,16 +72,11 @@ class LocatorProductCompareLink:
     PRODUCT_COMPARE = (By.ID, 'compare-total')
 
 
-class LocatorListViewButton:
-    """Locator for a 'List' (view) button."""
+class LocatorsViewModeButton:
+    """Locator for a different view buttons."""
 
-    BUTTON = (By.ID, 'list-view')
-
-
-class LocatorGridViewButton:
-    """Locator for a 'Grid' (view) button."""
-
-    BUTTON = (By.ID, 'grid-view')
+    LIST_VIEW_BUTTON = (By.ID, 'list-view')
+    GRID_VIEW_BUTTON = (By.ID, 'grid-view')
 
 
 class LocatorProductWidget:

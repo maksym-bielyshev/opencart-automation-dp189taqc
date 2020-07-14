@@ -2,7 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget, \
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, \
     LocatorSuccessAddingMessage
 
 
@@ -287,11 +287,11 @@ class ProductCompareLinkComponent:
         self.product_compare_link.click()
 
 
-class ProductsViewComponent:
+class ProductsViewModeComponent:
     def __init__(self, driver: Remote) -> None:
         self._driver = driver
-        self.list_view_button = driver.find_element(*LocatorListViewButton.BUTTON)
-        self.grid_view_button = driver.find_element(*LocatorGridViewButton.BUTTON)
+        self.list_view_button = driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON)
+        self.grid_view_button = driver.find_element(*LocatorsViewModeButton.GRID_VIEW_BUTTON)
 
     def click_list_view_button(self) -> None:
         """Click on the 'List' button.
