@@ -59,3 +59,24 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorsYourPersonalDetailsComponent:
+    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
+    LAST_NAME_FIELD = (By.ID, 'input-lastname')
+    EMAIL_FIELD = (By.ID, 'input-email')
+    TELEPHONE_FIELD = (By.ID, 'input-telephone')
+
+
+class LocatorsYourPasswordComponent:
+    PASSWORD_FIELD = (By.ID, 'input-password')
+    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
+
+
+class LocatorsRegisterPage:
+    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+
+
+class LocatorsNewsletterComponent:
+    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
