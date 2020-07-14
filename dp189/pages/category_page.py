@@ -3,8 +3,7 @@
 from selenium.webdriver import Remote
 from dp189.pages.base_page import BasePage
 from dp189.components import SortByDropdownComponent, ShowNumberProductsDropdownComponent, \
-    ListViewComponent, GridViewComponent, CategoryProductWidgetComponent, ProductCompareLinkComponent, \
-    ProductWidgetsListComponent
+    ProductsViewComponent, CategoryProductWidgetComponent, ProductCompareLinkComponent, ProductWidgetsListComponent
 from dp189.locators import LocatorCategoryTitle
 
 
@@ -18,11 +17,10 @@ class CategoryPage(BasePage):
         """
         super().__init__(driver)
         self.category_title = driver.find_element(*LocatorCategoryTitle.CATEGORY_TITLE)
-        self.list_view = ListViewComponent(driver)
-        self.grid_view = GridViewComponent(driver)
+        self.products_view_button = ProductsViewComponent(driver)
         self.product_compare_link = ProductCompareLinkComponent(driver)
-        self.sort_by = SortByDropdownComponent(driver)
-        self.show_number_products = ShowNumberProductsDropdownComponent(driver)
+        self.sort_by_dropdown = SortByDropdownComponent(driver)
+        self.show_number_products_dropdown = ShowNumberProductsDropdownComponent(driver)
 
 
 if __name__ == "__main__":
@@ -41,6 +39,6 @@ if __name__ == "__main__":
 
     SortByDropdownComponent(driver).click_option("Model (Z - A)")
     ShowNumberProductsDropdownComponent(driver).click_option("100")
-    ListViewComponent(driver).click_list_view_button()
+    ProductsViewComponent(driver).click_list_view_button()
     CategoryProductWidgetComponent(driver, "iPhone").click_add_to_shopping_cart_button()
     CategoryProductWidgetComponent(driver, "Canon EOS 5D").click_add_to_wish_list_button()
