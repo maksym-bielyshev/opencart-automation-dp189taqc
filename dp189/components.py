@@ -1,8 +1,13 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage
+    LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
+    LocatorsNewsletterComponent
 
 
 class SearchArea:
@@ -112,56 +117,97 @@ class BaseRightMenu:
 
 
 class YourPersonalDetailsComponent:
-    def __init__(self, driver):
+    """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize input fields first name, last name, email, telephone.
+
+        :param driver: Remote.
+        """
         self._driver = driver
         self.first_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD)
         self.last_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD)
         self.email_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.EMAIL_FIELD)
         self.telephone_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD)
 
-    def fill_form(self):
-        pass
-
 
 class YourPasswordComponent:
-    def __init__(self, driver):
+    """Your password form сonsists two fields to fill password, password confirm."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize input fields password field, password confirm field.
+
+        :param driver: Remote
+        :return: None
+        """
         self._driver = driver
         self.password_field = InputFieldComponent(self._driver, LocatorsYourPasswordComponent.PASSWORD_FIELD)
         self.password_confirm_field = InputFieldComponent(self._driver,
                                                           LocatorsYourPasswordComponent.PASSWORD_CONFIRM_FIELD)
 
-    def fill_form(self):
-        pass
-
 
 class InputFieldComponent:
-    def __init__(self, driver, input_field_locator):
+    """An input field to fill with data from user."""
+
+    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
+        """Initialize the input field.
+
+        :param driver: Remote
+        :param input_field_locator: tuple (example: PASSWORD_FIELD=(By.ID, 'input-password'))
+        :return: None
+        """
         self._driver = driver
-        self.input_field = self._driver.find_element(*input_field_locator)
         self.input_field_locator = input_field_locator
 
-    def fill_field(self, data: str) -> None:
+    def clear_and_fill_input_field(self, data: str) -> None:
+        """Clear and fill input field with data.
+
+        :param data: str
+        :return: None
+        """
+        self.input_field = self._driver.find_element(*self.input_field_locator)
+        self.input_field.clear()
         self.input_field.send_keys(data)
 
-    def clear_field(self) -> None:
-        self.input_field.clear()
-
     def get_error_message_for_input_field(self) -> str:
-        self.error_message_locator = '#' + self.input_field_locator[1] + ' ~ div.text-danger'
-        self._error_massage = self._driver.find_element_by_css_selector(self.error_message_locator)
-        return self._error_massage.text
+        """Get error message for input field if it were incorrect data.
+
+        :return: str
+        """
+        self.error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
+        self.error_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.error_message_locator))
+        )
+        return self.error_message.text
 
 
 class NewsletterComponent:
-    def __init__(self, driver):
+    """Two radio buttons to subscribe or unsubscribe to newsletter."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize radio buttons.
+
+        :param driver: Remote
+        :return: None
+        """
         self._driver = driver
-        self.subscribe_radio_buttons = self._driver.find_elements(*LocatorsRegisterPage.SUBSCRIBE_RADIO_BUTTONS)
-        self.subscribe_radio_buttons_locator = LocatorsRegisterPage.SUBSCRIBE_RADIO_BUTTONS
+        self.subscribe_radio_buttons_locator = LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS
 
-    def get_status_for_radio_buttons(self):
+    def is_subscribed(self) -> bool:
+        """Check user is subscribed or not.
+
+        :return: bool
+        """
+        self.subscribe_radio_buttons = self._driver.find_elements(*self.subscribe_radio_buttons_locator)
         for button in self.subscribe_radio_buttons:
-            print('button: {} \t checked: {}'.format(button.get_attribute('value'), button.get_attribute('checked')))
+            if button.get_attribute('checked') == 'true' and button.get_attribute('value') == '1':
+                return True
+        return False
 
-    def subscribe_to_newsletter(self):
-        self.subscribe_to_newsletter_locator = '[' + self.subscribe_radio_buttons_locator[0] + '="' + self.subscribe_radio_buttons_locator[1] + '"][value="1"]'
+    def subscribe_to_newsletter(self) -> None:
+        """Subscribe to newsletter.
+
+        :return: None
+        """
+        self.subscribe_to_newsletter_locator = f'[{self.subscribe_radio_buttons_locator[0]}="{self.subscribe_radio_buttons_locator[1]}"][value="1"]'
         self._driver.find_element_by_css_selector(self.subscribe_to_newsletter_locator).click()

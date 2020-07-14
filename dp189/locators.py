@@ -74,6 +74,9 @@ class LocatorsYourPasswordComponent:
 
 
 class LocatorsRegisterPage:
-    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
     CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+
+
+class LocatorsNewsletterComponent:
+    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
