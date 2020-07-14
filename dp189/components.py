@@ -51,39 +51,39 @@ class ShopCartDropdownComponent:
         :param product_title: The title of the product.
         """
         self._driver = driver
-        self._product_title = driver.find_element(
+        self.product_title = driver.find_element(
             By.XPATH, f"//*[@id='cart']//ul//li//table//tbody//tr//td[2]//a[(text()='{product_title}')]")
-        self._remove_button = driver.find_element(By.XPATH, f"{self._product_title}/../../td[5]/button")
-        self._view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
-        self._checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
+        self.remove_button = driver.find_element(By.XPATH, f"{self.product_title}/../../td[5]/button")
+        self.view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
+        self.checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
 
     def click_product_title(self) -> None:
         """Click on the product title.
 
         :return: None.
         """
-        self._product_title.click()
+        self.product_title.click()
 
     def click_remove_button(self) -> None:
         """Click on the remove from the shopping cart button.
 
         :return:
         """
-        self._remove_button.click()
+        self.remove_button.click()
 
     def click_view_cart_link(self) -> None:
         """Click on the 'View Cart' link.
 
         :return: None.
         """
-        self._view_cart_link.click()
+        self.view_cart_link.click()
 
     def click_checkout_link(self) -> None:
         """Click on the 'Checkout' link.
 
         :return: None.
         """
-        self._checkout_link.click()
+        self.checkout_link.click()
 
 
 class BaseNavBar:
@@ -151,7 +151,7 @@ class BaseRightMenu:
         self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
 
 
-class ListProductWidgetsComponent:
+class ProductWidgetsListComponent:
     """All products on the 'Category' page."""
 
     def __init__(self, driver: Remote):
@@ -159,8 +159,8 @@ class ListProductWidgetsComponent:
 
         :param driver: Remote driver.
         """
-        self.driver = driver
-        self.list_product_widgets = []
+        self._driver = driver
+        self.product_widgets_list = []
 
     def open_category(self, category_title: str) -> None:
         """Open a specific category.
@@ -169,15 +169,15 @@ class ListProductWidgetsComponent:
         :return: None.
         """
         category_title = f"//div[@class='col-sm-6']//a[text()='{category_title}']"
-        self.driver.find_element(By.XPATH, category_title).click()
+        self._driver.find_element(By.XPATH, category_title).click()
 
     def get_list_product_widgets(self) -> list:
         """Get a list of all products on the 'Category' page.
 
         :return: List of all products on the 'Category' page.
         """
-        self.list_product_widgets = self.driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
-        return self.list_product_widgets
+        self.product_widgets_list = self._driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
+        return self.product_widgets_list
 
 
 class CategoryProductWidgetComponent:
@@ -186,10 +186,10 @@ class CategoryProductWidgetComponent:
     def __init__(self, driver: Remote, product_title: str) -> None:
         """Initialise the widget and the buttons.
 
-        :param driver: Remote river.
+        :param driver: Remote driver.
         :param product_title: The title of the product.
         """
-        self.driver = driver
+        self._driver = driver
 
         self.product_title = f"//*[contains(@class, 'product-thumb')]//a[(text()='{product_title}')]"
 
@@ -210,7 +210,7 @@ class CategoryProductWidgetComponent:
         :return: Message about success adding.
         """
         self.wish_list_button.click()
-        success_message = self.driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
+        success_message = self._driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
         return success_message
 
     def click_add_to_compare_button(self) -> object:
@@ -219,7 +219,7 @@ class CategoryProductWidgetComponent:
         :return: Message about success adding.
         """
         self.compare_button.click()
-        success_message = self.driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
+        success_message = self._driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
         return success_message
 
 
@@ -264,55 +264,38 @@ class ShowNumberProductsDropdownComponent:
 class ProductCompareLinkComponent:
     """A link to compare the products added to the comparison."""
 
-    def __init__(self, driver) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise the link.
 
-        :param driver: Driver.
+        :param driver: Remote driver.
         """
         self._driver = driver
-        self._product_compare_link = driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE)
+        self.product_compare_link = driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE)
 
     def click_product_compare_link(self) -> None:
         """Click on the 'Product Compare' link.
 
         :return: None.
         """
-        self._product_compare_link.click()
+        self.product_compare_link.click()
 
 
-class ListViewComponent:
-    """A button to switch on the list view."""
-
+class ProductsViewComponent:
     def __init__(self, driver: Remote) -> None:
-        """Initialise the button.
-
-        :param driver: Driver.
-        """
         self._driver = driver
-        self._list_view = driver.find_element(*LocatorListViewButton.BUTTON)
+        self.list_view_button = driver.find_element(*LocatorListViewButton.BUTTON)
+        self.grid_view_button = driver.find_element(*LocatorGridViewButton.BUTTON)
 
-    def click_list_view(self) -> None:
+    def click_list_view_button(self) -> None:
         """Click on the 'List' button.
 
         :return: None.
         """
-        self._list_view.click()
-
-
-class GridViewComponent:
-    """A button to switch on the list view."""
-
-    def __init__(self, driver: Remote) -> None:
-        """Initialise the button.
-
-        :param driver: Remote driver.
-        """
-        self._driver = driver
-        self._grid_view = driver.find_element(*LocatorGridViewButton.BUTTON)
+        self.list_view_button.click()
 
     def click_grid_view(self) -> None:
         """Click on the 'Grid' button.
 
         :return: None.
         """
-        self._grid_view.click()
+        self.grid_view_button.click()

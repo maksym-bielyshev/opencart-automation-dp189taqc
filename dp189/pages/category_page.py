@@ -4,7 +4,7 @@ from selenium.webdriver import Remote
 from dp189.pages.base_page import BasePage
 from dp189.components import SortByDropdownComponent, ShowNumberProductsDropdownComponent, \
     ListViewComponent, GridViewComponent, CategoryProductWidgetComponent, ProductCompareLinkComponent, \
-    ListProductWidgetsComponent
+    ProductWidgetsListComponent
 from dp189.locators import LocatorCategoryTitle
 
 
@@ -36,9 +36,11 @@ if __name__ == "__main__":
 
     driver.get('http://34.71.14.206/index.php?route=information/sitemap')
 
-    ListProductWidgetsComponent(driver).open_category("Desktops")
-    list = ListProductWidgetsComponent(driver).get_list_product_widgets()
+    ProductWidgetsListComponent(driver).open_category("Desktops")
+    list = ProductWidgetsListComponent(driver).get_list_product_widgets()
 
-    CategoryProductWidgetComponent(driver, "iPhone").click_add_to_shopping_cart_button()
     SortByDropdownComponent(driver).click_option("Model (Z - A)")
     ShowNumberProductsDropdownComponent(driver).click_option("100")
+    ListViewComponent(driver).click_list_view_button()
+    CategoryProductWidgetComponent(driver, "iPhone").click_add_to_shopping_cart_button()
+    CategoryProductWidgetComponent(driver, "Canon EOS 5D").click_add_to_wish_list_button()
