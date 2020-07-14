@@ -1,18 +1,16 @@
-from selenium.webdriver import Chrome
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from .pages.home_page import HomePage
+from dp189.pages.product_page import ProductPage
 
-options = Options()
-options.add_argument('--ignore-certificate-errors')
-driver = Chrome('/Users/olexiyusov/PycharmProjects/selenium_project/drivers/chromedriver', options=options)
-driver.maximize_window()
+if __name__ == '__main__':
+    options = Options()
+    options.add_argument('--ignore-certificate-errors')
+    my_driver = webdriver.Chrome('C:/chromedriver/chromedriver.exe', options=options)
+  #  my_driver.get('http://34.71.14.206/index.php?route=product/product&product_id=42')
+    my_driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
 
+    my_driver.maximize_window()
 
-driver.get('http://34.71.14.206/index.php?route=common/home')
+    product = ProductPage(my_driver)
 
-#driver.implicitly_wait(15)
-
-page = HomePage(driver)
-page.add_product_to_cart('iPhone')
-#login_page = page.click_account_and_go_to_login()
-#login_page.login('smith@mail.com','12345')
+    product.available_options.upload_file()
