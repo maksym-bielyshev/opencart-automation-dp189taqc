@@ -2,7 +2,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget
+    LocatorProductCompareLink, LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget, \
+    LocatorSuccessAddingMessage
 
 
 class SearchArea:
@@ -203,19 +204,23 @@ class CategoryProductWidgetComponent:
         """
         self.shopping_cart_button.click()
 
-    def click_add_to_wish_list_button(self) -> None:
+    def click_add_to_wish_list_button(self) -> object:
         """Click on the "Add to Wish List" button.
 
-        :return: None.
+        :return: Message about success adding.
         """
         self.wish_list_button.click()
+        success_message = self.driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
+        return success_message
 
-    def click_add_to_compare_button(self) -> None:
+    def click_add_to_compare_button(self) -> object:
         """Click on the "Compare this Product" button.
 
-        :return: None.
+        :return: Message about success adding.
         """
         self.compare_button.click()
+        success_message = self.driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
+        return success_message
 
 
 class SortByDropdownComponent:

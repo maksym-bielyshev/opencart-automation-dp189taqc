@@ -94,3 +94,7 @@ class LocatorCategoryTitle:
     """Category title text."""
 
     CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')
+
+
+class LocatorSuccessAddingMessage:
+    MESSAGE = (By.XPATH, "//div[@class='alert alert-success alert-dismissible']")
