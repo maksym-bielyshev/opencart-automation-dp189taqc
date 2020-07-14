@@ -48,6 +48,9 @@ class RightMenuLocators:
 class LocatorsShoppingCartButton:
     """Locators for a black shop cart button."""
 
+    SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
+    CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
+
     VIEW_CART = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[1]")
     CHECKOUT = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[2]")
 
@@ -61,58 +64,6 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
-
-
-class LocatorsLeftCategoryMenu:
-    """Locators for a left menu in category page."""
-
-    LEFT_CATEGORY_MENU = (By.ID, 'column-left')
-
-    DESKTOPS = (By.XPATH, "//a[contains(text(),'Desktops (')]")
-    PC = (By.XPATH, "//a[contains(text(),'PC (')]")
-    MAC = (By.XPATH, "//a[contains(text(),'PC (')]")
-    LAPTOPS_AND_NOTEBOOKS = (By.XPATH, "//a[contains(text(),'Laptops & Notebooks (')]")
-    MACS = (By.XPATH, "//a[contains(text(),'Macs (')]")
-    WINDOWS = (By.XPATH, "//a[contains(text(),'Windows (')]")
-    COMPONENTS = (By.XPATH, "//a[contains(text(),'Components (')]")
-    MICE_AND_TRACKBALLS = (By.XPATH, "//a[contains(text(),'Mice and Trackballs (')]")
-    MONITORS = (By.XPATH, "//a[contains(text(),'Monitors (')]")
-    PRINTERS = (By.XPATH, "//a[contains(text(),'Printers (')]")
-    SCANNERS = (By.XPATH, "//a[contains(text(),'Scanners (')]")
-    WEB_CAMERAS = (By.XPATH, "//a[contains(text(),'Web Cameras (')]")
-    TABLETS = (By.XPATH, "//a[contains(text(),'Tablets (')]")
-    SOFTWARE = (By.XPATH, "//a[contains(text(),'Software (')]")
-    PHONES_AND_PDAS = (By.XPATH, "//a[contains(text(),'Phones & PDAs (')]")
-    CAMERAS = (By.XPATH, "//a[contains(text(),'Cameras (')]")
-    MP3_PLAYERS = (By.XPATH, "//a[contains(text(),'MP3 Players (')]")
-
-
-class LocatorSortBy:
-    """Locators for a 'Sort By' drop-down."""
-
-    DROP_DOWN = (By.ID, "input-sort")
-
-    DEFAULT = (By.XPATH, '//*[@id="input-sort"]/option[1]')
-    NAME_A_Z = (By.XPATH, '//*[@id="input-sort"]/option[2]')
-    NAME_Z_A = (By.XPATH, '//*[@id="input-sort"]/option[3]')
-    PRICE_LOW_HIGH = (By.XPATH, '//*[@id="input-sort"]/option[4]')
-    PRICE_HIGH_LOW = (By.XPATH, '//*[@id="input-sort"]/option[5]')
-    RATING_HIGHEST = (By.XPATH, '//*[@id="input-sort"]/option[6]')
-    RATING_LOWEST = (By.XPATH, '//*[@id="input-sort"]/option[7]')
-    MODEL_A_Z = (By.XPATH, '//*[@id="input-sort"]/option[8]')
-    MODEL_Z_A = (By.XPATH, '//*[@id="input-sort"]/option[9]')
-
-
-class LocatorShowNumberProducts:
-    """Locator for a 'Show' (number of products) drop-down."""
-
-    DROP_DOWN = (By.ID, "input-limit")
-
-    FIFTEEN = (By.XPATH, '//*[@id="input-limit"]/option[1]')
-    TWENTY_FIVE = (By.XPATH, '//*[@id="input-limit"]/option[2]')
-    FIFTY = (By.XPATH, '//*[@id="input-limit"]/option[3]')
-    SEVENTY_FIVE = (By.XPATH, '//*[@id="input-limit"]/option[4]')
-    HUNDRED = (By.XPATH, '//*[@id="input-limit"]/option[5]')
 
 
 class LocatorProductCompareLink:
@@ -135,3 +86,9 @@ class LocatorGridViewButton:
 
 class LocatorProductWidget:
     PRODUCT_WIDGET = (By.CLASS_NAME, 'product-thumb')
+
+
+class LocatorCategoryTitle:
+    """Category title text."""
+
+    CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')

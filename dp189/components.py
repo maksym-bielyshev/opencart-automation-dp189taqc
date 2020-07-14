@@ -2,8 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorSortBy, LocatorsLeftCategoryMenu, LocatorShowNumberProducts, LocatorProductCompareLink, \
-    LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget
+    LocatorProductCompareLink, LocatorListViewButton, LocatorGridViewButton, LocatorProductWidget
 
 
 class SearchArea:
@@ -13,7 +12,7 @@ class SearchArea:
         self._search_field = driver.find_element(*LocatorsSearch.SEARCH_FIELD)
         self._search_button = driver.find_element(*LocatorsSearch.SEARCH_BUTTON)
 
-    
+
     def fill_search_field_and_hit_return(self, item: str):
         self._search_field.clear()
         self._search_field.send_keys(item).send_keys(Keys.RETURN)
@@ -38,27 +37,51 @@ class ShopCartButton:
         if len(cart_items) == 0:
             return 'Your cart is empty!'
         else:
-            return ShopCartDropdown(self._driver)
+            return ShopCartDropdownComponent(self._driver)
 
 
-class ShopCartDropdown:
-    def __init__(self, driver, product_title):
+class ShopCartDropdownComponent:
+    """Component for black shopping cart drop-down button."""
+
+    def __init__(self, driver: Remote, product_title: str) -> None:
+        """Initialise shopping cart drop-down button.
+
+        :param driver: Remote driver.
+        :param product_title: The title of the product.
+        """
         self._driver = driver
-        self._product_title = driver.find_element(By.XPATH, f"//*[@id='cart']//ul//li//table//tbody//tr//td[2]//a[(text()='{product_title}')]")
+        self._product_title = driver.find_element(
+            By.XPATH, f"//*[@id='cart']//ul//li//table//tbody//tr//td[2]//a[(text()='{product_title}')]")
         self._remove_button = driver.find_element(By.XPATH, f"{self._product_title}/../../td[5]/button")
         self._view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
         self._checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
 
-    def click_product_title(self):
+    def click_product_title(self) -> None:
+        """Click on the product title.
+
+        :return: None.
+        """
         self._product_title.click()
 
-    def click_remove_button(self):
+    def click_remove_button(self) -> None:
+        """Click on the remove from the shopping cart button.
+
+        :return:
+        """
         self._remove_button.click()
 
-    def click_view_cart_link(self):
+    def click_view_cart_link(self) -> None:
+        """Click on the 'View Cart' link.
+
+        :return: None.
+        """
         self._view_cart_link.click()
 
-    def click_checkout_link(self):
+    def click_checkout_link(self) -> None:
+        """Click on the 'Checkout' link.
+
+        :return: None.
+        """
         self._checkout_link.click()
 
 
@@ -127,144 +150,43 @@ class BaseRightMenu:
         self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
 
 
-class LeftCategoryMenuComponent:
-    """Left navigation menu on the category page."""
+class ListProductWidgetsComponent:
+    """All products on the 'Category' page."""
 
-    def __init__(self, driver) -> None:
-        """Initialise a driver.
+    def __init__(self, driver: Remote):
+        """Initialise a driver and an empty list.
 
-        :param driver: Initialisation of a driver.
+        :param driver: Remote driver.
         """
-        self._driver = driver
+        self.driver = driver
+        self.list_product_widgets = []
 
-    def click_desktops(self) -> None:
-        """Click on the 'Desktops' link.
+    def open_category(self, category_title: str) -> None:
+        """Open a specific category.
 
-        :return: None
+        :param category_title: The title of the category.
+        :return: None.
         """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.DESKTOPS).click()
+        category_title = f"//div[@class='col-sm-6']//a[text()='{category_title}']"
+        self.driver.find_element(By.XPATH, category_title).click()
 
-    def click_pc(self) -> None:
-        """Click on the 'PC' link.
+    def get_list_product_widgets(self) -> list:
+        """Get a list of all products on the 'Category' page.
 
-        :return: None
+        :return: List of all products on the 'Category' page.
         """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.PC).click()
-
-    def click_mac(self) -> None:
-        """Click on the 'Mac' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.MAC).click()
-
-    def click_laptops_and_notebooks(self) -> None:
-        """Click on the 'Laptops & Notebooks' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.LAPTOPS_AND_NOTEBOOKS).click()
-
-    def click_macs(self) -> None:
-        """Click on the 'Macs' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.MACS).click()
-
-    def click_windows(self) -> None:
-        """Click on the 'Windows' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.WINDOWS).click()
-
-    def click_components(self) -> None:
-        """Click on the 'Components' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.COMPONENTS).click()
-
-    def click_mice_and_trackballs(self) -> None:
-        """Click on the 'Mice and Trackballs' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.MICE_AND_TRACKBALLS).click()
-
-    def click_monitors(self) -> None:
-        """Click on the 'Monitors' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.MONITORS).click()
-
-    def click_printers(self) -> None:
-        """Click on the 'Printers' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.PRINTERS).click()
-
-    def click_scanners(self) -> None:
-        """Click on the 'Scanners' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.SCANNERS).click()
-
-    def click_web_cameras(self) -> None:
-        """Click on the 'Web Cameras' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.WEB_CAMERAS).click()
-
-    def click_tablets(self) -> None:
-        """Click on the 'Tablets' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.TABLETS).click()
-
-    def click_software(self) -> None:
-        """Click on the 'Software' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.SOFTWARE).click()
-
-    def click_phones_and_pdas(self) -> None:
-        """Click on the 'Phones & PDAs' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.PHONES_AND_PDAS).click()
-
-    def click_cameras(self) -> None:
-        """Click on the 'Cameras' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.CAMERAS).click()
-
-    def click_mp3_players(self) -> None:
-        """Click on the 'MP3 Players' link.
-
-        :return: None
-        """
-        self._driver.find_element(*LocatorsLeftCategoryMenu.MP3_PLAYERS).click()
+        self.list_product_widgets = self.driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
+        return self.list_product_widgets
 
 
 class CategoryProductWidgetComponent:
     """Widget for products on the category page."""
 
-    def __init__(self, driver, product_title: str) -> None:
+    def __init__(self, driver: Remote, product_title: str) -> None:
         """Initialise the widget and the buttons.
 
-        :param driver: Driver.
-        :param product_title: Title of a product.
+        :param driver: Remote river.
+        :param product_title: The title of the product.
         """
         self.driver = driver
 
@@ -277,187 +199,61 @@ class CategoryProductWidgetComponent:
     def click_add_to_shopping_cart_button(self) -> None:
         """Click on the "Add to shopping cart" button.
 
-        :return: None
+        :return: None.
         """
         self.shopping_cart_button.click()
 
     def click_add_to_wish_list_button(self) -> None:
         """Click on the "Add to Wish List" button.
 
-        :return: None
+        :return: None.
         """
         self.wish_list_button.click()
 
     def click_add_to_compare_button(self) -> None:
         """Click on the "Compare this Product" button.
 
-        :return: None
+        :return: None.
         """
         self.compare_button.click()
 
 
 class SortByDropdownComponent:
-    """A drop-down list with sorting options."""
+    """Sort products by provided option."""
 
-    def __init__(self, driver) -> None:
-        """All sorting options in a drop-down list.
+    def __init__(self, driver: Remote) -> None:
+        """Initialise a driver.
 
-        :param driver: Driver.
+        :param driver: Remote driver.
         """
         self._driver = driver
-        self._drop_down = driver.find_element(*LocatorSortBy.DROP_DOWN)
-        self._default = driver.find_element(*LocatorSortBy.DEFAULT)
-        self._name_a_z = driver.find_element(*LocatorSortBy.NAME_A_Z)
-        self._name_z_a = driver.find_element(*LocatorSortBy.NAME_Z_A)
-        self._price_low_high = driver.find_element(*LocatorSortBy.PRICE_LOW_HIGH)
-        self._price_high_low = driver.find_element(*LocatorSortBy.PRICE_HIGH_LOW)
-        self._rating_highest = driver.find_element(*LocatorSortBy.RATING_HIGHEST)
-        self._rating_lowest = driver.find_element(*LocatorSortBy.RATING_LOWEST)
-        self._model_a_z = driver.find_element(*LocatorSortBy.MODEL_A_Z)
-        self._model_z_a = driver.find_element(*LocatorSortBy.MODEL_Z_A)
 
-    def click_drop_down(self) -> None:
-        """Click on the sorting drop-down.
+    def click_option(self, option) -> None:
+        """Click on the specific option.
 
-        :return: None
+        :param option: Provided option to click on it.
+        :return: None.
         """
-        self._drop_down.click()
-
-    def click_default(self) -> None:
-        """Click on the sorting drop-down and on the 'Default' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._default()
-
-    def click_name_a_z(self) -> None:
-        """Click on the sorting drop-down and on the 'Name (A - Z)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._name_a_z.click()
-
-    def click_name_z_a(self) -> None:
-        """Click on the sorting drop-down and on the 'Name (Z - A)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._name_z_a.click()
-
-    def click_price_low_high(self) -> None:
-        """Click on the sorting drop-down and on the 'Price (Low > High)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._price_low_high.click()
-
-    def click_price_high_low(self) -> None:
-        """Click on the sorting drop-down and on the 'Price (High > Low)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._price_high_low.click()
-
-    def click_rating_highest(self) -> None:
-        """Click on the sorting drop-down and on the 'Rating (Highest)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._rating_highest.click()
-
-    def click_rating_lowest(self) -> None:
-        """Click on the sorting drop-down and on the 'Rating (Lowest)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._rating_lowest.click()
-
-    def click_model_a_z(self) -> None:
-        """Click on the sorting drop-down and on the 'Model (A - Z)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._model_a_z.click()
-
-    def click_model_z_a(self) -> None:
-        """Click on the sorting drop-down and on the 'Model (Z - A)' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._model_z_a.click()
+        self._driver.find_element(By.XPATH, f"//select[@id='input-sort']//option[.='{option}']").click()
 
 
 class ShowNumberProductsDropdownComponent:
-    """A drop-down list with number of displayed products options."""
+    """Show provided number of products."""
 
-    def __init__(self, driver) -> None:
-        """All options in a drop-down list.
+    def __init__(self, driver: Remote) -> None:
+        """Initialise a driver.
 
-        :param driver: Driver.
+        :param driver: Remote driver.
         """
         self._driver = driver
-        self._drop_down = driver.find_element(*LocatorShowNumberProducts.DROP_DOWN)
-        self._fifteen = driver.find_element(*LocatorShowNumberProducts.FIFTEEN)
-        self._twenty_five = driver.find_element(*LocatorShowNumberProducts.TWENTY_FIVE)
-        self._fifty = driver.find_element(*LocatorShowNumberProducts.FIFTY)
-        self._seventy_five = driver.find_element(*LocatorShowNumberProducts.SEVENTY_FIVE)
-        self._hundred = driver.find_element(*LocatorShowNumberProducts.HUNDRED)
 
-    def click_drop_down(self) -> None:
-        """Click on the drop-down.
+    def click_option(self, option):
+        """Click on the specific option.
 
-        :return: None
+        :param option: Provided option to click on it.
+        :return: None.
         """
-        self._drop_down.click()
-
-    def click_fifteen(self) -> None:
-        """Click on the sorting drop-down and on the '15' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._fifteen.click()
-
-    def click_twenty_five(self) -> None:
-        """Click on the sorting drop-down and on the '25' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._twenty_five.click()
-
-    def click_fifty(self) -> None:
-        """Click on the sorting drop-down and on the '50' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._fifty.click()
-
-    def click_seventy_five(self) -> None:
-        """Click on the sorting drop-down and on the '75' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._seventy_five.click()
-
-    def click_hundred(self) -> None:
-        """Click on the sorting drop-down and on the '100' option.
-
-        :return: None
-        """
-        self.click_drop_down()
-        self._hundred.click()
+        self._driver.find_element(By.XPATH, f"//select[@id='input-limit']//option[.='{option}']").click()
 
 
 class ProductCompareLinkComponent:
@@ -474,7 +270,7 @@ class ProductCompareLinkComponent:
     def click_product_compare_link(self) -> None:
         """Click on the 'Product Compare' link.
 
-        :return: None
+        :return: None.
         """
         self._product_compare_link.click()
 
@@ -482,7 +278,7 @@ class ProductCompareLinkComponent:
 class ListViewComponent:
     """A button to switch on the list view."""
 
-    def __init__(self, driver) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise the button.
 
         :param driver: Driver.
@@ -493,7 +289,7 @@ class ListViewComponent:
     def click_list_view(self) -> None:
         """Click on the 'List' button.
 
-        :return: None
+        :return: None.
         """
         self._list_view.click()
 
@@ -501,10 +297,10 @@ class ListViewComponent:
 class GridViewComponent:
     """A button to switch on the list view."""
 
-    def __init__(self, driver) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise the button.
 
-        :param driver: Driver.
+        :param driver: Remote driver.
         """
         self._driver = driver
         self._grid_view = driver.find_element(*LocatorGridViewButton.BUTTON)
@@ -512,16 +308,6 @@ class GridViewComponent:
     def click_grid_view(self) -> None:
         """Click on the 'Grid' button.
 
-        :return: None
+        :return: None.
         """
         self._grid_view.click()
-
-
-class ListProductWidgetsComponent:
-    def __init__(self, driver):
-        self._driver = driver
-        self._list_product_widgets = []
-
-    def get_list_product_widgets(self):
-        self._list_product_widgets = self._driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
-        return self._list_product_widgets
