@@ -85,6 +85,8 @@ class LocatorGridViewButton:
 
 
 class LocatorProductWidget:
+    """Locator for a widget of the product."""
+
     PRODUCT_WIDGET = (By.CLASS_NAME, 'product-thumb')
 
 
