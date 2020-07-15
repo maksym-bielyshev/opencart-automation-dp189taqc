@@ -80,3 +80,11 @@ class LocatorsRegisterPage:
 
 class LocatorsNewsletterComponent:
     SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+
+
+class LocatorsForgotPasswordPage:
+    """Locators fot the 'Forgot password' page."""
+
+    EMAIL_FIELD = (By.ID, "input-email")
+    BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
+    CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
