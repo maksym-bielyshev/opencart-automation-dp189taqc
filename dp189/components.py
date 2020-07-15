@@ -1,6 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -150,7 +151,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize the input field.
 
         :param driver: Remote
@@ -159,6 +160,7 @@ class InputFieldComponent:
         """
         self._driver = driver
         self.input_field_locator = input_field_locator
+        self.parent_element = parent_element
 
     def clear_and_fill_input_field(self, data: str) -> None:
         """Clear and fill input field with data.
@@ -166,7 +168,10 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        input_field = self._driver.find_element(*self.input_field_locator)
+        if self.parent_element:
+            input_field = self.parent_element.find_element(*self.input_field_locator)
+        else:
+            input_field = self._driver.find_element(*self.input_field_locator)
         input_field.clear()
         input_field.send_keys(data)
 
@@ -228,8 +233,9 @@ class NewsletterComponent:
 
 
 class AddAddressComponent:
-    def __init__(self, driver: Remote) -> None:
+    def __init__(self, driver: Remote, parent_locator: WebElement) -> None:
         self._driver = driver
+        self._parent_locator = parent_locator
         self.first_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.FIRST_NAME_INPUT)
         self.last_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.LAST_NAME_INPUT)
         self.company_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.COMPANY_INPUT)
