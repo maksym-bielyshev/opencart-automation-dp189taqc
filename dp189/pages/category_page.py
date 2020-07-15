@@ -21,20 +21,4 @@ class CategoryPage(BasePage):
         self.product_compare_link = ProductCompareLinkComponent(driver)
         self.sort_by_dropdown = SortByDropdownComponent(driver)
         self.show_number_products_dropdown = ShowNumberProductsDropdownComponent(driver)
-
-
-if __name__ == "__main__":
-    from selenium.webdriver import Chrome
-    from selenium.webdriver.chrome.options import Options
-
-    options = Options()
-    options.add_argument('--ignore-certificate-errors')
-    driver = Chrome(options=options)
-    driver.maximize_window()
-
-    driver.get('http://34.71.14.206/index.php?route=information/sitemap')
-    # driver.get('http://34.71.14.206/index.php?route=common/home')
-    #
-    ProductWidgetsListComponent(driver).open_category("Desktops")
-    # list = ProductWidgetsListComponent(driver).get_list_product_widgets()
-    ProductWidgetComponent(driver, "MacBook").click_add_to_shopping_cart_button()
+        self.product_widget_list = ProductWidgetsListComponent(driver)
