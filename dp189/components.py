@@ -4,10 +4,11 @@ from selenium.webdriver import Remote
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent
 
 
 class SearchArea:
@@ -165,20 +166,33 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        self.input_field = self._driver.find_element(*self.input_field_locator)
-        self.input_field.clear()
-        self.input_field.send_keys(data)
+        input_field = self._driver.find_element(*self.input_field_locator)
+        input_field.clear()
+        input_field.send_keys(data)
+
+    def choose_selector_by_text(self, data: str) -> None:
+        """Choose option by text in selector.
+
+        :param data: str
+        :return: None
+        """
+        selector = Select(self._driver.find_element(*self.input_field_locator))
+        selector.select_by_visible_text(data)
+
+    def check_radio_button(self, data: str) -> None:
+        radio_container = self._driver.find_element(*self.input_field_locator)
+        radio_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
     def get_error_message_for_input_field(self) -> str:
         """Get error message for input field if it were incorrect data.
 
         :return: str
         """
-        self.error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
-        self.error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, self.error_message_locator))
+        error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
+        error_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, error_message_locator))
         )
-        return self.error_message.text
+        return error_message.text
 
 
 class NewsletterComponent:
@@ -211,3 +225,19 @@ class NewsletterComponent:
         """
         self.subscribe_to_newsletter_locator = f'[{self.subscribe_radio_buttons_locator[0]}="{self.subscribe_radio_buttons_locator[1]}"][value="1"]'
         self._driver.find_element_by_css_selector(self.subscribe_to_newsletter_locator).click()
+
+
+class AddAddressComponent:
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
+        self.first_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.FIRST_NAME_INPUT)
+        self.last_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.LAST_NAME_INPUT)
+        self.company_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.COMPANY_INPUT)
+        self.address_1_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.ADDRESS_1_INPUT)
+        self.address_2_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.ADDRESS_2_INPUT)
+        self.city_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.CITY_INPUT)
+        self.post_code_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.POST_CODE_INPUT)
+        self.country = InputFieldComponent(self._driver, LocatorsAddAddressComponent.COUNTRY_SELECTOR)
+        self.region = InputFieldComponent(self._driver, LocatorsAddAddressComponent.REGION_SELECTOR)
+        self.default_address = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.DEFAULT_ADDRESS_RADIO_CONTAINER)

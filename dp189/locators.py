@@ -80,3 +80,20 @@ class LocatorsRegisterPage:
 
 class LocatorsNewsletterComponent:
     SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+
+
+class LocatorsAddAddressComponent:
+    FIRST_NAME_INPUT = (By.XPATH, '//input[@id="input-firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, '//input[@id="input-lastname"]')
+    COMPANY_INPUT = (By.XPATH, '//input[@id="input-company"]')
+    ADDRESS_1_INPUT = (By.XPATH, '//input[@id="input-address-1"]')
+    ADDRESS_2_INPUT = (By.XPATH, '//input[@id="input-address-2"]')
+    CITY_INPUT = (By.XPATH, '//input[@id="input-city"]')
+    POST_CODE_INPUT = (By.XPATH, '//input[@id="input-postcode"]')
+    COUNTRY_SELECTOR = (By.XPATH, '//select[@id="input-country"]')
+    REGION_SELECTOR = (By.XPATH, '//select[@id="input-zone"]')
+    DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
+
+class LocatorsAddAddressPage:
+    BACK_BUTTON = (By.XPATH, '//a[text()="Back"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@value="Continue"]')
