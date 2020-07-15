@@ -1,3 +1,5 @@
+from selenium.webdriver.common.by import By
+
 print(__name__)
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
@@ -47,30 +49,24 @@ class ShopCartDropdown:
 class BaseNavBar:
     """This class describes the top nav bar of the base page"""
     def __init__(self, driver):
-        self._driver = driver
-        self._currency = driver.find_element(*LocatorsNavBar.CURRENCY)
-        self._nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
+        self.driver = driver
+        self.currency = driver.find_element(*LocatorsNavBar.CURRENCY)
+        self.nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
 
-    def click_currency_euro(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.EUR).click()
+    def change_currency(self, specific_currency: str):
+        # """EUR, USD, GBP"""
+        self.currency.click()
+        self.driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
-    def click_currency_pound(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.POUND).click()
-
-    def click_currency_usd(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.USD).click()
 
     def click_contact_us(self):
-        self._nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
+        self.nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
 
     def click_wishlist(self):
-        self._nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
+        self.nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
 
     def click_shopping_cart(self):
-        self._nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
+        self.nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
 
 
 class BaseRightMenu:
