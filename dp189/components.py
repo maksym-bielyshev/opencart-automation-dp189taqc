@@ -188,7 +188,7 @@ class ProductWidgetsListComponent:
         return self.product_widgets_list
 
 
-class CategoryProductWidgetComponent:
+class ProductWidgetComponent:
     """Widget for products on the category page."""
 
     def __init__(self, driver: Remote, product_title: str) -> None:
@@ -198,44 +198,33 @@ class CategoryProductWidgetComponent:
         :param product_title: The title of the product.
         """
         self._driver = driver
-
-        self.product_title = f"//*[contains(@class, 'product-thumb')]//a[(text()='{product_title}')]"
-
-        SHOPPING_CART_BUTTON = 1
-        ADD_TO_WISH_LIST_BUTTON = 2
-        COMPARE_THIS_PRODUCT_BUTTON = 3
-
-        self.shopping_cart_button = driver.find_element\
-            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{SHOPPING_CART_BUTTON}]")
-        self.wish_list_button = driver.find_element\
-            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{ADD_TO_WISH_LIST_BUTTON}]")
-        self.compare_button = driver.find_element\
-            (By.XPATH, f"{self.product_title}/../../../div[2]/button[{COMPARE_THIS_PRODUCT_BUTTON}]")
+        self.product_title = product_title
 
     def click_add_to_shopping_cart_button(self) -> None:
         """Click on the "Add to shopping cart" button.
 
         :return: None.
         """
-        self.shopping_cart_button.click()
+        self._driver.find_element\
+            (By.XPATH, f"//a[text()='{self.product_title}']/../../..//span[text()='Add to Cart']/..").click()
 
-    def click_add_to_wish_list_button(self) -> object:
+    def click_add_to_wish_list_button(self) -> None:
         """Click on the "Add to Wish List" button.
 
-        :return: Message about success adding.
+        :return: None.
         """
-        self.wish_list_button.click()
-        success_message = self._driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
-        return success_message
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title ="Add to Wish List"]').click()
 
-    def click_add_to_compare_button(self) -> object:
+    def click_add_to_compare_button(self) -> None:
         """Click on the "Compare this Product" button.
 
-        :return: Message about success adding.
+        :return: None.
         """
-        self.compare_button.click()
-        success_message = self._driver.find_element(*LocatorSuccessAddingMessage.MESSAGE)
-        return success_message
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
 
 
 class SortByDropdownComponent:
