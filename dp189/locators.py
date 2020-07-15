@@ -60,6 +60,25 @@ class LocatorsHomePage:
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
 
+class LocatorsYourPersonalDetailsComponent:
+    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
+    LAST_NAME_FIELD = (By.ID, 'input-lastname')
+    EMAIL_FIELD = (By.ID, 'input-email')
+    TELEPHONE_FIELD = (By.ID, 'input-telephone')
+
+
+class LocatorsYourPasswordComponent:
+    PASSWORD_FIELD = (By.ID, 'input-password')
+    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
+
+
+class LocatorsRegisterPage:
+    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+
+
+class LocatorsNewsletterComponent:
+    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
 
 class LocatorsShoppingCartPage:
     COUPON_FIELD = (By.ID, 'input-coupon')
@@ -85,7 +104,6 @@ class LocatorsShoppingCartPage:
     PRODUCT_UPDATE_QUANTITY_BUTTON = (By.XPATH, './/button[@data-original-title="Update"]')
     PRODUCT_REMOVE_BUTTON = (By.XPATH, './/button[@data-original-title="Remove"]')
 
-
     COUPON_PANEL = (By.XPATH, '//a[text() = "Use Coupon Code "]')
     ESTIMATE_SHIPPING_PANEL = (By.XPATH, '//a[text() = "Estimate Shipping & Taxes "]')
     GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
@@ -100,24 +118,3 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
-
-
-class LocatorsYourPersonalDetailsComponent:
-    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
-    LAST_NAME_FIELD = (By.ID, 'input-lastname')
-    EMAIL_FIELD = (By.ID, 'input-email')
-    TELEPHONE_FIELD = (By.ID, 'input-telephone')
-
-
-class LocatorsYourPasswordComponent:
-    PASSWORD_FIELD = (By.ID, 'input-password')
-    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
-
-
-class LocatorsRegisterPage:
-    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
-    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
-
-
-class LocatorsNewsletterComponent:
-    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
