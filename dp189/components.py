@@ -59,7 +59,7 @@ class ShopCartDropdownComponent:
         """
         self._driver = driver
         self.product_title = driver.find_element(
-            By.XPATH, f"//*[@id='cart']//ul//li//table//tbody//tr//td[2]//a[(text()='{product_title}')]")
+            By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
         self.remove_button = driver.find_element(By.XPATH, f"{self.product_title}/../../td[5]/button")
         self.view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
         self.checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
