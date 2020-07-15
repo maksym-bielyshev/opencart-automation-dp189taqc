@@ -170,15 +170,6 @@ class ProductWidgetsListComponent:
         self._driver = driver
         self.product_widgets_list = []
 
-    def open_category(self, category_title: str) -> None:
-        """Open a specific category.
-
-        :param category_title: The title of the category.
-        :return: None.
-        """
-        category_title = f"//div[@class='col-sm-6']//a[text()='{category_title}']"
-        self._driver.find_element(By.XPATH, category_title).click()
-
     def get_list_product_widgets(self) -> list:
         """Get a list of all products on the 'Category' page.
 
