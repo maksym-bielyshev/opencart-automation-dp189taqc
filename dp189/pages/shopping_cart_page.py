@@ -38,7 +38,7 @@ class ShoppingCartPage(BasePage):
 
     def get_product_quantity(self, name: str) -> None:
         for product in self.products_list:
-            if product.name() == name:
+            if product.get_name() == name:
                 return product.get_quantity()
 
     def get_product_unit_price(self, name: str) -> None:
@@ -47,15 +47,13 @@ class ShoppingCartPage(BasePage):
                 return product.get_unit_price()
 
     def get_product_total_price(self, name: str) -> None:
-        print(self.products_list)
         for product in self.products_list:
-            print(product.name)
-            if product.name() == name:
+            if product.get_name() == name:
                 return product.get_total_price()
 
     def change_product_quantity(self, name: str, quantity) -> object:
         for product in self.products_list:
-            if product.name() == name:
+            if product.get_name() == name:
                 product.set_quantity(quantity)
                 product.click_update_button()
                 return ShoppingCartPage(self._driver)

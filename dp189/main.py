@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from dp189.pages.shopping_cart_page import ShoppingCartPage
@@ -29,12 +31,11 @@ if __name__ == '__main__':
     cart.get_products_list()
     # driver.implicitly_wait(15)
     print(cart.get_product_total_price('iPod Classic'))
-    cart.change_product_quantity('iPod Classic', 5)
+    cart = cart.change_product_quantity('iPod Classic', 5)
+    cart.get_products_list()
     # cart.get_products_list()
-    # driver.implicitly_wait(15)
-    cart_1 = ShoppingCartPage(driver)
-    cart_1.get_products_list()
-    print(cart.get_product_quantity('iPod Classic'))
+
+    print(cart.get_product_total_price('iPod Classic'))
     # print(cart.get_product_total_price('iPod Classic'))
 
 
