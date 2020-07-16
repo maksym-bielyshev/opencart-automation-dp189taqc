@@ -214,7 +214,6 @@ class ProductWidgetComponent:
         self._driver.find_element(
             By.XPATH,
             f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
-        # return ComparePage(self.driver)
 
 
 class SortByDropdownComponent:
@@ -265,6 +264,7 @@ class ProductCompareLinkComponent:
         """
         self._driver = driver
 
+    # Change to "def click_product_compare_link(self) -> ComparePage:" after creating this page and the docstring of the method.
     def click_product_compare_link(self) -> None:
         """Click on the 'Product Compare' link.
 
