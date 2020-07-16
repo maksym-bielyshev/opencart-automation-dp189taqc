@@ -91,10 +91,6 @@ class LocatorCategoryTitle:
     CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')
 
 
-class LocatorSuccessAddingMessage:
-    MESSAGE = (By.XPATH, "//div[@class='alert alert-success alert-dismissible']")
-
-
 class LocatorsYourPersonalDetailsComponent:
     FIRST_NAME_FIELD = (By.ID, 'input-firstname')
     LAST_NAME_FIELD = (By.ID, 'input-lastname')

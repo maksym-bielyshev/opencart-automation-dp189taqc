@@ -9,8 +9,7 @@ from selenium.webdriver.common.by import By
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
     LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, \
-    LocatorSuccessAddingMessage
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
 
 
 class SearchArea:
