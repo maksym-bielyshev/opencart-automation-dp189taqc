@@ -51,8 +51,8 @@ class LocatorsShoppingCartButton:
     SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
     CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
 
-    VIEW_CART = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[1]")
-    CHECKOUT = (By.XPATH, "//ul[@class='dropdown-menu pull-right']//li[2]//div//p//a[2]")
+    VIEW_CART = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[1]')
+    CHECKOUT = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[2]')
 
 
 class LocatorYourStoreLink:
@@ -115,6 +115,6 @@ class LocatorsNewsletterComponent:
 class LocatorsForgotPasswordPage:
     """Locators fot the 'Forgot password' page."""
 
-    EMAIL_FIELD = (By.ID, "input-email")
-    BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
-    CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
+    EMAIL_FIELD = (By.ID, 'input-email')
+    BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')

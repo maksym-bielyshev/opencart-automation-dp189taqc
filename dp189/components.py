@@ -196,7 +196,7 @@ class ProductWidgetComponent:
         :return: None.
         """
         self._driver.find_element\
-            (By.XPATH, f"//a[text()='{self.product_title}']/../../..//span[text()='Add to Cart']/..").click()
+            (By.XPATH, f'//a[text()="{self.product_title}"]/../../..//span[text()="Add to Cart"]/..').click()
 
     def click_add_to_wish_list_button(self) -> None:
         """Click on the "Add to Wish List" button.
@@ -252,7 +252,7 @@ class ShowNumberProductsDropdownComponent:
         :param option: Provided option to click on it.
         :return: None.
         """
-        self._driver.find_element(By.XPATH, f"//select[@id='input-limit']//option[.='{option}']").click()
+        self._driver.find_element(By.XPATH, f'//select[@id="input-limit"]//option[.="{option}"]').click()
 
 
 class ProductCompareLinkComponent:
