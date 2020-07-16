@@ -59,7 +59,7 @@ class ShopCartDropdownComponent:
         self._driver = driver
         self.product_title = driver.find_element(
             By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
-        self.remove_button = driver.find_element(By.XPATH, f"{self.product_title}/../../td[5]/button")
+        self.remove_button = driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button')
         self.view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
         self.checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
 
@@ -233,7 +233,7 @@ class SortByDropdownComponent:
         :param option: Provided option to click on it.
         :return: None.
         """
-        self._driver.find_element(By.XPATH, f"//select[@id='input-sort']//option[.='{option}']").click()
+        self._driver.find_element(By.XPATH, f'//select[@id="input-sort"]//option[.="{option}"]').click()
 
 
 class ShowNumberProductsDropdownComponent:
@@ -293,6 +293,7 @@ class ProductsViewModeComponent:
         :return: None.
         """
         self.grid_view_button.click()
+
 
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
