@@ -67,6 +67,7 @@ class LocatorsProductPage:
     ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
     COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
     PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
+    CLOSE_PHOTO = (By.XPATH, '//button[@title="Close (Esc)"]')
     NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
     PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
     EX_TAX = (By.XPATH, "//ul//li[contains(.,'Ex Tax')]/../li/h2")
