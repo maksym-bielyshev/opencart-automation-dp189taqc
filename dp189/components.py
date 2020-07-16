@@ -169,17 +169,6 @@ class InputFieldComponent:
         self.input_field.clear()
         self.input_field.send_keys(data)
 
-    def get_error_message_for_input_field(self) -> str:
-        """Get error message for input field if it were incorrect data.
-
-        :return: str
-        """
-        self.error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
-        self.error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, self.error_message_locator))
-        )
-        return self.error_message.text
-
 
 class NewsletterComponent:
     """Two radio buttons to subscribe or unsubscribe to newsletter."""
