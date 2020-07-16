@@ -56,6 +56,13 @@ class ProductPage(BasePage):
         """
         self._driver.find_element(*LocatorsProductPage.PHOTO).click()
 
+    def close_product_photo(self) -> None:
+        """Close the product photo.
+
+        :return: None
+        """
+        self._driver.find_element(*LocatorsProductPage.CLOSE_PHOTO).click()
+
     def switch_to_next_photo(self) -> None:
         """Switch to the next product photo.
 
@@ -119,48 +126,12 @@ class AvailableOptions:
         self.text_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_FIELD)
         self.text_area_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_AREA)
         self.data_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE)
+        self.time = InputFieldComponent(self._driver, LocatorsAvailableOptions.TIME)
+        self.date_and_time = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE_AND_TIME)
+        self.quantity = InputFieldComponent(self._driver, LocatorsAvailableOptions.QUANTITY)
         self.radio = RadioComponent(self._driver, LocatorsAvailableOptions.RADIO_CONTAINER)
         self.checkbox = CheckboxComponent(self._driver, LocatorsAvailableOptions.CHECKBOX_CONTAINER)
         self.select = SelectComponent(self._driver, LocatorsAvailableOptions.SELECT_CONTAINER)
-
-    def fill_date_field(self, input_date: str) -> None:
-        """Fill <date> field in the available options in the following format: <YYYY-MM-DD>.
-        For example: '2020-07-10'
-
-        :param input_date: str
-        :return: None
-        """
-        self._driver.find_element(*LocatorsAvailableOptions.DATE).clear()
-        self._driver.find_element(*LocatorsAvailableOptions.DATE).send_keys(input_date)
-
-    def fill_time_field(self, input_time: str) -> None:
-        """Fill <time> field in the available options in the following format: <HH:mm>.
-        For example: '22:59'
-
-        :param input_time: str
-        :return: None
-        """
-        self._driver.find_element(*LocatorsAvailableOptions.TIME).clear()
-        self._driver.find_element(*LocatorsAvailableOptions.TIME).send_keys(input_time)
-
-    def fill_date_and_time_field(self, input_date_and_time: str) -> None:
-        """Fill <date> and <time> field in the available options in the following format: <YYYY-MM-DD HH:mm>.
-        For example: '2020-07-10 22:35'
-
-        :param input_date_and_time: str
-        :return: None
-        """
-        self._driver.find_element(*LocatorsAvailableOptions.DATE_AND_TIME).clear()
-        self._driver.find_element(*LocatorsAvailableOptions.DATE_AND_TIME).send_keys(input_date_and_time)
-
-    def fill_quantity_field(self, input_quantity: int) -> None:
-        """Fill <quantity> field entering an integer value in the available options.
-
-        :param input_quantity: int
-        :return: None
-        """
-        self._driver.find_element(*LocatorsAvailableOptions.QUANTITY).clear()
-        self._driver.find_element(*LocatorsAvailableOptions.QUANTITY).send_keys(input_quantity)
 
     def click_add_to_cart_button(self) -> None:
         """Add specific product to Shopping Cart.
