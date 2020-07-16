@@ -6,7 +6,7 @@ Each field or button of the product page can be called using a separate method.
 from selenium.webdriver.common.by import By
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsProductPage, LocatorsReviewsTab, LocatorsAvailableOptions, LocatorsShoppingCartButton
-from dp189.components import InputFieldComponent, RadioComponent, CheckboxComponent, SelectComponent
+from dp189.components import InputFieldComponent, RadioButtonComponent, CheckboxComponent, DropdownComponent
 from selenium.webdriver import Remote
 import re
 from selenium.webdriver.support.wait import WebDriverWait
@@ -129,9 +129,9 @@ class AvailableOptions:
         self.time = InputFieldComponent(self._driver, LocatorsAvailableOptions.TIME)
         self.date_and_time = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE_AND_TIME)
         self.quantity = InputFieldComponent(self._driver, LocatorsAvailableOptions.QUANTITY)
-        self.radio = RadioComponent(self._driver, LocatorsAvailableOptions.RADIO_CONTAINER)
+        self.radio = RadioButtonComponent(self._driver, LocatorsAvailableOptions.RADIO_CONTAINER)
         self.checkbox = CheckboxComponent(self._driver, LocatorsAvailableOptions.CHECKBOX_CONTAINER)
-        self.select = SelectComponent(self._driver, LocatorsAvailableOptions.SELECT_CONTAINER)
+        self.select = DropdownComponent(self._driver, LocatorsAvailableOptions.SELECT_CONTAINER)
 
     def click_add_to_cart_button(self) -> None:
         """Add specific product to Shopping Cart.
@@ -153,23 +153,8 @@ class ReviewsTab:
         :param driver: Remote
         """
         self._driver = driver
-
-    def fill_your_name_field(self, input_your_name: str) -> None:
-        """Fill 'Your Name' field in Reviews Tab.
-
-        :param input_your_name: str
-        :return: None
-        """
-        self._driver.find_element(*LocatorsReviewsTab.YOUR_NAME).clear()
-        self._driver.find_element(*LocatorsReviewsTab.YOUR_NAME).send_keys(input_your_name)
-
-    def fill_your_review_field(self, input_your_review: str) -> None:
-        """Fill 'Your Review' field in Reviews Tab.
-
-        :param input_your_review: str
-        :return: None
-        """
-        self._driver.find_element(*LocatorsReviewsTab.YOUR_REVIEW).send_keys(input_your_review)
+        self.your_name = InputFieldComponent(self._driver, LocatorsReviewsTab.YOUR_NAME)
+        self.your_review = InputFieldComponent(self._driver, LocatorsReviewsTab.YOUR_REVIEW)
 
     def choose_review_rating(self, rating: int) -> None:
         """Choose review rating about product by clicking the button.

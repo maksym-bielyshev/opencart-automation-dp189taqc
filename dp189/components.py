@@ -189,7 +189,7 @@ class InputFieldComponent:
         return error_message.text
 
 
-class RadioComponent:
+class RadioButtonComponent:
     pass
 
 
@@ -197,7 +197,7 @@ class CheckboxComponent:
     pass
 
 
-class SelectComponent:
+class DropdownComponent:
     pass
 
 

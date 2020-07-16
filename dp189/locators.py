@@ -78,9 +78,9 @@ class LocatorsProductPage:
 
 class LocatorsReviewsTab:
     """Locators for Reviews Tab on Product page. """
-    YOUR_NAME = (By.ID, 'input-name')
-    YOUR_REVIEW = (By.ID, 'input-review')
     CONTINUE = (By.ID, 'button-review')
+    YOUR_NAME = (By.XPATH, '//input[@id="input-name"]')
+    YOUR_REVIEW = (By.XPATH, '//textarea[@id="input-review"]')
     REVIEW_ERROR_MESSAGE = (
         By.XPATH, '//div[@id="review"]/following-sibling::div[@class="alert alert-danger alert-dismissible"]')
 
