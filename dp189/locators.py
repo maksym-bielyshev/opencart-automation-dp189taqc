@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LocatorsSearch:
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
     SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
@@ -10,14 +11,13 @@ class LocatorsNavBar:
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH,'.//ul/li[3]/button')
+    USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
-
     # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    #MY_ACCOUNT = (By.XPATH, './/li[2]/a')
+    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -62,30 +62,37 @@ class LocatorsHomePage:
 
 
 class LocatorsProductPage:
+    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
+    COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
     PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
     NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
     PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
+    EX_TAX = (By.XPATH, "//ul//li[contains(.,'Ex Tax')]/../li/h2")
     DESCRIPTION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[1]/a')
     SPECIFICATION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[2]/a')
-    REVIEW_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
-    CONTINUE = (By.ID, 'button-review')
+    REVIEWS_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
+
+
+class LocatorsReviewsTab:
     YOUR_NAME = (By.ID, 'input-name')
     YOUR_REVIEW = (By.ID, 'input-review')
-    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
-    COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
+    CONTINUE = (By.ID, 'button-review')
+    REVIEW_ERROR_MESSAGE = (
+        By.XPATH, '//div[@id="review"]/following-sibling::div[@class="alert alert-danger alert-dismissible"]')
 
 
 class LocatorsAvailableOptions:
-    ALL_OPTIONS = (By.CSS_SELECTOR, "#product")
-    CHECKBOX_GROUP = (By.XPATH, "//div[@class='checkbox']")
     QUANTITY = (By.ID, 'input-quantity')
     ADD_TO_CART = (By.ID, 'button-cart')
-    TEXT_FIELD = (By.XPATH, "//input[@value='test']")
-    DATE = (By.XPATH, "//input[@data-date-format='YYYY-MM-DD']")
-    TIME = (By.XPATH, "//input[@data-date-format='HH:mm']")
-    DATE_AND_TIME = (By.XPATH, "//input[@data-date-format='YYYY-MM-DD HH:mm']")
-    UPLOAD_FILE = (By.XPATH, "//*[text()[contains(.,'Upload File')]]/../input")
-
+    ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
+    TEXT_FIELD = (By.XPATH, '//input[@value="test"]')
+    DATE = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD"]')
+    TIME = (By.XPATH, '//input[@data-date-format="HH:mm"]')
+    DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
+    TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
+    CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
 
 
 class LocatorsYourPersonalDetailsComponent:
