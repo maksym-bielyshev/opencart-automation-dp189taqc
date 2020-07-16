@@ -233,17 +233,24 @@ class NewsletterComponent:
 
 
 class AddAddressComponent:
-    def __init__(self, driver: Remote, parent_locator: WebElement) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         self._driver = driver
-        self._parent_locator = parent_locator
-        self.first_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.FIRST_NAME_INPUT)
-        self.last_name_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.LAST_NAME_INPUT)
-        self.company_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.COMPANY_INPUT)
-        self.address_1_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.ADDRESS_1_INPUT)
-        self.address_2_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.ADDRESS_2_INPUT)
-        self.city_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.CITY_INPUT)
-        self.post_code_field = InputFieldComponent(self._driver, LocatorsAddAddressComponent.POST_CODE_INPUT)
-        self.country = InputFieldComponent(self._driver, LocatorsAddAddressComponent.COUNTRY_SELECTOR)
-        self.region = InputFieldComponent(self._driver, LocatorsAddAddressComponent.REGION_SELECTOR)
-        self.default_address = InputFieldComponent(self._driver,
-                                                   LocatorsAddAddressComponent.DEFAULT_ADDRESS_RADIO_CONTAINER)
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsAddAddressComponent.FIRST_NAME_INPUT, self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.LAST_NAME_INPUT, self._parent_element)
+        self.company_field = InputFieldComponent(self._driver,
+                                                 LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
+        self.address_1_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_1_INPUT, self._parent_element)
+        self.address_2_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_2_INPUT, self._parent_element)
+        self.city_field = InputFieldComponent(self._driver,
+                                              LocatorsAddAddressComponent.CITY_INPUT, self._parent_element)
+        self.post_code_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.POST_CODE_INPUT, self._parent_element)
+        self.country = InputFieldComponent(self._driver,
+                                           LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
+        self.region = InputFieldComponent(self._driver,
+                                          LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)

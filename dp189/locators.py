@@ -83,17 +83,20 @@ class LocatorsNewsletterComponent:
 
 
 class LocatorsAddAddressComponent:
-    FIRST_NAME_INPUT = (By.XPATH, '//input[@id="input-firstname"]')
-    LAST_NAME_INPUT = (By.XPATH, '//input[@id="input-lastname"]')
-    COMPANY_INPUT = (By.XPATH, '//input[@id="input-company"]')
-    ADDRESS_1_INPUT = (By.XPATH, '//input[@id="input-address-1"]')
-    ADDRESS_2_INPUT = (By.XPATH, '//input[@id="input-address-2"]')
-    CITY_INPUT = (By.XPATH, '//input[@id="input-city"]')
-    POST_CODE_INPUT = (By.XPATH, '//input[@id="input-postcode"]')
-    COUNTRY_SELECTOR = (By.XPATH, '//select[@id="input-country"]')
-    REGION_SELECTOR = (By.XPATH, '//select[@id="input-zone"]')
-    DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
+    FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
+    ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
+    ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
+    CITY_INPUT = (By.XPATH, '//input[@name="city"]')
+    POST_CODE_INPUT = (By.XPATH, '//input[@name="postcode"]')
+    COUNTRY_SELECTOR = (By.XPATH, '//select[@name="country_id"]')
+    REGION_SELECTOR = (By.XPATH, '//select[@name="zone_id"]')
+
 
 class LocatorsAddAddressPage:
+    ADDRESS_CONTENT = (By.ID, 'content')
+
+    DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
     BACK_BUTTON = (By.XPATH, '//a[text()="Back"]')
     CONTINUE_BUTTON = (By.XPATH, '//input[@value="Continue"]')
