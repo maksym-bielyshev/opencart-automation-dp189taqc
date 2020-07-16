@@ -11,13 +11,14 @@ class LocatorsNavBar:
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH, './/ul/li[3]/button')
+    USD = (By.XPATH,'.//ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
+
     # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
+    #MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -114,3 +115,11 @@ class LocatorsRegisterPage:
 
 class LocatorsNewsletterComponent:
     SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+
+
+class LocatorsForgotPasswordPage:
+    """Locators fot the 'Forgot password' page."""
+
+    EMAIL_FIELD = (By.ID, "input-email")
+    BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
+    CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
