@@ -165,20 +165,40 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        self.input_field = self._driver.find_element(*self.input_field_locator)
-        self.input_field.clear()
-        self.input_field.send_keys(data)
+        input_field = self._driver.find_element(*self.input_field_locator)
+        input_field.clear()
+        input_field.send_keys(data)
+
+    def choose_checkbox_option(self, data: str) -> None:
+        checkbox_container = self._driver.find_element(*self.input_field_locator)
+        checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
+
+    def choose_radio_option(self, data: str) -> None:
+        radio_container = self._driver.find_element(*self.input_field_locator)
+        radio_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
     def get_error_message_for_input_field(self) -> str:
         """Get error message for input field if it were incorrect data.
 
         :return: str
         """
-        self.error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
-        self.error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, self.error_message_locator))
+        error_message_locator = f'{self.input_field_locator[1]}/following-sibling::div[@class="text-danger"]'
+        error_message = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, error_message_locator))
         )
-        return self.error_message.text
+        return error_message.text
+
+
+class RadioComponent:
+    pass
+
+
+class CheckboxComponent:
+    pass
+
+
+class SelectComponent:
+    pass
 
 
 class NewsletterComponent:
