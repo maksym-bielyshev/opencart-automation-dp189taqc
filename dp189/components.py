@@ -272,7 +272,7 @@ class ProductCompareLinkComponent:
         """
         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
         # Delete comment after creating this page.
-        # return ComparePage()
+        # return ComparePage(self.driver)
 
 
 class ProductsViewModeComponent:
