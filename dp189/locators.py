@@ -94,6 +94,7 @@ class LocatorsForgotPasswordPage:
 
 class LocatorsWishListPage:
     # TODO correct xpathes
+    ITEMS = (By.XPATH, "//div/table/tbody/tr/td[@class='text-left']//a")
     PRODUCT_NAME = (By.XPATH, "//td[@class='text-left']//a")
     ADD_PRODUCT_TO_CARD = (By.XPATH, "../../td[@class='text-right']/button[@class='btn btn-primary']")
     DELETE_PRODUCT_FROM_CARD = (By.XPATH, "../../td[@class='text-right']/a[@class='btn btn-danger']")
