@@ -264,8 +264,9 @@ class ProductCompareLinkComponent:
         """
         self._driver = driver
 
-    # Change to "def click_product_compare_link(self) -> ComparePage:" after creating this page and the docstring of the method.
+    # Change the type hint to "def click_product_compare_link(self) -> ComparePage:" after creating this page.
     def open_compare_page(self) -> None:
+        # Change the docstring of this method to "Click on the 'Product Compare' link and return ComparePage" and :return: ComparePage after creating this page."
         """Click on the 'Product Compare' link.
 
         :return: None.
