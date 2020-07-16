@@ -63,6 +63,7 @@ class LocatorsHomePage:
 
 
 class LocatorsProductPage:
+    """Main locators for Product page."""
     ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
     COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
     PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
@@ -75,6 +76,7 @@ class LocatorsProductPage:
 
 
 class LocatorsReviewsTab:
+    """Locators for Reviews Tab on Product page. """
     YOUR_NAME = (By.ID, 'input-name')
     YOUR_REVIEW = (By.ID, 'input-review')
     CONTINUE = (By.ID, 'button-review')
@@ -83,6 +85,7 @@ class LocatorsReviewsTab:
 
 
 class LocatorsAvailableOptions:
+    """Locators for Available options on Product page."""
     QUANTITY = (By.ID, 'input-quantity')
     ADD_TO_CART = (By.ID, 'button-cart')
     ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
@@ -118,7 +121,7 @@ class LocatorsNewsletterComponent:
 
 
 class LocatorsForgotPasswordPage:
-    """Locators fot the 'Forgot password' page."""
+    """Locators for the 'Forgot password' page."""
 
     EMAIL_FIELD = (By.ID, "input-email")
     BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
