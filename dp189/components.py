@@ -61,7 +61,7 @@ class BaseNavBar:
     def change_currency(self, specific_currency: str):
         # """EUR, USD, GBP"""
         self.currency.click()
-        self.driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
+        self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
 
     def click_contact_us(self):
