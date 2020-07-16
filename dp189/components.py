@@ -265,7 +265,7 @@ class ProductCompareLinkComponent:
         self._driver = driver
 
     # Change to "def click_product_compare_link(self) -> ComparePage:" after creating this page and the docstring of the method.
-    def click_product_compare_link(self) -> None:
+    def open_compare_page(self) -> None:
         """Click on the 'Product Compare' link.
 
         :return: None.
