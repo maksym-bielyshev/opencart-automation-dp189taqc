@@ -11,6 +11,9 @@ from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Locator
     LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
 
+# Delete the comment after creating this page.
+# from dp189.pages.compare_page import ComparePage
+
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
@@ -57,11 +60,7 @@ class ShopCartDropdownComponent:
         :param product_title: The title of the product.
         """
         self._driver = driver
-        self.product_title = driver.find_element(
-            By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
-        self.remove_button = driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button')
-        self.view_cart_link = driver.find_element(*LocatorsShoppingCartButton.VIEW_CART)
-        self.checkout_link = driver.find_element(*LocatorsShoppingCartButton.CHECKOUT)
+        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
 
     def click_product_title(self) -> None:
         """Click on the product title.
@@ -75,21 +74,21 @@ class ShopCartDropdownComponent:
 
         :return:
         """
-        self.remove_button.click()
+        self._driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button').click()
 
     def click_view_cart_link(self) -> None:
         """Click on the 'View Cart' link.
 
         :return: None.
         """
-        self.view_cart_link.click()
+        self._driver.find_element(*LocatorsShoppingCartButton.VIEW_CART).click()
 
     def click_checkout_link(self) -> None:
         """Click on the 'Checkout' link.
 
         :return: None.
         """
-        self.checkout_link.click()
+        self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
 
 class BaseNavBar:
@@ -215,6 +214,7 @@ class ProductWidgetComponent:
         self._driver.find_element(
             By.XPATH,
             f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
+        # return ComparePage(self.driver)
 
 
 class SortByDropdownComponent:
@@ -264,35 +264,36 @@ class ProductCompareLinkComponent:
         :param driver: Remote driver.
         """
         self._driver = driver
-        self.product_compare_link = driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE)
 
     def click_product_compare_link(self) -> None:
         """Click on the 'Product Compare' link.
 
         :return: None.
         """
-        self.product_compare_link.click()
+        self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
+        # Delete comment after creating this page.
+        # return ComparePage()
 
 
 class ProductsViewModeComponent:
+    """Two buttons to change the view of the products."""
+
     def __init__(self, driver: Remote) -> None:
         self._driver = driver
-        self.list_view_button = driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON)
-        self.grid_view_button = driver.find_element(*LocatorsViewModeButton.GRID_VIEW_BUTTON)
 
     def click_list_view_button(self) -> None:
         """Click on the 'List' button.
 
         :return: None.
         """
-        self.list_view_button.click()
+        self._driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON).click()
 
     def click_grid_view(self) -> None:
         """Click on the 'Grid' button.
 
         :return: None.
         """
-        self.grid_view_button.click()
+        self._driver.find_element(*LocatorsViewModeButton.GRID_VIEW_BUTTON).click()
 
 
 class YourPersonalDetailsComponent:
