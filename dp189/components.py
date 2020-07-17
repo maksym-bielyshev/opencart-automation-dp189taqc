@@ -12,8 +12,7 @@ from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Locator
     LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
 
-# Delete the comment after creating this page.
-# from dp189.pages.compare_page import ComparePage
+from dp189.pages.compare_page import ComparePage
 
 
 class SearchArea:
@@ -227,16 +226,13 @@ class ProductCompareLinkComponent:
         """
         self._driver = driver
 
-    # Change the type hint to "def click_product_compare_link(self) -> ComparePage:" after creating this page.
-    def open_compare_page(self) -> None:
-        # Change the docstring of this method to "Click on the 'Product Compare' link and return ComparePage" and :return: ComparePage after creating this page."
-        """Click on the 'Product Compare' link.
+    def open_compare_page(self) -> ComparePage:
+        """Click on the 'Product Compare' link and return the 'Compare' page.
 
-        :return: None.
+        :return: Page which compare selected products.
         """
         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
-        # Delete comment after creating this page.
-        # return ComparePage(self.driver)
+        return ComparePage(self._driver)
 
 
 class ProductsViewModeComponent:
