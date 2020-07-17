@@ -98,6 +98,27 @@ class LocatorsForgotPasswordPage:
     CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
 
 
+class LocatorsAddAddressComponent:
+    """Locators fot the 'Add Address' component."""
+    FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
+    ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
+    ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
+    CITY_INPUT = (By.XPATH, '//input[@name="city"]')
+    POST_CODE_INPUT = (By.XPATH, '//input[@name="postcode"]')
+    COUNTRY_SELECTOR = (By.XPATH, '//select[@name="country_id"]')
+    REGION_SELECTOR = (By.XPATH, '//select[@name="zone_id"]')
+
+
+class LocatorsAddAddressPage:
+    """Locators fot the 'Add Address' page."""
+    ADDRESS_CONTENT = (By.ID, 'content')
+
+    DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
+    BACK_BUTTON = (By.XPATH, '//a[text()="Back"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@value="Continue"]')
+
 
 class LocatorsWishListPage:
     # TODO correct xpathes
