@@ -62,6 +62,44 @@ class LocatorsHomePage:
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
 
 
+class LocatorsProductPage:
+    """Main locators for Product page."""
+    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
+    COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
+    PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
+    CLOSE_PHOTO = (By.XPATH, '//button[@title="Close (Esc)"]')
+    NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
+    PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
+    EX_TAX = (By.XPATH, "//ul//li[contains(.,'Ex Tax')]/../li/h2")
+    DESCRIPTION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[1]/a')
+    SPECIFICATION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[2]/a')
+    REVIEWS_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
+
+
+class LocatorsReviewsTab:
+    """Locators for Reviews Tab on Product page. """
+    CONTINUE = (By.ID, 'button-review')
+    YOUR_NAME = (By.XPATH, '//input[@id="input-name"]')
+    YOUR_REVIEW = (By.XPATH, '//textarea[@id="input-review"]')
+    REVIEW_ERROR_MESSAGE = (
+        By.XPATH, '//div[@id="review"]/following-sibling::div[@class="alert alert-danger alert-dismissible"]')
+
+
+class LocatorsAvailableOptions:
+    """Locators for Available options on Product page."""
+    QUANTITY = (By.ID, 'input-quantity')
+    ADD_TO_CART = (By.ID, 'button-cart')
+    ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
+    TEXT_FIELD = (By.XPATH, '//input[@value="test"]')
+    DATE = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD"]')
+    TIME = (By.XPATH, '//input[@data-date-format="HH:mm"]')
+    DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
+    TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
+    CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
+
+
 class LocatorsYourPersonalDetailsComponent:
     """Locators fot the 'Your Personal Details' component."""
 
@@ -92,7 +130,7 @@ class LocatorsNewsletterComponent:
 
 
 class LocatorsForgotPasswordPage:
-    """Locators fot the 'Forgot password' page."""
+    """Locators for the 'Forgot password' page."""
 
     EMAIL_FIELD = (By.ID, "input-email")
     BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
