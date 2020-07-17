@@ -115,5 +115,8 @@ class LocatorsGiftCertificatePage:
 
 class LocatorsComparePage:
     # TODO correct xpathes
-    ITEM = (By.PARTIAL_LINK_TEXT, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
+    ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
+    ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
+    REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
+
 
