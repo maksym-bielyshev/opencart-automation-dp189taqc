@@ -2,14 +2,16 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
 
 from dp189.pages.compare_page import ComparePage
@@ -289,7 +291,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize the input field.
 
         :param driver: Remote
@@ -298,6 +300,11 @@ class InputFieldComponent:
         """
         self._driver = driver
         self.input_field_locator = input_field_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.input_field = self.parent_element.find_element(*self.input_field_locator)
+        else:
+            self.input_field = self._driver.find_element(*self.input_field_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
@@ -314,7 +321,7 @@ class InputFieldComponent:
 class RadioButtonComponent:
     """Radio buttons to choose some option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, radio_buttons_locator: tuple) -> None:
+    def __init__(self, driver: Remote, radio_buttons_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize radio buttons.
 
         :param driver: Remote
@@ -323,8 +330,12 @@ class RadioButtonComponent:
         """
         self._driver = driver
         self.radio_buttons_locator = radio_buttons_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.radio_buttons_container = self.parent_element.find_element(*self.radio_buttons_locator)
+        else:
+            self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
-        self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -346,7 +357,7 @@ class RadioButtonComponent:
 class CheckboxComponent:
     """Checkbox to choose option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, checkbox_locator: tuple) -> None:
+    def __init__(self, driver: Remote, checkbox_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize checkbox.
 
         :param driver: Remote
@@ -355,8 +366,12 @@ class CheckboxComponent:
         """
         self._driver = driver
         self.checkbox_locator = checkbox_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.checkbox_container = self.parent_element.find_element(*self.checkbox_locator)
+        else:
+            self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
-        self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -378,7 +393,7 @@ class CheckboxComponent:
 class DropdownComponent:
     """Drop-down menu to choose option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, dropdown_locator: tuple) -> None:
+    def __init__(self, driver: Remote, dropdown_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize drop-down.
 
         :param driver: Remote
@@ -387,8 +402,12 @@ class DropdownComponent:
         """
         self._driver = driver
         self.dropdown_locator = dropdown_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
+        else:
+            self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
         self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
-        self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -463,3 +482,35 @@ class NewsletterComponent:
         """
         self.subscribe_to_newsletter_locator = f'[{self.subscribe_radio_buttons_locator[0]}="{self.subscribe_radio_buttons_locator[1]}"][value="1"]'
         self._driver.find_element_by_css_selector(self.subscribe_to_newsletter_locator).click()
+
+
+class AddAddressComponent:
+    """Add Address form сonsists from fields: First Name, Last Name, Company,
+    Address 1, Address 2, City, Country, Region."""
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
+        """Initialize input form fields and dropdown form fields.
+
+        :param driver: Remote
+        :param parent_element: WebElement
+        :return: None
+        """
+        self._driver = driver
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsAddAddressComponent.FIRST_NAME_INPUT, self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.LAST_NAME_INPUT, self._parent_element)
+        self.company_field = InputFieldComponent(self._driver,
+                                                 LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
+        self.address_1_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_1_INPUT, self._parent_element)
+        self.address_2_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_2_INPUT, self._parent_element)
+        self.city_field = InputFieldComponent(self._driver,
+                                              LocatorsAddAddressComponent.CITY_INPUT, self._parent_element)
+        self.post_code_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.POST_CODE_INPUT, self._parent_element)
+        self.country = DropdownComponent(self._driver,
+                                         LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
+        self.region = DropdownComponent(self._driver,
+                                        LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)

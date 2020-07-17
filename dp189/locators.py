@@ -90,6 +90,44 @@ class LocatorCategoryTitle:
     CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')
 
 
+class LocatorsProductPage:
+    """Main locators for Product page."""
+    ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
+    COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
+    PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
+    CLOSE_PHOTO = (By.XPATH, '//button[@title="Close (Esc)"]')
+    NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
+    PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
+    EX_TAX = (By.XPATH, "//ul//li[contains(.,'Ex Tax')]/../li/h2")
+    DESCRIPTION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[1]/a')
+    SPECIFICATION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[2]/a')
+    REVIEWS_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
+
+
+class LocatorsReviewsTab:
+    """Locators for Reviews Tab on Product page. """
+    CONTINUE = (By.ID, 'button-review')
+    YOUR_NAME = (By.XPATH, '//input[@id="input-name"]')
+    YOUR_REVIEW = (By.XPATH, '//textarea[@id="input-review"]')
+    REVIEW_ERROR_MESSAGE = (
+        By.XPATH, '//div[@id="review"]/following-sibling::div[@class="alert alert-danger alert-dismissible"]')
+
+
+class LocatorsAvailableOptions:
+    """Locators for Available options on Product page."""
+    QUANTITY = (By.ID, 'input-quantity')
+    ADD_TO_CART = (By.ID, 'button-cart')
+    ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
+    TEXT_FIELD = (By.XPATH, '//input[@value="test"]')
+    DATE = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD"]')
+    TIME = (By.XPATH, '//input[@data-date-format="HH:mm"]')
+    DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
+    TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
+    CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
+
+
 class LocatorsYourPersonalDetailsComponent:
     """Locators fot the 'Your Personal Details' component."""
 
@@ -120,7 +158,7 @@ class LocatorsNewsletterComponent:
 
 
 class LocatorsForgotPasswordPage:
-    """Locators fot the 'Forgot password' page."""
+    """Locators for the 'Forgot password' page."""
 
     EMAIL_FIELD = (By.ID, 'input-email')
 
@@ -134,3 +172,55 @@ class LocatorSortByDropdown:
 
 class LocatorShowNumberProductsDropdown:
     SHOW_NUMBER_PRODUCTS = (By.XPATH, '//select[@id="input-limit"]')
+
+
+class LocatorsAddAddressComponent:
+    """Locators fot the 'Add Address' component."""
+    FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
+    ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
+    ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
+    CITY_INPUT = (By.XPATH, '//input[@name="city"]')
+    POST_CODE_INPUT = (By.XPATH, '//input[@name="postcode"]')
+    COUNTRY_SELECTOR = (By.XPATH, '//select[@name="country_id"]')
+    REGION_SELECTOR = (By.XPATH, '//select[@name="zone_id"]')
+
+
+class LocatorsAddAddressPage:
+    """Locators fot the 'Add Address' page."""
+    ADDRESS_CONTENT = (By.ID, 'content')
+
+    DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
+    BACK_BUTTON = (By.XPATH, '//a[text()="Back"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@value="Continue"]')
+
+
+class LocatorsWishListPage:
+    # TODO correct xpathes
+    ITEMS = (By.XPATH, "//div/table/tbody/tr/td[@class='text-left']//a")
+    PRODUCT_NAME = (By.XPATH, "//td[@class='text-left']//a")
+    ADD_PRODUCT_TO_CARD = (By.XPATH, "../../td[@class='text-right']/button[@class='btn btn-primary']")
+    DELETE_PRODUCT_FROM_CARD = (By.XPATH, "../../td[@class='text-right']/a[@class='btn btn-danger']")
+    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//a[@class='btn btn-primary']")
+
+
+class LocatorsGiftCertificatePage:
+    # TODO correct xpathes
+    RECEPIENT_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_name']")
+    RECEPIENT_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_email']")
+    YOUR_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_name']")
+    YOUR_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_email']")
+    GIFT_CERTIFICATE_THEME = (By.XPATH, "//div[@class='radio']//label")
+    MESSAGE = (By.XPATH, "//div[@class='col-sm-10']//textarea[@name='message']")
+    AMOUNT = (By.XPATH, "//div[@class='col-sm-10']//input[@name='amount']")
+    AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
+    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
+
+class LocatorsComparePage:
+    # TODO correct xpathes
+    ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
+    ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
+    REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
+
+
