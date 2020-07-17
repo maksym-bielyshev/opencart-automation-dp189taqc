@@ -15,10 +15,9 @@ class LocatorsNavBar:
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
-
     # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    #MY_ACCOUNT = (By.XPATH, './/li[2]/a')
+    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -47,8 +46,12 @@ class RightMenuLocators:
 
 
 class LocatorsShoppingCartButton:
+    """Locators for a black shop cart button."""
+
     SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
     CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
+    VIEW_CART = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[1]')
+    CHECKOUT = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[2]')
 
 
 class LocatorYourStoreLink:
@@ -60,6 +63,31 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorProductCompareLink:
+    """Locator for a 'Product Compare' link."""
+
+    PRODUCT_COMPARE = (By.ID, 'compare-total')
+
+
+class LocatorsViewModeButton:
+    """Locator for a different view buttons."""
+
+    LIST_VIEW_BUTTON = (By.ID, 'list-view')
+    GRID_VIEW_BUTTON = (By.ID, 'grid-view')
+
+
+class LocatorProductWidget:
+    """Locator for a widget of the product."""
+
+    PRODUCT_WIDGET = (By.CLASS_NAME, 'product-thumb')
+
+
+class LocatorCategoryTitle:
+    """Category title text."""
+
+    CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')
 
 
 class LocatorsProductPage:
@@ -132,9 +160,18 @@ class LocatorsNewsletterComponent:
 class LocatorsForgotPasswordPage:
     """Locators for the 'Forgot password' page."""
 
-    EMAIL_FIELD = (By.ID, "input-email")
-    BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
-    CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
+    EMAIL_FIELD = (By.ID, 'input-email')
+
+    BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
+
+
+class LocatorSortByDropdown:
+    SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
+
+
+class LocatorShowNumberProductsDropdown:
+    SHOW_NUMBER_PRODUCTS = (By.XPATH, '//select[@id="input-limit"]')
 
 
 class LocatorsAddAddressComponent:

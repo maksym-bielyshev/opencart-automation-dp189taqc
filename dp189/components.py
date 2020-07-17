@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
@@ -10,7 +11,10 @@ from selenium.webdriver.support.ui import Select
 
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
+
+from dp189.pages.compare_page import ComparePage
 
 
 class SearchArea:
@@ -45,12 +49,48 @@ class ShopCartButton:
         if len(cart_items) == 0:
             return 'Your cart is empty!'
         else:
-            return ShopCartDropdown(self._driver)
+            return ShopCartDropdownComponent(self._driver)
 
 
-class ShopCartDropdown:
-    def __init__(self, driver):
-        pass
+class ShopCartDropdownComponent:
+    """Component for black shopping cart drop-down button."""
+
+    def __init__(self, driver: Remote, product_title: str) -> None:
+        """Initialise shopping cart drop-down button.
+
+        :param driver: Remote driver.
+        :param product_title: The title of the product.
+        """
+        self._driver = driver
+        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
+
+    def click_product_title(self) -> None:
+        """Click on the product title.
+
+        :return: None.
+        """
+        self.product_title.click()
+
+    def click_remove_button(self) -> None:
+        """Click on the remove from the shopping cart button.
+
+        :return:
+        """
+        self._driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button').click()
+
+    def click_view_cart_link(self) -> None:
+        """Click on the 'View Cart' link.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsShoppingCartButton.VIEW_CART).click()
+
+    def click_checkout_link(self) -> None:
+        """Click on the 'Checkout' link.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
 
 class BaseNavBar:
@@ -117,6 +157,105 @@ class BaseRightMenu:
 
     def click_newsletter(self):
         self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
+
+
+class ProductWidgetsListComponent:
+    """All products on the 'Category' page."""
+
+    def __init__(self, driver: Remote):
+        """Initialise a driver and an empty list.
+
+        :param driver: Remote driver.
+        """
+        self._driver = driver
+        self.product_widgets_list = []
+
+    def get_list_product_widgets(self) -> list:
+        """Get a list of all products on the 'Category' page.
+
+        :return: List of all products on the 'Category' page.
+        """
+        self.product_widgets_list = self._driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
+        return self.product_widgets_list
+
+
+class ProductWidgetComponent:
+    """Widget for products on the category page."""
+
+    def __init__(self, driver: Remote, product_title: str) -> None:
+        """Initialise the widget and the buttons.
+
+        :param driver: Remote driver.
+        :param product_title: The title of the product.
+        """
+        self._driver = driver
+        self.product_title = product_title
+
+    def click_add_to_shopping_cart_button(self) -> None:
+        """Click on the "Add to shopping cart" button.
+
+        :return: None.
+        """
+        self._driver.find_element\
+            (By.XPATH, f'//a[text()="{self.product_title}"]/../../..//span[text()="Add to Cart"]/..').click()
+
+    def click_add_to_wish_list_button(self) -> None:
+        """Click on the "Add to Wish List" button.
+
+        :return: None.
+        """
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title ="Add to Wish List"]').click()
+
+    def click_add_to_compare_button(self) -> None:
+        """Click on the "Compare this Product" button.
+
+        :return: None.
+        """
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
+
+
+class ProductCompareLinkComponent:
+    """A link to compare the products added to the comparison."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialise the link.
+
+        :param driver: Remote driver.
+        """
+        self._driver = driver
+
+    def open_compare_page(self) -> ComparePage:
+        """Click on the 'Product Compare' link and return the 'Compare' page.
+
+        :return: Page which compare selected products.
+        """
+        self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
+        return ComparePage(self._driver)
+
+
+class ProductsViewModeComponent:
+    """Two buttons to change the view of the products."""
+
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
+
+    def click_list_view_button(self) -> None:
+        """Click on the 'List' button.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON).click()
+
+    def click_grid_view_button(self) -> None:
+        """Click on the 'Grid' button.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsViewModeButton.GRID_VIEW_BUTTON).click()
 
 
 class YourPersonalDetailsComponent:
