@@ -290,7 +290,7 @@ class ProductsViewModeComponent:
         """
         self._driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON).click()
 
-    def click_grid_view(self) -> None:
+    def click_grid_view_button(self) -> None:
         """Click on the 'Grid' button.
 
         :return: None.
