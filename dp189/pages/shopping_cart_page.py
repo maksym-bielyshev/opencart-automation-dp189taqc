@@ -140,11 +140,7 @@ class GiftCertificatePanel:
 
 class ProductInCart:
     def __init__(self, product: WebElement):
-        # self._driver = driver
         self._product = product
-        # self.name = self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_NAME).text
-        # self.quantity = self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_QUANTITY).get_attribute('value')
-        # self.quantity_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.PRODUCT_QUANTITY)
 
     def get_name(self) -> str:
         return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_NAME).text

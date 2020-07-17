@@ -94,7 +94,6 @@ class LocatorsShoppingCartPage:
     CERTIFICATE_APPLY_BUTTON = (By.ID, 'button-voucher')
 
     PRODUCT_LINES = (By.XPATH, '//h1/following-sibling::form//tbody/tr')
-    # PRODUCT_LINES = (By.CSS_SELECTOR, 'h1 ~ form tbody tr')
 
     PRODUCT_NAME = (By.XPATH, './/td[2]/a')
     PRODUCT_MODEL = (By.XPATH, './/td[3]')
