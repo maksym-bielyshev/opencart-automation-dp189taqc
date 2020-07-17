@@ -101,23 +101,31 @@ class LocatorsAvailableOptions:
 
 
 class LocatorsYourPersonalDetailsComponent:
-    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
-    LAST_NAME_FIELD = (By.ID, 'input-lastname')
-    EMAIL_FIELD = (By.ID, 'input-email')
-    TELEPHONE_FIELD = (By.ID, 'input-telephone')
+    """Locators fot the 'Your Personal Details' component."""
+
+    FIRST_NAME_FIELD = (By.XPATH, '//*[@id="input-firstname"]')
+    LAST_NAME_FIELD = (By.XPATH, '//*[@id="input-lastname"]')
+    EMAIL_FIELD = (By.XPATH, '//*[@id="input-email"]')
+    TELEPHONE_FIELD = (By.XPATH, '//*[@id="input-telephone"]')
 
 
 class LocatorsYourPasswordComponent:
-    PASSWORD_FIELD = (By.ID, 'input-password')
-    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
+    """Locators fot the 'Your Password' component."""
+
+    PASSWORD_FIELD = (By.XPATH, '//*[@id="input-password"]')
+    PASSWORD_CONFIRM_FIELD = (By.XPATH, '//*[@id="input-confirm"]')
 
 
 class LocatorsRegisterPage:
+    """Locators fot the 'Register' page."""
+
     CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
-    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+    CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
 
 class LocatorsNewsletterComponent:
+    """Locators fot the 'Newsletter' component."""
+
     SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
 
 
