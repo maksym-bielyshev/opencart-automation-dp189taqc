@@ -1,6 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -328,7 +329,15 @@ class NewsletterComponent:
 
 
 class AddAddressComponent:
+    """Add Address form сonsists from fields: First Name, Last Name, Company,
+    Address 1, Address 2, City, Country, Region."""
     def __init__(self, driver: Remote, parent_element: WebElement) -> None:
+        """Initialize input form fields and dropdown form fields.
+
+        :param driver: Remote
+        :param parent_element: WebElement
+        :return: None
+        """
         self._driver = driver
         self._parent_element = parent_element
         self.first_name_field = InputFieldComponent(self._driver,
@@ -345,7 +354,7 @@ class AddAddressComponent:
                                               LocatorsAddAddressComponent.CITY_INPUT, self._parent_element)
         self.post_code_field = InputFieldComponent(self._driver,
                                                    LocatorsAddAddressComponent.POST_CODE_INPUT, self._parent_element)
-        self.country = InputFieldComponent(self._driver,
-                                           LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
-        self.region = InputFieldComponent(self._driver,
-                                          LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)
+        self.country = DropdownComponent(self._driver,
+                                        LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
+        self.region = DropdownComponent(self._driver,
+                                        LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)

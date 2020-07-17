@@ -21,5 +21,7 @@ if __name__ == '__main__':
     driver.get('https://34.71.14.206/index.php?route=account/address/add')
 
     address = AddAddressPage(driver)
-    address.add_address.first_name_field.clear_and_fill_input_field("2222")
+    # address.add_address.first_name_field.clear_and_fill_input_field("2222")
+
+    address.click_continue_button()
 

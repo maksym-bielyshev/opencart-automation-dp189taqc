@@ -98,8 +98,8 @@ class LocatorsForgotPasswordPage:
     CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
 
 
-
 class LocatorsAddAddressComponent:
+    """Locators fot the 'Add Address' component."""
     FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
     LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
     COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
@@ -112,6 +112,7 @@ class LocatorsAddAddressComponent:
 
 
 class LocatorsAddAddressPage:
+    """Locators fot the 'Add Address' page."""
     ADDRESS_CONTENT = (By.ID, 'content')
 
     DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
