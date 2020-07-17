@@ -1,7 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
-from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -151,7 +151,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
         """Initialize the input field.
 
         :param driver: Remote
@@ -160,7 +160,7 @@ class InputFieldComponent:
         """
         self._driver = driver
         self.input_field_locator = input_field_locator
-        self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
         """Clear and fill input field with data.
@@ -168,34 +168,129 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        if self.parent_element:
-            input_field = self.parent_element.find_element(*self.input_field_locator)
-        else:
-            input_field = self._driver.find_element(*self.input_field_locator)
-        input_field.clear()
-        input_field.send_keys(data)
+        self.input_field = self._driver.find_element(*self.input_field_locator)
+        self.input_field.clear()
+        self.input_field.send_keys(data)
 
-    def choose_selector_by_text(self, data: str) -> None:
-        """Choose option by text in selector.
+
+class RadioButtonComponent:
+    """Radio buttons to choose some option and check if required option is chosen."""
+
+    def __init__(self, driver: Remote, radio_buttons_locator: tuple) -> None:
+        """Initialize radio buttons.
+
+        :param driver: Remote
+        :param radio_buttons_locator: tuple
+        :return: None
+        """
+        self._driver = driver
+        self.radio_buttons_locator = radio_buttons_locator
+        self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
+        self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
+
+    def option_is_checked(self, data: str) -> bool:
+        """Check if required option is chosen.
+
+        :param data: str
+        :return: bool
+        """
+        return self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
+
+    def choose_radio_button_option(self, data: str) -> None:
+        """Choose some option.
 
         :param data: str
         :return: None
         """
-        selector = Select(self._driver.find_element(*self.input_field_locator))
-        selector.select_by_visible_text(data)
+        self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
-    def check_radio_button(self, data: str) -> None:
-        radio_container = self._driver.find_element(*self.input_field_locator)
-        radio_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
-    def get_error_message_for_input_field(self) -> str:
-        """Get error message for input field if it were incorrect data.
+class CheckboxComponent:
+    """Checkbox to choose option and check if required option is chosen."""
+
+    def __init__(self, driver: Remote, checkbox_locator: tuple) -> None:
+        """Initialize checkbox.
+
+        :param driver: Remote
+        :param checkbox_locator: tuple
+        :return: None
+        """
+        self._driver = driver
+        self.checkbox_locator = checkbox_locator
+        self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
+        self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
+
+    def option_is_checked(self, data: str) -> bool:
+        """Check if required option is chosen.
+
+        :param data: str
+        :return: bool
+        """
+        return self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
+
+    def choose_checkbox_option(self, data: str) -> None:
+        """Choose some option.
+
+        :param data: str
+        :return: None
+        """
+        self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
+
+
+class DropdownComponent:
+    """Drop-down menu to choose option and check if required option is chosen."""
+
+    def __init__(self, driver: Remote, dropdown_locator: tuple) -> None:
+        """Initialize drop-down.
+
+        :param driver: Remote
+        :param dropdown_locator: tuple
+        :return: None
+        """
+        self._driver = driver
+        self.dropdown_locator = dropdown_locator
+        self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
+        self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
+
+    def option_is_checked(self, data: str) -> bool:
+        """Check if required option is chosen.
+
+        :param data: str
+        :return: bool
+        """
+        word_list_option = self.checkbox_container.first_selected_option.text.split()
+        return word_list_option[0] + ' ' + word_list_option[1] == data
+
+    def choose_dropdown_option(self, data: str) -> None:
+        """Choose some option.
+
+        :param data: str
+        :return: None
+        """
+        self.checkbox_container.select_by_visible_text(data)
+
+
+class ErrorMessageComponent:
+    """Error message for input fields, radio buttons, checkboxes, drop-down menus."""
+
+    def __init__(self, driver: Remote, element_locator: tuple) -> None:
+        """Initialize element locator to find error message for it.
+
+        :param driver: Remote
+        :param element_locator: tuple
+        :return: None
+        """
+        self._driver = driver
+        self.element_locator = element_locator
+
+    def get_error_message(self) -> str:
+        """Get error message.
 
         :return: str
         """
-        error_message_locator = f'#{self.input_field_locator[1]} ~ div.text-danger'
+        error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
         error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, error_message_locator))
+            EC.presence_of_element_located((By.XPATH, error_message_locator))
         )
         return error_message.text
 
