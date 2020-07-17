@@ -372,6 +372,6 @@ class AddAddressComponent:
         self.post_code_field = InputFieldComponent(self._driver,
                                                    LocatorsAddAddressComponent.POST_CODE_INPUT, self._parent_element)
         self.country = DropdownComponent(self._driver,
-                                        LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
+                                         LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
         self.region = DropdownComponent(self._driver,
                                         LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)

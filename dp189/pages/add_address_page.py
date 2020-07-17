@@ -14,8 +14,8 @@ class AddAddressPage(BasePage):
         """
         self.right_menu = BaseRightMenu(driver)
         self.address_content = self._driver.find_element(*LocatorsAddAddressPage.ADDRESS_CONTENT)
-        self.add_address = AddAddressComponent(self._driver, self.address_content)
-        self.default_address_rediobutton = RadioButtonComponent(self._driver,
+        self.address_fields = AddAddressComponent(self._driver, self.address_content)
+        self.default_address_radiobutton = RadioButtonComponent(self._driver,
                                                                 LocatorsAddAddressPage.DEFAULT_ADDRESS_RADIO_CONTAINER)
 
     def click_back_button(self) -> object:
