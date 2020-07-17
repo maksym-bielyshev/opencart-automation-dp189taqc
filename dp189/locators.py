@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LocatorsSearch:
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
     SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
@@ -10,7 +11,7 @@ class LocatorsNavBar:
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH,'.//ul/li[3]/button')
+    USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
@@ -61,24 +62,72 @@ class LocatorsHomePage:
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
 
 class LocatorsYourPersonalDetailsComponent:
-    FIRST_NAME_FIELD = (By.ID, 'input-firstname')
-    LAST_NAME_FIELD = (By.ID, 'input-lastname')
-    EMAIL_FIELD = (By.ID, 'input-email')
-    TELEPHONE_FIELD = (By.ID, 'input-telephone')
+    """Locators fot the 'Your Personal Details' component."""
+
+    FIRST_NAME_FIELD = (By.XPATH, '//*[@id="input-firstname"]')
+    LAST_NAME_FIELD = (By.XPATH, '//*[@id="input-lastname"]')
+    EMAIL_FIELD = (By.XPATH, '//*[@id="input-email"]')
+    TELEPHONE_FIELD = (By.XPATH, '//*[@id="input-telephone"]')
 
 
 class LocatorsYourPasswordComponent:
-    PASSWORD_FIELD = (By.ID, 'input-password')
-    PASSWORD_CONFIRM_FIELD = (By.ID, 'input-confirm')
+    """Locators fot the 'Your Password' component."""
+
+    PASSWORD_FIELD = (By.XPATH, '//*[@id="input-password"]')
+    PASSWORD_CONFIRM_FIELD = (By.XPATH, '//*[@id="input-confirm"]')
 
 
 class LocatorsRegisterPage:
+    """Locators fot the 'Register' page."""
+
     CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
-    CONTINUE_BUTTON = (By.CSS_SELECTOR, '#content > form > div > div > input.btn.btn-primary')
+    CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
 
 class LocatorsNewsletterComponent:
+    """Locators fot the 'Newsletter' component."""
+
     SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+
+
+class LocatorsForgotPasswordPage:
+    """Locators fot the 'Forgot password' page."""
+
+    EMAIL_FIELD = (By.ID, "input-email")
+    BACK_BUTTON = (By.XPATH, "//a[@class='btn btn-default']")
+    CONTINUE_BUTTON = (By.XPATH, "//input[@class='btn btn-primary']")
+
+
+
+class LocatorsWishListPage:
+    # TODO correct xpathes
+    ITEMS = (By.XPATH, "//div/table/tbody/tr/td[@class='text-left']//a")
+    PRODUCT_NAME = (By.XPATH, "//td[@class='text-left']//a")
+    ADD_PRODUCT_TO_CARD = (By.XPATH, "../../td[@class='text-right']/button[@class='btn btn-primary']")
+    DELETE_PRODUCT_FROM_CARD = (By.XPATH, "../../td[@class='text-right']/a[@class='btn btn-danger']")
+    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//a[@class='btn btn-primary']")
+
+
+class LocatorsGiftCertificatePage:
+    # TODO correct xpathes
+    RECEPIENT_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_name']")
+    RECEPIENT_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_email']")
+    YOUR_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_name']")
+    YOUR_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_email']")
+    GIFT_CERTIFICATE_THEME = (By.XPATH, "//div[@class='radio']//label")
+    MESSAGE = (By.XPATH, "//div[@class='col-sm-10']//textarea[@name='message']")
+    AMOUNT = (By.XPATH, "//div[@class='col-sm-10']//input[@name='amount']")
+    AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
+    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
+
+class LocatorsComparePage:
+    # TODO correct xpathes
+    ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
+    ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
+    REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
+
+
+
 
 class LocatorsShoppingCartPage:
     COUPON_FIELD = (By.ID, 'input-coupon')
