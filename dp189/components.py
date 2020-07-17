@@ -162,11 +162,13 @@ class InputFieldComponent:
         self._driver = driver
         self.input_field_locator = input_field_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
             self.input_field = self._driver.find_element(*self.input_field_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
         """Clear and fill input field with data.
@@ -174,7 +176,7 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        self.input_field = self._driver.find_element(*self.input_field_locator)
+        self._find_input_field()
         self.input_field.clear()
         self.input_field.send_keys(data)
 
@@ -192,11 +194,13 @@ class RadioButtonComponent:
         self._driver = driver
         self.radio_buttons_locator = radio_buttons_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.radio_buttons_container = self.parent_element.find_element(*self.radio_buttons_locator)
         else:
             self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -204,6 +208,7 @@ class RadioButtonComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         return self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
 
     def choose_radio_button_option(self, data: str) -> None:
@@ -212,6 +217,7 @@ class RadioButtonComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
@@ -228,11 +234,13 @@ class CheckboxComponent:
         self._driver = driver
         self.checkbox_locator = checkbox_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.checkbox_container = self.parent_element.find_element(*self.checkbox_locator)
         else:
             self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -240,6 +248,7 @@ class CheckboxComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         return self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
 
     def choose_checkbox_option(self, data: str) -> None:
@@ -248,6 +257,7 @@ class CheckboxComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
@@ -264,11 +274,13 @@ class DropdownComponent:
         self._driver = driver
         self.dropdown_locator = dropdown_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
         else:
             self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
-        self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -276,6 +288,7 @@ class DropdownComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         word_list_option = self.checkbox_container.first_selected_option.text.split()
         return word_list_option[0] + ' ' + word_list_option[1] == data
 
@@ -285,6 +298,7 @@ class DropdownComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.checkbox_container.select_by_visible_text(data)
 
 
@@ -348,6 +362,7 @@ class NewsletterComponent:
 class AddAddressComponent:
     """Add Address form сonsists from fields: First Name, Last Name, Company,
     Address 1, Address 2, City, Country, Region."""
+
     def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input form fields and dropdown form fields.
 
