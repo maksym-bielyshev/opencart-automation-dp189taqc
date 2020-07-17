@@ -217,44 +217,6 @@ class ProductWidgetComponent:
             f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
 
 
-class SortByDropdownComponent:
-    """Sort products by provided option."""
-
-    def __init__(self, driver: Remote) -> None:
-        """Initialise a driver.
-
-        :param driver: Remote driver.
-        """
-        self._driver = driver
-
-    def click_option(self, option) -> None:
-        """Click on the specific option.
-
-        :param option: Provided option to click on it.
-        :return: None.
-        """
-        self._driver.find_element(By.XPATH, f'//select[@id="input-sort"]//option[.="{option}"]').click()
-
-
-class ShowNumberProductsDropdownComponent:
-    """Show provided number of products."""
-
-    def __init__(self, driver: Remote) -> None:
-        """Initialise a driver.
-
-        :param driver: Remote driver.
-        """
-        self._driver = driver
-
-    def click_option(self, option):
-        """Click on the specific option.
-
-        :param option: Provided option to click on it.
-        :return: None.
-        """
-        self._driver.find_element(By.XPATH, f'//select[@id="input-limit"]//option[.="{option}"]').click()
-
-
 class ProductCompareLinkComponent:
     """A link to compare the products added to the comparison."""
 
