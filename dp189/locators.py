@@ -133,4 +133,4 @@ class LocatorSortByDropdown:
 
 
 class LocatorShowNumberProductsDropdown:
-    SHOW_NUMBER_PRODUCTS = (By.XPATH, '//select[@id="input-sort"]')
+    SHOW_NUMBER_PRODUCTS = (By.XPATH, '//select[@id="input-limit"]')
