@@ -152,7 +152,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize the input field.
 
         :param driver: Remote
@@ -161,6 +161,11 @@ class InputFieldComponent:
         """
         self._driver = driver
         self.input_field_locator = input_field_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.input_field = self.parent_element.find_element(*self.input_field_locator)
+        else:
+            self.input_field = self._driver.find_element(*self.input_field_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
@@ -177,7 +182,7 @@ class InputFieldComponent:
 class RadioButtonComponent:
     """Radio buttons to choose some option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, radio_buttons_locator: tuple) -> None:
+    def __init__(self, driver: Remote, radio_buttons_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize radio buttons.
 
         :param driver: Remote
@@ -186,8 +191,12 @@ class RadioButtonComponent:
         """
         self._driver = driver
         self.radio_buttons_locator = radio_buttons_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.radio_buttons_container = self.parent_element.find_element(*self.radio_buttons_locator)
+        else:
+            self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
-        self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -209,7 +218,7 @@ class RadioButtonComponent:
 class CheckboxComponent:
     """Checkbox to choose option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, checkbox_locator: tuple) -> None:
+    def __init__(self, driver: Remote, checkbox_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize checkbox.
 
         :param driver: Remote
@@ -218,8 +227,12 @@ class CheckboxComponent:
         """
         self._driver = driver
         self.checkbox_locator = checkbox_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.checkbox_container = self.parent_element.find_element(*self.checkbox_locator)
+        else:
+            self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
         self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
-        self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -241,7 +254,7 @@ class CheckboxComponent:
 class DropdownComponent:
     """Drop-down menu to choose option and check if required option is chosen."""
 
-    def __init__(self, driver: Remote, dropdown_locator: tuple) -> None:
+    def __init__(self, driver: Remote, dropdown_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize drop-down.
 
         :param driver: Remote
@@ -250,8 +263,12 @@ class DropdownComponent:
         """
         self._driver = driver
         self.dropdown_locator = dropdown_locator
+        self.parent_element = parent_element
+        if self.parent_element:
+            self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
+        else:
+            self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
         self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
-        self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
