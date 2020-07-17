@@ -1,4 +1,3 @@
-
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsWishListPage
 from dp189.pages.base_page import BasePage
@@ -36,5 +35,3 @@ class WishListPage(BasePage):
     def click_button_continue(self):
         """method which return Account page class"""
         self._driver.find_element(*LocatorsWishListPage.CONTINUE_BUTTON).click()
-
-
