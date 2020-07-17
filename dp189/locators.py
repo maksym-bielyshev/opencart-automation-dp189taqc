@@ -56,7 +56,6 @@ class LocatorYourStoreLink:
 
 
 class LocatorsHomePage:
-    # TODO correct xpathes
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
@@ -93,30 +92,30 @@ class LocatorsForgotPasswordPage:
 
 
 class LocatorsWishListPage:
-    # TODO correct xpathes
-    ITEMS = (By.XPATH, "//div/table/tbody/tr/td[@class='text-left']//a")
-    PRODUCT_NAME = (By.XPATH, "//td[@class='text-left']//a")
-    ADD_PRODUCT_TO_CARD = (By.XPATH, "../../td[@class='text-right']/button[@class='btn btn-primary']")
-    DELETE_PRODUCT_FROM_CARD = (By.XPATH, "../../td[@class='text-right']/a[@class='btn btn-danger']")
-    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//a[@class='btn btn-primary']")
+    """Locators for the 'Wish List' page"""
+    ITEMS = (By.XPATH, '//div/table/tbody/tr/td[@class="text-left"]//a')
+    PRODUCT_NAME = (By.XPATH, '//td[@class="text-left"]//a')
+    ADD_PRODUCT_TO_CARD = (By.XPATH, '../../td[@class="text-right"]/button[@class="btn btn-primary"]')
+    DELETE_PRODUCT_FROM_CARD = (By.XPATH, '../../td[@class="text-right"]/a[@class="btn btn-danger"]')
+    CONTINUE_BUTTON = (By.XPATH, '//div[@class="pull-right"]//a[@class="btn btn-primary"]')
 
 
 class LocatorsGiftCertificatePage:
-    # TODO correct xpathes
-    RECEPIENT_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_name']")
-    RECEPIENT_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_email']")
-    YOUR_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_name']")
-    YOUR_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_email']")
-    GIFT_CERTIFICATE_THEME = (By.XPATH, "//div[@class='radio']//label")
-    MESSAGE = (By.XPATH, "//div[@class='col-sm-10']//textarea[@name='message']")
-    AMOUNT = (By.XPATH, "//div[@class='col-sm-10']//input[@name='amount']")
-    AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
-    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
+    """Locators for the 'Gift Certificate' page"""
+    RECEPIENT_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_name"]')
+    RECEPIENT_EMAIL = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_email"]')
+    YOUR_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="from_name"]')
+    YOUR_EMAIL = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="from_email"]')
+    GIFT_CERTIFICATE_THEME = (By.XPATH, '//div[@class="radio"]//label')
+    MESSAGE = (By.XPATH, '//div[@class="col-sm-10"]//textarea[@name="message"]')
+    AMOUNT = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="amount"]')
+    AGREE = (By.XPATH, '//div[@class="pull-right"]//input[@name="agree"]')
+    CONTINUE_BUTTON = (By.XPATH, '//div[@class="pull-right"]//input[@type="submit"]')
 
 class LocatorsComparePage:
-    # TODO correct xpathes
-    ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
-    ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
-    REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
+    """Locators for the 'Compare' page"""
+    ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
+    ADD_BUTTONS = (By.XPATH, '//table/tbody/tr/td/input[@class="btn btn-primary btn-block"]')
+    REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
 
 
