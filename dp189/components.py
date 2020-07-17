@@ -1,14 +1,16 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import Remote
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent
 
 
 class SearchArea:
@@ -341,3 +343,35 @@ class NewsletterComponent:
         """
         self.subscribe_to_newsletter_locator = f'[{self.subscribe_radio_buttons_locator[0]}="{self.subscribe_radio_buttons_locator[1]}"][value="1"]'
         self._driver.find_element_by_css_selector(self.subscribe_to_newsletter_locator).click()
+
+
+class AddAddressComponent:
+    """Add Address form сonsists from fields: First Name, Last Name, Company,
+    Address 1, Address 2, City, Country, Region."""
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
+        """Initialize input form fields and dropdown form fields.
+
+        :param driver: Remote
+        :param parent_element: WebElement
+        :return: None
+        """
+        self._driver = driver
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsAddAddressComponent.FIRST_NAME_INPUT, self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.LAST_NAME_INPUT, self._parent_element)
+        self.company_field = InputFieldComponent(self._driver,
+                                                 LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
+        self.address_1_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_1_INPUT, self._parent_element)
+        self.address_2_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.ADDRESS_2_INPUT, self._parent_element)
+        self.city_field = InputFieldComponent(self._driver,
+                                              LocatorsAddAddressComponent.CITY_INPUT, self._parent_element)
+        self.post_code_field = InputFieldComponent(self._driver,
+                                                   LocatorsAddAddressComponent.POST_CODE_INPUT, self._parent_element)
+        self.country = DropdownComponent(self._driver,
+                                         LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
+        self.region = DropdownComponent(self._driver,
+                                        LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)
