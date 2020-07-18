@@ -3,18 +3,20 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 
-from dp189.components import InputFieldComponent
+from dp189.components import InputFieldComponent, DropdownComponent, RadioButtonComponent
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsShoppingCartPage
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver import Remote
+
+from dp189.pages.home_page import HomePage
 
 
 class ShoppingCartPage(BasePage):
     def __init__(self, driver: Remote):
         super().__init__(driver)
         self.coupon_panel = CouponPanel(driver)
-        self.estimate_shipping_panel = EstimateShippingPanel(driver)
+        # self.estimate_shipping_panel = EstimateShippingPanel(driver)
         self.gift_certificate_panel = GiftCertificatePanel(driver)
         self.products_list = []
 
@@ -64,11 +66,11 @@ class ShoppingCartPage(BasePage):
                 product.click_remove_button()
                 self.products_list.remove(product)
 
-    def click_continue_shipping_button(self) -> None:
+    def click_continue_shipping_button(self) -> object:
         self._driver.find_element(*LocatorsShoppingCartPage.CONTINUE_SHIPPING_BUTTON).click()
-        # return HomePage(self._driver)
+        return HomePage(self._driver)
 
-    def click_checkout_button(self) -> None:
+    def click_checkout_button(self) -> object:
         self._driver.find_element(*LocatorsShoppingCartPage.CHECKOUT_BUTTON).click()
         # return CheckoutPage(self._driver)
 
@@ -101,22 +103,17 @@ class EstimateShippingPanel:
     def __init__(self, driver: Remote):
         self._driver = driver
         self.post_code_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.POST_CODE_FIELD)
+        self.country_selector = DropdownComponent(self._driver, LocatorsShoppingCartPage.COUNTRY_SELECTOR)
+        self.region_selector = DropdownComponent(self._driver, LocatorsShoppingCartPage.REGION_SELECTOR)
+        self.modal_shipping_radio_button = RadioButtonComponent(self._driver, LocatorsShoppingCartPage.MODAL_SHIPPING_RADIO)
 
     def open_estimate_shipping_panel(self) -> None:
         self._driver.find_element(*LocatorsShoppingCartPage.ESTIMATE_SHIPPING_PANEL).click()
 
-    def select_country(self, country: str) -> None:
-        country_selector = Select(self._driver.find_element(*LocatorsShoppingCartPage.COUNTRY_SELECTOR))
-        country_selector.select_by_visible_text(country)
-
-    def select_region(self, region: str) -> None:
-        country_selector = Select(self._driver.find_element(*LocatorsShoppingCartPage.REGION_SELECTOR))
-        country_selector.select_by_visible_text(region)
-
     def click_get_quotes_button(self) -> None:
         self._driver.find_element(*LocatorsShoppingCartPage.GET_QUOTES_BUTTON).click()
 
-    def click_modal_shipping_radio_button(self, radio_text) -> None:
+    def click_modal_shipping_radio_button(self, radio_text: str) -> None:
         self._driver.find_element(By.XPATH, f'//label[text()="{radio_text}"]/input').click()
 
     def click_modal_shipping_cancel_button(self) -> None:
@@ -129,7 +126,7 @@ class EstimateShippingPanel:
 class GiftCertificatePanel:
     def __init__(self, driver: Remote):
         self._driver = driver
-        self.gift_certificate_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.CERTIFICATE_FIELD)
+        # self.gift_certificate_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.CERTIFICATE_FIELD)
 
     def open_gift_certificate_panel(self) -> None:
         self._driver.find_element(*LocatorsShoppingCartPage.GIFT_CERTIFICATE_PANEL)

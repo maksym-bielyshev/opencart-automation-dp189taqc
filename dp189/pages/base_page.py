@@ -32,7 +32,7 @@ class BasePage:
 
     def click_wishlist(self):
         self._top_nav_bar.click_wishlist()
-        #return WishListPage(self._driver)
+        return WishListPage(self._driver)
 
     def click_shopping_cart(self):
         self._top_nav_bar.click_shopping_cart()

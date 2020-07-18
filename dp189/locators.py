@@ -141,13 +141,12 @@ class LocatorsGiftCertificatePage:
     AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
     CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
 
+
 class LocatorsComparePage:
     # TODO correct xpathes
     ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
     ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
     REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
-
-
 
 
 class LocatorsShoppingCartPage:
@@ -178,6 +177,7 @@ class LocatorsShoppingCartPage:
     GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
 
     MODAL_SHIPPING_CANCEL_BUTTON = (By.XPATH, '//*[@id="modal-shipping"]//button[text()="Cancel"]')
+    MODAL_SHIPPING_RADIO = (By.XPATH, '//div[@id="modal-shipping"]//div[@class="radio"]')
 
     CONTINUE_SHIPPING_BUTTON = (By.XPATH, '//a[text()="Continue Shopping"]')
     CHECKOUT_BUTTON = (By.XPATH, '//a[text()="Checkout"]')
