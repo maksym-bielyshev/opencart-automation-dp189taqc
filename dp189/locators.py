@@ -217,6 +217,7 @@ class LocatorsGiftCertificatePage:
     AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
     CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
 
+
 class LocatorsComparePage:
     # TODO correct xpathes
     ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
@@ -224,3 +225,6 @@ class LocatorsComparePage:
     REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
 
 
+class LocatorsInfoMessages:
+    """This locator is an info message for CatchMessageComponent."""
+    ALERT_MESSAGE = (By.CLASS_NAME, 'alert')
