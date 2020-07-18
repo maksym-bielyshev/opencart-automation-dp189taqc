@@ -1,166 +1,322 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webdriver import WebDriver
+import re
+from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.select import Select
-
 from dp189.components import InputFieldComponent, DropdownComponent, RadioButtonComponent
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsShoppingCartPage
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver import Remote
-
 from dp189.pages.home_page import HomePage
 
 
 class ShoppingCartPage(BasePage):
+    """This class describes methods that we need to work with 'Shopping Cart' page."""
     def __init__(self, driver: Remote):
+        """Initialize driver and objects to works with 'Shopping Cart' page..
+
+        :param driver: Remote
+        """
         super().__init__(driver)
         self.coupon_panel = CouponPanel(driver)
-        # self.estimate_shipping_panel = EstimateShippingPanel(driver)
+        self.estimate_shipping_panel = EstimateShippingPanel(driver)
         self.gift_certificate_panel = GiftCertificatePanel(driver)
         self.products_list = []
 
     def get_products_list(self) -> list:
+        """Fills product_list with ProductInCart class instances.
+        This method must be called before you start working with product methods.
+
+        :return: ProductInCart class instances list
+        """
         product_lines = self._driver.find_elements(*LocatorsShoppingCartPage.PRODUCT_LINES)
         for product in product_lines:
-            self.products_list.append(ProductInCart(product))
+            self.products_list.append(ProductInCart(product, self._driver))
         return self.products_list
 
     def get_products_name_list(self) -> list:
+        """Creates list filled by product names in cart.
+
+        :return: products list
+        """
         products_name_list = []
         for product in self.products_list:
             products_name_list.append(product.get_name())
         return products_name_list
 
-    def get_products_total_price_list(self) -> list:
-        products_total_price_list = []
-        for product in self.products_list:
-            products_total_price_list.append(product.get_total_price())
-        return products_total_price_list
+    def get_product_quantity(self, product_name: str) -> str:
+        """Gets product unit price found by product name.
 
-    def get_product_quantity(self, name: str) -> None:
+        :param product_name: string
+        :return: string
+        """
         for product in self.products_list:
-            if product.get_name() == name:
+            if product.get_name() == product_name:
                 return product.get_quantity()
 
-    def get_product_unit_price(self, name: str) -> None:
+    def get_product_unit_price(self, product_name: str) -> float:
+        """Gets product unit price found by product name.
+
+        :param product_name: string
+        :return: float
+        """
         for product in self.products_list:
-            if product.get_name() == name:
+            if product.get_name() == product_name:
                 return product.get_unit_price()
 
-    def get_product_total_price(self, name: str) -> None:
+    def get_product_total_price(self, product_name: str) -> float:
+        """Gets product total price found by product name.
+
+        :param product_name: string
+        :return: float
+        """
         for product in self.products_list:
-            if product.get_name() == name:
+            if product.get_name() == product_name:
                 return product.get_total_price()
 
-    def change_product_quantity(self, name: str, quantity) -> object:
+    def change_product_quantity(self, product_name: str, product_quantity: str) -> object:
+        """Changes product quantity found by product name.
+
+        :param product_name: string
+        :param product_quantity: string
+        :return: ShoppingCartPage: object
+        """
         for product in self.products_list:
-            if product.get_name() == name:
-                product.set_quantity(quantity)
+            if product.get_name() == product_name:
+                product.quantity.clear_and_fill_input_field(product_quantity)
                 product.click_update_button()
                 return ShoppingCartPage(self._driver)
 
-    def click_remove_product_button(self, name: str) -> None:
+    def click_remove_product_button(self, product_name: str) -> None:
+        """Removes some product from cart found by product name.
+
+        :param product_name: string
+        :return: None
+        """
         for product in self.products_list:
-            if product.get_name() == name:
+            if product.get_name() == product_name:
                 product.click_remove_button()
                 self.products_list.remove(product)
 
     def click_continue_shipping_button(self) -> object:
+        """Click 'Continue Shopping' button.
+
+        :return: HomePage object
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.CONTINUE_SHIPPING_BUTTON).click()
         return HomePage(self._driver)
 
     def click_checkout_button(self) -> object:
+        """Click 'Checkout' button.
+
+        :return: CheckoutPage object
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.CHECKOUT_BUTTON).click()
         # return CheckoutPage(self._driver)
 
-    def get_flat_shipping_rate(self) -> None:
-        self._driver.find_element(*LocatorsShoppingCartPage.FLAT_SHIPPING_RATE).text()
+    def get_flat_shipping_rate(self) -> float:
+        """Gets 'Flat Shipping Rate' sum.
 
-    def get_coupon_sum(self) -> None:
-        self._driver.find_element(*LocatorsShoppingCartPage.COUPON_SUM).text()
+        :return: float
+        """
+        return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.FLAT_SHIPPING_RATE))
 
-    def get_sub_total_sum(self) -> None:
-        self._driver.find_element(*LocatorsShoppingCartPage.SUB_TOTAL_ORDER_SUM).text()
+    def get_coupon_sum(self) -> float:
+        """Gets 'Coupon' sum.
 
-    def get_total_sum(self) -> None:
-        self._driver.find_element(*LocatorsShoppingCartPage.TOTAL_ORDER_SUM).text()
+        :return: float
+        """
+        return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.COUPON_SUM))
+
+    def get_gift_certificate_sum(self) -> float:
+        """Gets 'Gift Certificate' sum.
+
+        :return: float
+        """
+        return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.GIFT_CERTIFICATE_SUM))
+
+    def get_sub_total_sum(self) -> float:
+        """Gets 'Sub-Total' sum.
+
+        :return: float
+        """
+        return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.SUB_TOTAL_ORDER_SUM))
+
+    def get_total_sum(self) -> float:
+        """Gets 'Total' sum.
+
+        :return: float
+        """
+        return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.TOTAL_ORDER_SUM))
+
+    @staticmethod
+    def _cut_number(web_text: WebElement) -> float:
+        """Cuts number from string to return float without other symbols.
+        
+        :param path: WebElement
+        :return: float
+        """""
+        return float(''.join(re.findall(r'\d+\.\d+', web_text.text)))
 
 
 class CouponPanel:
+    """This class describes methods that we need to work with 'Coupon' panel"""
     def __init__(self, driver: Remote):
+        """Initialize driver and coupon_field to work with 'Coupon' panel.
+
+        :param driver: Remote
+        """
         self._driver = driver
         self.coupon_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.COUPON_FIELD)
 
     def open_coupon_panel(self) -> None:
+        """Click on 'Use Coupon Code' panel to open it.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.COUPON_PANEL).click()
 
     def click_apply_coupon_button(self) -> None:
+        """Click 'Apply Coupon' button.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.COUPON_APPLY_BUTTON).click()
 
 
 class EstimateShippingPanel:
+    """This class describes methods that we need to work with 'Estimate Shipping & Taxes' panel"""
     def __init__(self, driver: Remote):
+        """Initialize driver and other field, selectors, radiobutton to work with 'Estimate Shipping & Taxes' panel
+        and it`s modal window.
+
+        :param driver: Remote
+        """
         self._driver = driver
         self.post_code_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.POST_CODE_FIELD)
         self.country_selector = DropdownComponent(self._driver, LocatorsShoppingCartPage.COUNTRY_SELECTOR)
         self.region_selector = DropdownComponent(self._driver, LocatorsShoppingCartPage.REGION_SELECTOR)
-        self.modal_shipping_radio_button = RadioButtonComponent(self._driver, LocatorsShoppingCartPage.MODAL_SHIPPING_RADIO)
+        self.modal_shipping_radio_button = RadioButtonComponent(self._driver,
+                                                                LocatorsShoppingCartPage.MODAL_SHIPPING_RADIO)
 
     def open_estimate_shipping_panel(self) -> None:
+        """Click on 'Estimate Shipping & Taxes' panel to open it.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.ESTIMATE_SHIPPING_PANEL).click()
 
     def click_get_quotes_button(self) -> None:
+        """Click on 'Get Quotes' button.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.GET_QUOTES_BUTTON).click()
 
-    def click_modal_shipping_radio_button(self, radio_text: str) -> None:
-        self._driver.find_element(By.XPATH, f'//label[text()="{radio_text}"]/input').click()
-
     def click_modal_shipping_cancel_button(self) -> None:
+        """Click 'Cancel' button in modal window.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.MODAL_SHIPPING_CANCEL_BUTTON).click()
 
-    def click_modal_shipping_apply_button(self) -> None:
+    def click_modal_apply_shipping_button(self) -> None:
+        """Click 'Apply Shipping' button in modal window.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.MODAL_SHIPPING_APPlY_BUTTON).click()
 
 
 class GiftCertificatePanel:
+    """This class describes methods that we need to work with 'Gift Certificate' panel"""
     def __init__(self, driver: Remote):
+        """Initialize driver, gift_certificate_field to work with 'Gift Certificate' panel.
+
+        :param driver: Remote
+        """
         self._driver = driver
-        # self.gift_certificate_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.CERTIFICATE_FIELD)
+        self.gift_certificate_field = InputFieldComponent(self._driver, LocatorsShoppingCartPage.CERTIFICATE_FIELD)
 
     def open_gift_certificate_panel(self) -> None:
-        self._driver.find_element(*LocatorsShoppingCartPage.GIFT_CERTIFICATE_PANEL)
+        """Click on 'Use Gift Certificate' panel to open it.
+
+        :return: None
+        """
+        self._driver.find_element(*LocatorsShoppingCartPage.GIFT_CERTIFICATE_PANEL).click()
 
     def click_apply_gift_certificate_button(self) -> None:
+        """Click on 'Apply Gift Certificate' button.
+
+        :return: None
+        """
         self._driver.find_element(*LocatorsShoppingCartPage.CERTIFICATE_APPLY_BUTTON).click()
 
 
 class ProductInCart:
-    def __init__(self, product: WebElement):
-        self._product = product
+    """This class describes methods that we need to work with separate product in cart."""
+    def __init__(self, product_line: WebElement, driver: Remote):
+        """Initialize driver, parent WebElement and product quantity to work with separate product in cart.
+
+        :param product_line: WebElement
+        :param driver: Remote
+        """
+        self._driver = driver
+        self._product_line = product_line
+        self.quantity = InputFieldComponent(self._driver,
+                                            LocatorsShoppingCartPage.PRODUCT_QUANTITY, self._product_line)
 
     def get_name(self) -> str:
-        return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_NAME).text
+        """Gets product name.
+
+        :return: string
+        """
+        return self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_NAME).text
 
     def get_model(self) -> str:
-        return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_MODEL).text
+        """Gets product model.
 
-    def get_unit_price(self) -> str:
-        return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_UNIT_PRICE).text
+        :return: string
+        """
+        return self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_MODEL).text
 
-    def get_total_price(self) -> str:
-        return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_TOTAL_PRICE).text
+    def get_unit_price(self) -> float:
+        """Gets product unit price.
+
+        :return: float
+        """
+        return self._cut_number(self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_UNIT_PRICE))
+
+    def get_total_price(self) -> float:
+        """Gets product total price.
+
+        :return: float
+        """
+        return self._cut_number(self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_TOTAL_PRICE))
 
     def get_quantity(self) -> str:
-        return self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_QUANTITY).get_attribute('value')
+        """Gets product quantity.
 
-    def set_quantity(self, value: int):
-        quantity_input = self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_QUANTITY)
-        quantity_input.clear()
-        quantity_input.send_keys(value)
+        :return: string
+        """
+        return self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_QUANTITY).get_attribute('value')
 
     def click_update_button(self) -> None:
-        self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_UPDATE_QUANTITY_BUTTON).click()
+        """Click update product quantity button.
+
+        :return: None
+        """
+        self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_UPDATE_QUANTITY_BUTTON).click()
 
     def click_remove_button(self) -> None:
-        self._product.find_element(*LocatorsShoppingCartPage.PRODUCT_REMOVE_BUTTON).click()
+        """Click remove product from cart button.
+
+        :return: None
+        """
+        self._product_line.find_element(*LocatorsShoppingCartPage.PRODUCT_REMOVE_BUTTON).click()
+
+    @staticmethod
+    def _cut_number(web_text: WebElement) -> float:
+        """Cuts number from string to return float without other symbols.
+
+        :param path: WebElement
+        :return: float
+        """""
+        return float(''.join(re.findall(r'\d+\.\d+', web_text.text)))
