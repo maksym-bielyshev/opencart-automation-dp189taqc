@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from dp189.pages.base_page import BasePage
 
 class HomePage(BasePage):
     def __init__(self, driver):

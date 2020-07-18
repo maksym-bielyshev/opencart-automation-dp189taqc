@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
@@ -11,7 +12,10 @@ from selenium.webdriver.support.ui import Select
 
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
+
+from dp189.pages.compare_page import ComparePage
 
 
 class SearchArea:
@@ -46,12 +50,48 @@ class ShopCartButton:
         if len(cart_items) == 0:
             return 'Your cart is empty!'
         else:
-            return ShopCartDropdown(self._driver)
+            return ShopCartDropdownComponent(self._driver)
 
 
-class ShopCartDropdown:
-    def __init__(self, driver):
-        pass
+class ShopCartDropdownComponent:
+    """Component for black shopping cart drop-down button."""
+
+    def __init__(self, driver: Remote, product_title: str) -> None:
+        """Initialise shopping cart drop-down button.
+
+        :param driver: Remote driver.
+        :param product_title: The title of the product.
+        """
+        self._driver = driver
+        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
+
+    def click_product_title(self) -> None:
+        """Click on the product title.
+
+        :return: None.
+        """
+        self.product_title.click()
+
+    def click_remove_button(self) -> None:
+        """Click on the remove from the shopping cart button.
+
+        :return:
+        """
+        self._driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button').click()
+
+    def click_view_cart_link(self) -> None:
+        """Click on the 'View Cart' link.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsShoppingCartButton.VIEW_CART).click()
+
+    def click_checkout_link(self) -> None:
+        """Click on the 'Checkout' link.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
 
 class BaseNavBar:
@@ -120,6 +160,105 @@ class BaseRightMenu:
         self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
 
 
+class ProductWidgetsListComponent:
+    """All products on the 'Category' page."""
+
+    def __init__(self, driver: Remote):
+        """Initialise a driver and an empty list.
+
+        :param driver: Remote driver.
+        """
+        self._driver = driver
+        self.product_widgets_list = []
+
+    def get_list_product_widgets(self) -> list:
+        """Get a list of all products on the 'Category' page.
+
+        :return: List of all products on the 'Category' page.
+        """
+        self.product_widgets_list = self._driver.find_elements(*LocatorProductWidget.PRODUCT_WIDGET)
+        return self.product_widgets_list
+
+
+class ProductWidgetComponent:
+    """Widget for products on the category page."""
+
+    def __init__(self, driver: Remote, product_title: str) -> None:
+        """Initialise the widget and the buttons.
+
+        :param driver: Remote driver.
+        :param product_title: The title of the product.
+        """
+        self._driver = driver
+        self.product_title = product_title
+
+    def click_add_to_shopping_cart_button(self) -> None:
+        """Click on the "Add to shopping cart" button.
+
+        :return: None.
+        """
+        self._driver.find_element\
+            (By.XPATH, f'//a[text()="{self.product_title}"]/../../..//span[text()="Add to Cart"]/..').click()
+
+    def click_add_to_wish_list_button(self) -> None:
+        """Click on the "Add to Wish List" button.
+
+        :return: None.
+        """
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title ="Add to Wish List"]').click()
+
+    def click_add_to_compare_button(self) -> None:
+        """Click on the "Compare this Product" button.
+
+        :return: None.
+        """
+        self._driver.find_element(
+            By.XPATH,
+            f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
+
+
+class ProductCompareLinkComponent:
+    """A link to compare the products added to the comparison."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialise the link.
+
+        :param driver: Remote driver.
+        """
+        self._driver = driver
+
+    def open_compare_page(self) -> ComparePage:
+        """Click on the 'Product Compare' link and return the 'Compare' page.
+
+        :return: Page which compare selected products.
+        """
+        self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
+        return ComparePage(self._driver)
+
+
+class ProductsViewModeComponent:
+    """Two buttons to change the view of the products."""
+
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
+
+    def click_list_view_button(self) -> None:
+        """Click on the 'List' button.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsViewModeButton.LIST_VIEW_BUTTON).click()
+
+    def click_grid_view_button(self) -> None:
+        """Click on the 'Grid' button.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorsViewModeButton.GRID_VIEW_BUTTON).click()
+
+
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
@@ -163,11 +302,13 @@ class InputFieldComponent:
         self._driver = driver
         self.input_field_locator = input_field_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
             self.input_field = self._driver.find_element(*self.input_field_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
         """Clear and fill input field with data.
@@ -175,7 +316,7 @@ class InputFieldComponent:
         :param data: str
         :return: None
         """
-        self.input_field = self._driver.find_element(*self.input_field_locator)
+        self._find_input_field()
         self.input_field.clear()
         self.input_field.send_keys(data)
 
@@ -193,11 +334,13 @@ class RadioButtonComponent:
         self._driver = driver
         self.radio_buttons_locator = radio_buttons_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.radio_buttons_container = self.parent_element.find_element(*self.radio_buttons_locator)
         else:
             self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -205,6 +348,7 @@ class RadioButtonComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         return self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
 
     def choose_radio_button_option(self, data: str) -> None:
@@ -213,6 +357,7 @@ class RadioButtonComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
@@ -229,11 +374,13 @@ class CheckboxComponent:
         self._driver = driver
         self.checkbox_locator = checkbox_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.checkbox_container = self.parent_element.find_element(*self.checkbox_locator)
         else:
             self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
-        self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -241,6 +388,7 @@ class CheckboxComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         return self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
 
     def choose_checkbox_option(self, data: str) -> None:
@@ -249,6 +397,7 @@ class CheckboxComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
@@ -265,11 +414,13 @@ class DropdownComponent:
         self._driver = driver
         self.dropdown_locator = dropdown_locator
         self.parent_element = parent_element
+        self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
+
+    def _find_input_field(self):
         if self.parent_element:
             self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
         else:
             self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
-        self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
 
     def option_is_checked(self, data: str) -> bool:
         """Check if required option is chosen.
@@ -277,6 +428,7 @@ class DropdownComponent:
         :param data: str
         :return: bool
         """
+        self._find_input_field()
         word_list_option = self.checkbox_container.first_selected_option.text.split()
         return word_list_option[0] + ' ' + word_list_option[1] == data
 
@@ -286,6 +438,7 @@ class DropdownComponent:
         :param data: str
         :return: None
         """
+        self._find_input_field()
         self.checkbox_container.select_by_visible_text(data)
 
 
@@ -349,6 +502,7 @@ class NewsletterComponent:
 class AddAddressComponent:
     """Add Address form сonsists from fields: First Name, Last Name, Company,
     Address 1, Address 2, City, Country, Region."""
+
     def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input form fields and dropdown form fields.
 
