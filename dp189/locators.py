@@ -226,6 +226,7 @@ class LocatorsComparePage:
 
 
 class LocatorsShoppingCartPage:
+    """Locators for 'Shopping Cart' page"""
     COUPON_FIELD = (By.ID, 'input-coupon')
     COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
 
@@ -260,6 +261,8 @@ class LocatorsShoppingCartPage:
 
     FLAT_SHIPPING_RATE = (By.XPATH, '//td/strong[text()="Flat Shipping Rate:"]/../following-sibling::td')
     COUPON_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Coupon")]'
+                            '/../following-sibling::td')
+    GIFT_CERTIFICATE_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Gift Certificate")]'
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
