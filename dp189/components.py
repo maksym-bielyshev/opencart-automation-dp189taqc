@@ -43,7 +43,7 @@ class ShopCartButton:
         if len(cart_items) == 0:
             return 'Your cart is empty!'
         else:
-            return ShopCartDropdown(self._driver)
+            return self._driver
 
 
 class ShopCartDropdown:
