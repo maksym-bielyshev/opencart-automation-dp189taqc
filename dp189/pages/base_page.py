@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 
+from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
+from ..locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
+from ..locators import LocatorsBasePageNavBar
+
 
 class BasePage:
     def __init__(self, driver):
@@ -22,8 +26,8 @@ class BasePage:
 
     def click_account_and_go_to_login(self):
         self.my_account.click()
-        self.my_account.find_element(*LocatorsNavBar.LOGIN).click()
+        self.my_account.find_element(*LocatorsBasePageNavBar.LOGIN).click()
     
     def click_account_and_go_to_register(self):
         self.my_account.click()
-        self.my_account.find_element(*LocatorsNavBar.REGISTER).click()
+        self.my_account.find_element(*LocatorsBasePageNavBar.REGISTER).click()
