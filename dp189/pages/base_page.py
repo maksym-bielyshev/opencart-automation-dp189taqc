@@ -1,10 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
-#MacOS imports
-from ..components import BasePageNavBarComponent, ShopCartButtonComponent, InputFieldComponent, DropdownComponent
-from ..locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsBasePageNavBar, LocatorBasePageSearch
-from ..locators import LocatorsBasePageMainMenu
 
 
 class BasePage:
