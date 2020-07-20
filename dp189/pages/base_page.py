@@ -1,17 +1,17 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import Remote
 
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
+from ..components import CatchMessageComponent
 from ..locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
 
-from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent
-from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
+#from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent
+#from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
 
 
 class BasePage:
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: Remote):
         self._driver = driver
         self.top_nav_bar = BasePageNavBarComponent(driver)
         self.main_menu_desktops = DropdownComponent(driver, LocatorsBasePageMainMenu.DESKTOPS)
