@@ -1,3 +1,6 @@
+from dp189.locators import LocatorsCheckoutPage
+
+
 class CheckoutOptions:
     pass
 
