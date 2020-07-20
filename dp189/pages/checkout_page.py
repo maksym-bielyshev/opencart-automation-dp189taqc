@@ -1,29 +1,36 @@
+from selenium.webdriver import Remote
 from dp189.locators import LocatorsCheckoutPage
 
 
 class CheckoutOptions:
-    pass
-
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 class BillingDetails:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 
 class AccountAndBillingDetails:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 
 class DeliveryDetails:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 
 class DeliveryMethod:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 
 class PaymentMethod:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
 
 
 class ConfirmOrder:
-    pass
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
