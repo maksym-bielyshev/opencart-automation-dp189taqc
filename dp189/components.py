@@ -9,10 +9,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
-from .locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 
 from dp189.pages.compare_page import ComparePage
 
@@ -464,6 +464,20 @@ class ErrorMessageComponent:
             EC.presence_of_element_located((By.XPATH, error_message_locator))
         )
         return error_message.text
+
+
+class CatchMessageComponent:
+    """This component created to find a specific info message after action on the site."""
+    def __init__(self, driver: Remote) -> None:
+        """Initialize a driver to CatchMessageComponent."""
+        self._driver = driver
+
+    def get_info_message(self) -> str:
+        """Get info message such as 'Success:' or 'Warning:'."""
+        alert_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_MESSAGE)
+        )
+        return alert_message.text
 
 
 class NewsletterComponent:
