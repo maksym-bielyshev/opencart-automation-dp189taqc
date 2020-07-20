@@ -291,3 +291,16 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
+
+
+class LocatorsCheckoutPage:
+    """Locators for the 'Checkout' page."""
+
+    REGISTER_ACCOUNT_OPTION = (By.XPATH, '//*[@class="radio"][1]/label/input')
+    GUEST_CHECKOUT_OPTION = (By.XPATH, '//*[@class="radio"][2]/label/input')
+    CONTINUE_BUTTON_OPTIONS = (By.XPATH, '//input[@id="button-account"]')
+
+    EMAIL_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-email"]')
+    PASSWORD_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-password"]')
+    FORGOTTEN_PASSWORD_LINK = (By.XPATH, '//a[contains(text(),"Forgotten Password")]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@id="button-login"]')
