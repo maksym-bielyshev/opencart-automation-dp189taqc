@@ -61,12 +61,12 @@ class ShopCartDropdownComponent:
         """
         self._driver = driver
 
-    def click_product_title(self) -> None:
-        """Click on the product title.
+    def click_product_title(self, product_title: str) -> None:
+        """Click on the provided product title.
 
         :return: None.
         """
-        self.product_title.click()
+        self._driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]').click()
 
     def click_remove_button(self) -> None:
         """Click on the remove from the shopping cart button.
