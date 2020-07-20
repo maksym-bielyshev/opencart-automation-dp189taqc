@@ -14,8 +14,6 @@ from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Lo
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 
-from dp189.pages.compare_page import ComparePage
-
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
@@ -228,13 +226,12 @@ class ProductCompareLinkComponent:
         """
         self._driver = driver
 
-    def open_compare_page(self) -> ComparePage:
-        """Click on the 'Product Compare' link and return the 'Compare' page.
+    def open_compare_page(self) -> None:
+        """Click on the 'Product Compare' link.
 
-        :return: Page which compare selected products.
+        :return: None.
         """
         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
-        return ComparePage(self._driver)
 
 
 class ProductsViewModeComponent:
