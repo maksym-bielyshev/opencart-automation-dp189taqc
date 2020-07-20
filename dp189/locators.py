@@ -156,7 +156,7 @@ class LocatorsRegisterPage:
 class LocatorsNewsletterComponent:
     """Locators fot the 'Newsletter' component."""
 
-    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+    SUBSCRIBE_RADIO_BUTTONS = (By.XPATH, '//label[@class="radio-inline"]')
 
 
 class LocatorsForgotPasswordPage:

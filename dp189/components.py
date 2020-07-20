@@ -517,24 +517,38 @@ class NewsletterComponent:
         self._driver = driver
         self.subscribe_radio_buttons_locator = LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS
 
-    def is_subscribed(self) -> bool:
-        """Check user is subscribed or not.
+    def get_subscription_status(self) -> str:
+        """Get the status of subscription to newsletters, Yes or No.
 
-        :return: bool
+        :return: str
         """
-        self.subscribe_radio_buttons = self._driver.find_elements(*self.subscribe_radio_buttons_locator)
-        for button in self.subscribe_radio_buttons:
-            if button.get_attribute('checked') == 'true' and button.get_attribute('value') == '1':
-                return True
-        return False
+        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
+        for label in subscribe_radio_button_labels:
+            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+            if radio_button_input.get_attribute('checked'):
+                return label.text
 
     def subscribe_to_newsletter(self) -> None:
         """Subscribe to newsletter.
 
         :return: None
         """
-        self.subscribe_to_newsletter_locator = f'[{self.subscribe_radio_buttons_locator[0]}="{self.subscribe_radio_buttons_locator[1]}"][value="1"]'
-        self._driver.find_element_by_css_selector(self.subscribe_to_newsletter_locator).click()
+        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
+        for label in subscribe_radio_button_labels:
+            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+            if label.text == 'Yes':
+                radio_button_input.click()
+
+    def unsubscribe_from_newsletter(self) -> None:
+        """Unsubscribe from newsletter.
+
+        :return: None
+        """
+        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
+        for label in subscribe_radio_button_labels:
+            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+            if label.text == 'No':
+                radio_button_input.click()
 
 
 class AddAddressComponent:
