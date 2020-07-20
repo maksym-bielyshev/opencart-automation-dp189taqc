@@ -64,6 +64,9 @@ class ShopCartDropdownComponent:
     def get_product_titles(self):
         pass
 
+    def get_all_options_for_product_in_cart(self, product_title: str):
+        pass
+
     def click_product_title(self, product_title: str) -> None:
         """Click on the provided product title.
 
