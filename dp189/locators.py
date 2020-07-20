@@ -229,6 +229,7 @@ class LocatorsGiftCertificatePage:
     AGREE = (By.XPATH, '//div[@class="pull-right"]//input[@name="agree"]')
     CONTINUE_BUTTON = (By.XPATH, '//div[@class="pull-right"]//input[@type="submit"]')
 
+
 class LocatorsComparePage:
     """Locators for the 'Compare' page"""
     ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
@@ -236,3 +237,49 @@ class LocatorsComparePage:
     REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
 
 
+class LocatorsInfoMessages:
+    """This locator is an info message for CatchMessageComponent."""
+    ALERT_MESSAGE = (By.CLASS_NAME, 'alert')
+
+
+class LocatorsShoppingCartPage:
+    """Locators for 'Shopping Cart' page"""
+    COUPON_FIELD = (By.ID, 'input-coupon')
+    COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
+
+    COUNTRY_SELECTOR = (By.ID, 'input-country')
+    REGION_SELECTOR = (By.ID, 'input-zone')
+    POST_CODE_FIELD = (By.ID, 'input-postcode')
+    GET_QUOTES_BUTTON = (By.ID, 'button-quote')
+    MODAL_SHIPPING_APPlY_BUTTON = (By.ID, 'button-shipping')
+
+    CERTIFICATE_FIELD = (By.ID, 'input-voucher')
+    CERTIFICATE_APPLY_BUTTON = (By.ID, 'button-voucher')
+
+    PRODUCT_LINES = (By.XPATH, '//h1/following-sibling::form//tbody/tr')
+
+    PRODUCT_NAME = (By.XPATH, './/td[2]/a')
+    PRODUCT_MODEL = (By.XPATH, './/td[3]')
+    PRODUCT_UNIT_PRICE = (By.XPATH, './/td[5]')
+    PRODUCT_TOTAL_PRICE = (By.XPATH, './/td[6]')
+    PRODUCT_QUANTITY = (By.XPATH, './/input')
+    PRODUCT_UPDATE_QUANTITY_BUTTON = (By.XPATH, './/button[@data-original-title="Update"]')
+    PRODUCT_REMOVE_BUTTON = (By.XPATH, './/button[@data-original-title="Remove"]')
+
+    COUPON_PANEL = (By.XPATH, '//a[text() = "Use Coupon Code "]')
+    ESTIMATE_SHIPPING_PANEL = (By.XPATH, '//a[text() = "Estimate Shipping & Taxes "]')
+    GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
+
+    MODAL_SHIPPING_CANCEL_BUTTON = (By.XPATH, '//*[@id="modal-shipping"]//button[text()="Cancel"]')
+    MODAL_SHIPPING_RADIO = (By.XPATH, '//div[@id="modal-shipping"]//div[@class="radio"]')
+
+    CONTINUE_SHIPPING_BUTTON = (By.XPATH, '//a[text()="Continue Shopping"]')
+    CHECKOUT_BUTTON = (By.XPATH, '//a[text()="Checkout"]')
+
+    FLAT_SHIPPING_RATE = (By.XPATH, '//td/strong[text()="Flat Shipping Rate:"]/../following-sibling::td')
+    COUPON_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Coupon")]'
+                            '/../following-sibling::td')
+    GIFT_CERTIFICATE_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Gift Certificate")]'
+                            '/../following-sibling::td')
+    SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
+    TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')

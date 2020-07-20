@@ -6,9 +6,12 @@ from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldC
 from ..locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
 
+from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent
+from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
+
 
 class BasePage:
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver):
         self._driver = driver
         self.top_nav_bar = BasePageNavBarComponent(driver)
         self.main_menu_desktops = DropdownComponent(driver, LocatorsBasePageMainMenu.DESKTOPS)
@@ -23,6 +26,7 @@ class BasePage:
         self.your_store_link = driver.find_element(*LocatorYourStoreLink.YOUR_STORE)
         self.search_field = InputFieldComponent(driver, LocatorBasePageSearch.SEARCH_FIELD)
         self.shop_cart_button = ShopCartButtonComponent(driver)
+        self.catch_info_message = CatchMessageComponent(self._driver)
 
     def click_account_and_go_to_login(self):
         self.my_account.click()
