@@ -232,7 +232,6 @@ class ProductCompareLinkComponent:
         :return: Page which compare selected products.
         """
         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
-        return ComparePage(self._driver)
 
 
 class ProductsViewModeComponent:
