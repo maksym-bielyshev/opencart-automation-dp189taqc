@@ -296,9 +296,9 @@ class LocatorsShoppingCartPage:
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
 
-    REGISTER_ACCOUNT_OPTION = (By.XPATH, '//*[@class="radio"][1]/label/input')
-    GUEST_CHECKOUT_OPTION = (By.XPATH, '//*[@class="radio"][2]/label/input')
-    CONTINUE_BUTTON_OPTIONS = (By.XPATH, '//input[@id="button-account"]')
+    REGISTER_ACCOUNT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][1]/label/input')
+    GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][2]/label/input')
+    CONTINUE_BUTTON_CHECKOUT_OPTIONS = (By.XPATH, '//input[@id="button-account"]')
 
     EMAIL_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-email"]')
     PASSWORD_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-password"]')
