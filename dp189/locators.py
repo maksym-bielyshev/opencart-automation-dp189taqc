@@ -1,22 +1,23 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorBasePageSearch:
-    """Locator for search field on base page"""
-
+class LocatorsSearch:
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
+    SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
 
 
-class LocatorsBasePageNavBar:
-    """Locators for top navbar links on base page"""
-
+class LocatorsNavBar:
+    # Absolute
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH,'.//ul/li[3]/button')
+    USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
+
+    # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
+    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -24,22 +25,7 @@ class LocatorsBasePageNavBar:
     CHECKOUT = (By.XPATH, './/li[5]/a')
 
 
-class LocatorsBasePageMainMenu:
-    """Locators for main menu on base page"""
-
-    DESKTOPS = (By.XPATH, '//a[text()="Desktops"]')
-    LAPTOPS_NOTEBOOKS = (By.XPATH, '//a[text()="Laptops & Notebooks"]')
-    COMPONENTS = (By.XPATH, '//a[text()="Components"]')
-    TABLETS = (By.XPATH, '//a[text()="Tablets"]')
-    SOFTWARE = (By.XPATH, '//a[text()="Software"]')
-    PHONES_PDAS = (By.XPATH, '//a[text()="Phones & PDAs"]')
-    CAMERAS = (By.XPATH, '//a[text()="Cameras"]')
-    MP3_PLAYERS = (By.XPATH, '//a[text()="MP3 Players"]')
-
-
-class LocatorsRightMenuRegisterPage:
-    """"Locators for right menu on Register and Login pages"""
-
+class RightMenuLocators:
     RIGHT_MENU = (By.CLASS_NAME, 'list-group')
     LOGIN = (By.XPATH, './/a[text()="Login"]')
     REGISTER = (By.XPATH, './/a[text()="Register"]')
@@ -137,9 +123,7 @@ class LocatorsAvailableOptions:
     DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
     TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
     CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
-    CHECKBOX_LABEL = (By.XPATH, '//div[@class="checkbox"]/label')
     RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
-    RADIO_BUTTON_LABEL = (By.XPATH, '//div[@class="radio"]/label')
     SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
 
 
@@ -162,19 +146,14 @@ class LocatorsYourPasswordComponent:
 class LocatorsRegisterPage:
     """Locators fot the 'Register' page."""
 
+    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
 
 class LocatorsNewsletterComponent:
     """Locators fot the 'Newsletter' component."""
 
-    SUBSCRIBE_RADIO_BUTTONS = (By.XPATH, '//label[@class="radio-inline"]')
-
-
-class LocatorsPrivacyPolicyComponent:
-    """Locators fot the 'Privacy Policy' component."""
-
-    PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//input[@name="agree"]')
+    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
 
 
 class LocatorsForgotPasswordPage:
@@ -240,10 +219,11 @@ class LocatorsGiftCertificatePage:
 
 class LocatorsComparePage:
     """Locators for the 'Compare' page"""
+    TABLE_ROW = (By.XPATH, '//table/tbody/tr')
     ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
-    ADD_BUTTONS = (By.XPATH, '//table/tbody/tr/td/input[@class="btn btn-primary btn-block"]')
-    REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
-
+    ADD_BUTTONS = (By.CLASS_NAME, 'btn-primary')
+    REMOVE_BUTTONS = (By.CLASS_NAME, 'btn-danger')
+    TABLE_COLUMN = (By.CLASS_NAME, 'td')
 
 class LocatorsInfoMessages:
     """This locator is an info message for CatchMessageComponent."""

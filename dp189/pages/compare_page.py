@@ -1,9 +1,7 @@
 from dp189.pages.base_page import BasePage
 from selenium.webdriver import Remote
-from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.remote.webelement import WebElement
 from dp189.locators import LocatorsComparePage
-import time
 
 CHROME_DRIVER = '../driver/chromedriver'
 
@@ -20,7 +18,7 @@ class ComparePage(BasePage):
 
         :return: list
         """
-        rows = self._driver.find_elements_by_xpath("//table/tbody/tr")
+        rows = self._driver.find_elements(*LocatorsComparePage.TABLE_ROW)
         for row in rows:
             self.table_rows.append(PropertyOfProduct(row))
         return self.table_rows
