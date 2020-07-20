@@ -85,7 +85,6 @@ class BasePageNavBarComponent:
         self.currency.click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
-
     def click_contact_us_link(self):
         self.nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
 
@@ -97,6 +96,7 @@ class BasePageNavBarComponent:
 
     def click_checkout_link(self):
         self.nav_bar.find_element(*LocatorsNavBar.CHECKOUT).click()
+
 
 class RegisterPageRightMenuComponent:
     def __init__(self, driver) -> None:
@@ -442,6 +442,7 @@ class ErrorMessageComponent:
 
 class CatchMessageComponent:
     """This component created to find a specific info message after action on the site."""
+
     def __init__(self, driver: Remote) -> None:
         """Initialize a driver to CatchMessageComponent."""
         self._driver = driver

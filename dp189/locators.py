@@ -6,7 +6,8 @@ class LocatorBasePageSearch:
 
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
 
-class LocatorsBasePageNavBar:
+
+class LocatorsNavBar:
     """Locators for top navbar links on base page"""
 
     NAVBAR = (By.CLASS_NAME, 'list-inline')
