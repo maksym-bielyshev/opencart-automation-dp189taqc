@@ -1,7 +1,7 @@
 from selenium.webdriver import Remote
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsCheckoutPage
-from dp189.components import InputFieldComponent
+from dp189.components import InputFieldComponent, YourPersonalDetailsComponent, AddAddressComponent
 
 
 class CheckoutOptions(BasePage):
@@ -20,7 +20,7 @@ class CheckoutOptions(BasePage):
         self._driver.find_element(LocatorsCheckoutPage.GUEST_CHECKOUT_RADIO_BUTTON).click()
 
     def click_continue_button(self):
-        self._driver.find_element(LocatorsCheckoutPage.CONTINUE_BUTTON).click()
+        self._driver.find_element(LocatorsCheckoutPage.CONTINUE_BUTTON_CHECKOUT_OPTIONS).click()
 
     def click_forgotten_password_link(self):
         self._driver.find_element(LocatorsCheckoutPage.FORGOTTEN_PASSWORD_LINK).click()
@@ -33,6 +33,14 @@ class BillingDetails:
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
+        self.your_address_form = AddAddressComponent(self._driver, LocatorsCheckoutPage.ADD_ADDRESS_BILLING_DETAILS_PARENT)
+
+    def click_continue_button_billing_details(self):
+        self._driver.find_element(LocatorsCheckoutPage.CONTINUE_BUTTON_CHECKOUT_OPTIONS).click()
+
+    def click_delivery_and_billing_addresses_checkbox(self):
+        self._driver.find_element(LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX)
 
 
 class AccountAndBillingDetails:
