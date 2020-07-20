@@ -54,14 +54,12 @@ class ShopCartButton:
 class ShopCartDropdownComponent:
     """Component for black shopping cart drop-down button."""
 
-    def __init__(self, driver: Remote, product_title: str) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise shopping cart drop-down button.
 
         :param driver: Remote driver.
-        :param product_title: The title of the product.
         """
         self._driver = driver
-        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
 
     def click_product_title(self) -> None:
         """Click on the product title.
