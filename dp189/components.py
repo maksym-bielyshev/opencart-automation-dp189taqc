@@ -35,29 +35,28 @@ class ShopCartButtonComponent:
 class ShopCartDropdownComponent:
     """Component for black shopping cart drop-down button."""
 
-    def __init__(self, driver: Remote, product_title: str) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise shopping cart drop-down button.
 
         :param driver: Remote driver.
-        :param product_title: The title of the product.
         """
         self._driver = driver
-        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
 
-    def click_product_title(self) -> None:
-        """Click on the product title.
+    def click_product_title(self, product_title: str) -> None:
+        """Click on the provided product title.
 
         :return: None.
         """
-        self.product_title.click()
+        self._driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]').click()
 
-    def click_remove_button(self) -> None:
+    def click_remove_button(self, product_title: str) -> None:
         """Click on the remove from the shopping cart button.
             return self._driver
 
-        :return:
+        :return: None.
         """
-        self._driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button').click()
+        product_title = self._driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
+        self._driver.find_element(By.XPATH, f'{product_title}/../../td[5]/button').click()
 
     def click_view_cart_link(self) -> None:
         """Click on the 'View Cart' link.
