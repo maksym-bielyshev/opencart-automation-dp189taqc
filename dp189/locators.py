@@ -137,7 +137,9 @@ class LocatorsAvailableOptions:
     DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
     TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
     CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    CHECKBOX_LABEL = (By.XPATH, '//div[@class="checkbox"]/label')
     RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    RADIO_BUTTON_LABEL = (By.XPATH, '//div[@class="radio"]/label')
     SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
 
 
@@ -160,14 +162,19 @@ class LocatorsYourPasswordComponent:
 class LocatorsRegisterPage:
     """Locators fot the 'Register' page."""
 
-    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
 
 class LocatorsNewsletterComponent:
     """Locators fot the 'Newsletter' component."""
 
-    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+    SUBSCRIBE_RADIO_BUTTONS = (By.XPATH, '//label[@class="radio-inline"]')
+
+
+class LocatorsPrivacyPolicyComponent:
+    """Locators fot the 'Privacy Policy' component."""
+
+    PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//input[@name="agree"]')
 
 
 class LocatorsForgotPasswordPage:
