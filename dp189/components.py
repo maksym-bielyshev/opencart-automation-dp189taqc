@@ -16,27 +16,7 @@ from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Lo
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 
 
-class SearchArea:
-    """"This class describes the search area common in all pages. It consists or search field and search button"""
-
-    def __init__(self, driver):
-        self._driver = driver
-        self._search_field = driver.find_element(*LocatorsSearch.SEARCH_FIELD)
-        self._search_button = driver.find_element(*LocatorsSearch.SEARCH_BUTTON)
-
-    def fill_search_field_and_hit_return(self, item: str):
-        self._search_field.clear()
-        self._search_field.send_keys(item).send_keys(Keys.RETURN)
-        # return SearchPage(self._driver)
-
-    def fill_search_field_and_click(self, item: str):
-        self._search_field.clear()
-        self._search_field.send_keys(item)
-        self._search_button.click()
-        # return SearchPage(self._driver)
-
-
-class ShopCartButton:
+class ShopCartButtonComponent:
     # TODO test functionality
     def __init__(self, driver):
         self._driver = driver
@@ -72,6 +52,7 @@ class ShopCartDropdownComponent:
 
     def click_remove_button(self) -> None:
         """Click on the remove from the shopping cart button.
+            return self._driver
 
         :return:
         """
@@ -91,38 +72,33 @@ class ShopCartDropdownComponent:
         """
         self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
-
-class BaseNavBar:
+class BasePageNavBarComponent:
     """This class describes the top nav bar of the base page"""
 
     def __init__(self, driver):
         self._driver = driver
-        self._currency = driver.find_element(*LocatorsNavBar.CURRENCY)
-        self._nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
+        self.currency = driver.find_element(*LocatorsNavBar.CURRENCY)
+        self.nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
 
-    def click_currency_euro(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.EUR).click()
-
-    def click_currency_pound(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.POUND).click()
-
-    def click_currency_usd(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.USD).click()
-
-    def click_contact_us(self):
-        self._nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
-
-    def click_wishlist(self):
-        self._nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
-
-    def click_shopping_cart(self):
-        self._nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
+    def change_currency(self, specific_currency: str):
+        # """EUR, USD, GBP"""
+        self.currency.click()
+        self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
 
-class BaseRightMenu:
+    def click_contact_us_link(self):
+        self.nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
+
+    def click_wishlist_link(self):
+        self.nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
+
+    def click_shopping_cart_link(self):
+        self.nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
+
+    def click_checkout_link(self):
+        self.nav_bar.find_element(*LocatorsNavBar.CHECKOUT).click()
+
+class RegisterPageRightMenuComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
         self._right_menu = driver.find_element_by_class_name('list-group')
@@ -289,7 +265,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
         """Initialize the input field.
 
         :param driver: Remote

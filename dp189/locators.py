@@ -1,31 +1,43 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorsSearch:
+class LocatorBasePageSearch:
+    """Locator for search field on base page"""
+
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
-    SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
 
+class LocatorsBasePageNavBar:
+    """Locators for top navbar links on base page"""
 
-class LocatorsNavBar:
-    # Absolute
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH, './/ul/li[3]/button')
+    USD = (By.XPATH,'.//ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
-
-    # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
     SHOPPING_CART = (By.XPATH, './/li[4]/a')
     CHECKOUT = (By.XPATH, './/li[5]/a')
 
+class LocatorsBasePageMainMenu:
+    """Locators for main menu on base page"""
 
-class RightMenuLocators:
+    DESKTOPS = (By.XPATH, '//a[text()="Desktops"]')
+    LAPTOPS_NOTEBOOKS = (By.XPATH, '//a[text()="Laptops & Notebooks"]')
+    COMPONENTS = (By.XPATH, '//a[text()="Components"]')
+    TABLETS = (By.XPATH, '//a[text()="Tablets"]')
+    SOFTWARE = (By.XPATH, '//a[text()="Software"]')
+    PHONES_PDAS = (By.XPATH, '//a[text()="Phones & PDAs"]')
+    CAMERAS = (By.XPATH, '//a[text()="Cameras"]')
+    MP3_PLAYERS = (By.XPATH, '//a[text()="MP3 Players"]')
+
+
+class LocatorsRightMenuRegisterPage:
+    """"Locators for right menu on Register and Login pages"""
+
     RIGHT_MENU = (By.CLASS_NAME, 'list-group')
     LOGIN = (By.XPATH, './/a[text()="Login"]')
     REGISTER = (By.XPATH, './/a[text()="Register"]')
@@ -59,6 +71,7 @@ class LocatorYourStoreLink:
 
 
 class LocatorsHomePage:
+    # TODO correct xpathes
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
