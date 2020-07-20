@@ -61,6 +61,9 @@ class ShopCartDropdownComponent:
         """
         self._driver = driver
 
+    def get_product_titles(self):
+        pass
+
     def click_product_title(self, product_title: str) -> None:
         """Click on the provided product title.
 
