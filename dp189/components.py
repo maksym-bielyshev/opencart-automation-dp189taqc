@@ -226,7 +226,7 @@ class ProductCompareLinkComponent:
         """
         self._driver = driver
 
-    def open_compare_page(self) -> ComparePage:
+    def open_compare_page(self) -> None:
         """Click on the 'Product Compare' link and return the 'Compare' page.
 
         :return: Page which compare selected products.
