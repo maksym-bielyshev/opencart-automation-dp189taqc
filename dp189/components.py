@@ -14,7 +14,7 @@ from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Lo
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, \
     LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, \
-    LocatorsAvailableOptions
+    LocatorsAvailableOptions, LocatorsPrivacyPolicyComponent
 
 
 # from dp189.pages.compare_page import ComparePage
@@ -406,7 +406,7 @@ class CheckboxComponent:
         """
         self._find_checkbox()
         choosen_options = list()
-        checkbox_labels = self.checkbox_container.find_elements(*LocatorsAvailableOptions.DROPDOWN_LABEL)
+        checkbox_labels = self.checkbox_container.find_elements(*LocatorsAvailableOptions.CHECKBOX_LABEL)
         for label in checkbox_labels:
             checkbox_input = label.find_element(By.TAG_NAME, 'input')
             if checkbox_input.get_attribute('checked'):
@@ -506,26 +506,26 @@ class CatchMessageComponent:
 
 
 class NewsletterComponent:
-    """Two radio buttons to subscribe or unsubscribe to newsletter."""
+    """Two radio buttons to subscribe or unsubscribe from newsletter."""
 
     def __init__(self, driver: Remote) -> None:
-        """Initialize radio buttons.
+        """Initialize driver.
 
         :param driver: Remote
         :return: None
         """
         self._driver = driver
-        self.subscribe_radio_buttons_locator = LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS
+        self.subscribe_radio_button_labels = self._driver.find_elements\
+            (*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
 
     def get_subscription_status(self) -> str:
         """Get the status of subscription to newsletters, Yes or No.
 
         :return: str
         """
-        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
-        for label in subscribe_radio_button_labels:
-            radio_button_input = label.find_element(By.TAG_NAME, 'input')
-            if radio_button_input.get_attribute('checked'):
+        for label in self.subscribe_radio_button_labels:
+            subscribe_radio_button_input = label.find_element(By.TAG_NAME, 'input')
+            if subscribe_radio_button_input.get_attribute('checked'):
                 return label.text
 
     def subscribe_to_newsletter(self) -> None:
@@ -533,22 +533,51 @@ class NewsletterComponent:
 
         :return: None
         """
-        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
-        for label in subscribe_radio_button_labels:
-            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+        for label in self.subscribe_radio_button_labels:
+            subscribe_radio_button_input = label.find_element(By.TAG_NAME, 'input')
             if label.text == 'Yes':
-                radio_button_input.click()
+                subscribe_radio_button_input.click()
 
     def unsubscribe_from_newsletter(self) -> None:
         """Unsubscribe from newsletter.
 
         :return: None
         """
-        subscribe_radio_button_labels = self._driver.find_elements(*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
-        for label in subscribe_radio_button_labels:
-            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+        for label in self.subscribe_radio_button_labels:
+            subscribe_radio_button_input = label.find_element(By.TAG_NAME, 'input')
             if label.text == 'No':
-                radio_button_input.click()
+                subscribe_radio_button_input.click()
+
+
+class PrivacyPolicyComponent:
+    """Checkbox Privacy Policy to agree with it."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize driver and privacy policy checkbox.
+
+        :param driver: Remote
+        :return: None
+        """
+        self._driver = driver
+        self.privacy_policy_checkbox_input = self._driver.find_element\
+            (*LocatorsPrivacyPolicyComponent.PRIVACY_POLICY_CHECKBOX)
+
+    def agree_with_privacy_policy(self) -> None:
+        """Agree with Privacy Policy.
+
+        :return: None
+        """
+        self.privacy_policy_checkbox_input.click()
+
+    def get_status_privacy_policy(self) -> str:
+        """Check status: the user agrees with the policy or not.
+
+        :return: str
+        """
+        if self.privacy_policy_checkbox_input.get_attribute('checked'):
+            return 'I have read and agree to the Privacy Policy.'
+        else:
+            return 'I don\'t agree to the Privacy Policy.'
 
 
 class AddAddressComponent:
