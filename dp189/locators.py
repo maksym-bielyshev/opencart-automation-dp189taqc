@@ -224,6 +224,11 @@ class LocatorsComparePage:
     REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
 
 
+class LocatorsInfoMessages:
+    """This locator is an info message for CatchMessageComponent."""
+    ALERT_MESSAGE = (By.CLASS_NAME, 'alert')
+
+
 class LocatorsShoppingCartPage:
     """Locators for 'Shopping Cart' page"""
     COUPON_FIELD = (By.ID, 'input-coupon')
