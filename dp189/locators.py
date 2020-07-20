@@ -15,10 +15,9 @@ class LocatorsNavBar:
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
 
-
     # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    #MY_ACCOUNT = (By.XPATH, './/li[2]/a')
+    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -47,8 +46,12 @@ class RightMenuLocators:
 
 
 class LocatorsShoppingCartButton:
+    """Locators for a black shop cart button."""
+
     SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
     CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
+    VIEW_CART = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[1]')
+    CHECKOUT = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[2]')
 
 
 class LocatorYourStoreLink:
@@ -56,10 +59,34 @@ class LocatorYourStoreLink:
 
 
 class LocatorsHomePage:
-    # TODO correct xpathes
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+
+
+class LocatorProductCompareLink:
+    """Locator for a 'Product Compare' link."""
+
+    PRODUCT_COMPARE = (By.ID, 'compare-total')
+
+
+class LocatorsViewModeButton:
+    """Locator for a different view buttons."""
+
+    LIST_VIEW_BUTTON = (By.ID, 'list-view')
+    GRID_VIEW_BUTTON = (By.ID, 'grid-view')
+
+
+class LocatorProductWidget:
+    """Locator for a widget of the product."""
+
+    PRODUCT_WIDGET = (By.CLASS_NAME, 'product-thumb')
+
+
+class LocatorCategoryTitle:
+    """Category title text."""
+
+    CATEGORY_TITLE = (By.XPATH, '//*[@id="content"]/h2')
 
 
 class LocatorsProductPage:
@@ -71,9 +98,9 @@ class LocatorsProductPage:
     NEXT_PHOTO = (By.XPATH, "//button[@title='Next (Right arrow key)']")
     PREVIOUS_PHOTO = (By.XPATH, "//button[@title='Previous (Left arrow key)']")
     EX_TAX = (By.XPATH, "//ul//li[contains(.,'Ex Tax')]/../li/h2")
-    DESCRIPTION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[1]/a')
-    SPECIFICATION_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[2]/a')
-    REVIEWS_TAB = (By.XPATH, '//*[@id="content"]/div[1]/div[1]/ul[2]/li[3]/a')
+    DESCRIPTION_TAB = (By.XPATH, '//a[@href="#tab-description"]')
+    SPECIFICATION_TAB = (By.XPATH, '//a[@href="#tab-specification"]')
+    REVIEWS_TAB = (By.XPATH, '//a[@href="#tab-review"]')
 
 
 class LocatorsReviewsTab:
@@ -81,8 +108,6 @@ class LocatorsReviewsTab:
     CONTINUE = (By.ID, 'button-review')
     YOUR_NAME = (By.XPATH, '//input[@id="input-name"]')
     YOUR_REVIEW = (By.XPATH, '//textarea[@id="input-review"]')
-    REVIEW_ERROR_MESSAGE = (
-        By.XPATH, '//div[@id="review"]/following-sibling::div[@class="alert alert-danger alert-dismissible"]')
 
 
 class LocatorsAvailableOptions:
@@ -160,30 +185,34 @@ class LocatorsAddAddressPage:
 
 
 class LocatorsWishListPage:
-    # TODO correct xpathes
-    ITEMS = (By.XPATH, "//div/table/tbody/tr/td[@class='text-left']//a")
-    PRODUCT_NAME = (By.XPATH, "//td[@class='text-left']//a")
-    ADD_PRODUCT_TO_CARD = (By.XPATH, "../../td[@class='text-right']/button[@class='btn btn-primary']")
-    DELETE_PRODUCT_FROM_CARD = (By.XPATH, "../../td[@class='text-right']/a[@class='btn btn-danger']")
-    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//a[@class='btn btn-primary']")
+    """Locators for the 'Wish List' page"""
+    ITEMS = (By.XPATH, '//div/table/tbody/tr/td[@class="text-left"]//a')
+    PRODUCT_NAME = (By.XPATH, '//td[@class="text-left"]//a')
+    ADD_PRODUCT_TO_CARD = (By.XPATH, '../../td[@class="text-right"]/button[@class="btn btn-primary"]')
+    DELETE_PRODUCT_FROM_CARD = (By.XPATH, '../../td[@class="text-right"]/a[@class="btn btn-danger"]')
+    CONTINUE_BUTTON = (By.XPATH, '//div[@class="pull-right"]//a[@class="btn btn-primary"]')
 
 
 class LocatorsGiftCertificatePage:
-    # TODO correct xpathes
-    RECEPIENT_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_name']")
-    RECEPIENT_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='to_email']")
-    YOUR_NAME = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_name']")
-    YOUR_EMAIL = (By.XPATH, "//div[@class='col-sm-10']//input[@name='from_email']")
-    GIFT_CERTIFICATE_THEME = (By.XPATH, "//div[@class='radio']//label")
-    MESSAGE = (By.XPATH, "//div[@class='col-sm-10']//textarea[@name='message']")
-    AMOUNT = (By.XPATH, "//div[@class='col-sm-10']//input[@name='amount']")
-    AGREE = (By.XPATH, "//div[@class='pull-right']//input[@name='agree']")
-    CONTINUE_BUTTON = (By.XPATH, "//div[@class='pull-right']//input[@type='submit']")
+    """Locators for the 'Gift Certificate' page"""
+    RECEPIENT_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_name"]')
+    RECEPIENT_EMAIL = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_email"]')
+    YOUR_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="from_name"]')
+    YOUR_EMAIL = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="from_email"]')
+    GIFT_CERTIFICATE_THEME = (By.XPATH, '//div[@class="radio"]//label')
+    MESSAGE = (By.XPATH, '//div[@class="col-sm-10"]//textarea[@name="message"]')
+    AMOUNT = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="amount"]')
+    AGREE = (By.XPATH, '//div[@class="pull-right"]//input[@name="agree"]')
+    CONTINUE_BUTTON = (By.XPATH, '//div[@class="pull-right"]//input[@type="submit"]')
+
 
 class LocatorsComparePage:
-    # TODO correct xpathes
-    ITEMS = (By.XPATH, "//table[@class='table table-bordered']/tbody/tr/td/a/strong")
-    ADD_BUTTONS = (By.XPATH, "//table/tbody/tr/td/input[@class='btn btn-primary btn-block']")
-    REMOVE_BUTTONS = (By.XPATH, "//table/tbody/tr/td/a[@class='btn btn-danger btn-block']")
+    """Locators for the 'Compare' page"""
+    ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
+    ADD_BUTTONS = (By.XPATH, '//table/tbody/tr/td/input[@class="btn btn-primary btn-block"]')
+    REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
 
 
+class LocatorsInfoMessages:
+    """This locator is an info message for CatchMessageComponent."""
+    ALERT_MESSAGE = (By.CLASS_NAME, 'alert')

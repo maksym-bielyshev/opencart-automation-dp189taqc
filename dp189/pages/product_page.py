@@ -125,7 +125,7 @@ class AvailableOptions:
         self._all_options = driver.find_element(*LocatorsAvailableOptions.ALL_OPTIONS)
         self.text_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_FIELD)
         self.text_area_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_AREA)
-        self.data_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE)
+        self.date_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE)
         self.time = InputFieldComponent(self._driver, LocatorsAvailableOptions.TIME)
         self.date_and_time = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE_AND_TIME)
         self.quantity = InputFieldComponent(self._driver, LocatorsAvailableOptions.QUANTITY)
@@ -163,15 +163,6 @@ class ReviewsTab:
         :return: None
         """
         self._driver.find_element(By.XPATH, f'.//input [@name="rating"][@value="{rating}"]').click()
-
-    def get_error_message_in_review_tab(self) -> str:
-        """Get error message for review input fields if it were incorrect data.
-
-        :return: str
-        """
-        error_message = WebDriverWait(self._driver, 10).until(
-            EC.presence_of_element_located(LocatorsReviewsTab.REVIEW_ERROR_MESSAGE))
-        return error_message.text
 
     def click_review_continue_button(self) -> None:
         """Click 'Continue' button in Reviews Tab.
