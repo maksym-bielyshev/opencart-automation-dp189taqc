@@ -15,13 +15,15 @@ from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsCom
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsBasePageNavBar, \
     LocatorsRightMenuRegisterPage, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
-from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+from dp189.locators import  LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, \
-    LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent,  LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, \
     LocatorsAvailableOptions, LocatorsPrivacyPolicyComponent
 
+# Have a trouble with import with these locators
+# from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsSearch, \
+#     LocatorsNavBar, RightMenuLocators
 
 class ShopCartButtonComponent:
     # TODO test functionality
