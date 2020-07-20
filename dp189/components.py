@@ -7,8 +7,14 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import Select
 
+from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsComponent, \
+    LocatorsYourPasswordComponent, LocatorsRegisterPage, \
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsBasePageNavBar, \
+    LocatorsRightMenuRegisterPage, LocatorsShoppingCartButton, \
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, \
@@ -17,30 +23,7 @@ from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Lo
     LocatorsAvailableOptions, LocatorsPrivacyPolicyComponent
 
 
-# from dp189.pages.compare_page import ComparePage
-
-
-class SearchArea:
-    """"This class describes the search area common in all pages. It consists or search field and search button"""
-
-    def __init__(self, driver):
-        self._driver = driver
-        self._search_field = driver.find_element(*LocatorsSearch.SEARCH_FIELD)
-        self._search_button = driver.find_element(*LocatorsSearch.SEARCH_BUTTON)
-
-    def fill_search_field_and_hit_return(self, item: str):
-        self._search_field.clear()
-        self._search_field.send_keys(item).send_keys(Keys.RETURN)
-        # return SearchPage(self._driver)
-
-    def fill_search_field_and_click(self, item: str):
-        self._search_field.clear()
-        self._search_field.send_keys(item)
-        self._search_button.click()
-        # return SearchPage(self._driver)
-
-
-class ShopCartButton:
+class ShopCartButtonComponent:
     # TODO test functionality
     def __init__(self, driver):
         self._driver = driver
@@ -58,28 +41,28 @@ class ShopCartButton:
 class ShopCartDropdownComponent:
     """Component for black shopping cart drop-down button."""
 
-    def __init__(self, driver: Remote, product_title: str) -> None:
+    def __init__(self, driver: Remote) -> None:
         """Initialise shopping cart drop-down button.
 
         :param driver: Remote driver.
-        :param product_title: The title of the product.
         """
         self._driver = driver
-        self.product_title = driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
 
-    def click_product_title(self) -> None:
-        """Click on the product title.
+    def click_product_title(self, product_title: str) -> None:
+        """Click on the provided product title.
 
         :return: None.
         """
-        self.product_title.click()
+        self._driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]').click()
 
-    def click_remove_button(self) -> None:
+    def click_remove_button(self, product_title: str) -> None:
         """Click on the remove from the shopping cart button.
+            return self._driver
 
-        :return:
+        :return: None.
         """
-        self._driver.find_element(By.XPATH, f'{self.product_title}/../../td[5]/button').click()
+        product_title = self._driver.find_element(By.XPATH, f'//*[@id="cart"]//td[2]//a[(text()="{product_title}")]')
+        self._driver.find_element(By.XPATH, f'{product_title}/../../td[5]/button').click()
 
     def click_view_cart_link(self) -> None:
         """Click on the 'View Cart' link.
@@ -95,71 +78,66 @@ class ShopCartDropdownComponent:
         """
         self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
-
-class BaseNavBar:
+class BasePageNavBarComponent:
     """This class describes the top nav bar of the base page"""
 
     def __init__(self, driver):
         self._driver = driver
-        self._currency = driver.find_element(*LocatorsNavBar.CURRENCY)
-        self._nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
+        self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
+        self.nav_bar = driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
 
-    def click_currency_euro(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.EUR).click()
-
-    def click_currency_pound(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.POUND).click()
-
-    def click_currency_usd(self):
-        self._currency.click()
-        self._currency.find_element(*LocatorsNavBar.USD).click()
-
-    def click_contact_us(self):
-        self._nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
-
-    def click_wishlist(self):
-        self._nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
-
-    def click_shopping_cart(self):
-        self._nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
+    def change_currency(self, specific_currency: str):
+        # """EUR, USD, GBP"""
+        self.currency.click()
+        self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
 
-class BaseRightMenu:
+    def click_contact_us_link(self):
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.CONTACT_US).click()
+
+    def click_wishlist_link(self):
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.WISH_LIST).click()
+
+    def click_shopping_cart_link(self):
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.SHOPPING_CART).click()
+
+    def click_checkout_link(self):
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.CHECKOUT).click()
+
+class RegisterPageRightMenuComponent:
     def __init__(self, driver) -> None:
         self._driver = driver
         self._right_menu = driver.find_element_by_class_name('list-group')
 
     def click_my_account(self):
-        self._right_menu.find_element(*RightMenuLocators.MY_ACCOUNT).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.MY_ACCOUNT).click()
 
     def click_address_book(self):
-        self._right_menu.find_element(*RightMenuLocators.ADDRESS_BOOK).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ADDRESS_BOOK).click()
 
     def click_wish_list(self):
-        self._right_menu.find_element(*RightMenuLocators.WISH_LIST).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.WISH_LIST).click()
 
     def click_order_history(self):
-        self._right_menu.find_element(*RightMenuLocators.ORDER_HISTORY).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ORDER_HISTORY).click()
 
     def click_downloads(self):
-        self._right_menu.find_element(*RightMenuLocators.DOWNLOADS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.DOWNLOADS).click()
 
     def click_recurring_payments(self):
-        self._right_menu.find_element(*RightMenuLocators.RECURRING_PAYMENTS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RECURRING_PAYMENTS).click()
 
     def click_reward_points(self):
-        self._right_menu.find_element(*RightMenuLocators.REWARD_POINTS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.REWARD_POINTS).click()
 
     def click_returns(self):
-        self._right_menu.find_element(*RightMenuLocators.RETURNS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RETURNS).click()
 
     def click_transactions(self):
-        self._right_menu.find_element(*RightMenuLocators.TRANSACTIONS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.TRANSACTIONS).click()
 
     def click_newsletter(self):
-        self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.NEWSLETTER).click()
 
 
 class ProductWidgetsListComponent:
@@ -221,23 +199,22 @@ class ProductWidgetComponent:
             f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
 
 
-# class ProductCompareLinkComponent:
-#     """A link to compare the products added to the comparison."""
-#
-#     def __init__(self, driver: Remote) -> None:
-#         """Initialise the link.
-#
-#         :param driver: Remote driver.
-#         """
-#         self._driver = driver
-#
-#     def open_compare_page(self) -> ComparePage:
-#         """Click on the 'Product Compare' link and return the 'Compare' page.
-#
-#         :return: Page which compare selected products.
-#         """
-#         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
-#         return ComparePage(self._driver)
+class ProductCompareLinkComponent:
+    """A link to compare the products added to the comparison."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialise the link.
+
+        :param driver: Remote driver.
+        """
+        self._driver = driver
+
+    def open_compare_page(self) -> None:
+        """Click on the 'Product Compare' link.
+
+        :return: None.
+        """
+        self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
 
 
 class ProductsViewModeComponent:

@@ -1,23 +1,22 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorsSearch:
+class LocatorBasePageSearch:
+    """Locator for search field on base page"""
+
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
-    SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
 
 
-class LocatorsNavBar:
-    # Absolute
+class LocatorsBasePageNavBar:
+    """Locators for top navbar links on base page"""
+
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH, './/ul/li[3]/button')
+    USD = (By.XPATH,'.//ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
-
-    # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -25,7 +24,22 @@ class LocatorsNavBar:
     CHECKOUT = (By.XPATH, './/li[5]/a')
 
 
-class RightMenuLocators:
+class LocatorsBasePageMainMenu:
+    """Locators for main menu on base page"""
+
+    DESKTOPS = (By.XPATH, '//a[text()="Desktops"]')
+    LAPTOPS_NOTEBOOKS = (By.XPATH, '//a[text()="Laptops & Notebooks"]')
+    COMPONENTS = (By.XPATH, '//a[text()="Components"]')
+    TABLETS = (By.XPATH, '//a[text()="Tablets"]')
+    SOFTWARE = (By.XPATH, '//a[text()="Software"]')
+    PHONES_PDAS = (By.XPATH, '//a[text()="Phones & PDAs"]')
+    CAMERAS = (By.XPATH, '//a[text()="Cameras"]')
+    MP3_PLAYERS = (By.XPATH, '//a[text()="MP3 Players"]')
+
+
+class LocatorsRightMenuRegisterPage:
+    """"Locators for right menu on Register and Login pages"""
+
     RIGHT_MENU = (By.CLASS_NAME, 'list-group')
     LOGIN = (By.XPATH, './/a[text()="Login"]')
     REGISTER = (By.XPATH, './/a[text()="Register"]')
@@ -234,3 +248,46 @@ class LocatorsComparePage:
 class LocatorsInfoMessages:
     """This locator is an info message for CatchMessageComponent."""
     ALERT_MESSAGE = (By.CLASS_NAME, 'alert')
+
+
+class LocatorsShoppingCartPage:
+    """Locators for 'Shopping Cart' page"""
+    COUPON_FIELD = (By.ID, 'input-coupon')
+    COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
+
+    COUNTRY_SELECTOR = (By.ID, 'input-country')
+    REGION_SELECTOR = (By.ID, 'input-zone')
+    POST_CODE_FIELD = (By.ID, 'input-postcode')
+    GET_QUOTES_BUTTON = (By.ID, 'button-quote')
+    MODAL_SHIPPING_APPlY_BUTTON = (By.ID, 'button-shipping')
+
+    CERTIFICATE_FIELD = (By.ID, 'input-voucher')
+    CERTIFICATE_APPLY_BUTTON = (By.ID, 'button-voucher')
+
+    PRODUCT_LINES = (By.XPATH, '//h1/following-sibling::form//tbody/tr')
+
+    PRODUCT_NAME = (By.XPATH, './/td[2]/a')
+    PRODUCT_MODEL = (By.XPATH, './/td[3]')
+    PRODUCT_UNIT_PRICE = (By.XPATH, './/td[5]')
+    PRODUCT_TOTAL_PRICE = (By.XPATH, './/td[6]')
+    PRODUCT_QUANTITY = (By.XPATH, './/input')
+    PRODUCT_UPDATE_QUANTITY_BUTTON = (By.XPATH, './/button[@data-original-title="Update"]')
+    PRODUCT_REMOVE_BUTTON = (By.XPATH, './/button[@data-original-title="Remove"]')
+
+    COUPON_PANEL = (By.XPATH, '//a[text() = "Use Coupon Code "]')
+    ESTIMATE_SHIPPING_PANEL = (By.XPATH, '//a[text() = "Estimate Shipping & Taxes "]')
+    GIFT_CERTIFICATE_PANEL = (By.XPATH, '//a[text() = "Use Gift Certificate "]')
+
+    MODAL_SHIPPING_CANCEL_BUTTON = (By.XPATH, '//*[@id="modal-shipping"]//button[text()="Cancel"]')
+    MODAL_SHIPPING_RADIO = (By.XPATH, '//div[@id="modal-shipping"]//div[@class="radio"]')
+
+    CONTINUE_SHIPPING_BUTTON = (By.XPATH, '//a[text()="Continue Shopping"]')
+    CHECKOUT_BUTTON = (By.XPATH, '//a[text()="Checkout"]')
+
+    FLAT_SHIPPING_RATE = (By.XPATH, '//td/strong[text()="Flat Shipping Rate:"]/../following-sibling::td')
+    COUPON_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Coupon")]'
+                            '/../following-sibling::td')
+    GIFT_CERTIFICATE_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Gift Certificate")]'
+                            '/../following-sibling::td')
+    SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
+    TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
