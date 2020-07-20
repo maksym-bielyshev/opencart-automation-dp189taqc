@@ -123,8 +123,11 @@ class LocatorsAvailableOptions:
     DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
     TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
     CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    CHECKBOX_ITEMS = (By.XPATH, '//label/input[@type="checkbox"]')
     RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    RADIO_BUTTON_LABEL = (By.XPATH, '//div[@class="radio"]/label')
     SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
+    DROPDOWN_LABEL = (By.XPATH, '//div[@class="checkbox"]/label')
 
 
 class LocatorsYourPersonalDetailsComponent:

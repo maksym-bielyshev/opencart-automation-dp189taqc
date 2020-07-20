@@ -11,10 +11,13 @@ from selenium.webdriver.support.ui import Select
 
 from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, \
+    LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, \
+    LocatorsAvailableOptions
 
-from dp189.pages.compare_page import ComparePage
+
+# from dp189.pages.compare_page import ComparePage
 
 
 class SearchArea:
@@ -218,23 +221,23 @@ class ProductWidgetComponent:
             f'//a[text()="{self.product_title}"]/../../..//button[@data-original-title="Compare this Product"]').click()
 
 
-class ProductCompareLinkComponent:
-    """A link to compare the products added to the comparison."""
-
-    def __init__(self, driver: Remote) -> None:
-        """Initialise the link.
-
-        :param driver: Remote driver.
-        """
-        self._driver = driver
-
-    def open_compare_page(self) -> ComparePage:
-        """Click on the 'Product Compare' link and return the 'Compare' page.
-
-        :return: Page which compare selected products.
-        """
-        self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
-        return ComparePage(self._driver)
+# class ProductCompareLinkComponent:
+#     """A link to compare the products added to the comparison."""
+#
+#     def __init__(self, driver: Remote) -> None:
+#         """Initialise the link.
+#
+#         :param driver: Remote driver.
+#         """
+#         self._driver = driver
+#
+#     def open_compare_page(self) -> ComparePage:
+#         """Click on the 'Product Compare' link and return the 'Compare' page.
+#
+#         :return: Page which compare selected products.
+#         """
+#         self._driver.find_element(*LocatorProductCompareLink.PRODUCT_COMPARE).click()
+#         return ComparePage(self._driver)
 
 
 class ProductsViewModeComponent:
@@ -303,7 +306,11 @@ class InputFieldComponent:
         self.parent_element = parent_element
         self.error_message = ErrorMessageComponent(self._driver, self.input_field_locator)
 
-    def _find_input_field(self):
+    def _find_input_field(self) -> None:
+        """Find input field by parent element or driver.
+
+        :return: None
+        """
         if self.parent_element:
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
@@ -321,7 +328,7 @@ class InputFieldComponent:
 
 
 class RadioButtonComponent:
-    """Radio buttons to choose some option and check if required option is chosen."""
+    """Radio buttons to choose some option and check which option is chosen."""
 
     def __init__(self, driver: Remote, radio_buttons_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize radio buttons.
@@ -335,33 +342,40 @@ class RadioButtonComponent:
         self.parent_element = parent_element
         self.error_message = ErrorMessageComponent(self._driver, self.radio_buttons_locator)
 
-    def _find_input_field(self):
+    def _find_radio_button(self) -> None:
+        """Find input field by parent element or driver.
+
+        :return: None
+        """
         if self.parent_element:
             self.radio_buttons_container = self.parent_element.find_element(*self.radio_buttons_locator)
         else:
             self.radio_buttons_container = self._driver.find_element(*self.radio_buttons_locator)
 
-    def option_is_checked(self, data: str) -> bool:
-        """Check if required option is chosen.
+    def which_option_is_chosen(self) -> str:
+        """Return text of chosen option.
 
-        :param data: str
-        :return: bool
+        :return: str
         """
-        self._find_input_field()
-        return self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
+        self._find_radio_button()
+        radio_button_labels = self.radio_buttons_container.find_elements(*LocatorsAvailableOptions.RADIO_BUTTON_LABEL)
+        for label in radio_button_labels:
+            radio_button_input = label.find_element(By.TAG_NAME, 'input')
+            if radio_button_input.get_attribute('checked'):
+                return label.text
 
     def choose_radio_button_option(self, data: str) -> None:
-        """Choose some option.
+        """Choose some option. data - string of desired option.
 
         :param data: str
         :return: None
         """
-        self._find_input_field()
+        self._find_radio_button()
         self.radio_buttons_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
 class CheckboxComponent:
-    """Checkbox to choose option and check if required option is chosen."""
+    """Checkbox to choose option and check which option is chosen."""
 
     def __init__(self, driver: Remote, checkbox_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize checkbox.
@@ -375,20 +389,29 @@ class CheckboxComponent:
         self.parent_element = parent_element
         self.error_message = ErrorMessageComponent(self._driver, self.checkbox_locator)
 
-    def _find_input_field(self):
+    def _find_checkbox(self):
+        """Find input field by parent element or driver.
+
+        :return: None
+        """
         if self.parent_element:
             self.checkbox_container = self.parent_element.find_element(*self.checkbox_locator)
         else:
             self.checkbox_container = self._driver.find_element(*self.checkbox_locator)
 
-    def option_is_checked(self, data: str) -> bool:
-        """Check if required option is chosen.
+    def which_option_is_chosen(self) -> list:
+        """Return list which consists text of desired options.
 
-        :param data: str
-        :return: bool
+        :return: list
         """
-        self._find_input_field()
-        return self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').is_selected()
+        self._find_checkbox()
+        choosen_options = list()
+        checkbox_labels = self.checkbox_container.find_elements(*LocatorsAvailableOptions.DROPDOWN_LABEL)
+        for label in checkbox_labels:
+            checkbox_input = label.find_element(By.TAG_NAME, 'input')
+            if checkbox_input.get_attribute('checked'):
+                choosen_options.append(label.text)
+        return choosen_options
 
     def choose_checkbox_option(self, data: str) -> None:
         """Choose some option.
@@ -396,12 +419,12 @@ class CheckboxComponent:
         :param data: str
         :return: None
         """
-        self._find_input_field()
+        self._find_checkbox()
         self.checkbox_container.find_element(By.XPATH, f'//label[contains(.,"{data}")]/input').click()
 
 
 class DropdownComponent:
-    """Drop-down menu to choose option and check if required option is chosen."""
+    """Drop-down menu to choose option and check which option is chosen."""
 
     def __init__(self, driver: Remote, dropdown_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize drop-down.
@@ -415,21 +438,23 @@ class DropdownComponent:
         self.parent_element = parent_element
         self.error_message = ErrorMessageComponent(self._driver, self.dropdown_locator)
 
-    def _find_input_field(self):
+    def _find_dropdown(self):
+        """Find input field by parent element or driver.
+
+        :return: None
+        """
         if self.parent_element:
             self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
         else:
             self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
 
-    def option_is_checked(self, data: str) -> bool:
-        """Check if required option is chosen.
+    def which_option_is_chosen(self) -> str:
+        """Return text of chosen option.
 
-        :param data: str
-        :return: bool
+        :return: str
         """
-        self._find_input_field()
-        word_list_option = self.checkbox_container.first_selected_option.text.split()
-        return word_list_option[0] + ' ' + word_list_option[1] == data
+        self._find_dropdown()
+        return self.checkbox_container.first_selected_option.text
 
     def choose_dropdown_option(self, data: str) -> None:
         """Choose some option.
@@ -437,7 +462,7 @@ class DropdownComponent:
         :param data: str
         :return: None
         """
-        self._find_input_field()
+        self._find_dropdown()
         self.checkbox_container.select_by_visible_text(data)
 
 
