@@ -6,24 +6,14 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import Select
 
 from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsComponent, \
-    LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsBasePageNavBar, \
-    LocatorsRightMenuRegisterPage, LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
-from dp189.locators import  LocatorsShoppingCartButton, \
-    LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent,  LocatorsShoppingCartButton, \
-    LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, \
-    LocatorsAvailableOptions, LocatorsPrivacyPolicyComponent
+    LocatorsYourPasswordComponent, LocatorsNewsletterComponent, LocatorsAddAddressComponent, \
+    LocatorsBasePageNavBar, LocatorsRightMenuRegisterPage, LocatorProductCompareLink, \
+    LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, LocatorsAvailableOptions, \
+    LocatorsPrivacyPolicyComponent
 
-# Have a trouble with import with these locators
-# from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsSearch, \
-#     LocatorsNavBar, RightMenuLocators
 
 class ShopCartButtonComponent:
     # TODO test functionality
@@ -80,6 +70,7 @@ class ShopCartDropdownComponent:
         """
         self._driver.find_element(*LocatorsShoppingCartButton.CHECKOUT).click()
 
+
 class BasePageNavBarComponent:
     """This class describes the top nav bar of the base page"""
 
@@ -105,6 +96,7 @@ class BasePageNavBarComponent:
 
     def click_checkout_link(self):
         self.nav_bar.find_element(*LocatorsBasePageNavBar.CHECKOUT).click()
+
 
 class RegisterPageRightMenuComponent:
     def __init__(self, driver) -> None:
