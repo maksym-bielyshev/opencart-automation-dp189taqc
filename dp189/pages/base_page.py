@@ -16,7 +16,7 @@ class BasePage:
         self._search = SearchArea(driver)
         self._shop_cart_button = ShopCartButton(self._driver)
         self.catch_info_message = CatchMessageComponent(self._driver)
-    
+
     def click_currency_euro(self):
         self._top_nav_bar.click_currency_euro()
 
