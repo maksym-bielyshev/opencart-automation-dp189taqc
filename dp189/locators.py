@@ -6,6 +6,7 @@ class LocatorBasePageSearch:
 
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
 
+
 class LocatorsBasePageNavBar:
     """Locators for top navbar links on base page"""
 
@@ -21,6 +22,7 @@ class LocatorsBasePageNavBar:
     WISH_LIST = (By.XPATH, './/li[3]/a')
     SHOPPING_CART = (By.XPATH, './/li[4]/a')
     CHECKOUT = (By.XPATH, './/li[5]/a')
+
 
 class LocatorsBasePageMainMenu:
     """Locators for main menu on base page"""
@@ -71,7 +73,6 @@ class LocatorYourStoreLink:
 
 
 class LocatorsHomePage:
-    # TODO correct xpathes
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')

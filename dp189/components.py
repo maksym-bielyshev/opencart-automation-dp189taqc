@@ -10,9 +10,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import Select
 
-from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
-    LocatorsYourPersonalDetailsComponent, LocatorsYourPasswordComponent, LocatorsRegisterPage, \
-    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
+from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsComponent, \
+    LocatorsYourPasswordComponent, LocatorsRegisterPage, \
+    LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsBasePageNavBar, \
+    LocatorsRightMenuRegisterPage, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 
 
@@ -77,8 +78,8 @@ class BasePageNavBarComponent:
 
     def __init__(self, driver):
         self._driver = driver
-        self.currency = driver.find_element(*LocatorsNavBar.CURRENCY)
-        self.nav_bar = driver.find_element(*LocatorsNavBar.NAVBAR)
+        self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
+        self.nav_bar = driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
 
     def change_currency(self, specific_currency: str):
         # """EUR, USD, GBP"""
@@ -87,16 +88,16 @@ class BasePageNavBarComponent:
 
 
     def click_contact_us_link(self):
-        self.nav_bar.find_element(*LocatorsNavBar.CONTACT_US).click()
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.CONTACT_US).click()
 
     def click_wishlist_link(self):
-        self.nav_bar.find_element(*LocatorsNavBar.WISH_LIST).click()
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.WISH_LIST).click()
 
     def click_shopping_cart_link(self):
-        self.nav_bar.find_element(*LocatorsNavBar.SHOPPING_CART).click()
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.SHOPPING_CART).click()
 
     def click_checkout_link(self):
-        self.nav_bar.find_element(*LocatorsNavBar.CHECKOUT).click()
+        self.nav_bar.find_element(*LocatorsBasePageNavBar.CHECKOUT).click()
 
 class RegisterPageRightMenuComponent:
     def __init__(self, driver) -> None:
@@ -104,34 +105,34 @@ class RegisterPageRightMenuComponent:
         self._right_menu = driver.find_element_by_class_name('list-group')
 
     def click_my_account(self):
-        self._right_menu.find_element(*RightMenuLocators.MY_ACCOUNT).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.MY_ACCOUNT).click()
 
     def click_address_book(self):
-        self._right_menu.find_element(*RightMenuLocators.ADDRESS_BOOK).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ADDRESS_BOOK).click()
 
     def click_wish_list(self):
-        self._right_menu.find_element(*RightMenuLocators.WISH_LIST).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.WISH_LIST).click()
 
     def click_order_history(self):
-        self._right_menu.find_element(*RightMenuLocators.ORDER_HISTORY).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ORDER_HISTORY).click()
 
     def click_downloads(self):
-        self._right_menu.find_element(*RightMenuLocators.DOWNLOADS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.DOWNLOADS).click()
 
     def click_recurring_payments(self):
-        self._right_menu.find_element(*RightMenuLocators.RECURRING_PAYMENTS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RECURRING_PAYMENTS).click()
 
     def click_reward_points(self):
-        self._right_menu.find_element(*RightMenuLocators.REWARD_POINTS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.REWARD_POINTS).click()
 
     def click_returns(self):
-        self._right_menu.find_element(*RightMenuLocators.RETURNS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RETURNS).click()
 
     def click_transactions(self):
-        self._right_menu.find_element(*RightMenuLocators.TRANSACTIONS).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.TRANSACTIONS).click()
 
     def click_newsletter(self):
-        self._right_menu.find_element(*RightMenuLocators.NEWSLETTER).click()
+        self._right_menu.find_element(*LocatorsRightMenuRegisterPage.NEWSLETTER).click()
 
 
 class ProductWidgetsListComponent:
@@ -265,7 +266,7 @@ class YourPasswordComponent:
 class InputFieldComponent:
     """An input field to fill with data from user."""
 
-    def __init__(self, driver: Remote, input_field_locator: tuple) -> None:
+    def __init__(self, driver: Remote, input_field_locator: tuple, parent_element: WebElement = None) -> None:
         """Initialize the input field.
 
         :param driver: Remote
