@@ -298,9 +298,13 @@ class LocatorsCheckoutPage:
 
     REGISTER_ACCOUNT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][1]/label/input')
     GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][2]/label/input')
-    CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-account"]')
+    CONTINUE_BUTTON_CHECKOUT_OPTIONS = (By.XPATH, '//input[@id="button-account"]')
 
     EMAIL_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-email"]')
     PASSWORD_FIELD_RETURNING_CUSTOMER = (By.XPATH, '//input[@id="input-password"]')
     FORGOTTEN_PASSWORD_LINK = (By.XPATH, '//a[contains(text(),"Forgotten Password")]')
     LOGIN_BUTTON = (By.XPATH, '//input[@id="button-login"]')
+
+    ADD_ADDRESS_BILLING_DETAILS_PARENT = (By.XPATH, '//fieldset[@id="address"]')
+    CONTINUE_BUTTON_BILLING_DETAILS = (By.XPATH, '//input[@id="button-guest"]')
+    DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
