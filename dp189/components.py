@@ -14,8 +14,6 @@ from dp189.locators import LocatorsSearch, LocatorsNavBar, RightMenuLocators, Lo
     LocatorsNewsletterComponent, LocatorsAddAddressComponent, LocatorsNewsletterComponent, LocatorsSearch, LocatorsNavBar, RightMenuLocators, LocatorsShoppingCartButton, \
     LocatorProductCompareLink, LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages
 
-from dp189.pages.compare_page import ComparePage
-
 
 class SearchArea:
     """"This class describes the search area common in all pages. It consists or search field and search button"""
