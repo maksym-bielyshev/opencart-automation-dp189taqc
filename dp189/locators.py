@@ -309,5 +309,9 @@ class LocatorsCheckoutPage:
     CONTINUE_BUTTON_BILLING_DETAILS = (By.XPATH, '//input[@id="button-guest"]')
     DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
 
-    DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
+    TEXT_AREA_DELIVERY_METHOD = (By.XPATH, '//textarea[@name="comment"]')
     CONTINUE_BUTTON_DELIVERY_METHOD = (By.XPATH, '//input[@id="button-shipping-method"]')
+
+    TEXT_AREA_PAYMENT_METHOD = (By.XPATH, '//div[@id="collapse-payment-method"]//textarea[@name="comment"]')
+    TERM_AND_CONDITIONS_CHECKBOX = (By.XPATH, '//input[@name="agree"]')
+    CONTINUE_BUTTON_PAYMENT_METHOD = (By.XPATH, '//input[@id="button-payment-method"]')
