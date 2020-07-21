@@ -60,6 +60,12 @@ class DeliveryMethod:
         super().__init__(driver)
         self._driver = driver
 
+    def fill_delivery_method_text_area(self):
+        InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_METHOD_TEXT_AREA)
+
+    def click_continue_button(self):
+        self._driver.find_element(LocatorsCheckoutPage.CONTINUE_BUTTON_DELIVERY_METHOD).click()
+
 
 class PaymentMethod:
     def __init__(self, driver: Remote) -> None:
