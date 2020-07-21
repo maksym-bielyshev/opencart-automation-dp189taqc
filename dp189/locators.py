@@ -309,6 +309,10 @@ class LocatorsCheckoutPage:
     BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-guest"]')
     DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
 
+    NEWSLETTER_CHECKBOX = (By.XPATH, '//input[@id="newsletter"]')
+    PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//div[@class="buttons clearfix"]//input[@name="agree"]')
+    ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-register"]')
+
     DELIVERY_DETAILS_FIRST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-firstname"]')
     DELIVERY_DETAILS_LAST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-lastname"]')
     DELIVERY_DETAILS_COMPANY_FIELD = (By.XPATH, '//input[@id="input-shipping-company"]')
