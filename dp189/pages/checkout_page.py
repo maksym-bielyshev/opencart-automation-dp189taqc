@@ -53,6 +53,15 @@ class DeliveryDetails:
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
+        self.fill_first_name_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_FIRST_NAME_FIELD)
+        self.last_name_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_LAST_NAME_FIELD)
+        self.company_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_COMPANY_FIELD)
+        self.first_address_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_FIRST_ADDRESS_FIELD)
+        self.second_address_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_SECOND_ADDRESS_FIELD)
+        self.city_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_CITY_FIELD)
+        self.post_code_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_POST_CODE_FIELD)
+        self.country_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_COUNTRY_FIELD)
+        self.region_state_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_REGION_STATE_DROPDOWN)
 
 
 class DeliveryMethod:
