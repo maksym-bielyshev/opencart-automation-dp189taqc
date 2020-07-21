@@ -320,16 +320,6 @@ class LocatorsCheckoutPage:
 
     DELIVERY_DETAILS_PARENT = (By.XPATH, "collapse-shipping-address")
 
-    # DELIVERY_DETAILS_FIRST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-firstname"]')
-    # DELIVERY_DETAILS_LAST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-lastname"]')
-    # DELIVERY_DETAILS_COMPANY_FIELD = (By.XPATH, '//input[@id="input-shipping-company"]')
-    # DELIVERY_DETAILS_FIRST_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-1"]')
-    # DELIVERY_DETAILS_SECOND_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-2"]')
-    # DELIVERY_DETAILS_CITY_FIELD = (By.XPATH, '//input[@id="input-shipping-city"]')
-    # DELIVERY_DETAILS_POST_CODE_FIELD = (By.XPATH, '//input[@id="input-shipping-postcode"]')
-    # DELIVERY_DETAILS_COUNTRY_FIELD = (By.XPATH, '//select[@id="input-shipping-country"]')
-    # DELIVERY_DETAILS_REGION_STATE_DROPDOWN = (By.XPATH, '//select[@id="input-shipping-zone"]')
-
     DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
     DELIVERY_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-method"]')
 
