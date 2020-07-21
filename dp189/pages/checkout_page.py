@@ -29,7 +29,7 @@ class CheckoutOptions(BasePage):
         self._driver.find_element(LocatorsCheckoutPage.LOGIN_BUTTON).click()
 
 
-class BillingDetails:
+class BillingDetails(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
@@ -43,7 +43,7 @@ class BillingDetails:
         self._driver.find_element(LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX).click()
 
 
-class AccountAndBillingDetails:
+class AccountAndBillingDetails(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
@@ -64,7 +64,7 @@ class AccountAndBillingDetails:
         self._driver.find_element(LocatorsCheckoutPage.ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON).click()
 
 
-class DeliveryDetails:
+class DeliveryDetails(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
@@ -79,7 +79,7 @@ class DeliveryDetails:
         self.region_state_field = InputFieldComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_REGION_STATE_DROPDOWN)
 
 
-class DeliveryMethod:
+class DeliveryMethod(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
@@ -91,7 +91,7 @@ class DeliveryMethod:
         self._driver.find_element(LocatorsCheckoutPage.DELIVERY_METHOD_CONTINUE_BUTTON).click()
 
 
-class PaymentMethod:
+class PaymentMethod(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
@@ -106,7 +106,7 @@ class PaymentMethod:
         self._driver.find_element(LocatorsCheckoutPage.PAYMENT_METHOD_CONTINUE_BUTTON).click()
 
 
-class ConfirmOrder:
+class ConfirmOrder(BasePage):
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
