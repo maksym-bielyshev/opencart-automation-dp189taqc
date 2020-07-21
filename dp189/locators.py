@@ -186,6 +186,12 @@ class LocatorsForgotPasswordPage:
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
 
+class LocatorsChangePasswordPage:
+    """Locators for the 'Change password' page."""
+
+    BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
+
 class LocatorSortByDropdown:
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
 
