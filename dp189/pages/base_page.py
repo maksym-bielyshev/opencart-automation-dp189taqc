@@ -3,7 +3,7 @@ from selenium.webdriver import Remote
 
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
 from ..components import CatchMessageComponent
-from ..locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
+from dp189.locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
 
 #from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent

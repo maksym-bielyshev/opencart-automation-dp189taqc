@@ -1,8 +1,9 @@
 from dp189.pages.base_page import BasePage
 from selenium.webdriver import Remote
+from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.remote.webelement import WebElement
 from dp189.locators import LocatorsComparePage
-
+import time
 CHROME_DRIVER = '../driver/chromedriver'
 
 
@@ -135,5 +136,21 @@ class PropertyOfProduct:
         """
         return self._property.find_elements(*LocatorsComparePage.REMOVE_BUTTONS)
 
-
+if __name__ == '__main__':
+    options = ChromeOptions()
+    options.add_argument('--ignore-certificate-errors')
+    driver = Chrome(CHROME_DRIVER, options=options)
+    driver.maximize_window()
+    driver.get("http://34.71.14.206/index.php?route=common/home")
+    driver.find_element_by_xpath(f'//*[@id="content"]/div[2]/div[1]/div/div[3]/button[3]').click()
+    time.sleep(3)
+    driver.find_element_by_xpath(f'//*[@id="content"]/div[2]/div[2]/div/div[3]/button[3]').click()
+    time.sleep(3)
+    driver.find_element_by_xpath('//*[@id="common-home"]/div[1]/a[2]').click()
+    time.sleep(3)
+    comparepage = ComparePage(driver)
+    print(comparepage.get_rows_in_table())
+    print(comparepage.get_products())
+    print(comparepage.get_prices())
+    comparepage.click_add_to_cart_button("ds")
 
