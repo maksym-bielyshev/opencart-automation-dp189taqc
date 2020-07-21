@@ -12,7 +12,7 @@ from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsCom
     LocatorsYourPasswordComponent, LocatorsNewsletterComponent, LocatorsAddAddressComponent, \
     LocatorsBasePageNavBar, LocatorsRightMenuRegisterPage, LocatorProductCompareLink, \
     LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, LocatorsAvailableOptions, \
-    LocatorsPrivacyPolicyComponent
+    LocatorsPrivacyPolicyComponent, LocatorsLoginComponent
 
 
 class ShopCartButtonComponent:
@@ -582,3 +582,33 @@ class AddAddressComponent:
                                          LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
         self.region = DropdownComponent(self._driver,
                                         LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)
+
+
+class LoginComponent:
+    """Login component consists two fields: E-Mail Address and Password."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize input form fields.
+
+        :param driver: Remote
+        :return: None
+        """
+        self._driver = driver
+        self.email_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.EMAIL_INPUT)
+        self.password_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.PASSWORD_INPUT)
+
+    def click_forgotten_password(self) -> None:
+        """Click forgotten password button to restore password.
+
+        :return: None
+        """
+        self.forgotten_password_button = self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON)
+        self.forgotten_password_button.click()
+
+    def click_login_button(self) -> None:
+        """Click login button to return the user to the system.
+
+        :return: None
+        """
+        self.login_button = self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON)
+        self.login_button.click()
