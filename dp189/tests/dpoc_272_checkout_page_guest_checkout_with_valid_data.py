@@ -23,6 +23,11 @@ class TestCheckoutPage():
         self.checkout_page.email_field_returning_customer.clear_and_fill_input_field('a')
         time.sleep(2)
         self.checkout_page.click_guest_checkout_radio_button()
+        time.sleep(2)
+        self.checkout_page.click_forgotten_password_link()
+        time.sleep(2)
+        self.checkout_page.click_login_button()
+        time.sleep(2)
 
     def teardown(self):
         self.driver.close()
