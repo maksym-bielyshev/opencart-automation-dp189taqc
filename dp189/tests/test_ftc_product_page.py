@@ -4,12 +4,13 @@ from dp189.pages.product_page import ProductPage
 
 options = Options()
 options.add_argument('--ignore-certificate-errors')
+CHROME_DRIVER = '../driver/chromedriver'
 
 
 class BaseTest:
 
     def setup(self):
-        self.my_driver = webdriver.Chrome('C:/chromedriver/chromedriver.exe', options=options)
+        self.my_driver = webdriver.Chrome(CHROME_DRIVER, options=options)
         self.my_driver.maximize_window()
         self.my_driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
         self.apple = ProductPage(self.my_driver)
