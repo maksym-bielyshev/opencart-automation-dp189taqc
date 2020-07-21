@@ -11,4 +11,9 @@ if __name__ == '__main__':
     my_driver.maximize_window()
 
     product = ProductPage(my_driver)
-    product.available_options.click_add_to_cart_button()
+    product.available_options.radio.choose_radio_button_option('Medium')
+    product.available_options.checkbox.choose_checkbox_option('Checkbox 3')
+    product.available_options.select.choose_dropdown_option('Blue (+$3.00)')
+    print(product.available_options.radio.which_option_is_chosen())
+    print(product.available_options.checkbox.which_option_is_chosen())
+    print(product.available_options.select.which_option_is_chosen())

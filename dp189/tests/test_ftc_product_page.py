@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from dp189.pages.product_page import ProductPage
 
-
 options = Options()
 options.add_argument('--ignore-certificate-errors')
 
@@ -19,10 +18,11 @@ class BaseTest:
         self.my_driver.close()
 
 
-class TestAddProductToCart(BaseTest):
+class TestAvailableOptions(BaseTest):
+    """Tests for Available Options menu on product page."""
 
-    def test_add_product_to_cart_with_all_selected_options(self):
-        # TODO DPOC-109
+    def test_add_product_to_cart_button_with_all_selected_options(self):
+        """Check correct work of clicking on 'Add to Cart' button by filling all required fields."""
         self.apple.available_options.radio.choose_radio_button_option('Medium')
         self.apple.available_options.checkbox.choose_checkbox_option('Checkbox 2')
         self.apple.available_options.text_field.clear_and_fill_input_field('test')
@@ -36,18 +36,20 @@ class TestAddProductToCart(BaseTest):
         success_message = 'Success: You have added Apple Cinema 24 to your shopping cart!'
         assert success_message in self.apple.catch_info_message.get_info_message()
 
-    def test_add_product_to_cart_with_selected_option_color(self):
-        # TODO Add to story Automate DPOC-94
-        self.apple.available_options.select.choose_dropdown_option('Blue (+$3.00)')
+    def test_choose_radio_option(self):
+        """Check correct work of clicking on specific option of radio button."""
+        self.apple.available_options.radio.choose_radio_button_option('Medium')
 
-        self.apple.available_options.select.option_is_checked('Blue (+$3.00)')
-        assert True
+        radio = 'Medium (+$20.00)'
+
+        assert radio == self.apple.available_options.radio.which_option_is_chosen()
 
 
-class TestAddReviewToProduct(BaseTest):
+class TestReviewsTab(BaseTest):
+    """Tests for Reviews Tab on Product page."""
 
     def test_add_review_to_product(self):
-        # TODO Change and add to story DPOC-2
+        """Fill all required fields for adding review on product page."""
         self.apple.click_reviews_tab()
         self.apple.reviews_tab.your_name.clear_and_fill_input_field('Maksym')
         self.apple.reviews_tab.your_review.clear_and_fill_input_field('Some text for review field.')
@@ -59,9 +61,11 @@ class TestAddReviewToProduct(BaseTest):
         assert info_message == self.apple.catch_info_message.get_info_message()
 
 
-class TestProductButtons(BaseTest):
+class TestProductPageButtons(BaseTest):
+    """Tests for checking correct work of buttons on product page."""
 
     def test_click_compare_button(self):
+        """Check correct work of clicking on 'Compare this product' button."""
         self.apple.click_compare_this_product_button()
 
         info_message = 'Success: You have added Apple Cinema 24 to your product comparison!'
@@ -69,9 +73,9 @@ class TestProductButtons(BaseTest):
         assert info_message in self.apple.catch_info_message.get_info_message()
 
     def test_click_add_to_wish_list_as_not_logged_user(self):
+        """Check correct work of clicking 'Add to Wish List' button."""
         self.apple.click_add_to_wish_list_button()
 
         info_message = 'You must login or create an account to save Apple Cinema 24 to your wish list!'
 
         assert info_message in self.apple.catch_info_message.get_info_message()
-
