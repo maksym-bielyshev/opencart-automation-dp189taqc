@@ -297,3 +297,12 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
+
+
+class LocatorsLoginComponent:
+    """Locators for Login Component."""
+
+    EMAIL_INPUT = (By.XPATH, '//input[@id="input-email"]')
+    PASSWORD_INPUT = (By.XPATH, '//input[@id="input-password"]')
+    FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//a[text()="Forgotten Password"]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@type="submit"]')
