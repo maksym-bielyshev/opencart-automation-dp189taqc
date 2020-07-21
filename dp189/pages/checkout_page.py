@@ -86,3 +86,6 @@ class ConfirmOrder:
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
+
+    def click_confirm_order_button(self):
+        self._driver.find_element(LocatorsCheckoutPage.CONFIRM_ORDER_BUTTON).click()
