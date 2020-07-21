@@ -296,7 +296,7 @@ class LocatorsShoppingCartPage:
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
 
-    REGISTER_CHECKOUT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][1]/label/input')
+    REGISTER_CHECKOUT_RADIO_BUTTON = (By.XPATH, "//div[@id='collapse-checkout-option']//div[2]//label[1]//input[1]")
     GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][2]/label/input')
     CHECKOUT_OPTIONS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-account"]')
 
@@ -332,3 +332,5 @@ class LocatorsCheckoutPage:
     PAYMENT_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-method"]')
 
     CONFIRM_ORDER_BUTTON = (By.XPATH, '//input[@id="button-confirm"]')
+
+    STEP_FIRST_TAB = (By.XPATH, "/html/body/div[2]/div/div/div/div[1]/div[1]/h4/a")

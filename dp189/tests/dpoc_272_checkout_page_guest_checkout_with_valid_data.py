@@ -15,11 +15,14 @@ class TestCheckoutPage():
         self.driver.get('https://34.71.14.206/index.php')
         ProductWidgetComponent(self.driver, 'iPhone').click_add_to_shopping_cart_button()
         self.driver.get('https://34.71.14.206/index.php?route=checkout/checkout')
-        self.register_page = CheckoutOptions(self.driver)
+        self.checkout_page = CheckoutOptions(self.driver)
         time.sleep(3)
 
     def test_guest_checkout_with_valid_data(self):
-        pass
+        time.sleep(2)
+        self.checkout_page.email_field_returning_customer.clear_and_fill_input_field('a')
+        time.sleep(2)
+        self.checkout_page.click_guest_checkout_radio_button()
 
     def teardown(self):
         self.driver.close()

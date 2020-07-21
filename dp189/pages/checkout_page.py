@@ -4,14 +4,17 @@ from dp189.locators import LocatorsCheckoutPage
 from dp189.components import InputFieldComponent, YourPersonalDetailsComponent, AddAddressComponent, YourPasswordComponent
 
 
-class CheckoutOptions(BasePage):
+class CheckoutOptions:
     def __init__(self, driver: Remote) -> None:
-        super().__init__(driver)
+        # super().__init__(driver)
         self._driver = driver
         self.email_field_returning_customer = \
             InputFieldComponent(self._driver, LocatorsCheckoutPage.RETURNING_CUSTOMER_EMAIL_FIELD)
         self.password_field_returning_customer = \
             InputFieldComponent(self._driver, LocatorsCheckoutPage.RETURNING_CUSTOMER_PASSWORD_FIELD)
+
+    def click_first_tab(self):
+        self._driver.find_element(LocatorsCheckoutPage.STEP_FIRST_TAB).click()
 
     def click_register_account_radio_button(self):
         self._driver.find_element(LocatorsCheckoutPage.REGISTER_CHECKOUT_RADIO_BUTTON).click()
