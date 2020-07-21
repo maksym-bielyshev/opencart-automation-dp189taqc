@@ -198,6 +198,9 @@ class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
     FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
     LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
+    EMAIL_INPUT_PAYMENT = (By.XPATH, "//input[@id='input-payment-email']")
+    TELEPHONE_INPUT = (By.XPATH, "//input[@name='telephone']")
     COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
     ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
     ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
@@ -296,33 +299,36 @@ class LocatorsShoppingCartPage:
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
 
-    REGISTER_CHECKOUT_RADIO_BUTTON = (By.XPATH, "//div[@id='collapse-checkout-option']//div[2]//label[1]//input[1]")
-    GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, '//*[@class="radio"][2]/label/input')
-    CHECKOUT_OPTIONS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-account"]')
+    REGISTER_CHECKOUT_RADIO_BUTTON = \
+        (By.XPATH, "//div[@id='collapse-checkout-option']//div[@class='col-sm-6']//div[1]//label[1]//input[1]")
+    GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, "//div[@id='collapse-checkout-option']//div[2]//label[1]//input[1]")
+    CHECKOUT_OPTIONS_CONTINUE_BUTTON = (By.XPATH, "//input[@id='button-account']")
 
     RETURNING_CUSTOMER_EMAIL_FIELD = (By.XPATH, '//input[@id="input-email"]')
     RETURNING_CUSTOMER_PASSWORD_FIELD = (By.XPATH, '//input[@id="input-password"]')
     FORGOTTEN_PASSWORD_LINK = (By.XPATH, '//a[contains(text(),"Forgotten Password")]')
     LOGIN_BUTTON = (By.XPATH, '//input[@id="button-login"]')
 
-    ADD_ADDRESS_BILLING_DETAILS_PARENT = (By.XPATH, '//fieldset[@id="address"]')
-    BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-guest"]')
-    DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
+    ADD_ADDRESS_BILLING_DETAILS_PARENT = (By.ID, "address")
+    BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, "//input[@id='button-guest']")
 
-    YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT = (By.XPATH, "//fieldset[@id='address']")
+    DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
+    YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT = (By.XPATH, '//*[@id="collapse-payment-address"]')
     NEWSLETTER_CHECKBOX = (By.XPATH, '//input[@id="newsletter"]')
     PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//div[@class="buttons clearfix"]//input[@name="agree"]')
     ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-register"]')
 
-    DELIVERY_DETAILS_FIRST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-firstname"]')
-    DELIVERY_DETAILS_LAST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-lastname"]')
-    DELIVERY_DETAILS_COMPANY_FIELD = (By.XPATH, '//input[@id="input-shipping-company"]')
-    DELIVERY_DETAILS_FIRST_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-1"]')
-    DELIVERY_DETAILS_SECOND_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-2"]')
-    DELIVERY_DETAILS_CITY_FIELD = (By.XPATH, '//input[@id="input-shipping-city"]')
-    DELIVERY_DETAILS_POST_CODE_FIELD = (By.XPATH, '//input[@id="input-shipping-postcode"]')
-    DELIVERY_DETAILS_COUNTRY_FIELD = (By.XPATH, '//select[@id="input-shipping-country"]')
-    DELIVERY_DETAILS_REGION_STATE_DROPDOWN = (By.XPATH, '//select[@id="input-shipping-zone"]')
+    DELIVERY_DETAILS_PARENT = (By.XPATH, "collapse-shipping-address")
+
+    # DELIVERY_DETAILS_FIRST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-firstname"]')
+    # DELIVERY_DETAILS_LAST_NAME_FIELD = (By.XPATH, '//input[@id="input-shipping-lastname"]')
+    # DELIVERY_DETAILS_COMPANY_FIELD = (By.XPATH, '//input[@id="input-shipping-company"]')
+    # DELIVERY_DETAILS_FIRST_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-1"]')
+    # DELIVERY_DETAILS_SECOND_ADDRESS_FIELD = (By.XPATH, '//input[@id="input-shipping-address-2"]')
+    # DELIVERY_DETAILS_CITY_FIELD = (By.XPATH, '//input[@id="input-shipping-city"]')
+    # DELIVERY_DETAILS_POST_CODE_FIELD = (By.XPATH, '//input[@id="input-shipping-postcode"]')
+    # DELIVERY_DETAILS_COUNTRY_FIELD = (By.XPATH, '//select[@id="input-shipping-country"]')
+    # DELIVERY_DETAILS_REGION_STATE_DROPDOWN = (By.XPATH, '//select[@id="input-shipping-zone"]')
 
     DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
     DELIVERY_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-method"]')
@@ -332,5 +338,3 @@ class LocatorsCheckoutPage:
     PAYMENT_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-method"]')
 
     CONFIRM_ORDER_BUTTON = (By.XPATH, '//input[@id="button-confirm"]')
-
-    STEP_FIRST_TAB = (By.XPATH, "/html/body/div[2]/div/div/div/div[1]/div[1]/h4/a")
