@@ -248,7 +248,7 @@ class LocatorsComparePage:
     """Locators for the 'Compare' page"""
     ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
     TABLE_ROW = (By.XPATH, '//table/tbody/tr')
-    TABLE_COLUMN = (By.CLASS_NAME, 'td')
+    TABLE_COLUMN = (By.XPATH, 'td')
     ADD_BUTTONS = (By.CLASS_NAME, 'btn-primary')
     REMOVE_BUTTONS = (By.CLASS_NAME, 'btn-danger')
 

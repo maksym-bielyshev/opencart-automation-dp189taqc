@@ -4,6 +4,7 @@ from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.remote.webelement import WebElement
 from dp189.locators import LocatorsComparePage
 import time
+
 CHROME_DRIVER = '../driver/chromedriver'
 
 
@@ -31,6 +32,7 @@ class ComparePage(BasePage):
         """
         dict_names = {}
         names = PropertyOfProduct.get_name(self.table_rows[0])
+        print(names)
         dict_names[names[0].text] = list()
         for i in range(1, len(names)):
             dict_names[names[0].text].append(names[i].text)
@@ -136,6 +138,7 @@ class PropertyOfProduct:
         """
         return self._property.find_elements(*LocatorsComparePage.REMOVE_BUTTONS)
 
+
 if __name__ == '__main__':
     options = ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
@@ -153,4 +156,3 @@ if __name__ == '__main__':
     print(comparepage.get_products())
     print(comparepage.get_prices())
     comparepage.click_add_to_cart_button("ds")
-
