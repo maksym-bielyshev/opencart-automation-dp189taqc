@@ -1,7 +1,7 @@
 from selenium.webdriver import Remote
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsCheckoutPage
-from dp189.components import InputFieldComponent, YourPersonalDetailsComponent, AddAddressComponent
+from dp189.components import InputFieldComponent, YourPersonalDetailsComponent, AddAddressComponent, YourPasswordComponent
 
 
 class CheckoutOptions(BasePage):
@@ -40,13 +40,28 @@ class BillingDetails:
         self._driver.find_element(LocatorsCheckoutPage.CHECKOUT_OPTIONS_CONTINUE_BUTTON).click()
 
     def click_delivery_and_billing_addresses_checkbox(self):
-        self._driver.find_element(LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX)
+        self._driver.find_element(LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX).click()
 
 
 class AccountAndBillingDetails:
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
         self._driver = driver
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
+        self.your_password_form = YourPasswordComponent(self._driver)
+        self.your_address_from = AddAddressComponent(self._driver, LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
+
+    def click_newsletter_checkbox(self):
+        self._driver.find_element(LocatorsCheckoutPage.NEWSLETTER_CHECKBOX).click()
+
+    def click_delivery_and_billing_addresses_checkbox(self):
+        self._driver.find_element(LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX).click()
+
+    def click_privacy_policy_checkbox(self):
+        self._driver.find_element(LocatorsCheckoutPage.PRIVACY_POLICY_CHECKBOX).click()
+
+    def click_continue_button(self):
+        self._driver.find_element(LocatorsCheckoutPage.ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON).click()
 
 
 class DeliveryDetails:
