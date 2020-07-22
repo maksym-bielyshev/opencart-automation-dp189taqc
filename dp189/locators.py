@@ -204,6 +204,9 @@ class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
     FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
     LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
+    EMAIL_INPUT_PAYMENT = (By.XPATH, "//input[@id='input-payment-email']")
+    TELEPHONE_INPUT = (By.XPATH, "//input[@name='telephone']")
     COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
     ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
     ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')

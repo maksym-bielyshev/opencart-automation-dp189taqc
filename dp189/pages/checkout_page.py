@@ -12,10 +12,10 @@ class CheckoutPage(BasePage):
 
     def __init__(self, driver: Remote) -> None:
         """Initialize main class.
+
         :param driver: Remote.
         """
         super().__init__(driver)
-        self._driver = driver
         self.open_checkout_options = CheckoutOptions(self._driver)
         self.open_billing_details = BillingDetails(self._driver)
         self.open_account_billing_details = AccountAndBillingDetails(self._driver)
@@ -30,6 +30,7 @@ class CheckoutOptions:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -59,6 +60,7 @@ class BillingDetails:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -81,6 +83,7 @@ class AccountAndBillingDetails:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -107,6 +110,7 @@ class DeliveryDetails:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -118,6 +122,7 @@ class DeliveryMethod:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -134,6 +139,7 @@ class PaymentMethod:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver
@@ -153,6 +159,7 @@ class ConfirmOrder:
 
     def __init__(self, driver: Remote) -> None:
         """Initialize the class.
+
         :param driver: Remote.
         """
         self._driver = driver

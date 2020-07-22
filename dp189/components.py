@@ -568,6 +568,13 @@ class AddAddressComponent:
                                                     LocatorsAddAddressComponent.FIRST_NAME_INPUT, self._parent_element)
         self.last_name_field = InputFieldComponent(self._driver,
                                                    LocatorsAddAddressComponent.LAST_NAME_INPUT, self._parent_element)
+        self.email_field = InputFieldComponent(self._driver,
+                                               LocatorsAddAddressComponent.EMAIL_INPUT, self._parent_element)
+        self.email_field_payment = InputFieldComponent(self._driver,
+                                                       LocatorsAddAddressComponent.EMAIL_INPUT_PAYMENT,
+                                                       self._parent_element)
+        self.telephone_field = InputFieldComponent(self._driver,
+                                               LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
         self.company_field = InputFieldComponent(self._driver,
                                                  LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
         self.address_1_field = InputFieldComponent(self._driver,
