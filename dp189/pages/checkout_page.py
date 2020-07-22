@@ -16,7 +16,6 @@ class CheckoutPage(BasePage):
         :param driver: Remote.
         """
         super().__init__(driver)
-        self._driver = driver
         self.open_checkout_options = CheckoutOptions(self._driver)
         self.open_billing_details = BillingDetails(self._driver)
         self.open_account_billing_details = AccountAndBillingDetails(self._driver)
