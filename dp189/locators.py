@@ -186,6 +186,12 @@ class LocatorsForgotPasswordPage:
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
 
+class LocatorsChangePasswordPage:
+    """Locators for the 'Change password' page."""
+
+    BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
+
 class LocatorSortByDropdown:
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
 
@@ -294,6 +300,15 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
+
+
+class LocatorsLoginComponent:
+    """Locators for Login Component."""
+
+    EMAIL_INPUT = (By.XPATH, '//input[@id="input-email"]')
+    PASSWORD_INPUT = (By.XPATH, '//input[@id="input-password"]')
+    FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//a[text()="Forgotten Password"]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@type="submit"]')
 
 
 class LocatorsCheckoutPage:
