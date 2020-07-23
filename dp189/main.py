@@ -1,24 +1,19 @@
-from selenium.webdriver import Chrome
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from dp189.pages.product_page import ProductPage
 
-from dp189.locators import LocatorsYourPersonalDetailsComponent
-from dp189.pages.home_page import HomePage
-from dp189.pages.register_page import RegisterPage
 
 if __name__ == '__main__':
     options = Options()
     options.add_argument('--ignore-certificate-errors')
+    my_driver = webdriver.Chrome('C:/chromedriver/chromedriver.exe', options=options)
+    my_driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
+    my_driver.maximize_window()
 
-    with Chrome(options=options) as driver:
-        driver.maximize_window()
-        driver.get('http://34.71.14.206/index.php?route=account/register')
-
-        register_page = RegisterPage(driver)
-        register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field(
-            '111111111111111111111111111111111111111111111')
-        register_page = register_page.click_continue_button()
-        print(register_page.your_personal_details_form.first_name_field.get_error_message_for_input_field())
-
-        print(register_page.subscribe_radio_buttons.is_subscribed())
-        register_page.subscribe_radio_buttons.subscribe_to_newsletter()
-        print(register_page.subscribe_radio_buttons.is_subscribed())
+    product = ProductPage(my_driver)
+    product.available_options.radio.choose_radio_button_option('Medium')
+    product.available_options.checkbox.choose_checkbox_option('Checkbox 3')
+    product.available_options.select.choose_dropdown_option('Blue (+$3.00)')
+    print(product.available_options.radio.which_option_is_chosen())
+    print(product.available_options.checkbox.which_option_is_chosen())
+    print(product.available_options.select.which_option_is_chosen())

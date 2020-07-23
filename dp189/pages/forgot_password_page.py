@@ -18,7 +18,7 @@ class ForgotPasswordPage(BasePage):
         self.email_address_field = InputFieldComponent(driver, LocatorsForgotPasswordPage.EMAIL_FIELD)
         self.back_button = driver.find_element(*LocatorsForgotPasswordPage.BACK_BUTTON)
         self.continue_button = driver.find_element(*LocatorsForgotPasswordPage.CONTINUE_BUTTON)
-        self.left_navigation_menu = BaseRightMenu(driver)
+        self.right_navigation_menu = BaseRightMenu(driver)
 
     def click_back_button(self) -> None:
         """Click on the 'Back' button.
