@@ -1,9 +1,14 @@
 from dp189.pages.base_page import BasePage
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from dp189.locators import LocatorsComparePage
 from selenium.webdriver import Chrome, ChromeOptions
 import time
+from dp189.constants import ComparePageConstants
+
 CHROME_DRIVER = '../driver/chromedriver'
 
 
@@ -94,6 +99,17 @@ class ComparePage(BasePage):
                 index = product['Product'].index(item)
                 button[index].click()
         return ComparePage(self._driver)
+
+    def test_item_without_option(self):
+        return WebDriverWait(self._driver, 3).until(EC.presence_of_element_located(ComparePageConstants.IPHONE),
+                                                    message=f"Can't find element by locator")
+
+    def test_item_with_option(self):
+        return WebDriverWait(self._driver, 3).until(EC.presence_of_element_located(ComparePageConstants.CINEMA),
+                                                    message=f"Can't find element by locator")
+
+    def go_to_site(self):
+        return self._driver.get('http://34.71.14.206/index.php?route=product/compare')
 
 
 class PropertyOfProduct:
