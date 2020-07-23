@@ -12,7 +12,7 @@ from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsCom
     LocatorsYourPasswordComponent, LocatorsNewsletterComponent, LocatorsAddAddressComponent, \
     LocatorsBasePageNavBar, LocatorsRightMenuRegisterPage, LocatorProductCompareLink, \
     LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, LocatorsAvailableOptions, \
-    LocatorsPrivacyPolicyComponent
+    LocatorsPrivacyPolicyComponent, LocatorsLoginComponent
 
 
 class ShopCartButtonComponent:
@@ -83,7 +83,6 @@ class BasePageNavBarComponent:
         # """EUR, USD, GBP"""
         self.currency.click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
-
 
     def click_contact_us_link(self):
         self.nav_bar.find_element(*LocatorsBasePageNavBar.CONTACT_US).click()
@@ -464,6 +463,7 @@ class ErrorMessageComponent:
 
 class CatchMessageComponent:
     """This component created to find a specific info message after action on the site."""
+
     def __init__(self, driver: Remote) -> None:
         """Initialize a driver to CatchMessageComponent."""
         self._driver = driver
@@ -568,6 +568,13 @@ class AddAddressComponent:
                                                     LocatorsAddAddressComponent.FIRST_NAME_INPUT, self._parent_element)
         self.last_name_field = InputFieldComponent(self._driver,
                                                    LocatorsAddAddressComponent.LAST_NAME_INPUT, self._parent_element)
+        self.email_field = InputFieldComponent(self._driver,
+                                               LocatorsAddAddressComponent.EMAIL_INPUT, self._parent_element)
+        self.email_field_payment = InputFieldComponent(self._driver,
+                                                       LocatorsAddAddressComponent.EMAIL_INPUT_PAYMENT,
+                                                       self._parent_element)
+        self.telephone_field = InputFieldComponent(self._driver,
+                                               LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
         self.company_field = InputFieldComponent(self._driver,
                                                  LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
         self.address_1_field = InputFieldComponent(self._driver,
@@ -582,3 +589,33 @@ class AddAddressComponent:
                                          LocatorsAddAddressComponent.COUNTRY_SELECTOR, self._parent_element)
         self.region = DropdownComponent(self._driver,
                                         LocatorsAddAddressComponent.REGION_SELECTOR, self._parent_element)
+
+
+class LoginComponent:
+    """Login component consists two fields: E-Mail Address and Password."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialize input form fields.
+
+        :param driver: Remote
+        :return: None
+        """
+        self._driver = driver
+        self.email_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.EMAIL_INPUT)
+        self.password_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.PASSWORD_INPUT)
+
+    def click_forgotten_password(self) -> None:
+        """Click forgotten password button to restore password.
+
+        :return: None
+        """
+        self.forgotten_password_button = self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON)
+        self.forgotten_password_button.click()
+
+    def click_login_button(self) -> None:
+        """Click login button to return the user to the system.
+
+        :return: None
+        """
+        self.login_button = self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON)
+        self.login_button.click()
