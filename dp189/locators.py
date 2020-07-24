@@ -1,23 +1,22 @@
 from selenium.webdriver.common.by import By
 
 
-class LocatorsSearch:
+class LocatorBasePageSearch:
+    """Locator for search field on base page"""
+
     SEARCH_FIELD = (By.CLASS_NAME, 'input-lg')
-    SEARCH_BUTTON = (By.CLASS_NAME, 'input-group-btn')
 
 
-class LocatorsNavBar:
-    # Absolute
+class LocatorsBasePageNavBar:
+    """Locators for top navbar links on base page"""
+
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH, './/ul/li[3]/button')
+    USD = (By.XPATH,'.//ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
-
-    # Relative
     CONTACT_US = (By.XPATH, './/li[1]/a')
-    # MY_ACCOUNT = (By.XPATH, './/li[2]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
     WISH_LIST = (By.XPATH, './/li[3]/a')
@@ -25,7 +24,22 @@ class LocatorsNavBar:
     CHECKOUT = (By.XPATH, './/li[5]/a')
 
 
-class RightMenuLocators:
+class LocatorsBasePageMainMenu:
+    """Locators for main menu on base page"""
+
+    DESKTOPS = (By.XPATH, '//a[text()="Desktops"]')
+    LAPTOPS_NOTEBOOKS = (By.XPATH, '//a[text()="Laptops & Notebooks"]')
+    COMPONENTS = (By.XPATH, '//a[text()="Components"]')
+    TABLETS = (By.XPATH, '//a[text()="Tablets"]')
+    SOFTWARE = (By.XPATH, '//a[text()="Software"]')
+    PHONES_PDAS = (By.XPATH, '//a[text()="Phones & PDAs"]')
+    CAMERAS = (By.XPATH, '//a[text()="Cameras"]')
+    MP3_PLAYERS = (By.XPATH, '//a[text()="MP3 Players"]')
+
+
+class LocatorsRightMenuRegisterPage:
+    """"Locators for right menu on Register and Login pages"""
+
     RIGHT_MENU = (By.CLASS_NAME, 'list-group')
     LOGIN = (By.XPATH, './/a[text()="Login"]')
     REGISTER = (By.XPATH, './/a[text()="Register"]')
@@ -123,7 +137,9 @@ class LocatorsAvailableOptions:
     DATE_AND_TIME = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD HH:mm"]')
     TEXT_AREA = (By.XPATH, '//h3[text()="Available Options"]/..//textarea')
     CHECKBOX_CONTAINER = (By.XPATH, '//div[@class="checkbox"]/..')
+    CHECKBOX_LABEL = (By.XPATH, '//div[@class="checkbox"]/label')
     RADIO_CONTAINER = (By.XPATH, '//div[@class="radio"]/..')
+    RADIO_BUTTON_LABEL = (By.XPATH, '//div[@class="radio"]/label')
     SELECT_CONTAINER = (By.XPATH, '//div/select[contains(.,"--- Please Select ---")]')
 
 
@@ -153,7 +169,13 @@ class LocatorsRegisterPage:
 class LocatorsNewsletterComponent:
     """Locators fot the 'Newsletter' component."""
 
-    SUBSCRIBE_RADIO_BUTTONS = (By.NAME, 'newsletter')
+    SUBSCRIBE_RADIO_BUTTONS = (By.XPATH, '//label[@class="radio-inline"]')
+
+
+class LocatorsPrivacyPolicyComponent:
+    """Locators fot the 'Privacy Policy' component."""
+
+    PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//input[@name="agree"]')
 
 
 class LocatorsForgotPasswordPage:
@@ -164,6 +186,12 @@ class LocatorsForgotPasswordPage:
     BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
+
+class LocatorsChangePasswordPage:
+    """Locators for the 'Change password' page."""
+
+    BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
+    CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
 class LocatorSortByDropdown:
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
@@ -177,6 +205,9 @@ class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
     FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
     LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
+    EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
+    EMAIL_INPUT_PAYMENT = (By.XPATH, "//input[@id='input-payment-email']")
+    TELEPHONE_INPUT = (By.XPATH, "//input[@name='telephone']")
     COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
     ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
     ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
@@ -272,3 +303,46 @@ class LocatorsShoppingCartPage:
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
 
     CONTENT_EMPTY_CART = (By.XPATH, '//div[@id="content"]/p[text()="Your shopping cart is empty!"]')
+
+
+class LocatorsLoginComponent:
+    """Locators for Login Component."""
+
+    EMAIL_INPUT = (By.XPATH, '//input[@id="input-email"]')
+    PASSWORD_INPUT = (By.XPATH, '//input[@id="input-password"]')
+    FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//a[text()="Forgotten Password"]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@type="submit"]')
+
+
+class LocatorsCheckoutPage:
+    """Locators for the 'Checkout' page."""
+
+    REGISTER_CHECKOUT_RADIO_BUTTON = \
+        (By.XPATH, "//div[@id='collapse-checkout-option']//div[@class='col-sm-6']//div[1]//label[1]//input[1]")
+    GUEST_CHECKOUT_RADIO_BUTTON = (By.XPATH, "//div[@id='collapse-checkout-option']//div[2]//label[1]//input[1]")
+    CHECKOUT_OPTIONS_CONTINUE_BUTTON = (By.XPATH, "//input[@id='button-account']")
+
+    RETURNING_CUSTOMER_EMAIL_FIELD = (By.XPATH, '//input[@id="input-email"]')
+    RETURNING_CUSTOMER_PASSWORD_FIELD = (By.XPATH, '//input[@id="input-password"]')
+    FORGOTTEN_PASSWORD_LINK = (By.XPATH, '//a[contains(text(),"Forgotten Password")]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@id="button-login"]')
+
+    ADD_ADDRESS_BILLING_DETAILS_PARENT = (By.ID, "address")
+    BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, "//input[@id='button-guest']")
+
+    DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
+    YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT = (By.XPATH, '//*[@id="collapse-payment-address"]')
+    NEWSLETTER_CHECKBOX = (By.XPATH, '//input[@id="newsletter"]')
+    PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//div[@class="buttons clearfix"]//input[@name="agree"]')
+    ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-register"]')
+
+    DELIVERY_DETAILS_PARENT = (By.XPATH, "collapse-shipping-address")
+
+    DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
+    DELIVERY_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-method"]')
+
+    PAYMENT_METHOD_TEXT_AREA = (By.XPATH, '//div[@id="collapse-payment-method"]//textarea[@name="comment"]')
+    TERMS_AND_CONDITIONS_CHECKBOX = (By.XPATH, '//input[@name="agree"]')
+    PAYMENT_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-method"]')
+
+    CONFIRM_ORDER_BUTTON = (By.XPATH, '//input[@id="button-confirm"]')
