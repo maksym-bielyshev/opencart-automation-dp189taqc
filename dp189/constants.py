@@ -21,14 +21,18 @@ ORDER_HISTORY = PROTOCOL + DOMAIN + ROUTE_ACCOUNT + '/order'
 LOGOUT = PROTOCOL + DOMAIN + ROUTE_ACCOUNT + '/logout'
 GIFT_CERTIFICATE = PROTOCOL + DOMAIN + ROUTE_ACCOUNT + '/voucher'
 
+
 def get_product_url(product_id):
     return PROTOCOL + DOMAIN + ROUTE_PRODUCT + f'/product&product_id={product_id}'
+
 
 def get_search_page_url(search_query):
     return PROTOCOL + DOMAIN + ROUTE_PRODUCT + f'/search&search={search_query}'
 
+
 def get_category_url(category_id):
     return PROTOCOL + DOMAIN + ROUTE_PRODUCT + f'/category&path={category_id}'
+
 
 def get_edit_address_url(address_id):
     return ADDRESS + f'/edit&address_id={address_id}'
