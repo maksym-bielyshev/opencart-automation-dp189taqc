@@ -1,31 +1,16 @@
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from dp189.pages.product_page import ProductPage
 from dp189.pages.shopping_cart_page import ShoppingCartPage
-import csv
-
+from dp189.tests.conftest import get_test_data
 from dp189.tests.base_test import BaseTest
 
-CHROME_DRIVER_PATH = 'C:/Users/Home/Downloads/chromedriver_win32/chromedriver.exe'
+
 PRODUCT_URL = 'http://34.71.14.206/index.php?route=product/product&product_id=40'
 SHOPPING_CART_URL = 'http://34.71.14.206/index.php?route=checkout/cart'
 
 
-# def get_test_data():
-#     with open('../testsData/test_data_shopping_cart_quantity.csv', 'r') as file:
-#         reader = csv.reader(file, quoting=csv.QUOTE_ALL, skipinitialspace=True, delimiter='\t')
-#         test_data_list = []
-#         for row in reader:
-#             test_data_list.append(tuple(row[0].strip('][').split(';')))
-#         return test_data_list
-
-
 class TestShoppingCart(BaseTest):
     def setup(self):
-        # options = Options()
-        # options.add_argument('--ignore-certificate-errors')
-        # self._driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=options)
         self.driver.maximize_window()
 
         self.driver.get(PRODUCT_URL)
@@ -45,8 +30,7 @@ class TestShoppingCart(BaseTest):
 
         assert 'Success: You have modified your shopping cart!' in self.cart.catch_info_message.get_info_message()
 
-    @pytest.mark.parametrize('test_input,expected',
-                             BaseTest.get_test_data('test_data_shopping_cart_quantity.csv'))
+    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_shopping_cart_quantity.csv'))
     def test_shopping_cart_change_quantity_negative(self, test_input: str, expected: str):
         """Negative test for checking changes in the cart when invalid data is entered.
         :param test_input: str
