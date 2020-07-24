@@ -6,11 +6,15 @@ class TestAvailableOptions(BaseTest):
     """Tests for Available Options menu on product page."""
 
     def setup(self):
+
         super().setup()
+        self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
+        self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)
 
     def test_add_product_to_cart_button_with_all_selected_options(self):
         """Check correct work of clicking on 'Add to Cart' button by filling all required fields."""
+
         self.product_page.available_options.radio.choose_radio_button_option('Medium')
         self.product_page.available_options.checkbox.choose_checkbox_option('Checkbox 2')
         self.product_page.available_options.text_field.clear_and_fill_input_field('test')
@@ -39,6 +43,8 @@ class TestReviewsTab(BaseTest):
 
     def setup(self):
         super().setup()
+        self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
+        self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)
 
     def test_add_review_to_product(self):
@@ -59,6 +65,8 @@ class TestProductPageButtons(BaseTest):
 
     def setup(self):
         super().setup()
+        self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
+        self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)
 
     def test_click_compare_button(self):
