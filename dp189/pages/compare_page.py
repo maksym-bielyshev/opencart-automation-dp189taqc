@@ -100,15 +100,8 @@ class ComparePage(BasePage):
                 button[index].click()
         return ComparePage(self._driver)
 
-    def test_item_without_option(self):
-        return WebDriverWait(self._driver, 3).until(EC.presence_of_element_located(ComparePageConstants.IPHONE),
-                                                    message=f"Can't find element by locator")
-
-    def test_item_with_option(self):
-        return WebDriverWait(self._driver, 3).until(EC.presence_of_element_located(ComparePageConstants.CINEMA),
-                                                    message=f"Can't find element by locator")
-
     def go_to_site(self):
+        self._driver.implicitly_wait(5)
         return self._driver.get('http://34.71.14.206/index.php?route=product/compare')
 
 

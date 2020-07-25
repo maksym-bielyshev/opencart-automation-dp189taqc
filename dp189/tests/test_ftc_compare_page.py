@@ -14,17 +14,16 @@ class TestCompareItems:
     def setup(self):
         self.driver = webdriver.Chrome(CHROME_DRIVER, options=options)
         self.driver.maximize_window()
-        self.driver.get(ComparePageConstants.BASE_URL)
+        self.driver.get(ComparePageConstants.BASE_URL)#
         self.page = ComparePage(self.driver)
-        self.page.test_item_without_option().click()
-        self.page.test_item_with_option().click()
+        self.page.find_element(ComparePageConstants.IPHONE).click()
+        self.page.find_element(ComparePageConstants.CINEMA).click()
         self.page.go_to_site()
         self.page.get_rows_in_table()
 
     def test_add_product_to_cart_without_option(self):
         self.page.click_add_to_cart_button("iPhone")
-        message = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located(ComparePageConstants.MESSAGE),
-                                                      message=f"Can't find element by locator")
+        message = self.page.find_element(ComparePageConstants.MESSAGE)
         assert message.text == ComparePageConstants.RESULT
 
     def test_add_product_to_cart_with_option(self):

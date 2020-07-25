@@ -13,6 +13,7 @@ from ..locators import LocatorsBasePageNavBar
 class BasePage:
     def __init__(self, driver: Remote):
         self._driver = driver
+        self._driver.implicitly_wait(5)
         self.top_nav_bar = BasePageNavBarComponent(driver)
         self.main_menu_desktops = DropdownComponent(driver, LocatorsBasePageMainMenu.DESKTOPS)
         self.main_menu_laptops_notebooks = DropdownComponent(driver, LocatorsBasePageMainMenu.LAPTOPS_NOTEBOOKS)
@@ -35,3 +36,7 @@ class BasePage:
     def click_account_and_go_to_register(self):
         self.my_account.click()
         self.my_account.find_element(*LocatorsBasePageNavBar.REGISTER).click()
+
+    def find_element(self, locator):
+        self._driver.implicitly_wait(5)
+        return self._driver.find_element(*locator)
