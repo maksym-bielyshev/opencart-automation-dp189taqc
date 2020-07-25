@@ -162,6 +162,7 @@ class LocatorsYourPasswordComponent:
 class LocatorsRegisterPage:
     """Locators fot the 'Register' page."""
 
+    CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
 
@@ -301,6 +302,8 @@ class LocatorsShoppingCartPage:
                             '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
+
+    CONTENT_EMPTY_CART = (By.XPATH, '//div[@id="content"]/p[text()="Your shopping cart is empty!"]')
 
 
 class LocatorsLoginComponent:
