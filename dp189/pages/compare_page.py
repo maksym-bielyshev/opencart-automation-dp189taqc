@@ -101,7 +101,6 @@ class ComparePage(BasePage):
         return ComparePage(self._driver)
 
     def go_to_site(self):
-        self._driver.implicitly_wait(5)
         return self._driver.get('http://34.71.14.206/index.php?route=product/compare')
 
 

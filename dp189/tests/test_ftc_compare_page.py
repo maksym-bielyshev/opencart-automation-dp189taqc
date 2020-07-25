@@ -1,39 +1,38 @@
-from selenium import webdriver
+from dp189.locators import LocatorsComparePageTest
 from selenium.webdriver.chrome.options import Options
 from dp189.pages.compare_page import ComparePage
 from dp189.constants import ComparePageConstants
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-options = Options()
-options.add_argument('--ignore-certificate-errors')
-CHROME_DRIVER = '../driver/chromedriver'
+from dp189.tests.base_test import BaseTest
+from dp189.routes import *
 
 
-class TestCompareItems:
+class TestCompareItems(BaseTest):
     def setup(self):
-        self.driver = webdriver.Chrome(CHROME_DRIVER, options=options)
+        super().setup()
         self.driver.maximize_window()
-        self.driver.get(ComparePageConstants.BASE_URL)#
+        self.driver.get(HOME_PAGE_URL)
         self.page = ComparePage(self.driver)
-        self.page.find_element(ComparePageConstants.IPHONE).click()
-        self.page.find_element(ComparePageConstants.CINEMA).click()
+        self.page.find_element(LocatorsComparePageTest.IPHONE).click()
+        self.page.find_element(LocatorsComparePageTest.CINEMA).click()
         self.page.go_to_site()
         self.page.get_rows_in_table()
 
     def test_add_product_to_cart_without_option(self):
-        self.page.click_add_to_cart_button("iPhone")
-        message = self.page.find_element(ComparePageConstants.MESSAGE)
+        self.page.click_add_to_cart_button(ComparePageConstants.TEST_ITEM1)
+        message = self.page.find_element(LocatorsComparePageTest.MESSAGE)
         assert message.text == ComparePageConstants.RESULT
 
     def test_add_product_to_cart_with_option(self):
-        self.page.click_add_to_cart_button('Apple Cinema 30"')
+        self.page.click_add_to_cart_button(ComparePageConstants.TEST_ITEM2)
         WebDriverWait(self.driver, 3).until(EC.title_is(ComparePageConstants.RESULT2))
-        assert self.driver.title == ComparePageConstants.RESULT2
+        title = self.page.title_is()
+        assert title == ComparePageConstants.RESULT2
 
     def test_remove_item_from_cart(self):
-        self.page.click_remove_button("iPhone")
-        message = WebDriverWait(self.driver, 3).until(EC.presence_of_element_located(ComparePageConstants.MESSAGE))
+        self.page.click_remove_button(ComparePageConstants.TEST_ITEM1)
+        message = self.page.find_element(LocatorsComparePageTest.MESSAGE)
         assert message.text == ComparePageConstants.RESULT3
 
     def teardown(self):

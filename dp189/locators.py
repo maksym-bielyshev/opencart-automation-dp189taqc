@@ -347,3 +347,9 @@ class LocatorsCheckoutPage:
     PAYMENT_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-method"]')
 
     CONFIRM_ORDER_BUTTON = (By.XPATH, '//input[@id="button-confirm"]')
+
+class LocatorsComparePageTest:
+    MACBOOK = (By.XPATH, '//*[@id="content"]/div[2]/div[1]/div/div[3]/button[3]')
+    IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[3]')
+    CINEMA = (By.XPATH, '//*[@id="content"]/div[2]/div[3]/div/div[3]/button[3]')
+    MESSAGE = (By.XPATH, '//div[@class="alert alert-success alert-dismissible"]')
