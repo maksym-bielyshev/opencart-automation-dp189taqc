@@ -20,7 +20,7 @@ class ShoppingCartPage(BasePage):
         self.gift_certificate_panel = GiftCertificatePanel(driver)
         self.products_list = []
 
-    def get_products_list(self) -> list:
+    def generate_products_list(self) -> list:
         """Fills product_list with ProductInCart class instances.
         This method must be called before you start working with product methods.
 
@@ -146,11 +146,18 @@ class ShoppingCartPage(BasePage):
         """
         return self._cut_number(self._driver.find_element(*LocatorsShoppingCartPage.TOTAL_ORDER_SUM))
 
+    def get_text_empty_cart(self) -> str:
+        """Gets content empty cart.
+
+        :return: string content text
+        """
+        return self._driver.find_element(*LocatorsShoppingCartPage.CONTENT_EMPTY_CART).text
+
     @staticmethod
     def _cut_number(web_text: WebElement) -> float:
         """Cuts number from string to return float without other symbols.
         
-        :param path: WebElement
+        :param web_text: WebElement
         :return: float
         """""
         return float(''.join(re.findall(r'\d+\.\d+', web_text.text)))
