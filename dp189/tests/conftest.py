@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 
-CHROME_DRIVER = 'dp189/driver/chromedriver.exe'
+CHROME_DRIVER = '../driver/chromedriver.exe'
 
 
 @pytest.fixture(scope="function")
