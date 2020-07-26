@@ -39,7 +39,7 @@ class TestShoppingCart(BaseTest):
         assert self.cart.get_text_empty_cart() == expected
 
     def test_use_coupon_code(self):
-        """Positive test for checking message display after apply coupon code."""
+        """Positive test for checking success message display after apply coupon code."""
         self.cart.coupon_panel.open_coupon_panel()
         self.cart.coupon_panel.coupon_field.clear_and_fill_input_field('2222')
         self.cart.coupon_panel.click_apply_coupon_button()
