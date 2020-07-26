@@ -16,5 +16,5 @@ class TestShoppingCartPageContinueShoppingButton(BaseTest):
         self.page = ShoppingCartPage(self.driver)
 
     def test_continue_shopping_button(self):
-        self.page.click_continue_shipping_button()
-        assert self.page.get_title.get_title_page(ShoppingCartPageConstants.HOME_TITLE) == 'Your Store'
+        self.page.click_checkout_button()
+        assert self.page.get_title.get_title_page(ShoppingCartPageConstants.CHECKOUT_TITLE) == 'Checkout'

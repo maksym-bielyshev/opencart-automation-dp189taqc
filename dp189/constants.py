@@ -13,4 +13,5 @@ class ShoppingCartPageConstants:
     TEST_ITEM1 = 'iPhone'
     RESULT = 'Success: You have modified your shopping cart!'
     RESULT2 = 202.0
-    TITLE = 'Your Store'
+    HOME_TITLE = 'Your Store'
+    CHECKOUT_TITLE = 'Checkout'
