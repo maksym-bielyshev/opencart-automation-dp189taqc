@@ -14,9 +14,9 @@ class TestShoppingCart(BaseTest):
         self.driver.get(get_product_url('40'))
         product = ProductPage(self.driver)
         product.available_options.click_add_to_cart_button()
+        product.catch_info_message.get_info_message()
 
         self.driver.get(CART_PAGE_URL)
-
         self.cart = ShoppingCartPage(self.driver)
         self.cart.generate_products_list()
 
@@ -37,6 +37,14 @@ class TestShoppingCart(BaseTest):
         self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, test_input)
 
         assert self.cart.get_text_empty_cart() == expected
+
+    def test_use_coupon_code(self):
+        """Positive test for checking message display after apply coupon code."""
+        self.cart.coupon_panel.open_coupon_panel()
+        self.cart.coupon_panel.coupon_field.clear_and_fill_input_field('2222')
+        self.cart.coupon_panel.click_apply_coupon_button()
+
+        assert ShoppingCartPageConstants.RESULT4 in self.cart.catch_info_message.get_info_message()
 
     def test_shopping_cart_click_remove_button(self):
         """Positive test to check correct changing after remove product from shopping cart."""
