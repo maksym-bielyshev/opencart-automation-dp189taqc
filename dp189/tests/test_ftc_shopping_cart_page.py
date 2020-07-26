@@ -21,10 +21,10 @@ class TestShoppingCart(BaseTest):
         self.cart.generate_products_list()
 
     def test_shopping_cart_change_quantity_positive(self):
-        """Positive test to check correct changing quantity of product."""
+        """Positive test to check correct changing quantity of product.
+        :param expected: str
+        """
         self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, '5')
-        """Positive test to check correct changing quantity of product."""
-        self.cart.change_product_quantity('iPhone', '5')
 
         assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
 
@@ -39,7 +39,7 @@ class TestShoppingCart(BaseTest):
         assert self.cart.get_text_empty_cart() == expected
 
     def test_use_coupon_code(self):
-        """Positive test for checking message display after apply coupon code."""
+        """Positive test for checking success message display after apply coupon code."""
         self.cart.coupon_panel.open_coupon_panel()
         self.cart.coupon_panel.coupon_field.clear_and_fill_input_field('2222')
         self.cart.coupon_panel.click_apply_coupon_button()
@@ -51,3 +51,16 @@ class TestShoppingCart(BaseTest):
         self.cart.click_remove_product_button(ShoppingCartPageConstants.TEST_ITEM1)
 
         assert ShoppingCartPageConstants.RESULT3 == self.cart.get_text_empty_cart()
+
+    def test_shopping_cart_estimate_shipping_and_taxes(self):
+        """Positive test for checking success message display after fill Estimate Shipping & Taxes field."""
+        self.cart.estimate_shipping_panel.open_estimate_shipping_panel()
+        self.cart.estimate_shipping_panel.country_selector.choose_dropdown_option('Ukraine')
+        self.cart.estimate_shipping_panel.region_selector.choose_dropdown_option('Kyiv')
+        self.cart.estimate_shipping_panel.click_get_quotes_button()
+
+        self.cart.estimate_shipping_panel.modal_shipping_radio_button.choose_radio_button_option(
+            ShoppingCartPageConstants.TEST_ITEM2)
+        self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
+
+        assert ShoppingCartPageConstants.RESULT5 in self.cart.catch_info_message.get_info_message()

@@ -8,7 +8,9 @@ class ComparePageConstants:
 
 class ShoppingCartPageConstants:
     TEST_ITEM1 = 'iPhone'
+    TEST_ITEM2 = 'Flat Shipping Rate - $5.00'
     RESULT = 'Success: You have modified your shopping cart!'
     RESULT2 = 202.0
     RESULT3 = 'Your shopping cart is empty!'
     RESULT4 = 'Success: Your coupon discount has been applied!'
+    RESULT5 = 'Success: Your shipping estimate has been applied!'
