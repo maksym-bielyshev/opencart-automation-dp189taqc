@@ -6,7 +6,7 @@ class ComparePageConstants:
     RESULT3 = f'Success: You have modified your product comparison!\n×'
 
 
-class ShoppingCartConstants:
+class ShoppingCartPageConstants:
     TEST_ITEM1 = 'iPhone'
     TEST_ITEM2 = 'Flat Shipping Rate - $5.00'
     RESULT = 'Success: You have modified your shopping cart!'

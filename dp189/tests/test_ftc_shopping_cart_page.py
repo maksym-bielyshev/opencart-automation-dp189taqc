@@ -4,7 +4,7 @@ from dp189.pages.shopping_cart_page import ShoppingCartPage
 from dp189.tests.conftest import get_test_data
 from dp189.tests.base_test import BaseTest
 from dp189.routes import *
-from dp189.constants import ShoppingCartConstants
+from dp189.constants import ShoppingCartPageConstants
 
 
 class TestShoppingCart(BaseTest):
@@ -24,9 +24,9 @@ class TestShoppingCart(BaseTest):
         """Positive test to check correct changing quantity of product.
         :param expected: str
         """
-        self.cart.change_product_quantity(ShoppingCartConstants.TEST_ITEM1, '5')
+        self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, '5')
 
-        assert ShoppingCartConstants.RESULT in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
 
     @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_shopping_cart_quantity.csv'))
     def test_shopping_cart_change_quantity_negative(self, test_input: str, expected: str):
@@ -34,7 +34,7 @@ class TestShoppingCart(BaseTest):
         :param test_input: str
         :param expected: str
         """
-        self.cart.change_product_quantity(ShoppingCartConstants.TEST_ITEM1, test_input)
+        self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, test_input)
 
         assert self.cart.get_text_empty_cart() == expected
 
@@ -46,7 +46,7 @@ class TestShoppingCart(BaseTest):
         self.cart.estimate_shipping_panel.click_get_quotes_button()
 
         self.cart.estimate_shipping_panel.modal_shipping_radio_button.choose_radio_button_option(
-            ShoppingCartConstants.TEST_ITEM2)
+            ShoppingCartPageConstants.TEST_ITEM2)
         self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
 
-        assert ShoppingCartConstants.RESULT3 in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT3 in self.cart.catch_info_message.get_info_message()
