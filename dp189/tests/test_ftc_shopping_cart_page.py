@@ -14,9 +14,9 @@ class TestShoppingCart(BaseTest):
         self.driver.get(get_product_url('40'))
         product = ProductPage(self.driver)
         product.available_options.click_add_to_cart_button()
+        product.catch_info_message.get_info_message()
 
         self.driver.get(CART_PAGE_URL)
-
         self.cart = ShoppingCartPage(self.driver)
         self.cart.generate_products_list()
 
