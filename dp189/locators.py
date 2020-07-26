@@ -13,7 +13,7 @@ class LocatorsBasePageNavBar:
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
     CURRENCY = (By.CLASS_NAME, 'btn-group')
-    USD = (By.XPATH,'.//ul/li[3]/button')
+    USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')
     CONTACT_US = (By.XPATH, './/li[1]/a')
@@ -193,6 +193,7 @@ class LocatorsChangePasswordPage:
     BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
+
 class LocatorSortByDropdown:
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
 
@@ -251,8 +252,10 @@ class LocatorsGiftCertificatePage:
 class LocatorsComparePage:
     """Locators for the 'Compare' page"""
     ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
-    ADD_BUTTONS = (By.XPATH, '//table/tbody/tr/td/input[@class="btn btn-primary btn-block"]')
-    REMOVE_BUTTONS = (By.XPATH, '//table/tbody/tr/td/a[@class="btn btn-danger btn-block"]')
+    TABLE_ROW = (By.XPATH, '//table/tbody/tr')
+    TABLE_COLUMN = (By.XPATH, 'td')
+    ADD_BUTTONS = (By.CLASS_NAME, 'btn-primary')
+    REMOVE_BUTTONS = (By.CLASS_NAME, 'btn-danger')
 
 
 class LocatorsInfoMessages:
@@ -298,7 +301,7 @@ class LocatorsShoppingCartPage:
     COUPON_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Coupon")]'
                             '/../following-sibling::td')
     GIFT_CERTIFICATE_SUM = (By.XPATH, '//div[@id="checkout-cart"]//strong[starts-with(text(), "Gift Certificate")]'
-                            '/../following-sibling::td')
+                                      '/../following-sibling::td')
     SUB_TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Sub-Total:"]/../following-sibling::td')
     TOTAL_ORDER_SUM = (By.XPATH, '//td/strong[text()="Total:"]/../following-sibling::td')
 
@@ -347,3 +350,15 @@ class LocatorsCheckoutPage:
     PAYMENT_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-method"]')
 
     CONFIRM_ORDER_BUTTON = (By.XPATH, '//input[@id="button-confirm"]')
+
+
+class LocatorsComparePageTest:
+    MACBOOK = (By.XPATH, '//*[@id="content"]/div[2]/div[1]/div/div[3]/button[3]')
+    IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[3]')
+    CINEMA = (By.XPATH, '//*[@id="content"]/div[2]/div[3]/div/div[3]/button[3]')
+    MESSAGE = (By.XPATH, '//div[@class="alert alert-success alert-dismissible"]')
+
+
+class LocatorsShoppingCartPageTest:
+    IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[1]')
+    QUANTITY = (By.XPATH, '//*[@id="content"]/form/div/table/tbody/tr/td[4]/div/input')

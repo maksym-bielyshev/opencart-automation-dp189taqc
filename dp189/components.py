@@ -170,7 +170,7 @@ class ProductWidgetComponent:
 
         :return: None.
         """
-        self._driver.find_element\
+        self._driver.find_element \
             (By.XPATH, f'//a[text()="{self.product_title}"]/../../..//span[text()="Add to Cart"]/..').click()
 
     def click_add_to_wish_list_button(self) -> None:
@@ -471,6 +471,21 @@ class ErrorMessageComponent:
         return error_message.text
 
 
+class CatchPageTitleComponent:
+    """This component created to get title of current page"""
+
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
+
+    def get_title_page(self, page_title: str):
+        """This method gets title page until it loads
+
+        :return: str
+        """
+        WebDriverWait(self._driver, 3).until(EC.title_is(page_title))
+        return page_title
+
+
 class CatchMessageComponent:
     """This component created to find a specific info message after action on the site."""
 
@@ -496,7 +511,7 @@ class NewsletterComponent:
         :return: None
         """
         self._driver = driver
-        self.subscribe_radio_button_labels = self._driver.find_elements\
+        self.subscribe_radio_button_labels = self._driver.find_elements \
             (*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
 
     def get_subscription_status(self) -> str:
@@ -540,7 +555,7 @@ class PrivacyPolicyComponent:
         :return: None
         """
         self._driver = driver
-        self.privacy_policy_checkbox_input = self._driver.find_element\
+        self.privacy_policy_checkbox_input = self._driver.find_element \
             (*LocatorsPrivacyPolicyComponent.PRIVACY_POLICY_CHECKBOX)
 
     def agree_with_privacy_policy(self) -> None:
@@ -584,7 +599,7 @@ class AddAddressComponent:
                                                        LocatorsAddAddressComponent.EMAIL_INPUT_PAYMENT,
                                                        self._parent_element)
         self.telephone_field = InputFieldComponent(self._driver,
-                                               LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
+                                                   LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
         self.company_field = InputFieldComponent(self._driver,
                                                  LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
         self.address_1_field = InputFieldComponent(self._driver,
