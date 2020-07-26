@@ -24,9 +24,9 @@ class TestShoppingCart(BaseTest):
         """Positive test to check correct changing quantity of product.
         :param expected: str
         """
-        self.cart.change_product_quantity('iPhone', '5')
+        self.cart.change_product_quantity(ShoppingCartConstants.TEST_ITEM1, '5')
 
-        assert 'Success: You have modified your shopping cart!' in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartConstants.RESULT in self.cart.catch_info_message.get_info_message()
 
     @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_shopping_cart_quantity.csv'))
     def test_shopping_cart_change_quantity_negative(self, test_input: str, expected: str):
@@ -34,18 +34,18 @@ class TestShoppingCart(BaseTest):
         :param test_input: str
         :param expected: str
         """
-        self.cart.change_product_quantity('iPhone', test_input)
+        self.cart.change_product_quantity(ShoppingCartConstants.TEST_ITEM1, test_input)
 
         assert self.cart.get_text_empty_cart() == expected
 
     def test_shopping_cart_estimate_shipping_and_taxes(self):
-
         self.cart.estimate_shipping_panel.open_estimate_shipping_panel()
         self.cart.estimate_shipping_panel.country_selector.choose_dropdown_option('Ukraine')
         self.cart.estimate_shipping_panel.region_selector.choose_dropdown_option('Kyiv')
         self.cart.estimate_shipping_panel.click_get_quotes_button()
 
-        self.cart.estimate_shipping_panel.modal_shipping_radio_button.choose_radio_button_option('Flat Shipping Rate - $5.00')
+        self.cart.estimate_shipping_panel.modal_shipping_radio_button.choose_radio_button_option(
+            ShoppingCartConstants.TEST_ITEM2)
         self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
 
         assert ShoppingCartConstants.RESULT3 in self.cart.catch_info_message.get_info_message()
