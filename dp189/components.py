@@ -234,16 +234,26 @@ class ProductsViewModeComponent:
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
-    def __init__(self, driver: Remote) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
         """Initialize input fields first name, last name, email, telephone.
 
         :param driver: Remote.
+        :param parent_element: WebElement
         """
         self._driver = driver
-        self.first_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD)
-        self.last_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD)
-        self.email_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.EMAIL_FIELD)
-        self.telephone_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD)
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD,
+                                                    self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD,
+                                                   self._parent_element)
+        self.email_field = InputFieldComponent(self._driver,
+                                               LocatorsYourPersonalDetailsComponent.EMAIL_FIELD,
+                                               self._parent_element)
+        self.telephone_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD,
+                                                   self._parent_element)
 
 
 class YourPasswordComponent:
