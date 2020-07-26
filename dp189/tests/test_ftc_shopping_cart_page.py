@@ -4,6 +4,7 @@ from dp189.pages.shopping_cart_page import ShoppingCartPage
 from dp189.tests.conftest import get_test_data
 from dp189.tests.base_test import BaseTest
 from dp189.routes import *
+from dp189.constants import ShoppingCartConstants
 
 
 class TestShoppingCart(BaseTest):
@@ -36,3 +37,15 @@ class TestShoppingCart(BaseTest):
         self.cart.change_product_quantity('iPhone', test_input)
 
         assert self.cart.get_text_empty_cart() == expected
+
+    def test_shopping_cart_estimate_shipping_and_taxes(self):
+
+        self.cart.estimate_shipping_panel.open_estimate_shipping_panel()
+        self.cart.estimate_shipping_panel.country_selector.choose_dropdown_option('Ukraine')
+        self.cart.estimate_shipping_panel.region_selector.choose_dropdown_option('Kyiv')
+        self.cart.estimate_shipping_panel.click_get_quotes_button()
+
+        self.cart.estimate_shipping_panel.modal_shipping_radio_button.choose_radio_button_option('Flat Shipping Rate - $5.00')
+        self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
+
+        assert ShoppingCartConstants.RESULT3 in self.cart.catch_info_message.get_info_message()
