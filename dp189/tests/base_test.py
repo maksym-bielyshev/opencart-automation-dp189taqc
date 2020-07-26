@@ -5,8 +5,7 @@ import pytest
 class BaseTest:
 
     def setup(self):
-        options = Options()
-        options.add_argument('--ignore-certificate-errors')
+        pass
 
     def teardown(self):
         self.driver.close()

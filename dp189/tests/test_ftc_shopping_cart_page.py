@@ -23,9 +23,7 @@ class TestShoppingCart(BaseTest):
         self.cart.generate_products_list()
 
     def test_shopping_cart_change_quantity_positive(self):
-        """Positive test to check correct changing quantity of product.
-        :param expected: str
-        """
+        """Positive test to check correct changing quantity of product."""
         self.cart.change_product_quantity('iPhone', '5')
 
         assert 'Success: You have modified your shopping cart!' in self.cart.catch_info_message.get_info_message()
@@ -36,6 +34,6 @@ class TestShoppingCart(BaseTest):
         :param test_input: str
         :param expected: str
         """
-        self.cart = self.cart.change_product_quantity('iPhone', test_input)
+        self.cart.change_product_quantity('iPhone', test_input)
 
         assert self.cart.get_text_empty_cart() == expected

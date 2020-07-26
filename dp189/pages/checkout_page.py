@@ -64,7 +64,10 @@ class BillingDetails:
         :param driver: Remote.
         """
         self._driver = driver
-        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
+        self.your_personal_details_form_container = \
+            self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_FORM)
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
+                                                                       self.your_personal_details_form_container)
         self.your_address_form = None
 
     def load_your_address_form(self) -> None:

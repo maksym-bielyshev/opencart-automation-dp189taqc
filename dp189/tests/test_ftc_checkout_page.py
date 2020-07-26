@@ -1,16 +1,16 @@
 """Module for the testing 'Checkout' page."""
-
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+
 from dp189.pages.checkout_page import CheckoutPage
 from dp189.components import ProductWidgetComponent
-options = Options()
-options.add_argument('--ignore-certificate-errors')
+from dp189.tests.base_test import BaseTest
+from dp189.routes import *
 import time
 
+from dp189.tests.conftest import get_test_data
 
-class TestCheckoutPage():
+
+class TestCheckoutPage(BaseTest):
     """Class for the 'Checkout' page."""
 
     def setup(self) -> None:
@@ -18,52 +18,71 @@ class TestCheckoutPage():
 
         :return: None
         """
-        self.driver = webdriver.Chrome(options=options)
-        self.driver.implicitly_wait(10)
+
         self.driver.maximize_window()
-        self.driver.get('https://34.71.14.206/index.php')
+        self.driver.get(HOME_PAGE_URL)
         ProductWidgetComponent(self.driver, 'iPhone').click_add_to_shopping_cart_button()
-        self.driver.get('https://34.71.14.206/index.php?route=checkout/checkout')
+        self.driver.get(CHECKOUT_PAGE_URL)
+
+        self.checkout_page = CheckoutPage(self.driver)
+        self.checkout_page.open_checkout_options.click_guest_checkout_radio_button()
+        self.checkout_page.open_checkout_options.click_continue_button()
 
     def test_guest_checkout_with_valid_data(self) -> None:
         """Test the 'Checkout' page with valid data.
 
         :return: None.
         """
-        checkout_page = CheckoutPage(self.driver)
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form.first_name_field.clear_and_fill_input_field("Maksym")
+        self.checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field("Bielyshev")
+        self.checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field("email@email.com")
+        self.checkout_page.open_billing_details.your_address_form.telephone_field.clear_and_fill_input_field("12345")
+        self.checkout_page.open_billing_details.your_address_form.company_field.clear_and_fill_input_field("test")
+        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field("test")
+        self.checkout_page.open_billing_details.your_address_form.address_2_field.clear_and_fill_input_field("test")
+        self.checkout_page.open_billing_details.your_address_form.city_field.clear_and_fill_input_field("test")
+        self.checkout_page.open_billing_details.your_address_form.post_code_field.clear_and_fill_input_field("test")
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option("Ukraine")
+        self.checkout_page.open_billing_details.your_address_form.region.choose_dropdown_option("Kyiv")
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
 
-        checkout_page.open_checkout_options.click_guest_checkout_radio_button()
-        checkout_page.open_checkout_options.click_continue_button()
-
-        checkout_page.open_billing_details.load_your_address_form()
-        checkout_page.open_billing_details.your_address_form.first_name_field.clear_and_fill_input_field("Maksym")
-        checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field("Bielyshev")
-        checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field("email@email.com")
-        checkout_page.open_billing_details.your_address_form.telephone_field.clear_and_fill_input_field("12345")
-        checkout_page.open_billing_details.your_address_form.company_field.clear_and_fill_input_field("test")
-        checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field("test")
-        checkout_page.open_billing_details.your_address_form.address_2_field.clear_and_fill_input_field("test")
-        checkout_page.open_billing_details.your_address_form.city_field.clear_and_fill_input_field("test")
-        checkout_page.open_billing_details.your_address_form.post_code_field.clear_and_fill_input_field("test")
-        checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option("Ukraine")
-        checkout_page.open_billing_details.your_address_form.region.choose_dropdown_option("Kyiv")
-        checkout_page.open_billing_details.click_continue_button_billing_details()
-
-        checkout_page.open_delivery_method.click_continue_button()
+        self.checkout_page.open_delivery_method.click_continue_button()
         time.sleep(1)
 
-        checkout_page.open_payment_method.click_terms_and_conditions_checkbox()
-        checkout_page.open_payment_method.click_continue_button()
+        self.checkout_page.open_payment_method.click_terms_and_conditions_checkbox()
+        self.checkout_page.open_payment_method.click_continue_button()
 
-        checkout_page.open_confirm_order.click_confirm_order_button()
+        self.checkout_page.open_confirm_order.click_confirm_order_button()
         time.sleep(1)
 
         #todo move 'title' in constant
         assert "Your order has been placed!" in self.driver.title
 
-    def teardown(self) -> None:
-        """Close the driver.
+    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_first_name-negative.csv'))
+    def test_guest_checkout_billing_details_first_name_negative(self, test_input: str, expected: str) -> None:
+        """Check 'First Name' field with invalid data in 'Step 2: Billing Details' tab.
 
-        :return: None.
+        :param test_input: test data for 'First Name' field
+        :param expected: error message under 'First Name' field
+        :return: None
         """
-        self.driver.close()
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .first_name_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details\
+                   .your_personal_details_form.first_name_field\
+                   .error_message.get_error_message() == expected
+
+    @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
+    def test_guest_checkout_billing_details_first_name_positive(self, test_input: str) -> None:
+        """Check 'First Name' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for 'First Name' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .first_name_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field\
+                       .error_message.get_error_message()

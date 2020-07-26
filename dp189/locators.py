@@ -146,10 +146,10 @@ class LocatorsAvailableOptions:
 class LocatorsYourPersonalDetailsComponent:
     """Locators fot the 'Your Personal Details' component."""
 
-    FIRST_NAME_FIELD = (By.XPATH, '//*[@id="input-firstname"]')
-    LAST_NAME_FIELD = (By.XPATH, '//*[@id="input-lastname"]')
-    EMAIL_FIELD = (By.XPATH, '//*[@id="input-email"]')
-    TELEPHONE_FIELD = (By.XPATH, '//*[@id="input-telephone"]')
+    FIRST_NAME_FIELD = (By.XPATH, '//input[@name="firstname"]')
+    LAST_NAME_FIELD = (By.XPATH, '//input[@name="lastname"]')
+    EMAIL_FIELD = (By.XPATH, '//input[@name="email"]')
+    TELEPHONE_FIELD = (By.XPATH, '//input[@name="telephone"]')
 
 
 class LocatorsYourPasswordComponent:
@@ -316,6 +316,7 @@ class LocatorsLoginComponent:
 
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
+    BILLING_DETAILS_FORM = (By.ID, 'collapse-payment-address')
 
     REGISTER_CHECKOUT_RADIO_BUTTON = \
         (By.XPATH, "//div[@id='collapse-checkout-option']//div[@class='col-sm-6']//div[1]//label[1]//input[1]")
