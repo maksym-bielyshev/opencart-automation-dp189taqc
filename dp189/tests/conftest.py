@@ -12,6 +12,7 @@ def init_driver(request):
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Chrome(CHROME_DRIVER, options=options)
     request.cls.driver = driver
+    driver.implicitly_wait(5)
 
     yield driver
 
