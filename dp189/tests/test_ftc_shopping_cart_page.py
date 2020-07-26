@@ -3,21 +3,18 @@ from dp189.pages.product_page import ProductPage
 from dp189.pages.shopping_cart_page import ShoppingCartPage
 from dp189.tests.conftest import get_test_data
 from dp189.tests.base_test import BaseTest
-
-
-PRODUCT_URL = 'http://34.71.14.206/index.php?route=product/product&product_id=40'
-SHOPPING_CART_URL = 'http://34.71.14.206/index.php?route=checkout/cart'
+from dp189.routes import *
 
 
 class TestShoppingCart(BaseTest):
     def setup(self):
         self.driver.maximize_window()
 
-        self.driver.get(PRODUCT_URL)
+        self.driver.get(get_product_url('40'))
         product = ProductPage(self.driver)
         product.available_options.click_add_to_cart_button()
 
-        self.driver.get(SHOPPING_CART_URL)
+        self.driver.get(CART_PAGE_URL)
 
         self.cart = ShoppingCartPage(self.driver)
         self.cart.generate_products_list()
@@ -36,6 +33,6 @@ class TestShoppingCart(BaseTest):
         :param test_input: str
         :param expected: str
         """
-        self.cart = self.cart.change_product_quantity('iPhone', test_input)
+        self.cart.change_product_quantity('iPhone', test_input)
 
         assert self.cart.get_text_empty_cart() == expected
