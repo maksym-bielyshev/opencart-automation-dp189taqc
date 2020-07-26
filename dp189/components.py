@@ -1,4 +1,4 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
@@ -449,16 +449,19 @@ class ErrorMessageComponent:
         self._driver = driver
         self.element_locator = element_locator
 
-    def get_error_message(self) -> str:
+    def get_error_message(self):
         """Get error message.
 
         :return: str
         """
-        error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
-        error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.XPATH, error_message_locator))
-        )
-        return error_message.text
+        try:
+            error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
+            error_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located((By.XPATH, error_message_locator))
+            )
+            return error_message.text
+        except TimeoutException:
+            return False
 
 
 class CatchPageTitleComponent:
