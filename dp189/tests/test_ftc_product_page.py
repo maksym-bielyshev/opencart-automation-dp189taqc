@@ -6,8 +6,7 @@ class TestAvailableOptions(BaseTest):
     """Tests for Available Options menu on product page."""
 
     def setup(self):
-
-        super().setup()
+        """Create initial state of driver on ProductPage."""
         self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
         self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)
@@ -42,7 +41,7 @@ class TestReviewsTab(BaseTest):
     """Tests for Reviews Tab on Product page."""
 
     def setup(self):
-        super().setup()
+        """Create initial state of driver on ProductPage."""
         self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
         self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)
@@ -64,7 +63,7 @@ class TestProductPageButtons(BaseTest):
     """Tests for checking correct work of buttons on product page."""
 
     def setup(self):
-        super().setup()
+        """Create initial state of driver on ProductPage."""
         self.driver.get('http://34.71.14.206/index.php?route=product/product&path=20&product_id=62')
         self.driver.maximize_window()
         self.product_page = ProductPage(self.driver)

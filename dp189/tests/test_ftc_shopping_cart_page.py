@@ -45,3 +45,9 @@ class TestShoppingCart(BaseTest):
         self.cart.coupon_panel.click_apply_coupon_button()
 
         assert ShoppingCartPageConstants.RESULT4 in self.cart.catch_info_message.get_info_message()
+
+    def test_shopping_cart_click_remove_button(self):
+        """Positive test to check correct changing after remove product from shopping cart."""
+        self.cart.click_remove_product_button(ShoppingCartPageConstants.TEST_ITEM1)
+
+        assert ShoppingCartPageConstants.RESULT3 == self.cart.get_text_empty_cart()

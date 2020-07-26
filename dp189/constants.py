@@ -10,5 +10,5 @@ class ShoppingCartPageConstants:
     TEST_ITEM1 = 'iPhone'
     RESULT = 'Success: You have modified your shopping cart!'
     RESULT2 = 202.0
-
+    RESULT3 = 'Your shopping cart is empty!'
     RESULT4 = 'Success: Your coupon discount has been applied!'
