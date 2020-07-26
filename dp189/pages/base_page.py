@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver import Remote
 
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
-from ..components import CatchMessageComponent
+from ..components import CatchMessageComponent, CatchPageTitleComponent
 from dp189.locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
 
@@ -27,6 +27,7 @@ class BasePage:
         self.search_field = InputFieldComponent(driver, LocatorBasePageSearch.SEARCH_FIELD)
         self.shop_cart_button = ShopCartButtonComponent(driver)
         self.catch_info_message = CatchMessageComponent(self._driver)
+        self.get_title = CatchPageTitleComponent(self._driver)
 
     def click_account_and_go_to_login(self):
         self.my_account.click()
@@ -40,6 +41,3 @@ class BasePage:
         self._driver.implicitly_wait(5)
         return self._driver.find_element(*locator)
 
-    def title_is(self):
-        self._driver.implicitly_wait(5)
-        return self._driver.title
