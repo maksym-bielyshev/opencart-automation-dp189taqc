@@ -1,6 +1,3 @@
-from selenium.webdriver.common.by import By
-
-
 class ComparePageConstants:
     TEST_ITEM1 = 'iPhone'
     TEST_ITEM2 = f'Apple Cinema 30"'
@@ -13,3 +10,4 @@ class ShoppingCartPageUpdateButtonConstants:
     TEST_ITEM1 = 'iPhone'
     RESULT = 'Success: You have modified your shopping cart!'
     RESULT2 = 202.0
+    RESULT3 = 'Your shopping cart is empty!'
