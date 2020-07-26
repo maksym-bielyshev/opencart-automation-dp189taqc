@@ -1,4 +1,4 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
@@ -234,16 +234,26 @@ class ProductsViewModeComponent:
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
-    def __init__(self, driver: Remote) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
         """Initialize input fields first name, last name, email, telephone.
 
         :param driver: Remote.
+        :param parent_element: WebElement
         """
         self._driver = driver
-        self.first_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD)
-        self.last_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD)
-        self.email_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.EMAIL_FIELD)
-        self.telephone_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD)
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD,
+                                                    self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD,
+                                                   self._parent_element)
+        self.email_field = InputFieldComponent(self._driver,
+                                               LocatorsYourPersonalDetailsComponent.EMAIL_FIELD,
+                                               self._parent_element)
+        self.telephone_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD,
+                                                   self._parent_element)
 
 
 class YourPasswordComponent:
@@ -449,16 +459,19 @@ class ErrorMessageComponent:
         self._driver = driver
         self.element_locator = element_locator
 
-    def get_error_message(self) -> str:
+    def get_error_message(self):
         """Get error message.
 
         :return: str
         """
-        error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
-        error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.XPATH, error_message_locator))
-        )
-        return error_message.text
+        try:
+            error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
+            error_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located((By.XPATH, error_message_locator))
+            )
+            return error_message.text
+        except TimeoutException:
+            return False
 
 
 class CatchPageTitleComponent:

@@ -38,6 +38,20 @@ class TestShoppingCart(BaseTest):
 
         assert self.cart.get_text_empty_cart() == expected
 
+    def test_use_coupon_code(self):
+        """Positive test for checking message display after apply coupon code."""
+        self.cart.coupon_panel.open_coupon_panel()
+        self.cart.coupon_panel.coupon_field.clear_and_fill_input_field('2222')
+        self.cart.coupon_panel.click_apply_coupon_button()
+
+        assert ShoppingCartPageConstants.RESULT4 in self.cart.catch_info_message.get_info_message()
+
+    def test_shopping_cart_click_remove_button(self):
+        """Positive test to check correct changing after remove product from shopping cart."""
+        self.cart.click_remove_product_button(ShoppingCartPageConstants.TEST_ITEM1)
+
+        assert ShoppingCartPageConstants.RESULT3 == self.cart.get_text_empty_cart()
+
     def test_shopping_cart_estimate_shipping_and_taxes(self):
         """Positive test for checking success message display after fill Estimate Shipping & Taxes field."""
         self.cart.estimate_shipping_panel.open_estimate_shipping_panel()
@@ -49,4 +63,4 @@ class TestShoppingCart(BaseTest):
             ShoppingCartPageConstants.TEST_ITEM2)
         self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
 
-        assert ShoppingCartPageConstants.RESULT3 in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT5 in self.cart.catch_info_message.get_info_message()
