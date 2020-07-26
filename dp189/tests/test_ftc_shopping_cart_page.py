@@ -39,6 +39,7 @@ class TestShoppingCart(BaseTest):
         assert self.cart.get_text_empty_cart() == expected
 
     def test_shopping_cart_estimate_shipping_and_taxes(self):
+        """Positive test for checking success message display after fill Estimate Shipping & Taxes field."""
         self.cart.estimate_shipping_panel.open_estimate_shipping_panel()
         self.cart.estimate_shipping_panel.country_selector.choose_dropdown_option('Ukraine')
         self.cart.estimate_shipping_panel.region_selector.choose_dropdown_option('Kyiv')
