@@ -21,6 +21,8 @@ ORDER_HISTORY_PAGE_URL = f'{PROTOCOL}{DOMAIN}{ROUTE_ACCOUNT}/order'
 LOGOUT_PAGE_URL = f'{PROTOCOL}{DOMAIN}{ROUTE_ACCOUNT}/logout'
 GIFT_CERTIFICATE_PAGE_URL = f'{PROTOCOL}{DOMAIN}{ROUTE_ACCOUNT}/voucher'
 
+COMPARE_PAGE_URL = f'{PROTOCOL}{DOMAIN}{ROUTE_PRODUCT}/compare'
+
 
 def get_product_url(product_id: str) -> str:
     return f'{PROTOCOL}{DOMAIN}{ROUTE_PRODUCT}/product&product_id={product_id}'

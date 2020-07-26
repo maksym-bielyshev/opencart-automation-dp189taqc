@@ -3,7 +3,7 @@ from selenium.webdriver import Remote
 
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
 from ..components import CatchMessageComponent
-from ..locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
+from dp189.locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
 
 #from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent
@@ -35,3 +35,11 @@ class BasePage:
     def click_account_and_go_to_register(self):
         self.my_account.click()
         self.my_account.find_element(*LocatorsBasePageNavBar.REGISTER).click()
+
+    def find_element(self, locator):
+        self._driver.implicitly_wait(5)
+        return self._driver.find_element(*locator)
+
+    def title_is(self):
+        self._driver.implicitly_wait(5)
+        return self._driver.title
