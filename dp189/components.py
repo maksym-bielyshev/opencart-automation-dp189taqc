@@ -1,4 +1,4 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
@@ -170,7 +170,7 @@ class ProductWidgetComponent:
 
         :return: None.
         """
-        self._driver.find_element\
+        self._driver.find_element \
             (By.XPATH, f'//a[text()="{self.product_title}"]/../../..//span[text()="Add to Cart"]/..').click()
 
     def click_add_to_wish_list_button(self) -> None:
@@ -234,16 +234,26 @@ class ProductsViewModeComponent:
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
-    def __init__(self, driver: Remote) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
         """Initialize input fields first name, last name, email, telephone.
 
         :param driver: Remote.
+        :param parent_element: WebElement
         """
         self._driver = driver
-        self.first_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD)
-        self.last_name_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD)
-        self.email_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.EMAIL_FIELD)
-        self.telephone_field = InputFieldComponent(self._driver, LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD)
+        self._parent_element = parent_element
+        self.first_name_field = InputFieldComponent(self._driver,
+                                                    LocatorsYourPersonalDetailsComponent.FIRST_NAME_FIELD,
+                                                    self._parent_element)
+        self.last_name_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.LAST_NAME_FIELD,
+                                                   self._parent_element)
+        self.email_field = InputFieldComponent(self._driver,
+                                               LocatorsYourPersonalDetailsComponent.EMAIL_FIELD,
+                                               self._parent_element)
+        self.telephone_field = InputFieldComponent(self._driver,
+                                                   LocatorsYourPersonalDetailsComponent.TELEPHONE_FIELD,
+                                                   self._parent_element)
 
 
 class YourPasswordComponent:
@@ -449,16 +459,34 @@ class ErrorMessageComponent:
         self._driver = driver
         self.element_locator = element_locator
 
-    def get_error_message(self) -> str:
+    def get_error_message(self):
         """Get error message.
 
         :return: str
         """
-        error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
-        error_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located((By.XPATH, error_message_locator))
-        )
-        return error_message.text
+        try:
+            error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
+            error_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located((By.XPATH, error_message_locator))
+            )
+            return error_message.text
+        except TimeoutException:
+            return False
+
+
+class CatchPageTitleComponent:
+    """This component created to get title of current page"""
+
+    def __init__(self, driver: Remote) -> None:
+        self._driver = driver
+
+    def get_title_page(self, page_title: str):
+        """This method gets title page until it loads
+
+        :return: str
+        """
+        WebDriverWait(self._driver, 3).until(EC.title_is(page_title))
+        return page_title
 
 
 class CatchMessageComponent:
@@ -486,7 +514,7 @@ class NewsletterComponent:
         :return: None
         """
         self._driver = driver
-        self.subscribe_radio_button_labels = self._driver.find_elements\
+        self.subscribe_radio_button_labels = self._driver.find_elements \
             (*LocatorsNewsletterComponent.SUBSCRIBE_RADIO_BUTTONS)
 
     def get_subscription_status(self) -> str:
@@ -530,7 +558,7 @@ class PrivacyPolicyComponent:
         :return: None
         """
         self._driver = driver
-        self.privacy_policy_checkbox_input = self._driver.find_element\
+        self.privacy_policy_checkbox_input = self._driver.find_element \
             (*LocatorsPrivacyPolicyComponent.PRIVACY_POLICY_CHECKBOX)
 
     def agree_with_privacy_policy(self) -> None:
@@ -574,7 +602,7 @@ class AddAddressComponent:
                                                        LocatorsAddAddressComponent.EMAIL_INPUT_PAYMENT,
                                                        self._parent_element)
         self.telephone_field = InputFieldComponent(self._driver,
-                                               LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
+                                                   LocatorsAddAddressComponent.TELEPHONE_INPUT, self._parent_element)
         self.company_field = InputFieldComponent(self._driver,
                                                  LocatorsAddAddressComponent.COMPANY_INPUT, self._parent_element)
         self.address_1_field = InputFieldComponent(self._driver,
