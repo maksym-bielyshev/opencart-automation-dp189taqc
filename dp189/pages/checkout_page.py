@@ -92,7 +92,7 @@ class AccountAndBillingDetails:
         self._driver = driver
         self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
         self.your_password_form = YourPasswordComponent(self._driver)
-        self.your_address_from = AddAddressComponent(self._driver, LocatorsCheckoutPage.
+        self.your_address_form = AddAddressComponent(self._driver, LocatorsCheckoutPage.
                                                      YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
 
     def click_newsletter_checkbox(self) -> None:
