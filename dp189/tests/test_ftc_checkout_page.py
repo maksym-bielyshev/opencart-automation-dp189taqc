@@ -35,8 +35,10 @@ class TestCheckoutPage(BaseTest):
         """
         self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.first_name_field.clear_and_fill_input_field("Maksym")
-        self.checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field("Bielyshev")
-        self.checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field("email@email.com")
+        self.checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field(
+            "Bielyshev")
+        self.checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field(
+            "email@email.com")
         self.checkout_page.open_billing_details.your_address_form.telephone_field.clear_and_fill_input_field("12345")
         self.checkout_page.open_billing_details.your_address_form.company_field.clear_and_fill_input_field("test")
         self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field("test")
@@ -56,7 +58,7 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_confirm_order.click_confirm_order_button()
         time.sleep(1)
 
-        #todo move 'title' in constant
+        # todo move 'title' in constant
         assert "Your order has been placed!" in self.driver.title
 
     @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_first_name-negative.csv'))
@@ -67,11 +69,11 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'First Name' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_personal_details_form\
+        self.checkout_page.open_billing_details.your_personal_details_form \
             .first_name_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
-        assert self.checkout_page.open_billing_details\
-                   .your_personal_details_form.first_name_field\
+        assert self.checkout_page.open_billing_details \
+                   .your_personal_details_form.first_name_field \
                    .error_message.get_error_message() == expected
 
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
@@ -81,11 +83,53 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for 'First Name' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_personal_details_form\
+        self.checkout_page.open_billing_details.your_personal_details_form \
             .first_name_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
-        assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field\
-                       .error_message.get_error_message()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field \
+            .error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_data', get_test_data('test_data_checkout_page_last_name-positive .csv'))
+    def test_guest_checkout_billing_details_last_name_positive(self, test_data: str) -> None:
+        """Check 'Last Name' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_data: test data for 'Last Name' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form \
+            .last_name_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form \
+            .last_name_field.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_data,expected', get_test_data('test_data_checkout_page_last_name-negative.csv'))
+    def test_guest_checkout_billing_details_last_name_negative(self, test_data: str, expected: str) -> None:
+        """Check 'Last Name' field with invalid data in 'Step 2: Billing Details' tab.
+
+        :param test_data: test data for 'Last Name' field
+        :param expected: error message under 'Last Name' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form \
+            .last_name_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details \
+                   .your_personal_details_form.last_name_field \
+                   .error_message.get_error_message() == expected
+
+    @pytest.mark.parametrize('test_data', get_test_data('test_data_checkout_page_address_1-positive.csv'))
+    def test_guest_checkout_billing_details_address_1_positive(self, test_data: str) -> None:
+        """Check 'Address 1' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_data: test data for 'Address 1' field
+        :return: None
+        """
+
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_address_form.address_1_field\
+            .error_message.get_error_message()
 
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_telephone_field_positive.csv'))
     def test_guest_checkout_billing_details_telephone_field_positive(self, test_input: str) -> None:
@@ -146,3 +190,4 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.city_field\
                        .error_message.get_error_message()
+
