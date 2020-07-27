@@ -131,6 +131,20 @@ class TestCheckoutPage(BaseTest):
         assert not self.checkout_page.open_billing_details.your_address_form.address_1_field\
             .error_message.get_error_message()
 
+    @pytest.mark.parametrize('test_data,expected', get_test_data('test_data_checkout_page_address_1-negative.csv'))
+    def test_guest_checkout_billing_details_address_1_negative(self, test_data: str, expected: str) -> None:
+        """Check 'Address 1' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_data: test data for 'Address 1' field
+        :param expected: error message under 'Address 1' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details.your_address_form.address_1_field\
+                   .error_message.get_error_message() == expected
+
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_telephone_field_positive.csv'))
     def test_guest_checkout_billing_details_telephone_field_positive(self, test_input: str) -> None:
         """Check 'Telephone' field with valid data in 'Step 2: Billing Details' tab.
