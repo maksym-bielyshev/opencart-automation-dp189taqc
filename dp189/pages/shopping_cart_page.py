@@ -5,6 +5,8 @@ from dp189.components import InputFieldComponent, DropdownComponent, RadioButton
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsShoppingCartPage
 from dp189.pages.home_page import HomePage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class ShoppingCartPage(BasePage):
@@ -151,7 +153,10 @@ class ShoppingCartPage(BasePage):
 
         :return: string content text
         """
-        return self._driver.find_element(*LocatorsShoppingCartPage.CONTENT_EMPTY_CART).text
+        cart_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located(LocatorsShoppingCartPage.CONTENT_EMPTY_CART)
+        )
+        return cart_message.text
 
     @staticmethod
     def _cut_number(web_text: WebElement) -> float:
