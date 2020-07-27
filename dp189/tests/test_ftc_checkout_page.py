@@ -75,7 +75,7 @@ class TestCheckoutPage(BaseTest):
                    .error_message.get_error_message() == expected
 
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
-    def test_guest_checkout_billing_details_city_field_positive(self, test_input: str) -> None:
+    def test_guest_checkout_billing_details_first_name_positive(self, test_input: str) -> None:
         """Check 'First Name' field with valid data in 'Step 2: Billing Details' tab.
 
         :param test_input: test data for 'First Name' field
