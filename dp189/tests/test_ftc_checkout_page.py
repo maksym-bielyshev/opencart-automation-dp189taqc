@@ -15,6 +15,7 @@ class TestCheckoutPage(BaseTest):
 
     def setup(self) -> None:
         """Setup for the test.
+
         :return: None
         """
 
@@ -29,6 +30,7 @@ class TestCheckoutPage(BaseTest):
 
     def test_guest_checkout_with_valid_data(self) -> None:
         """Test the 'Checkout' page with valid data.
+
         :return: None.
         """
         self.checkout_page.open_billing_details.load_your_address_form()
@@ -60,6 +62,7 @@ class TestCheckoutPage(BaseTest):
     @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_first_name-negative.csv'))
     def test_guest_checkout_billing_details_first_name_negative(self, test_input: str, expected: str) -> None:
         """Check 'First Name' field with invalid data in 'Step 2: Billing Details' tab.
+
         :param test_input: test data for 'First Name' field
         :param expected: error message under 'First Name' field
         :return: None
@@ -74,6 +77,7 @@ class TestCheckoutPage(BaseTest):
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
     def test_guest_checkout_billing_details_first_name_positive(self, test_input: str) -> None:
         """Check 'First Name' field with valid data in 'Step 2: Billing Details' tab.
+
         :param test_input: test data for 'First Name' field
         :return: None
         """
@@ -82,3 +86,32 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field\
                        .error_message.get_error_message()
+
+
+    @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_telephone_field_positive.csv'))
+    def test_guest_checkout_billing_details_telephone_field_positive(self, test_input: str) -> None:
+        """Check 'Telephone' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'Telephone' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .telephone_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form.telephone_field\
+                       .error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_telephone_field_negative.csv'))
+    def test_guest_checkout_billing_details_telephone_field_negative(self, test_input: str, expected: str) -> None:
+        """Check 'Telephone' field with invalid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for 'Telephone' field
+        :param expected: error message under 'Telephone' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .first_name_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details\
+                   .your_personal_details_form.telephone_field\
+                   .error_message.get_error_message() == expected
