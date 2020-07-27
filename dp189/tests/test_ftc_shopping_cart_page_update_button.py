@@ -6,7 +6,7 @@ from dp189.locators import LocatorsShoppingCartPageTest
 from dp189.constants import ShoppingCartPageConstants
 
 
-class TestShoppingCartPageUpdateButton(BaseTest):
+class TestComparePageUpdateButton(BaseTest):
     def setup(self):
         super().setup()
         self.driver.maximize_window()

@@ -64,3 +64,25 @@ class TestShoppingCart(BaseTest):
         self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
 
         assert ShoppingCartPageConstants.RESULT5 in self.cart.catch_info_message.get_info_message()
+
+    def test_checkout_button(self):
+        """Positive test for checking button 'Checkout'"""
+        self.cart.click_checkout_button()
+        assert self.cart.get_title.get_title_page(ShoppingCartPageConstants.CHECKOUT_TITLE) == 'Checkout'
+
+    def test_catch_info_message_update_quantity(self):
+        """Positive test for catching info message about update quantity of products in shopping cart"""
+        self.cart = self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, "2")
+        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
+
+    def test_total_price_of_product(self):
+        """Positive test for checking total price of product after update quantity"""
+        self.cart = self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, "2")
+        self.cart.generate_products_list()
+        total_price = self.cart.get_product_total_price(ShoppingCartPageConstants.TEST_ITEM1)
+        assert ShoppingCartPageConstants.RESULT2 == total_price
+
+    def test_continue_button(self):
+        """Positive test for checking work 'Continue' button"""
+        self.cart.click_continue_shipping_button()
+        assert self.cart.get_title.get_title_page(ShoppingCartPageConstants.HOME_TITLE) == 'Your Store'
