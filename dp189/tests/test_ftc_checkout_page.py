@@ -90,8 +90,8 @@ class TestCheckoutPage(BaseTest):
             .error_message.get_error_message()
 
     @pytest.mark.parametrize('test_data', get_test_data('test_data_checkout_page_last_name-positive .csv'))
-    def test_guest_checkout_billing_details_last_name_positive(self, test_data: str):
-        """Check 'First Name' field with valid data in 'Step 2: Billing Details' tab.
+    def test_guest_checkout_billing_details_last_name_positive(self, test_data: str) -> None:
+        """Check 'Last Name' field with valid data in 'Step 2: Billing Details' tab.
 
         :param test_data: test data for 'Last Name' field
         :return: None
@@ -101,3 +101,18 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_personal_details_form \
             .last_name_field.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_data,expected', get_test_data('test_data_checkout_page_last_name-negative.csv'))
+    def test_guest_checkout_billing_details_last_name_negative(self, test_data: str, expected: str) -> None:
+        """Check 'Last Name' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_data: test data for 'Last Name' field
+        :param expected: error message under 'Last Name' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form \
+            .last_name_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details \
+                   .your_personal_details_form.last_name_field \
+                   .error_message.get_error_message() == expected
