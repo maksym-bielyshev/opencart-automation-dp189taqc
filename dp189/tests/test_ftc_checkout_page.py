@@ -115,3 +115,34 @@ class TestCheckoutPage(BaseTest):
         assert self.checkout_page.open_billing_details \
                    .your_personal_details_form.telephone_field \
                    .error_message.get_error_message() == expected
+
+
+    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_city_field-negative.csv'))
+    def test_guest_checkout_billing_details_city_field_negative(self, test_input: str, expected: str) -> None:
+        """Check 'City' field with invalid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'City' field
+        :param expected: error message under the 'City' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form\
+            .city_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details\
+                   .your_address_form.city_field\
+                   .error_message.get_error_message() == expected
+
+    @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_city_field-positive.csv'))
+    def test_guest_checkout_billing_details_city_field_positive(self, test_input: str) -> None:
+        """Check the 'City' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'City' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form\
+            .city_field.clear_and_fill_input_field(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_address_form.city_field\
+                       .error_message.get_error_message()
