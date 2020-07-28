@@ -146,17 +146,17 @@ class LocatorsAvailableOptions:
 class LocatorsYourPersonalDetailsComponent:
     """Locators fot the 'Your Personal Details' component."""
 
-    FIRST_NAME_FIELD = (By.XPATH, '//input[@name="firstname"]')
-    LAST_NAME_FIELD = (By.XPATH, '//input[@name="lastname"]')
-    EMAIL_FIELD = (By.XPATH, '//input[@name="email"]')
-    TELEPHONE_FIELD = (By.XPATH, '//input[@name="telephone"]')
+    FIRST_NAME_FIELD = (By.XPATH, './/input[@name="firstname"]')
+    LAST_NAME_FIELD = (By.XPATH, './/input[@name="lastname"]')
+    EMAIL_FIELD = (By.XPATH, './/input[@name="email"]')
+    TELEPHONE_FIELD = (By.XPATH, './/input[@name="telephone"]')
 
 
 class LocatorsYourPasswordComponent:
     """Locators fot the 'Your Password' component."""
 
-    PASSWORD_FIELD = (By.XPATH, '//*[@id="input-password"]')
-    PASSWORD_CONFIRM_FIELD = (By.XPATH, '//*[@id="input-confirm"]')
+    PASSWORD_FIELD = (By.XPATH, './/*[@id="input-password"]')
+    PASSWORD_CONFIRM_FIELD = (By.XPATH, './/*[@id="input-confirm"]')
 
 
 class LocatorsRegisterPage:
@@ -204,18 +204,18 @@ class LocatorShowNumberProductsDropdown:
 
 class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
-    FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
-    LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
-    EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
-    EMAIL_INPUT_PAYMENT = (By.XPATH, "//input[@id='input-payment-email']")
-    TELEPHONE_INPUT = (By.XPATH, "//input[@name='telephone']")
-    COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
-    ADDRESS_1_INPUT = (By.XPATH, '//input[@name="address_1"]')
-    ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
-    CITY_INPUT = (By.XPATH, '//input[@name="city"]')
-    POST_CODE_INPUT = (By.XPATH, '//input[@name="postcode"]')
-    COUNTRY_SELECTOR = (By.XPATH, '//select[@name="country_id"]')
-    REGION_SELECTOR = (By.XPATH, '//select[@name="zone_id"]')
+    FIRST_NAME_INPUT = (By.XPATH, './/input[@name="firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, './/input[@name="lastname"]')
+    EMAIL_INPUT = (By.XPATH, ".//input[@name='email']")
+    EMAIL_INPUT_PAYMENT = (By.XPATH, ".//input[@id='input-payment-email']")
+    TELEPHONE_INPUT = (By.XPATH, ".//input[@name='telephone']")
+    COMPANY_INPUT = (By.XPATH, './/input[@name="company"]')
+    ADDRESS_1_INPUT = (By.XPATH, './/input[@name="address_1"]')
+    ADDRESS_2_INPUT = (By.XPATH, './/input[@name="address_2"]')
+    CITY_INPUT = (By.XPATH, './/input[@name="city"]')
+    POST_CODE_INPUT = (By.XPATH, './/input[@name="postcode"]')
+    COUNTRY_SELECTOR = (By.XPATH, './/select[@name="country_id"]')
+    REGION_SELECTOR = (By.XPATH, './/select[@name="zone_id"]')
 
 
 class LocatorsAddAddressPage:
