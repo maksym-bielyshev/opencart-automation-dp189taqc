@@ -215,3 +215,17 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.country.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_country-negative.csv'))
+    def test_guest_checkout_billing_details_country_negative(self, test_input: str, expected: str) -> None:
+        """Check the 'Country' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'Country' field
+        :param expected: error message under 'Country' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.load_your_address_form()
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(f" {test_input}")
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details.your_address_form.country\
+                   .error_message.get_error_message() == expected
