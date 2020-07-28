@@ -78,9 +78,6 @@ class BillingDetails:
     def click_continue_button_billing_details(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_CONTINUE_BUTTON).click()
 
-    def click_continue_register_account_billing_details(self) -> None:
-        self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_REGISTER_ACCOUNT_CONTINUE_BUTTON).click()
-
     def click_delivery_and_billing_addresses_checkbox(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX).click()
 

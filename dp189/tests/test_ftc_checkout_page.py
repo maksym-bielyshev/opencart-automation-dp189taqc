@@ -192,7 +192,6 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under the 'Post Code' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form\
             .post_code_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
@@ -207,7 +206,7 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for the 'Post Code' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
+
         self.checkout_page.open_billing_details.your_address_form\
             .post_code_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
@@ -221,7 +220,6 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for the 'Country' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.country.error_message.get_error_message()
@@ -234,7 +232,6 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'Country' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(f" {test_input}")
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details.your_address_form.country\
@@ -265,7 +262,7 @@ class TestCheckoutPageRegisterAccount(BaseTest):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('josh8@gmail.com')
+            clear_and_fill_input_field('josh11@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(

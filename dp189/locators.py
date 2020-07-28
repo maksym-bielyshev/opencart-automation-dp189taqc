@@ -342,7 +342,7 @@ class LocatorsCheckoutPage:
 
     DELIVERY_DETAILS_PARENT = (By.ID, "collapse-shipping-address")
 
-    DELIVERY_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-address"]')
+    DELIVERY_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//*[@id="collapse-shipping-address"]//input[@value="Continue"]')
 
     DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
     DELIVERY_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-method"]')
