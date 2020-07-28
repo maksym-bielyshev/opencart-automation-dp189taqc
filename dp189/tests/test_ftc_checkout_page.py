@@ -1,12 +1,10 @@
 """Module for the testing 'Checkout' page."""
 import pytest
-
 from dp189.pages.checkout_page import CheckoutPage
 from dp189.components import ProductWidgetComponent
 from dp189.tests.base_test import BaseTest
 from dp189.routes import *
 import time
-
 from dp189.tests.conftest import get_test_data
 
 
@@ -35,8 +33,10 @@ class TestCheckoutPage(BaseTest):
         """
         self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.first_name_field.clear_and_fill_input_field("Maksym")
-        self.checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field("Bielyshev")
-        self.checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field("email@email.com")
+        self.checkout_page.open_billing_details.your_address_form.last_name_field.clear_and_fill_input_field(
+            "Bielyshev")
+        self.checkout_page.open_billing_details.your_address_form.email_field_payment.clear_and_fill_input_field(
+            "email@email.com")
         self.checkout_page.open_billing_details.your_address_form.telephone_field.clear_and_fill_input_field("12345")
         self.checkout_page.open_billing_details.your_address_form.company_field.clear_and_fill_input_field("test")
         self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field("test")
@@ -56,7 +56,7 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_confirm_order.click_confirm_order_button()
         time.sleep(1)
 
-        #todo move 'title' in constant
+        # todo move 'title' in constant
         assert "Your order has been placed!" in self.driver.title
 
     @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_first_name-negative.csv'))
@@ -67,11 +67,11 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'First Name' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_personal_details_form\
+        self.checkout_page.open_billing_details.your_personal_details_form \
             .first_name_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
-        assert self.checkout_page.open_billing_details\
-                   .your_personal_details_form.first_name_field\
+        assert self.checkout_page.open_billing_details \
+                   .your_personal_details_form.first_name_field \
                    .error_message.get_error_message() == expected
 
     @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
@@ -81,8 +81,65 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for 'First Name' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_personal_details_form\
+        self.checkout_page.open_billing_details.your_personal_details_form \
             .first_name_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
-        assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field\
-                       .error_message.get_error_message()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field \
+            .error_message.get_error_message()
+
+
+class TestCheckoutPageRegisterAccount(BaseTest):
+
+    def setup(self) -> None:
+        """Setup for the test.
+
+        :return: None
+        """
+
+        self.driver.maximize_window()
+        self.driver.get(HOME_PAGE_URL)
+        ProductWidgetComponent(self.driver, 'iPhone').click_add_to_shopping_cart_button()
+        self.driver.get(CHECKOUT_PAGE_URL)
+
+        self.checkout_page = CheckoutPage(self.driver)
+
+    def test_checkout_register_account_valid_data(self):
+        """Check the functionality of checkout process with register account and valid data."""
+        self.checkout_page.open_checkout_options.click_register_account_radio_button()
+        self.checkout_page.open_checkout_options.click_continue_button()
+
+        self.checkout_page.open_account_billing_details.your_personal_details_form.first_name_field. \
+            clear_and_fill_input_field('John')
+        self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
+            clear_and_fill_input_field('Smith')
+        self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
+            clear_and_fill_input_field('josh@gmail.com')
+        self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
+            clear_and_fill_input_field('17777777777')
+        self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
+            '1234@')
+        self.checkout_page.open_account_billing_details.your_password_form.password_confirm_field. \
+            clear_and_fill_input_field('1234@')
+
+        self.checkout_page.open_account_billing_details.your_address_from.address_1_field. \
+            clear_and_fill_input_field('29 Street')
+        self.checkout_page.open_account_billing_details.your_address_from.city_field. \
+            clear_and_fill_input_field('Las Vegas')
+        self.checkout_page.open_account_billing_details.your_address_from.country. \
+            choose_dropdown_option('United States')
+        self.checkout_page.open_account_billing_details.your_address_from.region. \
+            choose_dropdown_option('Nevada')
+
+        self.checkout_page.open_account_billing_details.click_privacy_policy_checkbox()
+        self.checkout_page.open_account_billing_details.click_continue_button()
+
+        self.checkout_page.open_delivery_details.click_continue_button()
+
+        self.checkout_page.open_delivery_method.click_continue_button()
+
+        self.checkout_page.open_payment_method.click_terms_and_conditions_checkbox()
+        self.checkout_page.open_payment_method.click_continue_button()
+
+        self.checkout_page.open_confirm_order.click_confirm_order_button()
+
+        assert self.checkout_page.get_title.get_title_page('Your order has been placed!')

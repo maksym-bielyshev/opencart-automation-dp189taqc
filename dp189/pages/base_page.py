@@ -40,4 +40,3 @@ class BasePage:
     def find_element(self, locator):
         self._driver.implicitly_wait(5)
         return self._driver.find_element(*locator)
-
