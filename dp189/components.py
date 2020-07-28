@@ -234,7 +234,7 @@ class ProductsViewModeComponent:
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
-    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input fields first name, last name, email, telephone.
 
         :param driver: Remote.
@@ -259,16 +259,20 @@ class YourPersonalDetailsComponent:
 class YourPasswordComponent:
     """Your password form сonsists two fields to fill password, password confirm."""
 
-    def __init__(self, driver: Remote) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input fields password field, password confirm field.
 
         :param driver: Remote
+        :param parent_element: WebElement
         :return: None
         """
         self._driver = driver
-        self.password_field = InputFieldComponent(self._driver, LocatorsYourPasswordComponent.PASSWORD_FIELD)
+        self._parent_element = parent_element
+        self.password_field = InputFieldComponent(self._driver, LocatorsYourPasswordComponent.PASSWORD_FIELD,
+                                                  self._parent_element)
         self.password_confirm_field = InputFieldComponent(self._driver,
-                                                          LocatorsYourPasswordComponent.PASSWORD_CONFIRM_FIELD)
+                                                          LocatorsYourPasswordComponent.PASSWORD_CONFIRM_FIELD,
+                                                          self._parent_element)
 
 
 class InputFieldComponent:
