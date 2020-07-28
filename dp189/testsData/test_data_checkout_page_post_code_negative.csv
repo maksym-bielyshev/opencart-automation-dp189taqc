@@ -1,0 +1,4 @@
+;Post Code must be between 2 and 10 characters!
+9;Post Code must be between 2 and 10 characters!
+99999999999;Post Code must be between 2 and 10 characters!
+aaaaaa;Post Code must contain only digits
