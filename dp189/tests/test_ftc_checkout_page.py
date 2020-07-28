@@ -262,7 +262,7 @@ class TestCheckoutPageRegisterAccount(BaseTest):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('josh11@gmail.com')
+            clear_and_fill_input_field('jgoe@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
