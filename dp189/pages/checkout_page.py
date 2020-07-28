@@ -65,7 +65,7 @@ class BillingDetails:
         """
         self._driver = driver
         self.your_personal_details_form_container = \
-            self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_FORM)
+            self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
         self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
                                                                        self.your_personal_details_form_container)
         self.your_address_form = None
@@ -90,8 +90,12 @@ class AccountAndBillingDetails:
         :param driver: Remote.
         """
         self._driver = driver
-        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
-        self.your_password_form = YourPasswordComponent(self._driver)
+        self.your_personal_details_form_container = \
+            self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
+                                                                       self.your_personal_details_form_container)
+        self.your_password_form = YourPasswordComponent(self._driver,
+                                                        self.your_personal_details_form_container)
         self.your_address_from = AddAddressComponent(self._driver, LocatorsCheckoutPage.
                                                      YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
 

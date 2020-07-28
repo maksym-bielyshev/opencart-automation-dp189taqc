@@ -59,30 +59,56 @@ class TestCheckoutPage(BaseTest):
         #todo move 'title' in constant
         assert "Your order has been placed!" in self.driver.title
 
-    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_checkout_page_first_name-negative.csv'))
-    def test_guest_checkout_billing_details_first_name_negative(self, test_input: str, expected: str) -> None:
+    @pytest.mark.parametrize('first_name,error_message',
+                             get_test_data('test_data_checkout_page_first_name-negative.csv'))
+    def test_guest_checkout_billing_details_first_name_negative(self, first_name: str, error_message: str) -> None:
         """Check 'First Name' field with invalid data in 'Step 2: Billing Details' tab.
 
-        :param test_input: test data for 'First Name' field
-        :param expected: error message under 'First Name' field
+        :param first_name: test data for 'First Name' field
+        :param error_message: error message under 'First Name' field
         :return: None
         """
         self.checkout_page.open_billing_details.your_personal_details_form\
-            .first_name_field.clear_and_fill_input_field(test_input)
+            .first_name_field.clear_and_fill_input_field(first_name)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details\
                    .your_personal_details_form.first_name_field\
-                   .error_message.get_error_message() == expected
+                   .error_message.get_error_message() == error_message
 
-    @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_first_name-positive.csv'))
-    def test_guest_checkout_billing_details_first_name_positive(self, test_input: str) -> None:
+    @pytest.mark.parametrize('first_name', get_test_data('test_data_checkout_page_first_name-positive.csv'))
+    def test_guest_checkout_billing_details_first_name_positive(self, first_name: str) -> None:
         """Check 'First Name' field with valid data in 'Step 2: Billing Details' tab.
 
-        :param test_input: test data for 'First Name' field
+        :param first_name: test data for 'First Name' field
         :return: None
         """
         self.checkout_page.open_billing_details.your_personal_details_form\
-            .first_name_field.clear_and_fill_input_field(test_input)
+            .first_name_field.clear_and_fill_input_field(first_name)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field\
                        .error_message.get_error_message()
+
+    def test_guest_checkout_billing_details_email_positive(self) -> None:
+        """Check 'Email' field with invalid data in 'Step 2: Billing Details' tab.
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .email_field.clear_and_fill_input_field('john@gmail.com')
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_personal_details_form\
+            .email_field.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_input_email, error_message',
+                             get_test_data('test_data_checkout_page_email-negative.csv'))
+    def test_guest_checkout_billing_details_email_negative(self, email: str, error_message: str) -> None:
+        """Check 'Email' field with invalid data in 'Step 2: Billing Details' tab.
+
+        :param email: test data for 'Email' field
+        :param error_message: error message under 'Email' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_personal_details_form\
+            .email_field.clear_and_fill_input_field(email)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details.your_personal_details_form\
+            .email_field.error_message.get_error_message() == error_message
