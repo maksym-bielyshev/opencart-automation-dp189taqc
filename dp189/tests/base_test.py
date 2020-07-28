@@ -8,6 +8,6 @@ class BaseTest:
     def setup(self):
         pass
 
-    def teardown(self):
-        """Close driver after test completed."""
-        self.driver.close()
+    # def teardown(self):
+    #     """Close driver after test completed."""
+    #     self.driver.close()

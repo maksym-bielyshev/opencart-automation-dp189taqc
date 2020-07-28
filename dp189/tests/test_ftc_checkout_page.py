@@ -139,7 +139,7 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'Address 1' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details.your_address_form.address_1_field \
                    .error_message.get_error_message() == expected
@@ -234,7 +234,6 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under the 'Post Code' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form\
             .post_code_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
@@ -249,7 +248,6 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for the 'Post Code' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form\
             .post_code_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
@@ -263,7 +261,6 @@ class TestCheckoutPage(BaseTest):
         :param test_input: test data for the 'Country' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.country.error_message.get_error_message()
@@ -276,8 +273,30 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'Country' field
         :return: None
         """
-        self.checkout_page.open_billing_details.load_your_address_form()
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(f" {test_input}")
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details.your_address_form.country\
                    .error_message.get_error_message() == expected
+
+    def test_guest_checkout_billing_details_region_positive(self) -> None:
+        """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'Region' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option(test_input)
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_address_form.country.error_message.get_error_message()
+
+    def test_guest_checkout_billing_details_region_negative(self) -> None:
+        """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
+
+        :param test_input: test data for the 'Region' field
+        :param expected: error message under 'Region' field
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option('United States')
+        # self.checkout_page.open_billing_details.your_address_form.region.choose_dropdown_option('United States')
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details.your_address_form.country \
+                   .error_message.get_error_message() == 'Please select a region / state!'
