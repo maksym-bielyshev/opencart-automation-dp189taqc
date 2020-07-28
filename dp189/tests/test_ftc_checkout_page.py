@@ -254,11 +254,9 @@ class TestCheckoutPage(BaseTest):
         assert not self.checkout_page.open_billing_details.your_address_form.post_code_field\
                        .error_message.get_error_message()
 
-    @pytest.mark.parametrize('test_input', get_test_data('test_data_checkout_page_country-positive.csv'))
-    def test_guest_checkout_billing_details_country_positive(self, test_input: str) -> None:
+    def test_guest_checkout_billing_details_country_positive(self) -> None:
         """Check the 'Country' field with valid data in 'Step 2: Billing Details' tab.
 
-        :param test_input: test data for the 'Country' field
         :return: None
         """
         self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option('United States')
