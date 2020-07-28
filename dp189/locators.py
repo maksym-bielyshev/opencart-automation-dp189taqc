@@ -155,8 +155,8 @@ class LocatorsYourPersonalDetailsComponent:
 class LocatorsYourPasswordComponent:
     """Locators fot the 'Your Password' component."""
 
-    PASSWORD_FIELD = (By.XPATH, './/*[@id="input-password"]')
-    PASSWORD_CONFIRM_FIELD = (By.XPATH, './/*[@id="input-confirm"]')
+    PASSWORD_FIELD = (By.XPATH, './/*[@name="password"]')
+    PASSWORD_CONFIRM_FIELD = (By.XPATH, './/*[@name="confirm"]')
 
 
 class LocatorsRegisterPage:
@@ -340,7 +340,9 @@ class LocatorsCheckoutPage:
     PRIVACY_POLICY_CHECKBOX = (By.XPATH, '//div[@class="buttons clearfix"]//input[@name="agree"]')
     ACCOUNT_AND_BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-register"]')
 
-    DELIVERY_DETAILS_PARENT = (By.XPATH, "collapse-shipping-address")
+    DELIVERY_DETAILS_PARENT = (By.ID, "collapse-shipping-address")
+
+    DELIVERY_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-address"]')
 
     DELIVERY_METHOD_TEXT_AREA = (By.XPATH, '//textarea[@name="comment"]')
     DELIVERY_METHOD_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-method"]')

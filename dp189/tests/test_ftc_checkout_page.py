@@ -75,7 +75,7 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details\
                    .your_personal_details_form.first_name_field\
-                   .error_message.get_error_message() == expected
+                   .error_message.get_error_message() == error_message
 
     @pytest.mark.parametrize('test_data', get_test_data('test_data_checkout_page_address_1-positive.csv'))
     def test_guest_checkout_billing_details_address_1_positive(self, test_data: str) -> None:
@@ -97,7 +97,7 @@ class TestCheckoutPage(BaseTest):
         :param expected: error message under 'Address 1' field
         :return: None
         """
-        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_data)
+        self.checkout_page.open_billing_details.your_address_form.address_1_field.clear_and_fill_input_field(test_input)
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert self.checkout_page.open_billing_details.your_address_form.address_1_field \
                    .error_message.get_error_message() == expected
@@ -248,12 +248,11 @@ class TestCheckoutPageRegisterAccount(BaseTest):
 
         :return: None
         """
-
         self.driver.maximize_window()
         self.driver.get(HOME_PAGE_URL)
+        self.home_page = HomePage(self.driver)
         ProductWidgetComponent(self.driver, 'iPhone').click_add_to_shopping_cart_button()
-        self.driver.get(CHECKOUT_PAGE_URL)
-
+        self.home_page.top_nav_bar.click_checkout_link()
         self.checkout_page = CheckoutPage(self.driver)
 
     def test_checkout_register_account_valid_data(self):
@@ -266,7 +265,7 @@ class TestCheckoutPageRegisterAccount(BaseTest):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('josh@gmail.com')
+            clear_and_fill_input_field('josh8@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
