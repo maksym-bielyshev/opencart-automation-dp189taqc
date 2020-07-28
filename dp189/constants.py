@@ -1,6 +1,3 @@
-from selenium.webdriver.common.by import By
-
-
 class ComparePageConstants:
     TEST_ITEM1 = 'iPhone'
     TEST_ITEM2 = f'Apple Cinema 30"'
