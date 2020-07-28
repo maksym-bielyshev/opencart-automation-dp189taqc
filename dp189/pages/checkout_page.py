@@ -5,6 +5,8 @@ from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsCheckoutPage
 from dp189.components import InputFieldComponent, YourPersonalDetailsComponent, AddAddressComponent, \
     YourPasswordComponent
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class CheckoutPage(BasePage):
@@ -38,6 +40,9 @@ class CheckoutOptions:
             InputFieldComponent(self._driver, LocatorsCheckoutPage.RETURNING_CUSTOMER_EMAIL_FIELD)
         self.password_field_returning_customer = \
             InputFieldComponent(self._driver, LocatorsCheckoutPage.RETURNING_CUSTOMER_PASSWORD_FIELD)
+
+    def click_checkout_options_form(self) -> None:
+        self._driver.find_element(LocatorsCheckoutPage.CHECKOUT_OPTIONS_FORM).click()
 
     def click_register_account_radio_button(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.REGISTER_CHECKOUT_RADIO_BUTTON).click()
@@ -86,14 +91,11 @@ class AccountAndBillingDetails:
         :param driver: Remote.
         """
         self._driver = driver
-        self.your_personal_details_form_container = \
-            self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
-        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
-                                                                       self.your_personal_details_form_container)
-        self.your_password_form = YourPasswordComponent(self._driver,
-                                                        self.your_personal_details_form_container)
-        self.your_address_from = AddAddressComponent(self._driver, LocatorsCheckoutPage.
-                                                     YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
+        self.your_form_container = self._driver.\
+            find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver, self.your_form_container)
+        self.your_password_form = YourPasswordComponent(self._driver, self.your_form_container)
+        self.your_address_from = AddAddressComponent(self._driver, self.your_form_container)
 
     def click_newsletter_checkbox(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.NEWSLETTER_CHECKBOX).click()
@@ -117,7 +119,13 @@ class DeliveryDetails:
         :param driver: Remote.
         """
         self._driver = driver
-        self.delivery_details = AddAddressComponent(self._driver, LocatorsCheckoutPage.DELIVERY_DETAILS_PARENT)
+        self._form_parent_element = self._driver.find_element(*LocatorsCheckoutPage.DELIVERY_DETAILS_PARENT)
+        self.delivery_details = AddAddressComponent(self._driver, self._form_parent_element)
+
+    def click_continue_button(self):
+        continue_button = WebDriverWait(self._driver, 5). \
+            until(EC.presence_of_element_located(LocatorsCheckoutPage.DELIVERY_DETAILS_CONTINUE_BUTTON))
+        continue_button.click()
 
 
 class DeliveryMethod:
@@ -151,7 +159,9 @@ class PaymentMethod:
         InputFieldComponent(self._driver, LocatorsCheckoutPage.PAYMENT_METHOD_TEXT_AREA)
 
     def click_terms_and_conditions_checkbox(self) -> None:
-        self._driver.find_element(*LocatorsCheckoutPage.TERMS_AND_CONDITIONS_CHECKBOX).click()
+        terms_and_conditions = WebDriverWait(self._driver, 5).\
+            until(EC.presence_of_element_located(LocatorsCheckoutPage.TERMS_AND_CONDITIONS_CHECKBOX))
+        terms_and_conditions.click()
 
     def click_continue_button(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.PAYMENT_METHOD_CONTINUE_BUTTON).click()
@@ -168,4 +178,6 @@ class ConfirmOrder:
         self._driver = driver
 
     def click_confirm_order_button(self) -> None:
-        self._driver.find_element(*LocatorsCheckoutPage.CONFIRM_ORDER_BUTTON).click()
+        confirm_order_button = WebDriverWait(self._driver, 5). \
+            until(EC.presence_of_element_located(LocatorsCheckoutPage.CONFIRM_ORDER_BUTTON))
+        confirm_order_button.click()
