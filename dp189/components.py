@@ -464,12 +464,16 @@ class ErrorMessageComponent:
         self.element_locator = element_locator
 
     def get_error_message(self):
-        """Get error message.
+        """Get error message. This method has other error message locator for Date input and Time input fields.
 
         :return: str
         """
         try:
-            error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
+            if '@data-date-format' in self.element_locator[1]:
+                error_message_locator = f'{self.element_locator[1]}/../following-sibling::div[@class="text-danger"]'
+            else:
+                error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
+
             error_message = WebDriverWait(self._driver, 3).until(
                 EC.presence_of_element_located((By.XPATH, error_message_locator))
             )
