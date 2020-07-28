@@ -1,26 +1,9 @@
-import sys
-
+# from dp189.tests.conftest import get_test_data
+# # 'dp189\testsData\test_data_checkout_page_register_account_valid_data.csv'
 #
-print(sys.path)
-from selenium.webdriver import Chrome
-from selenium.webdriver.chrome.options import Options
-# MacOS import
-from dp189.pages.home_page import HomePage
+# if __name__ == '__main__':
+#
+#     print(get_test_data('test_data_checkout_page_register_account_valid_data.csv'))
 
-options = Options()
-options.add_argument('--ignore-certificate-errors')
-driver = Chrome('/Users/olexiyusov/PycharmProjects/selenium_project/drivers/chromedriver', options=options)
-driver.maximize_window()
-
-driver.get('http://34.71.14.206/index.php?route=common/home')
-
-# driver.implicitly_wait(15)
-
-# page = HomePage(driver)
-# page.add_product_to_cart('iPhone')
-# login_page = page.click_account_and_go_to_login()
-# login_page.login('smith@mail.com','12345')
-
-
-page = HomePage(driver)
-page.top_nav_bar.change_currency('GBP')
+# [('John',), ('Smith',), ('john@gmail.com',), ('17777777777',), ('1234@',),
+# ('1234@',), ('29 Street',), ('Las Vegas',), ('United States',), ('Nevada',)]
