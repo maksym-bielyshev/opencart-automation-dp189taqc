@@ -146,17 +146,17 @@ class LocatorsAvailableOptions:
 class LocatorsYourPersonalDetailsComponent:
     """Locators fot the 'Your Personal Details' component."""
 
-    FIRST_NAME_FIELD = (By.XPATH, '//input[@name="firstname"]')
-    LAST_NAME_FIELD = (By.XPATH, '//input[@name="lastname"]')
+    FIRST_NAME_FIELD = (By.XPATH, './/input[@name="firstname"]')
+    LAST_NAME_FIELD = (By.XPATH, './/input[@name="lastname"]')
     EMAIL_FIELD = (By.XPATH, './/input[@name="email"]')
-    TELEPHONE_FIELD = (By.XPATH, '//input[@name="telephone"]')
+    TELEPHONE_FIELD = (By.XPATH, './/input[@name="telephone"]')
 
 
 class LocatorsYourPasswordComponent:
     """Locators fot the 'Your Password' component."""
 
-    PASSWORD_FIELD = (By.XPATH, './/*[@name="password"]')
-    PASSWORD_CONFIRM_FIELD = (By.XPATH, './/*[@name="confirm"]')
+    PASSWORD_FIELD = (By.XPATH, './/*[@id="input-password"]')
+    PASSWORD_CONFIRM_FIELD = (By.XPATH, './/*[@id="input-confirm"]')
 
 
 class LocatorsRegisterPage:
@@ -204,16 +204,16 @@ class LocatorShowNumberProductsDropdown:
 
 class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
-    FIRST_NAME_INPUT = (By.XPATH, '//input[@name="firstname"]')
-    LAST_NAME_INPUT = (By.XPATH, '//input[@name="lastname"]')
-    EMAIL_INPUT = (By.XPATH, "//input[@name='email']")
-    EMAIL_INPUT_PAYMENT = (By.XPATH, "//input[@id='input-payment-email']")
-    TELEPHONE_INPUT = (By.XPATH, "//input[@name='telephone']")
-    COMPANY_INPUT = (By.XPATH, '//input[@name="company"]')
+    FIRST_NAME_INPUT = (By.XPATH, './/input[@name="firstname"]')
+    LAST_NAME_INPUT = (By.XPATH, './/input[@name="lastname"]')
+    EMAIL_INPUT = (By.XPATH, ".//input[@name='email']")
+    EMAIL_INPUT_PAYMENT = (By.XPATH, ".//input[@id='input-payment-email']")
+    TELEPHONE_INPUT = (By.XPATH, ".//input[@name='telephone']")
+    COMPANY_INPUT = (By.XPATH, './/input[@name="company"]')
     ADDRESS_1_INPUT = (By.XPATH, './/input[@name="address_1"]')
-    ADDRESS_2_INPUT = (By.XPATH, '//input[@name="address_2"]')
+    ADDRESS_2_INPUT = (By.XPATH, './/input[@name="address_2"]')
     CITY_INPUT = (By.XPATH, './/input[@name="city"]')
-    POST_CODE_INPUT = (By.XPATH, '//input[@name="postcode"]')
+    POST_CODE_INPUT = (By.XPATH, './/input[@name="postcode"]')
     COUNTRY_SELECTOR = (By.XPATH, './/select[@name="country_id"]')
     REGION_SELECTOR = (By.XPATH, './/select[@name="zone_id"]')
 
@@ -319,7 +319,6 @@ class LocatorsLoginComponent:
 
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
-    CHECKOUT_OPTIONS_FORM = (By.XPATH, '/html/body/div[2]/div/div/div/div[1]/div[1]')
     BILLING_DETAILS_FORM = (By.ID, 'collapse-payment-address')
 
     REGISTER_CHECKOUT_RADIO_BUTTON = \
@@ -334,9 +333,7 @@ class LocatorsCheckoutPage:
 
     ADD_ADDRESS_BILLING_DETAILS_PARENT = (By.ID, "address")
     BILLING_DETAILS_CONTINUE_BUTTON = (By.XPATH, "//input[@id='button-guest']")
-    BILLING_DETAILS_REGISTER_ACCOUNT_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-payment-address"]')
 
-    DELIVERY_DETAILS_CONTINUE_BUTTON = (By.XPATH, '//input[@id="button-shipping-address"]')
     DELIVERY_AND_BILLING_ADDRESSES_CHECKBOX = (By.XPATH, '//input[@name="shipping_address"]')
     YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT = (By.XPATH, '//*[@id="collapse-payment-address"]')
     NEWSLETTER_CHECKBOX = (By.XPATH, '//input[@id="newsletter"]')

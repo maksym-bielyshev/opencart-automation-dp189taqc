@@ -70,14 +70,10 @@ class BillingDetails:
         """
         self._driver = driver
         self.your_personal_details_form_container = \
-            self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_FORM)
+            self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
         self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
                                                                        self.your_personal_details_form_container)
-        self.your_address_form = None
-
-    def load_your_address_form(self) -> None:
-        parent = self._driver.find_element(*LocatorsCheckoutPage.ADD_ADDRESS_BILLING_DETAILS_PARENT)
-        self.your_address_form = AddAddressComponent(self._driver, parent)
+        self.your_address_form = AddAddressComponent(self._driver, self.your_personal_details_form_container)
 
     def click_continue_button_billing_details(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.BILLING_DETAILS_CONTINUE_BUTTON).click()
@@ -107,6 +103,14 @@ class AccountAndBillingDetails:
         self.your_address_form_container = \
             self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
         self.your_address_from = AddAddressComponent(self._driver, self.your_address_form_container)
+        self.your_personal_details_form_container = \
+            self._driver.find_element(*LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver,
+                                                                       self.your_personal_details_form_container)
+        self.your_password_form = YourPasswordComponent(self._driver,
+                                                        self.your_personal_details_form_container)
+        self.your_address_from = AddAddressComponent(self._driver, LocatorsCheckoutPage.
+                                                     YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT)
 
     def click_newsletter_checkbox(self) -> None:
         self._driver.find_element(*LocatorsCheckoutPage.NEWSLETTER_CHECKBOX).click()

@@ -234,7 +234,7 @@ class ProductsViewModeComponent:
 class YourPersonalDetailsComponent:
     """Your personal details form сonsists four fields to fill first name, last name, email, telephone."""
 
-    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input fields first name, last name, email, telephone.
 
         :param driver: Remote.
@@ -259,7 +259,7 @@ class YourPersonalDetailsComponent:
 class YourPasswordComponent:
     """Your password form сonsists two fields to fill password, password confirm."""
 
-    def __init__(self, driver: Remote, parent_element: WebElement = None) -> None:
+    def __init__(self, driver: Remote, parent_element: WebElement) -> None:
         """Initialize input fields password field, password confirm field.
 
         :param driver: Remote
