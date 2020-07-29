@@ -17,6 +17,8 @@ def init_driver(request):
 
     yield driver
 
+    driver.close()
+
 
 def get_test_data(file_name: str) -> list:
     """Converts file with test data to tuples list to use it in parameterized tests.

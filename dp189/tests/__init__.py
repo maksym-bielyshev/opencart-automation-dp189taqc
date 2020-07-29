@@ -1,5 +1,5 @@
 """Setting up all logs."""
-
+#
 import logging.config
 
 logging_settings = {

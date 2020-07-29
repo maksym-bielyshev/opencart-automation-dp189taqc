@@ -2,6 +2,7 @@
 
 import pytest
 from dp189.components import ProductWidgetComponent
+from dp189.constants import CheckoutPageConstants
 from dp189.pages.checkout_page import CheckoutPage
 from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
@@ -272,6 +273,26 @@ class TestCheckoutPage(BaseTest):
         assert self.checkout_page.open_billing_details.your_address_form.country\
                    .error_message.get_error_message() == expected
 
+    def test_guest_checkout_billing_details_region_positive(self) -> None:
+        """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
+
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option('United States')
+        self.checkout_page.open_billing_details.your_address_form.region.choose_dropdown_option('Nevada')
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert not self.checkout_page.open_billing_details.your_address_form.region.error_message.get_error_message()
+
+    def test_guest_checkout_billing_details_region_negative(self) -> None:
+        """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
+
+        :return: None
+        """
+        self.checkout_page.open_billing_details.your_address_form.country.choose_dropdown_option('United States')
+        self.checkout_page.open_billing_details.click_continue_button_billing_details()
+        assert self.checkout_page.open_billing_details.your_address_form.region \
+                   .error_message.get_error_message() == CheckoutPageConstants.REGION_FIELD_ERROR_MESSAGE
+
 
 class TestCheckoutPageRegisterAccount(BaseTest):
 
@@ -327,3 +348,5 @@ class TestCheckoutPageRegisterAccount(BaseTest):
         self.checkout_page.open_confirm_order.click_confirm_order_button()
 
         assert self.checkout_page.get_title.get_title_page('Your order has been placed!')
+
+
