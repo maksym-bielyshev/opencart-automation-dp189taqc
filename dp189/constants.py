@@ -16,3 +16,7 @@ class ShoppingCartPageConstants:
     RESULT5 = 'Success: Your shipping estimate has been applied!'
     HOME_TITLE = 'Your Store'
     CHECKOUT_TITLE = 'Checkout'
+
+
+class CheckoutPageConstants:
+    REGION_FIELD_ERROR_MESSAGE = 'Please select a region / state!'
