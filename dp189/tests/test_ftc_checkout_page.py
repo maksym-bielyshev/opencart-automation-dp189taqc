@@ -1,13 +1,12 @@
 """Module for the testing 'Checkout' page."""
+
 import pytest
-from dp189.pages.checkout_page import CheckoutPage
 from dp189.components import ProductWidgetComponent
+from dp189.pages.checkout_page import CheckoutPage
 from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
-from dp189.routes import *
-import time
-
 from dp189.tests.conftest import get_test_data
+from dp189.routes import *
 
 
 class TestCheckoutPage(BaseTest):
@@ -50,16 +49,13 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
 
         self.checkout_page.open_delivery_method.click_continue_button()
-        time.sleep(1)
 
         self.checkout_page.open_payment_method.click_terms_and_conditions_checkbox()
         self.checkout_page.open_payment_method.click_continue_button()
 
         self.checkout_page.open_confirm_order.click_confirm_order_button()
-        time.sleep(1)
 
-        # todo move 'title' in constant
-        assert "Your order has been placed!" in self.driver.title
+        assert self.checkout_page.get_title.get_title_page('Your order has been placed!')
 
     @pytest.mark.parametrize('first_name,error_message',
                              get_test_data('test_data_checkout_page_first_name-negative.csv'))
@@ -301,7 +297,7 @@ class TestCheckoutPageRegisterAccount(BaseTest):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('jgoe@gmail.com')
+            clear_and_fill_input_field('jgoe1022@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
