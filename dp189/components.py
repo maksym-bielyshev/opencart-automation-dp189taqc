@@ -522,7 +522,7 @@ class CatchMessageComponent:
     def get_danger_message(self) -> str:
         """Get message such as 'Danger:'."""
         danger_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
+            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_DANGER_MESSAGE)
         )
         return danger_message.text
 
