@@ -506,11 +506,25 @@ class CatchMessageComponent:
         self._driver = driver
 
     def get_info_message(self) -> str:
-        """Get info message such as 'Success:' or 'Warning:'."""
-        alert_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_MESSAGE)
+        """Get message such as 'Info:'."""
+        info_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
         )
-        return alert_message.text
+        return info_message.text
+
+    def get_success_message(self) -> str:
+        """Get message such as 'Success:'."""
+        success_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
+        )
+        return success_message.text
+
+    def get_danger_message(self) -> str:
+        """Get message such as 'Danger:'."""
+        danger_message = WebDriverWait(self._driver, 3).until(
+            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
+        )
+        return danger_message.text
 
 
 class NewsletterComponent:
