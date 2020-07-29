@@ -427,11 +427,11 @@ class DropdownComponent:
 
         :return: None
         """
-        WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable(self.dropdown_locator))
+        dropdown = WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable(self.dropdown_locator))
         if self.parent_element:
-            self.checkbox_container = Select(self.parent_element.find_element(*self.dropdown_locator))
+            self.checkbox_container = Select(dropdown)
         else:
-            self.checkbox_container = Select(self._driver.find_element(*self.dropdown_locator))
+            self.checkbox_container = Select(dropdown)
 
     def which_option_is_chosen(self) -> str:
         """Return text of chosen option.
