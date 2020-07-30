@@ -7,6 +7,7 @@ from dp189.locators import LocatorsRegisterPage
 
 class RegisterPage(BasePage):
     """Register page class."""
+
     def __init__(self, driver: Remote) -> None:
         """Initialize objects to work with this page.
 
@@ -14,8 +15,9 @@ class RegisterPage(BasePage):
         :return: None
         """
         super().__init__(driver)
-        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver)
-        self.your_password_form = YourPasswordComponent(self._driver)
+        self.register_account_container = self._driver.find_element(*LocatorsRegisterPage.YOUR_PERSONAL_DETAILS_PARENT)
+        self.your_personal_details_form = YourPersonalDetailsComponent(self._driver, self.register_account_container)
+        self.your_password_form = YourPasswordComponent(self._driver, self.register_account_container)
         self.subscribe_radio_buttons = NewsletterComponent(self._driver)
         self.privacy_policy_checkbox = PrivacyPolicyComponent(self._driver)
 

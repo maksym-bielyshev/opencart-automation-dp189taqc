@@ -310,18 +310,18 @@ class TestCheckoutPageRegister(TestCheckoutPage):
         :return: None
         """
         super(TestCheckoutPageRegister, self).setup()
+        self.checkout_page.open_checkout_options.click_register_account_radio_button()
+        self.checkout_page.open_checkout_options.click_continue_button()
 
     def test_checkout_register_account_valid_data(self):
         """Check the functionality of checkout process with register account and valid data."""
-        self.checkout_page.open_checkout_options.click_register_account_radio_button()
-        self.checkout_page.open_checkout_options.click_continue_button()
 
         self.checkout_page.open_account_billing_details.your_personal_details_form.first_name_field. \
             clear_and_fill_input_field('John')
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('jgoe8@gmail.com')
+            clear_and_fill_input_field('jgoe202@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
