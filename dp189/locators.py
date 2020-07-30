@@ -259,8 +259,10 @@ class LocatorsComparePage:
 
 
 class LocatorsInfoMessages:
-    """This locator is an info message for CatchMessageComponent."""
-    ALERT_MESSAGE = (By.CLASS_NAME, 'alert')
+    """Locators to various messages on pages, for CatchMessageComponent."""
+    ALERT_INFO_MESSAGE = (By.XPATH, '//div[@class="alert alert-info"]')
+    ALERT_SUCCESS_MESSAGE = (By.XPATH, '//div[@class="alert alert-success alert-dismissible"]')
+    ALERT_DANGER_MESSAGE = (By.XPATH, '//div[@class="alert alert-danger alert-dismissible"]')
 
 
 class LocatorsShoppingCartPage:
