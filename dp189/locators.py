@@ -162,6 +162,7 @@ class LocatorsYourPasswordComponent:
 class LocatorsRegisterPage:
     """Locators fot the 'Register' page."""
 
+    YOUR_PERSONAL_DETAILS_PARENT = (By.XPATH, '//*[@id="content"]')
     CHECKBOX_PRIVACY_POLICY = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@id="content"]/form/div/div/input[2]')
 
