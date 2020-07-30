@@ -7,6 +7,7 @@ from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
 
+
 class TestRegisterPage(BaseTest):
     """Class for the 'Register' page."""
 
@@ -24,4 +25,4 @@ class TestRegisterPage(BaseTest):
         self.register_page = RegisterPage(self.driver)
 
     def test_check_first_name_field_valid_data(self):
-        self.register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field('test')
+        pass
