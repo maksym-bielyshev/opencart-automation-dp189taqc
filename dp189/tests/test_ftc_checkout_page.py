@@ -8,13 +8,9 @@ from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
-from abc import ABC, abstractmethod
-
-from dp189.tests.conftest import get_test_data
 
 
-class TestCheckoutPage(ABC, BaseTest):
-    @abstractmethod
+class TestCheckoutPage(BaseTest):
     def setup(self) -> None:
         """
         Basic set up for Register and Unregister user.
@@ -37,7 +33,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
 
         :return: None
         """
-        super().setup()
+        super(TestCheckoutPageGuest, self).setup()
         self.checkout_page.open_checkout_options.click_guest_checkout_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
@@ -313,7 +309,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
 
         :return: None
         """
-        super().setup()
+        super(TestCheckoutPageRegister, self).setup()
 
     def test_checkout_register_account_valid_data(self):
         """Check the functionality of checkout process with register account and valid data."""
@@ -355,5 +351,3 @@ class TestCheckoutPageRegister(TestCheckoutPage):
         self.checkout_page.open_confirm_order.click_confirm_order_button()
 
         assert self.checkout_page.get_title.get_title_page('Your order has been placed!')
-
-
