@@ -366,3 +366,11 @@ class LocatorsComparePageTest:
 class LocatorsShoppingCartPageTest:
     IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[1]')
     QUANTITY = (By.XPATH, '//*[@id="content"]/form/div/table/tbody/tr/td[4]/div/input')
+
+
+class LocatorsLoginPage:
+    EMAIL_FIELD = (By.ID, 'input-email')
+    PASSWORD_FIELD = (By.ID, 'input-password')
+    FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//div[@id="content"]//a[text()="Forgotten Password"]')
+    LOGIN_BUTTON = (By.XPATH, '//input[@value="Login"]')
+    REGISTER_PAGE_BUTTON = (By.XPATH, '//a[text()="Continue"]')

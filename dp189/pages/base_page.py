@@ -1,13 +1,9 @@
-from selenium import webdriver
 from selenium.webdriver import Remote
 
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
 from ..components import CatchMessageComponent, CatchPageTitleComponent
-from dp189.locators import LocatorsBasePageMainMenu, LocatorsBasePageNavBar, LocatorYourStoreLink, LocatorBasePageSearch
+from dp189.locators import LocatorsBasePageMainMenu, LocatorYourStoreLink, LocatorBasePageSearch
 from ..locators import LocatorsBasePageNavBar
-
-#from dp189.components import SearchArea, BaseNavBar, ShopCartButton, CatchMessageComponent
-#from dp189.locators import LocatorsShoppingCartButton, LocatorYourStoreLink, LocatorsNavBar
 
 
 class BasePage:
