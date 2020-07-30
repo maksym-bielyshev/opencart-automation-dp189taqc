@@ -194,7 +194,7 @@ class TestAvailableOptions(BaseTest):
         expected_result = False
         assert self.product_page.available_options.time.error_message.get_error_message() == expected_result
 
-    def test_text_field_not_filled(self):
+    def test_text_field_not_filled(self) -> None:
         """Test for checking if available option Text is empty. There will be error message for this option after
         attempt to add product to cart.
 
@@ -206,7 +206,7 @@ class TestAvailableOptions(BaseTest):
         assert self.product_page.available_options.text_field.error_message.get_error_message() == expected_result
 
     @pytest.mark.parametrize('text_field_input', get_test_data('test_data_product_page_text_field.csv'))
-    def test_text_field_is_filled_valid_data(self, text_field_input: str):
+    def test_text_field_is_filled_valid_data(self, text_field_input: str) -> None:
         """Test for checking if available option Text field is filled with valid data that consists from 1 to 40
         characters. There will be no error message for this option after attempt to add product to cart.
 
@@ -218,7 +218,7 @@ class TestAvailableOptions(BaseTest):
         expected_result = False
         assert self.product_page.available_options.text_field.error_message.get_error_message() == expected_result
 
-    def test_text_field_is_filled_invalid_data(self):
+    def test_text_field_is_filled_invalid_data(self) -> None:
         """Test for checking if available option Text is filled with text string that is longer than 40 characters.
         There should be error message 'Text must be between 1 and 40 characters!' for this option after attempt
         to add product to cart.
@@ -231,7 +231,7 @@ class TestAvailableOptions(BaseTest):
         expected_result = 'Text must be between 1 and 40 characters!'
         assert self.product_page.available_options.text_field.error_message.get_error_message() == expected_result
 
-    def test_quantity_field_not_filled(self):
+    def test_quantity_field_not_filled(self) -> None:
         """Test for checking if available option Quantity field is empty. There will be error message for this option
         after attempt to add product to cart.
 
@@ -242,7 +242,7 @@ class TestAvailableOptions(BaseTest):
         expected_result = 'Quantity required!'
         assert self.product_page.available_options.quantity.error_message.get_error_message() == expected_result
 
-    def test_quantity_field_is_filled_valid_data(self):
+    def test_quantity_field_is_filled_valid_data(self) -> None:
         """Test for checking if available option Quantity field is filled with valid data: more than 2.
         There will be no error message for this option after attempt to add product to cart.
 
@@ -253,7 +253,7 @@ class TestAvailableOptions(BaseTest):
         expected_result = False
         assert self.product_page.available_options.quantity.error_message.get_error_message() == expected_result
 
-    def test_quantity_field_is_filled_invalid_data(self):
+    def test_quantity_field_is_filled_invalid_data(self) -> None:
         """Test for checking if available option Quantity field is filled with invalid data: less than 2.
         There will be error message for this option after attempt to add product to cart.
 
@@ -263,3 +263,41 @@ class TestAvailableOptions(BaseTest):
         self.product_page.available_options.click_add_to_cart_button()
         expected_result = 'This product has a minimum quantity of 2!'
         assert self.product_page.available_options.quantity.error_message.get_error_message() == expected_result
+
+    def test_add_to_cart_button_with_all_selected_available_options(self) -> None:
+        """Check correct work of clicking on 'Add to Cart' button by filling all required fields.
+
+        :return: None
+        """
+        today = datetime.date.today()
+        tomorrow = str(today + datetime.timedelta(days=1))
+
+        self.product_page.available_options.radio.choose_radio_button_option('Medium')
+        self.product_page.available_options.checkbox.choose_checkbox_option('Checkbox 2')
+        self.product_page.available_options.text_field.clear_and_fill_input_field('Test text')
+        self.product_page.available_options.select.choose_dropdown_option('Blue (+$3.00)')
+        self.product_page.available_options.text_area_field.clear_and_fill_input_field('Test textarea')
+        self.product_page.available_options.data_field.clear_and_fill_input_field(tomorrow)
+        self.product_page.available_options.time.clear_and_fill_input_field('16:00')
+        self.product_page.available_options.quantity.clear_and_fill_input_field('5')
+        self.product_page.available_options.click_add_to_cart_button()
+        info_message = 'Success: You have added Apple Cinema 30" to your shopping cart!'
+        assert info_message in self.product_page.catch_info_message.get_success_message()
+
+    def test_click_compare_button(self) -> None:
+        """Check correct work of clicking on 'Compare this product' button.
+
+        :return: None
+        """
+        self.product_page.click_compare_this_product_button()
+        info_message = 'Success: You have added Apple Cinema 30" to your product comparison!'
+        assert info_message in self.product_page.catch_info_message.get_success_message()
+
+    def test_click_add_to_wish_list_as_not_logged_user(self):
+        """Check correct work of clicking 'Add to Wish List' button.
+
+        :return: None
+        """
+        self.product_page.click_add_to_wish_list_button()
+        info_message = 'You must login or create an account to save Apple Cinema 30" to your wish list!'
+        assert info_message in self.product_page.catch_info_message.get_success_message()
