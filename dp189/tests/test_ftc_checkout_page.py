@@ -8,13 +8,9 @@ from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
-from abc import ABC, abstractmethod
-
-from dp189.tests.conftest import get_test_data
 
 
-class TestCheckoutPage(ABC, BaseTest):
-    @abstractmethod
+class TestCheckoutPage(BaseTest):
     def setup(self) -> None:
         """
         Basic set up for Register and Unregister user.
@@ -37,7 +33,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
 
         :return: None
         """
-        super().setup()
+        super(TestCheckoutPageGuest, self).setup()
         self.checkout_page.open_checkout_options.click_guest_checkout_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
@@ -313,7 +309,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
 
         :return: None
         """
-        super().setup()
+        super(TestCheckoutPageRegister, self).setup()
         self.checkout_page.open_checkout_options.click_register_account_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
@@ -325,7 +321,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('jgoe201@gmail.com')
+            clear_and_fill_input_field('jgoe8@gmail.com')
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
