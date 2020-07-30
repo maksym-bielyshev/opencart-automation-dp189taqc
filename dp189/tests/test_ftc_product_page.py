@@ -7,6 +7,7 @@ from dp189.pages.product_page import ProductPage
 from dp189.routes import get_product_url
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
+from dp189.routes import *
 
 
 class TestAvailableOptions(BaseTest):

@@ -2,7 +2,7 @@
 
 from selenium.webdriver import Remote
 from dp189.pages.base_page import BasePage
-from dp189.components import ProductsViewModeComponent, ProductWidgetComponent, ProductCompareLinkComponent, \
+from dp189.components import ProductsViewModeComponent, ProductCompareLinkComponent, \
     ProductWidgetsListComponent, DropdownComponent
 from dp189.locators import LocatorCategoryTitle, LocatorSortByDropdown, LocatorShowNumberProductsDropdown
 

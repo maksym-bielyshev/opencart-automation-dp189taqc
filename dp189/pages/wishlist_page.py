@@ -1,7 +1,7 @@
 from selenium.webdriver import Remote
 from dp189.locators import LocatorsWishListPage
 from dp189.pages.base_page import BasePage
-from dp189.components import BaseRightMenu
+from dp189.components import RegisterPageRightMenuComponent
 
 
 class WishListPage(BasePage):
@@ -9,7 +9,7 @@ class WishListPage(BasePage):
 
     def __init__(self, driver: Remote) -> None:
         super().__init__(driver)
-        self.basepage = BaseRightMenu(driver)
+        self.basepage = RegisterPageRightMenuComponent(driver)
 
     def get_list_items(self):
         """Method which print items on wishlist page.
