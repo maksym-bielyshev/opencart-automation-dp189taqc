@@ -1,4 +1,4 @@
-from dp189.components import RegisterPageRightMenuComponent, InputFieldComponent
+from dp189.components import RegisterPageRightMenuComponent, InputFieldComponent, LoginComponent
 from dp189.locators import LocatorsLoginPage
 from dp189.pages.base_page import BasePage
 from dp189.pages.forgot_password_page import ForgotPasswordPage
@@ -15,8 +15,7 @@ class LoginPage(BasePage):
         """
         super().__init__(driver)
         self.right_menu = RegisterPageRightMenuComponent(self._driver)
-        self.email_field = InputFieldComponent(self._driver, LocatorsLoginPage.EMAIL_FIELD)
-        self.password_field = InputFieldComponent(self._driver, LocatorsLoginPage.PASSWORD_FIELD)
+        self.login_form = LoginComponent(self._driver)
 
     def click_forgotten_password_button(self) -> object:
         """Click 'Forgotten password' button

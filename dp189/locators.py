@@ -370,8 +370,6 @@ class LocatorsShoppingCartPageTest:
 
 
 class LocatorsLoginPage:
-    EMAIL_FIELD = (By.ID, 'input-email')
-    PASSWORD_FIELD = (By.ID, 'input-password')
     FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//div[@id="content"]//a[text()="Forgotten Password"]')
     LOGIN_BUTTON = (By.XPATH, '//input[@value="Login"]')
     REGISTER_PAGE_BUTTON = (By.XPATH, '//a[text()="Continue"]')
