@@ -1,6 +1,7 @@
 """Module for the testing 'Register' page."""
 
 import pytest
+import allure
 from dp189.pages.register_page import RegisterPage
 from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
