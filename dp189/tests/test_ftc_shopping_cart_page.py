@@ -28,7 +28,8 @@ class TestShoppingCart(BaseTest):
 
         assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
 
-    @pytest.mark.parametrize('test_input,expected', get_test_data('test_data_shopping_cart_quantity.csv'))
+    @pytest.mark.parametrize('test_input,expected',
+                             get_test_data('shopping_cart/test_data_shopping_cart_quantity.csv'))
     def test_shopping_cart_change_quantity_negative(self, test_input: str, expected: str):
         """Negative test for checking changes in the cart when invalid data is entered.
         :param test_input: str
