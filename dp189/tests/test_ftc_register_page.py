@@ -27,15 +27,15 @@ class TestRegisterPage(BaseTest):
         self.register_page = RegisterPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.parametrize('test_input', get_test_data('register_page/first_name_positive.csv'))
-    def test_check_first_name_field_valid_data(self, test_input: str) -> None:
+    @pytest.mark.parametrize('first_name', get_test_data('register_page/first_name_positive.csv'))
+    def test_check_first_name_field_valid_data(self, first_name: str) -> None:
         """Check the 'First name' field with valid data on register page.
 
-        :param test_input: test data for 'first name' field
+        :param first_name: test data for 'First name' field
         :return: None
         """
 
-        self.register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field(test_input)
+        self.register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field(first_name)
         self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
         self.register_page.click_continue_button()
 
@@ -79,3 +79,20 @@ class TestRegisterPage(BaseTest):
 
         assert self.register_page.your_personal_details_form.telephone_field\
                    .error_message.get_error_message() == expected
+
+    @allure.severity(allure.severity_level.MINOR)
+    @pytest.mark.parametrize('last_name,error_message', get_test_data('register_page/last_name_negative.csv'))
+    def test_check_last_name_field_invalid_data(self, last_name: str, error_message: str) -> None:
+        """Check the 'First name' field with valid data on register page.
+
+        :param last_name: test data for 'Last name' field
+        :param error_message: error message under 'Last Name' field
+        :return: None
+        """
+
+        self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(last_name)
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+
+        assert self.register_page.your_personal_details_form.last_name_field.error_message.\
+            get_error_message() == error_message
