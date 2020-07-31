@@ -3,8 +3,8 @@ import datetime
 
 import pytest
 
+from dp189.pages.login_page import LoginPage
 from dp189.pages.product_page import ProductPage
-from dp189.routes import get_product_url
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
@@ -306,4 +306,21 @@ class TestAvailableOptions(BaseTest):
         """
         self.product_page.click_add_to_wish_list_button()
         info_message = 'You must login or create an account to save Apple Cinema 30" to your wish list!'
+        assert info_message in self.product_page.catch_info_message.get_success_message()
+
+    @pytest.fixture()
+    def login_user(self):
+        self.driver.get(LOGIN_PAGE_URL)
+        login_page = LoginPage(self.driver)
+        login_page.login_form.email_field.clear_and_fill_input_field('test@test.test')
+        login_page.login_form.password_field.clear_and_fill_input_field('12345678')
+        login_page.login_form.click_login_button()
+
+    def test_click_add_to_wish_list_as_logged_user(self, login_user):
+        """Check correct work of clicking 'Add to Wish List' button as logged user.
+
+        :return: None
+        """
+        self.product_page.click_add_to_wish_list_button()
+        info_message = 'Success: You have added Apple Cinema 30" to your wish list!'
         assert info_message in self.product_page.catch_info_message.get_success_message()
