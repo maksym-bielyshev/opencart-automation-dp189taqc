@@ -37,3 +37,14 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
 
         assert not self.register_page.your_personal_details_form.first_name_field.error_message.get_error_message()
+
+    def test_check_email_field_valid_data(self) -> None:
+        """Check the 'Email' field with valid data on register page.
+
+        :return: None
+        """
+
+        self.register_page.your_personal_details_form.email_field.clear_and_fill_input_field('test@gmail.com')
+        self.register_page.click_continue_button()
+
+        assert not self.register_page.your_personal_details_form.email_field.error_message.get_error_message()
