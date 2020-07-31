@@ -5,7 +5,7 @@ from dp189.pages.register_page import RegisterPage
 from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
-from dp189.routes import *
+from dp189.routes import HOME_PAGE_URL
 
 
 class TestRegisterPage(BaseTest):
