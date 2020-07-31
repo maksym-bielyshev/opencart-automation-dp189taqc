@@ -26,3 +26,6 @@ class TestRegisterPage(BaseTest):
 
     def test_check_first_name_field_valid_data(self):
         pass
+
+    def test_check_last_name_field_invalid_data(self):
+        pass
