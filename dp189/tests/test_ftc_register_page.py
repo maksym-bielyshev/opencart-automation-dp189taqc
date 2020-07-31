@@ -80,6 +80,7 @@ class TestRegisterPage(BaseTest):
         assert self.register_page.your_personal_details_form.telephone_field\
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('last_name,error_message', get_test_data('register_page/last_name_negative.csv'))
     def test_check_last_name_field_invalid_data(self, last_name: str, error_message: str) -> None:
         """Check the 'First name' field with valid data on register page.
