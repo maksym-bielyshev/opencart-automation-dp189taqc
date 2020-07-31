@@ -37,3 +37,31 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
 
         assert not self.register_page.your_personal_details_form.first_name_field.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_input', get_test_data('register_page/field_telephone-valid.csv'))
+    def test_check_telephone_field_valid_data(self, test_input: str) -> None:
+        """Check the 'Telephone' field with valid data on register page.
+
+        :param test_input: test data for 'first name' field
+        :return: None
+        """
+
+        self.register_page.your_personal_details_form.telephone_field.clear_and_fill_input_field(test_input)
+        self.register_page.click_continue_button()
+
+        assert not self.register_page.your_personal_details_form.telephone_field.error_message.get_error_message()
+
+    @pytest.mark.parametrize('test_input,expected', get_test_data('register_page/field_telephone_invalid.csv'))
+    def test_check_telephone_field_invalid_data(self, test_input: str, expected: str) -> None:
+        """Check the 'Telephone' field with invalid data on register page.
+
+        :param test_input: test data for 'Telephone' field
+        :param expected: expected result for 'Telephone' field
+        :return: None
+        """
+
+        self.register_page.your_personal_details_form.telephone_field.clear_and_fill_input_field(test_input)
+        self.register_page.click_continue_button()
+
+        assert self.register_page.your_personal_details_form.telephone_field\
+                   .error_message.get_error_message() == expected
