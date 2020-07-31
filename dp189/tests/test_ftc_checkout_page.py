@@ -1,6 +1,7 @@
 """Module for the testing 'Checkout' page."""
 
 import pytest
+import allure
 from dp189.components import ProductWidgetComponent
 from dp189.constants import CheckoutPageConstants
 from dp189.pages.checkout_page import CheckoutPage
@@ -25,6 +26,7 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page = CheckoutPage(self.driver)
 
 
+@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageGuest(TestCheckoutPage):
     """Class for the 'Checkout' page."""
 
@@ -37,6 +39,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         self.checkout_page.open_checkout_options.click_guest_checkout_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_guest_checkout_with_valid_data(self) -> None:
         """Test the 'Checkout' page with valid data.
 
@@ -66,6 +69,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
 
         assert self.checkout_page.get_title.get_title_page('Your order has been placed!')
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('first_name,error_message',
                              get_test_data('checkout_page/test_data_checkout_page_first_name-negative.csv'))
     def test_guest_checkout_billing_details_first_name_negative(self, first_name: str, error_message: str) -> None:
@@ -82,6 +86,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .your_personal_details_form.first_name_field \
                    .error_message.get_error_message() == error_message
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('first_name',
                              get_test_data('checkout_page/test_data_checkout_page_first_name-positive.csv'))
     def test_guest_checkout_billing_details_first_name_positive(self, first_name: str) -> None:
@@ -96,6 +101,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_personal_details_form.first_name_field \
             .error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input',
                              get_test_data('checkout_page/test_data_checkout_page_last_name-positive .csv'))
     def test_guest_checkout_billing_details_last_name_positive(self, test_input: str) -> None:
@@ -110,6 +116,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_personal_details_form \
             .last_name_field.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_last_name-negative.csv'))
     def test_guest_checkout_billing_details_last_name_negative(self, test_input: str, expected: str) -> None:
@@ -126,6 +133,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .your_personal_details_form.last_name_field \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_data',
                              get_test_data('checkout_page/test_data_checkout_page_address_1-positive.csv'))
     def test_guest_checkout_billing_details_address_1_positive(self, test_data: str) -> None:
@@ -139,6 +147,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_address_form.address_1_field \
             .error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_address_1-negative.csv'))
     def test_guest_checkout_billing_details_address_1_negative(self, test_input: str, expected: str) -> None:
@@ -153,6 +162,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert self.checkout_page.open_billing_details.your_address_form.address_1_field \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input',
                              get_test_data('checkout_page/test_data_checkout_page_telephone_field_positive.csv'))
     def test_guest_checkout_billing_details_telephone_field_positive(self, test_input: str) -> None:
@@ -167,6 +177,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_personal_details_form.telephone_field \
             .error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_telephone_field_negative.csv'))
     def test_guest_checkout_billing_details_telephone_field_negative(self, test_input: str, expected: str) -> None:
@@ -183,6 +194,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .your_personal_details_form.telephone_field \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_city_field-negative.csv'))
     def test_guest_checkout_billing_details_city_field_negative(self, test_input: str, expected: str) -> None:
@@ -199,6 +211,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .your_address_form.city_field \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input',
                              get_test_data('checkout_page/test_data_checkout_page_city_field-positive.csv'))
     def test_guest_checkout_billing_details_city_field_positive(self, test_input: str) -> None:
@@ -213,6 +226,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_address_form.city_field \
             .error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     def test_guest_checkout_billing_details_email_positive(self) -> None:
         """Check 'Email' field with invalid data in 'Step 2: Billing Details' tab.
         :return: None
@@ -223,6 +237,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_personal_details_form \
             .email_field.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('email, error_message',
                              get_test_data('checkout_page/test_data_checkout_page_email-negative.csv'))
     def test_guest_checkout_billing_details_email_negative(self, email: str, error_message: str) -> None:
@@ -238,6 +253,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert self.checkout_page.open_billing_details.your_personal_details_form \
                    .email_field.error_message.get_error_message() == error_message
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_post_code_negative.csv'))
     def test_guest_checkout_billing_details_post_code_field_negative(self, test_input: str, expected: str) -> None:
@@ -254,6 +270,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .your_address_form.post_code_field \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input',
                              get_test_data('checkout_page/test_data_checkout_page_post_code_positive.csv'))
     def test_guest_checkout_billing_details_post_code_field_positive(self, test_input: str) -> None:
@@ -269,6 +286,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert not self.checkout_page.open_billing_details.your_address_form.post_code_field \
             .error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     def test_guest_checkout_billing_details_country_positive(self) -> None:
         """Check the 'Country' field with valid data in 'Step 2: Billing Details' tab.
 
@@ -278,6 +296,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.country.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
                              get_test_data('checkout_page/test_data_checkout_page_country-negative.csv'))
     def test_guest_checkout_billing_details_country_negative(self, test_input: str, expected: str) -> None:
@@ -292,6 +311,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert self.checkout_page.open_billing_details.your_address_form.country \
                    .error_message.get_error_message() == expected
 
+    @allure.severity(allure.severity_level.MINOR)
     def test_guest_checkout_billing_details_region_positive(self) -> None:
         """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
 
@@ -302,6 +322,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         self.checkout_page.open_billing_details.click_continue_button_billing_details()
         assert not self.checkout_page.open_billing_details.your_address_form.region.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.NORMAL)
     def test_guest_checkout_billing_details_region_negative(self) -> None:
         """Check the 'Region' field with valid data in 'Step 2: Billing Details' tab.
 
@@ -313,6 +334,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .error_message.get_error_message() == CheckoutPageConstants.REGION_FIELD_ERROR_MESSAGE
 
 
+@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageRegister(TestCheckoutPage):
 
     def setup(self) -> None:
@@ -324,6 +346,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
         self.checkout_page.open_checkout_options.click_register_account_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_checkout_register_account_valid_data(self):
         """Check the functionality of checkout process with register account and valid data."""
 
