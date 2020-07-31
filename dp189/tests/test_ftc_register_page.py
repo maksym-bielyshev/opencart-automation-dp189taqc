@@ -1,6 +1,7 @@
 """Module for the testing 'Register' page."""
 
 import pytest
+import allure
 from dp189.pages.register_page import RegisterPage
 from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
@@ -8,6 +9,7 @@ from dp189.tests.conftest import get_test_data
 from dp189.routes import *
 
 
+@allure.severity(allure.severity_level.NORMAL)
 class TestRegisterPage(BaseTest):
     """Class for the 'Register' page."""
 
@@ -24,6 +26,7 @@ class TestRegisterPage(BaseTest):
 
         self.register_page = RegisterPage(self.driver)
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input', get_test_data('register_page/first_name_positive.csv'))
     def test_check_first_name_field_valid_data(self, test_input: str) -> None:
         """Check the 'First name' field with valid data on register page.
