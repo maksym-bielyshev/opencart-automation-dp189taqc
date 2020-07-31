@@ -653,21 +653,19 @@ class LoginComponent:
         :return: None
         """
         self._driver = driver
-        self.email_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.EMAIL_INPUT)
-        self.password_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.PASSWORD_INPUT)
+        self.email_field = InputFieldComponent(self._driver, LocatorsLoginComponent.EMAIL_INPUT)
+        self.password_field = InputFieldComponent(self._driver, LocatorsLoginComponent.PASSWORD_INPUT)
 
     def click_forgotten_password(self) -> None:
         """Click forgotten password button to restore password.
 
         :return: None
         """
-        self.forgotten_password_button = self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON)
-        self.forgotten_password_button.click()
+        self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON).click()
 
     def click_login_button(self) -> None:
         """Click login button to return the user to the system.
 
         :return: None
         """
-        self.login_button = self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON)
-        self.login_button.click()
+        self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON).click()
