@@ -67,7 +67,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
         assert self.checkout_page.get_title.get_title_page('Your order has been placed!')
 
     @pytest.mark.parametrize('first_name,error_message',
-                             get_test_data('test_data_checkout_page_first_name-negative.csv'))
+                             get_test_data('checkout_page/test_data_checkout_page_first_name-negative.csv'))
     def test_guest_checkout_billing_details_first_name_negative(self, first_name: str, error_message: str) -> None:
         """Check 'First Name' field with invalid data in 'Step 2: Billing Details' tab.
 
