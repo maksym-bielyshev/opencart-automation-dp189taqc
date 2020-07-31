@@ -143,8 +143,7 @@ class TestAvailableOptions(BaseTest):
         tomorrow = str(today + datetime.timedelta(days=1))
         self.product_page.available_options.data_field.clear_and_fill_input_field(tomorrow)
         self.product_page.available_options.click_add_to_cart_button()
-        expected_result = False
-        assert self.product_page.available_options.data_field.error_message.get_error_message() == expected_result
+        assert not self.product_page.available_options.data_field.error_message.get_error_message()
 
     def test_time_field_is_not_filled(self) -> None:
         """Test for checking if available option Time is empty and it will be error message for this option after attempt
@@ -196,8 +195,7 @@ class TestAvailableOptions(BaseTest):
         """
         self.product_page.available_options.time.clear_and_fill_input_field(time_field_input)
         self.product_page.available_options.click_add_to_cart_button()
-        expected_result = False
-        assert self.product_page.available_options.time.error_message.get_error_message() == expected_result
+        assert not self.product_page.available_options.time.error_message.get_error_message()
 
     def test_text_field_not_filled(self) -> None:
         """Test for checking if available option Text is empty. There will be error message for this option after
@@ -221,8 +219,7 @@ class TestAvailableOptions(BaseTest):
         """
         self.product_page.available_options.text_field.clear_and_fill_input_field(text_field_input)
         self.product_page.available_options.click_add_to_cart_button()
-        expected_result = False
-        assert self.product_page.available_options.text_field.error_message.get_error_message() == expected_result
+        assert not self.product_page.available_options.text_field.error_message.get_error_message()
 
     def test_text_field_is_filled_invalid_data(self) -> None:
         """Test for checking if available option Text is filled with text string that is longer than 40 characters.
@@ -256,8 +253,7 @@ class TestAvailableOptions(BaseTest):
         """
         self.product_page.available_options.quantity.clear_and_fill_input_field('5')
         self.product_page.available_options.click_add_to_cart_button()
-        expected_result = False
-        assert self.product_page.available_options.quantity.error_message.get_error_message() == expected_result
+        assert not self.product_page.available_options.quantity.error_message.get_error_message()
 
     def test_quantity_field_is_filled_invalid_data(self) -> None:
         """Test for checking if available option Quantity field is filled with invalid data: less than 2.
