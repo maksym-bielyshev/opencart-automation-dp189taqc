@@ -188,7 +188,7 @@ class TestRegisterPage(BaseTest):
 
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected', get_test_data('register_page/field_password_confirm_invalid.csv'))
-    def test_check_password_field_invalid_data(self, test_input: str, expected: str) -> None:
+    def test_check_password_confirm_field_invalid_data(self, test_input: str, expected: str) -> None:
         """Check the 'Password Confirm' field with invalid data on the register page.
 
         :param test_input: test data for the 'Password Confirm' field
