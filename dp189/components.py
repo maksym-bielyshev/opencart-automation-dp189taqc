@@ -506,26 +506,43 @@ class CatchMessageComponent:
         """Initialize a driver to CatchMessageComponent."""
         self._driver = driver
 
-    def get_info_message(self) -> str:
-        """Get message such as 'Info:'."""
-        info_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
-        )
-        return info_message.text
+    def get_info_message(self):
+        """Get message such as 'Info:'.
 
-    def get_success_message(self) -> str:
-        """Get message such as 'Success:'."""
-        success_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
-        )
-        return success_message.text
+        :returns str or None"""
+        try:
+            info_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
+            )
+            return info_message.text
+        except TimeoutException:
+            return None
 
-    def get_danger_message(self) -> str:
-        """Get message such as 'Danger:'."""
-        danger_message = WebDriverWait(self._driver, 3).until(
-            EC.presence_of_element_located(LocatorsInfoMessages.ALERT_DANGER_MESSAGE)
-        )
-        return danger_message.text
+    def get_success_message(self):
+        """Get message such as 'Success:'.
+
+        :returns str or None"""
+        try:
+            success_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
+            )
+            return success_message.text
+        except TimeoutException:
+            return None
+
+    def get_danger_message(self):
+        """Get message such as 'Danger:' or 'Warning:'.
+
+        :returns str or None
+        """
+        try:
+            danger_message = WebDriverWait(self._driver, 3).until(
+                EC.presence_of_element_located(LocatorsInfoMessages.ALERT_DANGER_MESSAGE)
+            )
+            return danger_message.text
+        except TimeoutException:
+            return None
+
 
 
 class NewsletterComponent:
