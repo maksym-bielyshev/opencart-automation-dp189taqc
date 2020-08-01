@@ -7,6 +7,7 @@ from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
+from dp189.constants import RegistrationPageConstants
 
 
 @allure.severity(allure.severity_level.NORMAL)
@@ -138,3 +139,23 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
         assert self.register_page.your_password_form.password_field \
                    .error_message.get_error_message() == expected
+
+    @allure.severity(allure.severity_level.NORMAL)
+    def test_checked_privacy_policy(self) -> None:
+        """Check for no warning message if "Privacy Policy" is checked.
+
+        :return:None
+        """
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+        assert not self.register_page.catch_info_message.get_danger_message()
+
+    @allure.severity(allure.severity_level.MINOR)
+    def test_unchecked_privacy_policy(self) -> None:
+        """Check displaying warning message if 'Privacy Policy' is unchecked.
+
+        :return:None
+        """
+        self.register_page.click_continue_button()
+        assert self.register_page.catch_info_message.get_danger_message() == \
+               RegistrationPageConstants.PRIVACY_POLICY_WARNING_MESSAGE
