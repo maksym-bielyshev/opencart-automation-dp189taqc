@@ -185,3 +185,19 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
         assert self.register_page.catch_info_message.get_danger_message() == \
                RegistrationPageConstants.PRIVACY_POLICY_WARNING_MESSAGE
+
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize('test_input,expected', get_test_data('register_page/field_password_confirm_invalid.csv'))
+    def test_check_password_field_invalid_data(self, test_input: str, expected: str) -> None:
+        """Check the 'Password Confirm' field with invalid data on the register page.
+
+        :param test_input: test data for the 'Password Confirm' field
+        :param expected: expected result for the 'Password Confirm' field
+        :return: None
+        """
+        self.register_page.your_password_form.password_field.clear_and_fill_input_field('testpass')
+        self.register_page.your_password_form.password_confirm_field.clear_and_fill_input_field(test_input)
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+        assert self.register_page.your_password_form.password_confirm_field \
+                   .error_message.get_error_message() == expected
