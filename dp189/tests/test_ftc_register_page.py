@@ -51,3 +51,16 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
 
         assert not self.register_page.your_personal_details_form.email_field.error_message.get_error_message()
+
+    @allure.severity(allure.severity_level.MINOR)
+    @pytest.mark.parametrize('test_input', get_test_data('register_page/field_password.csv'))
+    def test_check_password_field_valid_data(self, test_input: str) -> None:
+        """Check the 'Password' field with valid data on register page.
+
+        :param test_input: test data for 'Password' field
+        :return:None
+        """
+        self.register_page.your_password_form.password_field.clear_and_fill_input_field(test_input)
+        self.register_page.click_continue_button()
+
+        assert not self.register_page.your_password_form.password_field.error_message.get_error_message()
