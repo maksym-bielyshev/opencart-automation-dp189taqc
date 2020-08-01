@@ -41,6 +41,21 @@ class TestRegisterPage(BaseTest):
 
         assert not self.register_page.your_personal_details_form.first_name_field.error_message.get_error_message()
 
+    @pytest.mark.parametrize('test_input', get_test_data('register_page/field_last_name.csv'))
+    def test_check_last_name_field_valid_data(self, test_input: str) -> None:
+        """Check the 'Last name' field with valid data on the register page.
+
+        :param test_input: test data for the 'last name' field
+        :return: None
+        """
+
+        self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(test_input)
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+
+        assert not self.register_page.your_personal_details_form.last_name_field.error_message.get_error_message()
+
+
     def test_check_email_field_valid_data(self) -> None:
         """Check the 'Email' field with valid data on register page.
 
