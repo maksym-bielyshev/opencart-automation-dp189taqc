@@ -27,7 +27,7 @@ class TestRegisterPage(BaseTest):
         self.register_page = RegisterPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.parametrize('first_name', get_test_data('register_page/first_name_positive.csv'))
+    @pytest.mark.parametrize('first_name', get_test_data('register_page/field_first_name_valid.csv'))
     def test_check_first_name_field_valid_data(self, first_name: str) -> None:
         """Check the 'First name' field with valid data on register page.
 
@@ -81,18 +81,31 @@ class TestRegisterPage(BaseTest):
                    .error_message.get_error_message() == expected
 
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.parametrize('last_name,error_message', get_test_data('register_page/last_name_negative.csv'))
-    def test_check_last_name_field_invalid_data(self, last_name: str, error_message: str) -> None:
+    @pytest.mark.parametrize('test_input,error_message', get_test_data('register_page/field_last_name_invalid.csv'))
+    def test_check_last_name_field_invalid_data(self, test_input: str, error_message: str) -> None:
         """Check the 'First name' field with valid data on register page.
 
-        :param last_name: test data for 'Last name' field
+        :param test_input: test data for 'Last name' field
         :param error_message: error message under 'Last Name' field
         :return: None
         """
 
-        self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(last_name)
+        self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(test_input)
         self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
         self.register_page.click_continue_button()
 
         assert self.register_page.your_personal_details_form.last_name_field.error_message.\
             get_error_message() == error_message
+
+    @allure.severity(allure.severity_level.MINOR)
+    def test_check_confirm_password_field_valid_data(self):
+        """Check the 'Confirm password' field with valid data on register page.
+
+        :return: None
+        """
+        self.register_page.your_password_form.password_field.clear_and_fill_input_field('testpass')
+        self.register_page.your_password_form.password_confirm_field.clear_and_fill_input_field('testpass')
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+
+        assert not self.register_page.your_password_form.password_confirm_field.error_message.get_error_message()
