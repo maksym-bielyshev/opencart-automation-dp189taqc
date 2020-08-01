@@ -27,7 +27,7 @@ class TestRegisterPage(BaseTest):
         self.register_page = RegisterPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.parametrize('test_input', get_test_data('register_page/first_name_positive.csv'))
+    @pytest.mark.parametrize('test_input', get_test_data('register_page/field_first_name_valid.csv'))
     def test_check_first_name_field_valid_data(self, test_input: str) -> None:
         """Check the 'First name' field with valid data on register page.
 
@@ -95,7 +95,7 @@ class TestRegisterPage(BaseTest):
                    .error_message.get_error_message() == expected
 
     @allure.severity(allure.severity_level.MINOR)
-    @pytest.mark.parametrize('test_input,error_message', get_test_data('register_page/last_name_negative.csv'))
+    @pytest.mark.parametrize('test_input,error_message', get_test_data('register_page/field_last_name_invalid.csv'))
     def test_check_last_name_field_invalid_data(self, test_input: str, error_message: str) -> None:
         """Check the 'First name' field with valid data on register page.
 
