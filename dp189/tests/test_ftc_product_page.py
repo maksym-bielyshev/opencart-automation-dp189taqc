@@ -1,5 +1,6 @@
 """Module for the testing 'Product' page."""
 import datetime
+import random
 import pytest
 import allure
 
@@ -343,4 +344,22 @@ class TestAvailableOptions(BaseTest):
         """
         self.product_page.click_add_to_wish_list_button()
         info_message = 'Success: You have added Apple Cinema 30" to your wish list!'
+        assert info_message in self.product_page.catch_info_message.get_success_message()
+
+    @allure.severity(allure.severity_level.MINOR)
+    def test_add_review_to_product_valid_data(self) -> None:
+        """Checking the product review form with valid data.
+
+        :return: None
+        """
+        self.product_page.click_reviews_tab()
+        self.product_page.reviews_tab.your_name.clear_and_fill_input_field("Test name")
+        self.product_page.reviews_tab.your_review.clear_and_fill_input_field("Lorem ipsum dolor sit amet, an minimum "
+                                                                             "oportere nec, ut nec fabulas suscipit. "
+                                                                             "Te nam fugit bonorum dolorum. Clita "
+                                                                             "argumentum eu est, eligendi adipiscing "
+                                                                             "eloquentiam cu mea. In aeterno epicurei.")
+        self.product_page.reviews_tab.choose_review_rating(random.randint(1, 5))
+        self.product_page.reviews_tab.click_review_continue_button()
+        info_message = 'Thank you for your review. It has been submitted to the webmaster for approval.'
         assert info_message in self.product_page.catch_info_message.get_success_message()
