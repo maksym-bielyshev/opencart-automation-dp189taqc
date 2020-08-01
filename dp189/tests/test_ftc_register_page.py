@@ -138,3 +138,17 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
         assert self.register_page.your_password_form.password_field \
                    .error_message.get_error_message() == expected
+
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize('test_input,expected', get_test_data('register_page/field_email_invalid.csv'))
+    def test_check_email_field_invalid_data(self, test_input: str, expected: str) -> None:
+        """Check the 'E-mail' field with invalid data on the register page.
+
+        :param test_input: test data for the 'E-mail' field
+        :param expected: expected result for 'E-mail' field
+        :return: None
+        """
+        self.register_page.your_personal_details_form.email_field.clear_and_fill_input_field(test_input)
+        self.register_page.click_continue_button()
+        assert self.register_page.your_personal_details_form.email_field \
+                   .error_message.get_error_message() == expected
