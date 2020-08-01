@@ -452,7 +452,7 @@ class DropdownComponent:
 
 
 class ErrorMessageComponent:
-    """Error message for input fields, radio buttons, checkboxes, drop-down menus."""
+    """Error message for input fields, radio buttons, checkboxes, drop-down menus and date, time input fields."""
 
     def __init__(self, driver: Remote, element_locator: tuple) -> None:
         """Initialize element locator to find error message for it.
@@ -465,9 +465,10 @@ class ErrorMessageComponent:
         self.element_locator = element_locator
 
     def get_error_message(self):
-        """Get error message. This method has other error message locator for Date input and Time input fields.
+        """Get error message. If there is no error message, None will be returned.
+        This method has other error message locator for Date input and Time input fields.
 
-        :return: str
+        :return: str or None
         """
         try:
             if '@data-date-format' in self.element_locator[1]:
@@ -480,7 +481,7 @@ class ErrorMessageComponent:
             )
             return error_message.text
         except TimeoutException:
-            return False
+            return None
 
 
 class CatchPageTitleComponent:
@@ -652,21 +653,19 @@ class LoginComponent:
         :return: None
         """
         self._driver = driver
-        self.email_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.EMAIL_INPUT)
-        self.password_field = InputFieldComponent(self._driver, *LocatorsLoginComponent.PASSWORD_INPUT)
+        self.email_field = InputFieldComponent(self._driver, LocatorsLoginComponent.EMAIL_INPUT)
+        self.password_field = InputFieldComponent(self._driver, LocatorsLoginComponent.PASSWORD_INPUT)
 
     def click_forgotten_password(self) -> None:
         """Click forgotten password button to restore password.
 
         :return: None
         """
-        self.forgotten_password_button = self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON)
-        self.forgotten_password_button.click()
+        self._driver.find_element(*LocatorsLoginComponent.FORGOTTEN_PASSWORD_BUTTON).click()
 
     def click_login_button(self) -> None:
         """Click login button to return the user to the system.
 
         :return: None
         """
-        self.login_button = self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON)
-        self.login_button.click()
+        self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON).click()
