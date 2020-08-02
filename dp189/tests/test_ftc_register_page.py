@@ -140,32 +140,10 @@ class TestRegisterPage(BaseTest):
                    .error_message.get_error_message() == expected
 
     @allure.severity(allure.severity_level.NORMAL)
-    @pytest.mark.parametrize('first_name_field,'
-                             'last_name_field,'
-                             'email_field,'
-                             'telephone_field,'
-                             'password_field,'
-                             'password_confirm_field',
-                             [
-                                 ('q', 'a', 'ww1@gmail.com', '312', '1234', '1234'),
-
-                                 ('eqewew', 'weweww', 'ww2@gmail.com', '312321', '21213213', '21213213'),
-
-                                 ('eqeweweqeweweqeweweqeweweqewewwe',
-                                  'eqeweweqeweweqeweweqeweweqewewwe',
-                                  'ww3@gmail.com',
-                                  '11111111111111111111111111111111',
-                                  '11111111111111111111111111111111',
-                                  '11111111111111111111111111111111')
-                             ]
-                             )
-    def test_registration_form(self,
-                               first_name_field,
-                               last_name_field,
-                               email_field,
-                               telephone_field,
-                               password_field,
-                               password_confirm_field) -> None:
+    @pytest.mark.parametrize('first_name_field,last_name_field,email_field,telephone_field,password_field,'
+                             'password_confirm_field',get_test_data('register_page/registration_form_positive.csv'))
+    def test_registration_form(self, first_name_field: str, last_name_field: str, email_field: str,
+                               telephone_field: str, password_field: str, password_confirm_field: str) -> None:
         """Check the registration form on the registration page.
 
         :return: None
