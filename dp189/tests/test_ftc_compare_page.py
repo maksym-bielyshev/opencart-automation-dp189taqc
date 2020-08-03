@@ -13,7 +13,6 @@ from dp189.routes import *
 @allure.severity(allure.severity_level.NORMAL)
 class TestComparePage(BaseTest):
     def setup(self):
-        super().setup()
         self.driver.maximize_window()
         self.driver.get(HOME_PAGE_URL)
         self.page = HomePage(self.driver)
@@ -26,7 +25,7 @@ class TestComparePage(BaseTest):
     @allure.severity(allure.severity_level.NORMAL)
     def test_add_product_to_cart_without_option(self):
         self.page.click_add_to_cart_button(ComparePageConstants.TEST_ITEM1)
-        message = self.page.catch_info_message.get_info_message()
+        message = self.page.catch_info_message.get_success_message()
         assert message == ComparePageConstants.RESULT
 
     @allure.severity(allure.severity_level.NORMAL)
@@ -38,8 +37,5 @@ class TestComparePage(BaseTest):
     @allure.severity(allure.severity_level.MINOR)
     def test_remove_item_from_cart(self):
         self.page.click_remove_button(ComparePageConstants.TEST_ITEM1)
-        message = self.page.catch_info_message.get_info_message()
+        message = self.page.catch_info_message.get_success_message()
         assert message == ComparePageConstants.RESULT3
-
-    def teardown(self):
-        self.driver.close()
