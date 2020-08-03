@@ -20,3 +20,7 @@ class ShoppingCartPageConstants:
 
 class CheckoutPageConstants:
     REGION_FIELD_ERROR_MESSAGE = 'Please select a region / state!'
+
+
+class RegistrationPageConstants:
+    PRIVACY_POLICY_WARNING_MESSAGE = 'Warning: You must agree to the Privacy Policy!'
