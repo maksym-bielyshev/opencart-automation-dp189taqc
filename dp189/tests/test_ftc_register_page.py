@@ -218,3 +218,23 @@ class TestRegisterPage(BaseTest):
 
         assert self.register_page.your_personal_details_form.first_name_field.error_message.\
                    get_error_message() == expected
+
+    @allure.severity(allure.severity_level.NORMAL)
+    @pytest.mark.parametrize('first_name_field,last_name_field,email_field,telephone_field,password_field,'
+                             'password_confirm_field',get_test_data('register_page/registration_form_positive.csv'))
+    def test_registration_form(self, first_name_field: str, last_name_field: str, email_field: str,
+                               telephone_field: str, password_field: str, password_confirm_field: str) -> None:
+        """Check the registration form on the registration page.
+
+        :return: None
+        """
+        self.register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field(first_name_field)
+        self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(last_name_field)
+        self.register_page.your_personal_details_form.email_field.clear_and_fill_input_field(email_field)
+        self.register_page.your_personal_details_form.telephone_field.clear_and_fill_input_field(telephone_field)
+        self.register_page.your_password_form.password_field.clear_and_fill_input_field(password_field)
+        self.register_page.your_password_form.password_confirm_field.clear_and_fill_input_field(password_confirm_field)
+        self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
+        self.register_page.click_continue_button()
+
+        assert self.register_page.get_title.get_title_page('Your Account Has Been Created!')
