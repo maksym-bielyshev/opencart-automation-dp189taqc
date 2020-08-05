@@ -481,7 +481,7 @@ class ErrorMessageComponent:
             )
             return error_message.text
         except TimeoutException:
-            return None
+            return ''
 
 
 class CatchPageTitleComponent:
@@ -506,34 +506,34 @@ class CatchMessageComponent:
         """Initialize a driver to CatchMessageComponent."""
         self._driver = driver
 
-    def get_info_message(self):
+    def get_info_message(self) -> str:
         """Get message such as 'Info:'.
 
-        :returns str or None"""
+        :returns str"""
         try:
             info_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
             )
             return info_message.text
         except TimeoutException:
-            return None
+            return ''
 
-    def get_success_message(self):
+    def get_success_message(self) -> str:
         """Get message such as 'Success:'.
 
-        :returns str or None"""
+        :returns str"""
         try:
             success_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
             )
             return success_message.text
         except TimeoutException:
-            return None
+            return ''
 
-    def get_danger_message(self):
+    def get_danger_message(self) -> str:
         """Get message such as 'Danger:' or 'Warning:'.
 
-        :returns str or None
+        :returns str
         """
         try:
             danger_message = WebDriverWait(self._driver, 5).until(
@@ -541,8 +541,7 @@ class CatchMessageComponent:
             )
             return danger_message.text
         except TimeoutException:
-            return None
-
+            return ''
 
 
 class NewsletterComponent:

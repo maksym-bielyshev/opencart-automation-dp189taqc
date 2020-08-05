@@ -29,7 +29,7 @@ class TestShoppingCart(BaseTest):
         """
         self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, '5')
 
-        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_success_message()
 
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected',
@@ -50,7 +50,7 @@ class TestShoppingCart(BaseTest):
         self.cart.coupon_panel.coupon_field.clear_and_fill_input_field('2222')
         self.cart.coupon_panel.click_apply_coupon_button()
 
-        assert ShoppingCartPageConstants.RESULT4 in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT4 in self.cart.catch_info_message.get_success_message()
 
     @allure.severity(allure.severity_level.MINOR)
     def test_shopping_cart_click_remove_button(self):
@@ -71,7 +71,7 @@ class TestShoppingCart(BaseTest):
             ShoppingCartPageConstants.TEST_ITEM2)
         self.cart.estimate_shipping_panel.click_modal_apply_shipping_button()
 
-        assert ShoppingCartPageConstants.RESULT5 in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT5 in self.cart.catch_info_message.get_success_message()
 
     @allure.severity(allure.severity_level.MINOR)
     def test_checkout_button(self):
@@ -83,7 +83,7 @@ class TestShoppingCart(BaseTest):
     def test_catch_info_message_update_quantity(self):
         """Positive test for catching info message about update quantity of products in shopping cart"""
         self.cart = self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, "2")
-        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_info_message()
+        assert ShoppingCartPageConstants.RESULT in self.cart.catch_info_message.get_success_message()
 
     @allure.severity(allure.severity_level.MINOR)
     def test_total_price_of_product(self):

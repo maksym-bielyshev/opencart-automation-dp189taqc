@@ -35,7 +35,7 @@ class TestCheckoutPageGuest(TestCheckoutPage):
 
         :return: None
         """
-        super(TestCheckoutPageGuest, self).setup()
+        super().setup()
         self.checkout_page.open_checkout_options.click_guest_checkout_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 
@@ -342,7 +342,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
 
         :return: None
         """
-        super(TestCheckoutPageRegister, self).setup()
+        super().setup()
         self.checkout_page.open_checkout_options.click_register_account_radio_button()
         self.checkout_page.open_checkout_options.click_continue_button()
 

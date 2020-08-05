@@ -71,12 +71,12 @@ class TestAvailableOptions(BaseTest):
         to add product to cart.
 
         :param checkbox_option: str (example: Checkbox 1 (+$10.00))
-        :param expected_result: str (example: Checkbox 2 (+$20.00)
+        :param expected_result: str (example: Checkbox 2 (+$20.00))
         :return: None
         """
         self.product_page.available_options.checkbox.choose_checkbox_option(checkbox_option)
         self.product_page.available_options.click_add_to_cart_button()
-        assert self.product_page.available_options.checkbox.which_option_is_chosen() == expected_result
+        assert self.product_page.available_options.checkbox.which_option_is_chosen()[0] == expected_result
 
     @allure.severity(allure.severity_level.MINOR)
     def test_color_is_not_selected(self) -> None:
