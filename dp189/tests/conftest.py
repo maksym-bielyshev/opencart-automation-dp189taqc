@@ -13,10 +13,8 @@ CHROME_DRIVER_LINUX64 = '../driver/chromedriver'
 def init_driver(request):
     options = Options()
     options.add_argument('--ignore-certificate-errors')
-    # driver = webdriver.Chrome(CHROME_DRIVER_WIN32, options=options)
     driver = webdriver.Remote(
         command_executor='http://127.0.0.1:4444/wd/hub',
-        # desired_capabilities={'browserName': 'chrome', 'version': '2', 'javascriptEnabled': True},
         desired_capabilities=DesiredCapabilities.CHROME,
         options=options)
     request.cls.driver = driver
