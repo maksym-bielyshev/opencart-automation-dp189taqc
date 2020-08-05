@@ -511,7 +511,7 @@ class CatchMessageComponent:
 
         :returns str or None"""
         try:
-            info_message = WebDriverWait(self._driver, 3).until(
+            info_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
             )
             return info_message.text
