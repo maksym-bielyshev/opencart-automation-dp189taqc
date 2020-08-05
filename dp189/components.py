@@ -76,12 +76,12 @@ class BasePageNavBarComponent:
 
     def __init__(self, driver):
         self._driver = driver
-        self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
-        self.nav_bar = driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
+        # self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
+        self.nav_bar = self._driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
 
     def change_currency(self, specific_currency: str):
         # """EUR, USD, GBP"""
-        self.currency.click()
+        self._driver.find_element(*LocatorsBasePageNavBar.CURRENCY).click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
     def click_contact_us_link(self):

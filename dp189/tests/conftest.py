@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime
 
+from _pytest.fixtures import FixtureRequest
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 import pytest
@@ -8,22 +9,18 @@ from selenium import webdriver
 
 
 @pytest.fixture(scope="function")
-def init_driver(request):
+def init_driver(request: FixtureRequest):
+    options = Options()
+    options.add_argument('--ignore-certificate-errors')
+    driver = webdriver.Remote(
+        command_executor='http://127.0.0.1:4444/wd/hub',
+        desired_capabilities=DesiredCapabilities.CHROME,
+        options=options)
 
-    try:
-        options = Options()
-        options.add_argument('--ignore-certificate-errors')
-        driver = webdriver.Remote(
-            command_executor='http://127.0.0.1:4444/wd/hub',
-            desired_capabilities=DesiredCapabilities.CHROME,
-            options=options)
-        request.cls.driver = driver
-        driver.implicitly_wait(10)
-        yield driver
-    except Exception as e:
-        print(e)
-        now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        driver.get_screenshot_as_file('screenshot-%s.png' % now)
+    request.cls.driver = driver
+    driver.implicitly_wait(10)
+
+    yield driver
 
     driver.close()
 

@@ -86,7 +86,7 @@ class BillingDetails:
         self.your_address_form = AddAddressComponent(self._driver, self.get_your_personal_details_form())
 
     def get_your_personal_details_form(self):
-        return WebDriverWait(self._driver, 5).until(
+        return WebDriverWait(self._driver, 10).until(
             EC.presence_of_element_located(LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT))
 
     def click_continue_button_billing_details(self) -> None:
