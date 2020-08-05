@@ -5,9 +5,6 @@ from selenium.webdriver.chrome.options import Options
 import pytest
 from selenium import webdriver
 
-CHROME_DRIVER_WIN32 = '../driver/chromedriver.exe'
-CHROME_DRIVER_LINUX64 = '../driver/chromedriver'
-
 
 @pytest.fixture(scope="function")
 def init_driver(request):
