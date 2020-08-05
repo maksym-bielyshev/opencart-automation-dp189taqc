@@ -476,7 +476,7 @@ class ErrorMessageComponent:
             else:
                 error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
 
-            error_message = WebDriverWait(self._driver, 3).until(
+            error_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, error_message_locator))
             )
             return error_message.text
@@ -495,7 +495,7 @@ class CatchPageTitleComponent:
 
         :return: str
         """
-        WebDriverWait(self._driver, 3).until(EC.title_is(page_title))
+        WebDriverWait(self._driver, 5).until(EC.title_is(page_title))
         return page_title
 
 
@@ -523,7 +523,7 @@ class CatchMessageComponent:
 
         :returns str or None"""
         try:
-            success_message = WebDriverWait(self._driver, 3).until(
+            success_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
             )
             return success_message.text
@@ -536,7 +536,7 @@ class CatchMessageComponent:
         :returns str or None
         """
         try:
-            danger_message = WebDriverWait(self._driver, 3).until(
+            danger_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_DANGER_MESSAGE)
             )
             return danger_message.text

@@ -15,7 +15,7 @@ def init_driver(request):
         desired_capabilities=DesiredCapabilities.CHROME,
         options=options)
     request.cls.driver = driver
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(15)
 
     yield driver
 

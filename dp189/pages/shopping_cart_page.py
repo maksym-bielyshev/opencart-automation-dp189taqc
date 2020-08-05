@@ -153,7 +153,7 @@ class ShoppingCartPage(BasePage):
 
         :return: string content text
         """
-        cart_message = WebDriverWait(self._driver, 3).until(
+        cart_message = WebDriverWait(self._driver, 5).until(
             EC.presence_of_element_located(LocatorsShoppingCartPage.CONTENT_EMPTY_CART)
         )
         return cart_message.text
