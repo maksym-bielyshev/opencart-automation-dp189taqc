@@ -76,12 +76,19 @@ class BasePageNavBarComponent:
 
     def __init__(self, driver):
         self._driver = driver
-        # self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
-        self.nav_bar = self._driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
+        self.nav_bar = self.wait_load_nav_bar()
+
+    def wait_load_nav_bar(self):
+        return WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsBasePageNavBar.NAVBAR)
+        )
 
     def change_currency(self, specific_currency: str):
         # """EUR, USD, GBP"""
-        self._driver.find_element(*LocatorsBasePageNavBar.CURRENCY).click()
+        currency_button = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsBasePageNavBar.CURRENCY)
+        )
+        currency_button.click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
     def click_contact_us_link(self):
@@ -476,7 +483,7 @@ class ErrorMessageComponent:
             else:
                 error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
 
-            error_message = WebDriverWait(self._driver, 5).until(
+            error_message = WebDriverWait(self._driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, error_message_locator))
             )
             return error_message.text

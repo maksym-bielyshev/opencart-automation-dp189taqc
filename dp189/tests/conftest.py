@@ -21,6 +21,9 @@ def init_driver(request: FixtureRequest):
     driver.implicitly_wait(10)
 
     yield driver
+    # if request.session.testsfailed:
+    #     now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    #     driver.get_screenshot_as_file('screenshot-%s.png' % now)
 
     driver.close()
 
