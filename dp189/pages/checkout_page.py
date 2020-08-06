@@ -43,7 +43,7 @@ class CheckoutOptions:
 
     def click_checkout_options_form(self) -> None:
         checkout_options_form = WebDriverWait(self._driver, 5).until(
-            EC.element_to_be_clickable(LocatorsCheckoutPage.CHECKOUT_OPTIONS_FORM))
+            EC.element_to_be_clickable(LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT))
         checkout_options_form.click()
 
     def click_register_account_radio_button(self) -> None:
@@ -86,7 +86,7 @@ class BillingDetails:
         self.your_address_form = AddAddressComponent(self._driver, self.get_your_personal_details_form())
 
     def get_your_personal_details_form(self):
-        return WebDriverWait(self._driver, 10).until(
+        return WebDriverWait(self._driver, 20).until(
             EC.presence_of_element_located(LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT))
 
     def click_continue_button_billing_details(self) -> None:
@@ -115,7 +115,7 @@ class AccountAndBillingDetails:
         self.your_address_from = AddAddressComponent(self._driver, self.get_your_personal_details_form())
 
     def get_your_personal_details_form(self):
-        return WebDriverWait(self._driver, 5).until(
+        return WebDriverWait(self._driver, 20).until(
             EC.presence_of_element_located(LocatorsCheckoutPage.YOUR_ADDRESS_ACCOUNT_AND_BILLING_DETAILS_PARENT))
 
     def click_newsletter_checkbox(self) -> None:

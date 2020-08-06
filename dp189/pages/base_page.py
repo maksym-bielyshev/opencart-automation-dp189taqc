@@ -9,7 +9,7 @@ from ..locators import LocatorsBasePageNavBar
 class BasePage:
     def __init__(self, driver: Remote):
         self._driver = driver
-        self.top_nav_bar = BasePageNavBarComponent(driver)
+        # self.top_nav_bar = BasePageNavBarComponent(driver)
         self.main_menu_desktops = DropdownComponent(driver, LocatorsBasePageMainMenu.DESKTOPS)
         self.main_menu_laptops_notebooks = DropdownComponent(driver, LocatorsBasePageMainMenu.LAPTOPS_NOTEBOOKS)
         self.main_menu_components = DropdownComponent(driver, LocatorsBasePageMainMenu.COMPONENTS)
