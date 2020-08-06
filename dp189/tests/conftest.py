@@ -1,7 +1,9 @@
 import csv
 from datetime import datetime
 
+import allure
 from _pytest.fixtures import FixtureRequest
+from allure_commons.types import AttachmentType
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 import pytest
@@ -21,11 +23,6 @@ def init_driver(request: FixtureRequest):
     driver.implicitly_wait(10)
 
     yield driver
-    # if request.session.testsfailed:
-    #     now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    #     driver.get_screenshot_as_file('screenshot-%s.png' % now)
-
-    driver.close()
 
 
 def get_test_data(file_name: str) -> list:
