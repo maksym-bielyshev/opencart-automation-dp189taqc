@@ -1,5 +1,5 @@
 from selenium.webdriver import Remote
-
+import time
 from ..components import BasePageNavBarComponent, DropdownComponent, InputFieldComponent, ShopCartButtonComponent
 from ..components import CatchMessageComponent, CatchPageTitleComponent
 from dp189.locators import LocatorsBasePageMainMenu, LocatorYourStoreLink, LocatorBasePageSearch
@@ -34,5 +34,5 @@ class BasePage:
         self.my_account.find_element(*LocatorsBasePageNavBar.REGISTER).click()
 
     def find_element(self, locator):
-        self._driver.implicitly_wait(5)
+        time.sleep(1)
         return self._driver.find_element(*locator)
