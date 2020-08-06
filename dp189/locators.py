@@ -12,7 +12,7 @@ class LocatorsBasePageNavBar:
 
     NAVBAR = (By.CLASS_NAME, 'list-inline')
     MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
-    CURRENCY = (By.CLASS_NAME, 'btn-group')
+    CURRENCY = (By.XPATH, '//span[text()="Currency"]/../..')
     USD = (By.XPATH, './/ul/li[3]/button')
     POUND = (By.XPATH, './/ul/li[2]/button')
     EUR = (By.XPATH, './/ul/li[1]/button')

@@ -76,12 +76,19 @@ class BasePageNavBarComponent:
 
     def __init__(self, driver):
         self._driver = driver
-        self.currency = driver.find_element(*LocatorsBasePageNavBar.CURRENCY)
-        self.nav_bar = driver.find_element(*LocatorsBasePageNavBar.NAVBAR)
+        self.nav_bar = self.wait_load_nav_bar()
+
+    def wait_load_nav_bar(self):
+        return WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsBasePageNavBar.NAVBAR)
+        )
 
     def change_currency(self, specific_currency: str):
         # """EUR, USD, GBP"""
-        self.currency.click()
+        currency_button = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsBasePageNavBar.CURRENCY)
+        )
+        currency_button.click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
     def click_contact_us_link(self):
@@ -476,12 +483,12 @@ class ErrorMessageComponent:
             else:
                 error_message_locator = f'{self.element_locator[1]}/following-sibling::div[@class="text-danger"]'
 
-            error_message = WebDriverWait(self._driver, 3).until(
+            error_message = WebDriverWait(self._driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, error_message_locator))
             )
             return error_message.text
         except TimeoutException:
-            return None
+            return ''
 
 
 class CatchPageTitleComponent:
@@ -495,7 +502,7 @@ class CatchPageTitleComponent:
 
         :return: str
         """
-        WebDriverWait(self._driver, 3).until(EC.title_is(page_title))
+        WebDriverWait(self._driver, 5).until(EC.title_is(page_title))
         return page_title
 
 
@@ -506,43 +513,42 @@ class CatchMessageComponent:
         """Initialize a driver to CatchMessageComponent."""
         self._driver = driver
 
-    def get_info_message(self):
+    def get_info_message(self) -> str:
         """Get message such as 'Info:'.
 
-        :returns str or None"""
+        :returns str"""
         try:
             info_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
             )
             return info_message.text
         except TimeoutException:
-            return None
+            return ''
 
-    def get_success_message(self):
+    def get_success_message(self) -> str:
         """Get message such as 'Success:'.
 
-        :returns str or None"""
+        :returns str"""
         try:
-            success_message = WebDriverWait(self._driver, 3).until(
+            success_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)
             )
             return success_message.text
         except TimeoutException:
-            return None
+            return ''
 
-    def get_danger_message(self):
+    def get_danger_message(self) -> str:
         """Get message such as 'Danger:' or 'Warning:'.
 
-        :returns str or None
+        :returns str
         """
         try:
-            danger_message = WebDriverWait(self._driver, 3).until(
+            danger_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_DANGER_MESSAGE)
             )
             return danger_message.text
         except TimeoutException:
-            return None
-
+            return ''
 
 
 class NewsletterComponent:

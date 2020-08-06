@@ -1,5 +1,9 @@
 import csv
+from datetime import datetime
 
+import allure
+from _pytest.fixtures import FixtureRequest
+from allure_commons.types import AttachmentType
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 import pytest
@@ -7,19 +11,18 @@ from selenium import webdriver
 
 
 @pytest.fixture(scope="function")
-def init_driver(request):
+def init_driver(request: FixtureRequest):
     options = Options()
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Remote(
         command_executor='http://127.0.0.1:4444/wd/hub',
         desired_capabilities=DesiredCapabilities.CHROME,
         options=options)
+
     request.cls.driver = driver
     driver.implicitly_wait(10)
 
     yield driver
-
-    driver.close()
 
 
 def get_test_data(file_name: str) -> list:
