@@ -59,7 +59,7 @@ class TestAvailableOptions(BaseTest):
         """
         if self.product_page.available_options.checkbox.which_option_is_chosen() == []:
             self.product_page.available_options.click_add_to_cart_button()
-        expected_result = 'Checkbox required!!'
+        expected_result = 'Checkbox required!'
         assert self.product_page.available_options.checkbox.error_message.get_error_message() == expected_result
 
     @allure.severity(allure.severity_level.MINOR)
