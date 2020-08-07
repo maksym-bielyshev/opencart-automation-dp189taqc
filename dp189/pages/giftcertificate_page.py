@@ -9,8 +9,8 @@ class GiftCertificatePage(BasePage):
 
     def __init__(self, driver: Remote):
         super().__init__(driver)
-        self.recepient_name = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.RECEPIENT_NAME)
-        self.recepient_email = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.RECEPIENT_EMAIL)
+        self.recipient_name = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.RECEPIENT_NAME)
+        self.recipient_email = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.RECEPIENT_EMAIL)
         self.your_name = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.YOUR_NAME)
         self.your_email = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.YOUR_EMAIL)
         self.gift_certificate_theme = RadioButtonComponent(self._driver,
@@ -18,15 +18,15 @@ class GiftCertificatePage(BasePage):
         self.message = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.MESSAGE)
         self.amount = InputFieldComponent(self._driver, LocatorsGiftCertificatePage.AMOUNT)
 
-    def click_checkbox(self):
-        """Method which click on Agree with agreement.
+    def click_agreement_checkbox(self) -> None:
+        """Click on checkbox 'I understand that gift certificates are non-refundable'.
 
         :return:None
         """
         self._driver.find_element(*LocatorsGiftCertificatePage.AGREE).click()
 
-    def click_button_continue(self):
-        """Method which click on button Continue.
+    def click_button_continue(self) -> None:
+        """Click on 'Continue' button.
 
         :return:None
         """

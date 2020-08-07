@@ -19,7 +19,6 @@ class TestComparePage(BaseTest):
 
         :return: None
         """
-        self.driver.maximize_window()
         self.driver.get(HOME_PAGE_URL)
         self.page = HomePage(self.driver)
         self.page.find_element(LocatorsComparePageTest.IPHONE).click()

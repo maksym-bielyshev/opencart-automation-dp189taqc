@@ -1,18 +1,19 @@
 import re
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from dp189.components import InputFieldComponent, DropdownComponent, RadioButtonComponent
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsShoppingCartPage
+from dp189.pages.checkout_page import CheckoutPage
 from dp189.pages.home_page import HomePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class ShoppingCartPage(BasePage):
     """This class describes methods that we need to work with 'Shopping Cart' page."""
     def __init__(self, driver: Remote):
-        """Initialize driver and objects to works with 'Shopping Cart' page..
+        """Initialize driver and objects to works with 'Shopping Cart' page.
 
         :param driver: Remote
         """
@@ -111,7 +112,7 @@ class ShoppingCartPage(BasePage):
         :return: CheckoutPage object
         """
         self._driver.find_element(*LocatorsShoppingCartPage.CHECKOUT_BUTTON).click()
-        # return CheckoutPage(self._driver)
+        return CheckoutPage(self._driver)
 
     def get_flat_shipping_rate(self) -> float:
         """Gets 'Flat Shipping Rate' sum.

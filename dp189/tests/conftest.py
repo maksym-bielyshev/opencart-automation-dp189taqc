@@ -22,6 +22,7 @@ def init_driver(request: FixtureRequest) -> None:
 
     request.cls.driver = driver
     driver.implicitly_wait(10)
+    driver.maximize_window()
 
     yield driver
 

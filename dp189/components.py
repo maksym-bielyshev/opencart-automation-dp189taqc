@@ -515,6 +515,7 @@ class CatchPageTitleComponent:
 
         :return: str
         """
+        self._driver.title()
         WebDriverWait(self._driver, 5).until(EC.title_is(page_title))
         return page_title
 
@@ -529,7 +530,8 @@ class CatchMessageComponent:
     def get_info_message(self) -> str:
         """Get message such as 'Info:'.
 
-        :returns str"""
+        :returns str
+        """
         try:
             info_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_INFO_MESSAGE)
@@ -541,7 +543,8 @@ class CatchMessageComponent:
     def get_success_message(self) -> str:
         """Get message such as 'Success:'.
 
-        :returns str"""
+        :returns str
+        """
         try:
             success_message = WebDriverWait(self._driver, 5).until(
                 EC.presence_of_element_located(LocatorsInfoMessages.ALERT_SUCCESS_MESSAGE)

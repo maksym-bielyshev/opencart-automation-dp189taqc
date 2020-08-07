@@ -20,7 +20,6 @@ class TestRegisterPage(BaseTest):
         :return: None
         """
 
-        self.driver.maximize_window()
         self.driver.get(HOME_PAGE_URL)
         self.home_page = HomePage(self.driver)
         self.home_page.click_account_and_go_to_register()
@@ -201,7 +200,6 @@ class TestRegisterPage(BaseTest):
         self.register_page.click_continue_button()
         assert self.register_page.your_password_form.password_confirm_field \
                    .error_message.get_error_message() == expected
-
 
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize('test_input,expected', get_test_data('register_page/field_first_name_invalid.csv'))

@@ -11,6 +11,7 @@ from dp189.locators import LocatorsCheckoutPage
 
 from dp189.pages.base_page import BasePage
 
+
 class CheckoutPage(BasePage):
     """Main class for the all class instances."""
 
