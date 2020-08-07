@@ -31,11 +31,10 @@ class ShopCartButtonComponent:
         :param driver: Remote driver
         """
         self._driver = driver
-        self._shop_cart_button = driver.find_element(*LocatorsShoppingCartButton.SHOP_CART_BUTTON)
 
     def click_shop_cart_button(self):
         """Click shopping cart button."""
-        self._shop_cart_button.click()
+        self._driver.find_element(*LocatorsShoppingCartButton.SHOP_CART_BUTTON).click()
         cart_items = self._driver.find_elements(*LocatorsShoppingCartButton.CART_ITEMS)
         if len(cart_items) == 0:
             return 'Your cart is empty!'
