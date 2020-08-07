@@ -30,8 +30,7 @@ class TestAvailableOptions(BaseTest):
 
         :return: None
         """
-        if self.product_page.available_options.radio.which_option_is_chosen() is None:
-            self.product_page.available_options.click_add_to_cart_button()
+        self.product_page.available_options.click_add_to_cart_button()
         expected_result = 'Radio required!'
         assert self.product_page.available_options.radio.error_message.get_error_message() == expected_result
 
@@ -46,9 +45,8 @@ class TestAvailableOptions(BaseTest):
         :param expected_result: str (example: Medium (+$20.00))
         :return: None
         """
-        if self.product_page.available_options.radio.which_option_is_chosen() is None:
-            self.product_page.available_options.radio.choose_radio_button_option(radio_option)
-            self.product_page.available_options.click_add_to_cart_button()
+        self.product_page.available_options.radio.choose_radio_button_option(radio_option)
+        self.product_page.available_options.click_add_to_cart_button()
         assert self.product_page.available_options.radio.which_option_is_chosen() == expected_result
 
     @allure.severity(allure.severity_level.MINOR)
@@ -57,9 +55,8 @@ class TestAvailableOptions(BaseTest):
         attempt to add product to cart.
         :return: None
         """
-        if self.product_page.available_options.checkbox.which_option_is_chosen() == []:
-            self.product_page.available_options.click_add_to_cart_button()
-        expected_result = 'Checkbox required!!'
+        self.product_page.available_options.click_add_to_cart_button()
+        expected_result = 'Checkbox required!'
         assert self.product_page.available_options.checkbox.error_message.get_error_message() == expected_result
 
     @allure.severity(allure.severity_level.MINOR)
@@ -84,9 +81,7 @@ class TestAvailableOptions(BaseTest):
 
         :return: None
         """
-        initial_state = ' --- Please Select --- '
-        if self.product_page.available_options.select.which_option_is_chosen() == initial_state:
-            self.product_page.available_options.click_add_to_cart_button()
+        self.product_page.available_options.click_add_to_cart_button()
         expected_result = 'Color required!'
         assert self.product_page.available_options.select.error_message.get_error_message() == expected_result
 
@@ -329,7 +324,11 @@ class TestAvailableOptions(BaseTest):
         assert info_message in self.product_page.catch_info_message.get_success_message()
 
     @pytest.fixture()
-    def login_user(self):
+    def login_user(self) -> None:
+        """Log in to the system.
+
+        :return: None
+        """
         self.driver.get(LOGIN_PAGE_URL)
         login_page = LoginPage(self.driver)
         login_page.login_form.email_field.clear_and_fill_input_field('test@test.test')

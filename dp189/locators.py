@@ -69,10 +69,14 @@ class LocatorsShoppingCartButton:
 
 
 class LocatorYourStoreLink:
+    """Locator for 'Your Store' logo."""
+
     YOUR_STORE = (By.XPATH, '/html/body/header/div/div/div[1]/div/h1/a')
 
 
 class LocatorsHomePage:
+    """Locators for the 'Home Page'."""
+
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
@@ -105,7 +109,8 @@ class LocatorCategoryTitle:
 
 
 class LocatorsProductPage:
-    """Main locators for Product page."""
+    """Main locators for 'Product Page'."""
+
     ADD_TO_WISH_LIST = (By.CSS_SELECTOR, '[data-original-title="Add to Wish List"]')
     COMPARE_THIS_PRODUCT = (By.CSS_SELECTOR, '[data-original-title="Compare this Product"]')
     PHOTO = (By.XPATH, "//*[@id='content']/div[1]/div[1]/ul[1]/li[1]/a")
@@ -119,7 +124,8 @@ class LocatorsProductPage:
 
 
 class LocatorsReviewsTab:
-    """Locators for Reviews Tab on Product page. """
+    """Locators for Reviews Tab on 'Product Page'. """
+
     CONTINUE = (By.ID, 'button-review')
     YOUR_NAME = (By.XPATH, '//input[@id="input-name"]')
     YOUR_REVIEW = (By.XPATH, '//textarea[@id="input-review"]')
@@ -128,7 +134,8 @@ class LocatorsReviewsTab:
 
 
 class LocatorsAvailableOptions:
-    """Locators for Available options on Product page."""
+    """Locators for Available options on 'Product Page'."""
+
     QUANTITY = (By.ID, 'input-quantity')
     ADD_TO_CART = (By.ID, 'button-cart')
     ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
@@ -184,7 +191,6 @@ class LocatorsForgotPasswordPage:
     """Locators for the 'Forgot password' page."""
 
     EMAIL_FIELD = (By.ID, 'input-email')
-
     BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
@@ -198,15 +204,20 @@ class LocatorsChangePasswordPage:
 
 
 class LocatorSortByDropdown:
+    """Locator for 'Sort By' on 'Category' page."""
+
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
 
 
 class LocatorShowNumberProductsDropdown:
+    """Locator for 'Show' on 'Category' page."""
+
     SHOW_NUMBER_PRODUCTS = (By.XPATH, '//select[@id="input-limit"]')
 
 
 class LocatorsAddAddressComponent:
     """Locators fot the 'Add Address' component."""
+
     FIRST_NAME_INPUT = (By.XPATH, './/input[@name="firstname"]')
     LAST_NAME_INPUT = (By.XPATH, './/input[@name="lastname"]')
     EMAIL_INPUT = (By.XPATH, ".//input[@name='email']")
@@ -223,6 +234,7 @@ class LocatorsAddAddressComponent:
 
 class LocatorsAddAddressPage:
     """Locators fot the 'Add Address' page."""
+
     ADDRESS_CONTENT = (By.ID, 'content')
 
     DEFAULT_ADDRESS_RADIO_CONTAINER = (By.XPATH, '//label[@class="radio-inline"]/..')
@@ -232,6 +244,7 @@ class LocatorsAddAddressPage:
 
 class LocatorsWishListPage:
     """Locators for the 'Wish List' page"""
+
     ITEMS = (By.XPATH, '//div/table/tbody/tr/td[@class="text-left"]//a')
     PRODUCT_NAME = (By.XPATH, '//td[@class="text-left"]//a')
     ADD_PRODUCT_TO_CARD = (By.XPATH, '../../td[@class="text-right"]/button[@class="btn btn-primary"]')
@@ -241,6 +254,7 @@ class LocatorsWishListPage:
 
 class LocatorsGiftCertificatePage:
     """Locators for the 'Gift Certificate' page"""
+
     RECEPIENT_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_name"]')
     RECEPIENT_EMAIL = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="to_email"]')
     YOUR_NAME = (By.XPATH, '//div[@class="col-sm-10"]//input[@name="from_name"]')
@@ -254,6 +268,7 @@ class LocatorsGiftCertificatePage:
 
 class LocatorsComparePage:
     """Locators for the 'Compare' page"""
+
     ITEMS = (By.XPATH, '//table[@class="table table-bordered"]/tbody/tr/td/a/strong')
     TABLE_ROW = (By.XPATH, '//table/tbody/tr')
     TABLE_COLUMN = (By.XPATH, 'td')
@@ -263,6 +278,7 @@ class LocatorsComparePage:
 
 class LocatorsInfoMessages:
     """Locators to various messages on pages, for CatchMessageComponent."""
+
     ALERT_INFO_MESSAGE = (By.XPATH, '//div[@class="alert alert-info"]')
     ALERT_SUCCESS_MESSAGE = (By.XPATH, '//div[@class="alert alert-success alert-dismissible"]')
     ALERT_DANGER_MESSAGE = (By.XPATH, '//div[@class="alert alert-danger alert-dismissible"]')
@@ -270,6 +286,7 @@ class LocatorsInfoMessages:
 
 class LocatorsShoppingCartPage:
     """Locators for 'Shopping Cart' page"""
+
     COUPON_FIELD = (By.ID, 'input-coupon')
     COUPON_APPLY_BUTTON = (By.ID, 'button-coupon')
 
@@ -324,6 +341,7 @@ class LocatorsLoginComponent:
 
 class LocatorsCheckoutPage:
     """Locators for the 'Checkout' page."""
+
     BILLING_DETAILS_FORM = (By.ID, 'collapse-payment-address')
 
     REGISTER_CHECKOUT_RADIO_BUTTON = \
@@ -360,18 +378,17 @@ class LocatorsCheckoutPage:
 
 
 class LocatorsComparePageTest:
+    """Locators for products to compare."""
+
     MACBOOK = (By.XPATH, '//*[@id="content"]/div[2]/div[1]/div/div[3]/button[3]')
     IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[3]')
     CINEMA = (By.XPATH, '//*[@id="content"]/div[2]/div[3]/div/div[3]/button[3]')
     MESSAGE = (By.XPATH, '//div[@class="alert alert-success alert-dismissible"]')
 
 
-class LocatorsShoppingCartPageTest:
-    IPHONE = (By.XPATH, '//*[@id="content"]/div[2]/div[2]/div/div[3]/button[1]')
-    QUANTITY = (By.XPATH, '//*[@id="content"]/form/div/table/tbody/tr/td[4]/div/input')
-
-
 class LocatorsLoginPage:
+    """Locators for 'Login' page."""
+
     FORGOTTEN_PASSWORD_BUTTON = (By.XPATH, '//div[@id="content"]//a[text()="Forgotten Password"]')
     LOGIN_BUTTON = (By.XPATH, '//input[@value="Login"]')
     REGISTER_PAGE_BUTTON = (By.XPATH, '//a[text()="Continue"]')
