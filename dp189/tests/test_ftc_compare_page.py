@@ -22,10 +22,10 @@ class TestComparePage(BaseTest):
         self.driver.get(HOME_PAGE_URL)
         self.page = HomePage(self.driver)
 
-        iphone = WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.IPHONE))
+        iphone = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.IPHONE))
         iphone.click()
 
-        apple_cinema = WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.CINEMA))
+        apple_cinema = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.CINEMA))
         apple_cinema.click()
 
         self.driver.get(COMPARE_PAGE_URL)

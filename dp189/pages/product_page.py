@@ -137,7 +137,9 @@ class AvailableOptions:
 
         :return: None
         """
-        self._driver.find_element(*LocatorsAvailableOptions.ADD_TO_CART).click()
+        add_to_cart_button = WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable(LocatorsAvailableOptions.ADD_TO_CART))
+        add_to_cart_button.click()
 
 
 class ReviewsTab:
