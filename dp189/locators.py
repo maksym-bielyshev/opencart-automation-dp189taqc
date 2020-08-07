@@ -138,7 +138,6 @@ class LocatorsAvailableOptions:
 
     QUANTITY = (By.ID, 'input-quantity')
     ADD_TO_CART = (By.ID, 'button-cart')
-    ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
     TEXT_FIELD = (By.XPATH, '//input[@value="test"]')
     DATE = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD"]')
     TIME = (By.XPATH, '//input[@data-date-format="HH:mm"]')

@@ -1,7 +1,8 @@
 """Module for the 'Compare' page tests."""
 
 import allure
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from dp189.locators import LocatorsComparePageTest
 from dp189.pages.compare_page import ComparePage
 from dp189.pages.home_page import HomePage
@@ -20,8 +21,13 @@ class TestComparePage(BaseTest):
         """
         self.driver.get(HOME_PAGE_URL)
         self.page = HomePage(self.driver)
-        self.page.find_element(LocatorsComparePageTest.IPHONE).click()
-        self.page.find_element(LocatorsComparePageTest.CINEMA).click()
+
+        iphone = WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.IPHONE))
+        iphone.click()
+
+        apple_cinema = WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.CINEMA))
+        apple_cinema.click()
+
         self.driver.get(COMPARE_PAGE_URL)
         self.page = ComparePage(self.driver)
         self.page.get_rows_in_table()

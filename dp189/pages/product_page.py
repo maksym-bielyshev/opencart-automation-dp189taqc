@@ -122,7 +122,6 @@ class AvailableOptions:
         :param driver: Remote
         """
         self._driver = driver
-        self._all_options = driver.find_element(*LocatorsAvailableOptions.ALL_OPTIONS)
         self.text_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_FIELD)
         self.text_area_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_AREA)
         self.data_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE)
