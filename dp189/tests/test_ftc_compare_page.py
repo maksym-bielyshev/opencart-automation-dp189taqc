@@ -21,15 +21,9 @@ class TestComparePage(BaseTest):
         """
         self.driver.get(HOME_PAGE_URL)
         self.page = HomePage(self.driver)
-
-        iphone = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.IPHONE))
-        iphone.click()
-
-        apple_cinema = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.CINEMA))
-        apple_cinema.click()
-
-        compare_page = COMPARE_PAGE_URL
-        self.driver.get(compare_page)
+        self.page.find_element(LocatorsComparePageTest.IPHONE).click()
+        self.page.find_element(LocatorsComparePageTest.CINEMA).click()
+        self.driver.get(COMPARE_PAGE_URL)
         self.page = ComparePage(self.driver)
         self.page.get_rows_in_table()
 

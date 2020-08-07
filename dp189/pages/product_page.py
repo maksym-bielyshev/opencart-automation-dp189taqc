@@ -138,7 +138,7 @@ class AvailableOptions:
         :return: None
         """
         add_to_cart_button = WebDriverWait(self._driver, 15).until(
-            EC.element_to_be_clickable(LocatorsAvailableOptions.ADD_TO_CART))
+            EC.presence_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
         add_to_cart_button.click()
 
 

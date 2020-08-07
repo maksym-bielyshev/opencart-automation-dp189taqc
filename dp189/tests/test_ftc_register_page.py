@@ -18,7 +18,6 @@ class TestRegisterPage(BaseTest):
 
         :return: None
         """
-
         self.driver.get(REGISTER_PAGE_URL)
         self.register_page = RegisterPage(self.driver)
 
