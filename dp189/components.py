@@ -1,18 +1,12 @@
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+import random
+import string
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
-
-from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsComponent, \
-    LocatorsYourPasswordComponent, LocatorsNewsletterComponent, LocatorsAddAddressComponent, \
-    LocatorsBasePageNavBar, LocatorsRightMenuRegisterPage, LocatorProductCompareLink, \
-    LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, LocatorsAvailableOptions, \
-    LocatorsPrivacyPolicyComponent, LocatorsLoginComponent, LocatorsBasePageMainMenu
+from dp189.locators import *
 
 
 class MainMenuComponent:
@@ -315,7 +309,6 @@ class InputFieldComponent:
 
         :return: None
         """
-        WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable(self.input_field_locator))
         if self.parent_element:
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
@@ -708,3 +701,11 @@ class LoginComponent:
         :return: None
         """
         self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON).click()
+
+
+def email_generator() -> str:
+    """Generate random email.
+
+    :return: str
+    """
+    return ''.join(random.choice(string.ascii_letters) for x in range(10)) + "@gmail.com"
