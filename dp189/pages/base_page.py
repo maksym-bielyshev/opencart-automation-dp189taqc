@@ -21,7 +21,7 @@ class BasePage:
         self.main_menu_phones_pdas = DropdownComponent(driver, LocatorsBasePageMainMenu.PHONES_PDAS)
         self.main_menu_cameras = DropdownComponent(driver, LocatorsBasePageMainMenu.CAMERAS)
         self.main_menu_mp3players = DropdownComponent(driver, LocatorsBasePageMainMenu.MP3_PLAYERS)
-        self.your_store_link = driver.find_element(*LocatorYourStoreLink.YOUR_STORE)
+        # self.your_store_link = driver.find_element(*LocatorYourStoreLink.YOUR_STORE)
         self.search_field = InputFieldComponent(driver, LocatorBasePageSearch.SEARCH_FIELD)
         self.shop_cart_button = ShopCartButtonComponent(driver)
         self.catch_info_message = CatchMessageComponent(self._driver)
