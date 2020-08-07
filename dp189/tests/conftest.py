@@ -1,9 +1,5 @@
 import csv
-from datetime import datetime
-
-import allure
 from _pytest.fixtures import FixtureRequest
-from allure_commons.types import AttachmentType
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 import pytest
@@ -11,7 +7,12 @@ from selenium import webdriver
 
 
 @pytest.fixture(scope="function")
-def init_driver(request: FixtureRequest):
+def init_driver(request: FixtureRequest) -> None:
+    """Remote driver initialization with required options.
+
+    :param request: FixtureRequest
+    :return: None
+    """
     options = Options()
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Remote(
@@ -28,6 +29,7 @@ def init_driver(request: FixtureRequest):
 
 def get_test_data(file_name: str) -> list:
     """Converts file with test data to tuples list to use it in parameterized tests.
+
     :param file_name: string
     :return: test_data_list consists of tuples, where each tuple is one file row.
     """

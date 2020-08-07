@@ -12,7 +12,20 @@ from .locators import LocatorsShoppingCartButton, LocatorsYourPersonalDetailsCom
     LocatorsYourPasswordComponent, LocatorsNewsletterComponent, LocatorsAddAddressComponent, \
     LocatorsBasePageNavBar, LocatorsRightMenuRegisterPage, LocatorProductCompareLink, \
     LocatorsViewModeButton, LocatorProductWidget, LocatorsInfoMessages, LocatorsAvailableOptions, \
-    LocatorsPrivacyPolicyComponent, LocatorsLoginComponent
+    LocatorsPrivacyPolicyComponent, LocatorsLoginComponent, LocatorsBasePageMainMenu
+
+
+class MainMenuComponent:
+    """Component for Main Menu on Base page"""
+    def __init__(self, driver: Remote):
+        self.main_menu_desktops = DropdownComponent(driver, LocatorsBasePageMainMenu.DESKTOPS)
+        self.main_menu_laptops_notebooks = DropdownComponent(driver, LocatorsBasePageMainMenu.LAPTOPS_NOTEBOOKS)
+        self.main_menu_components = DropdownComponent(driver, LocatorsBasePageMainMenu.COMPONENTS)
+        self.main_menu_tablets = DropdownComponent(driver, LocatorsBasePageMainMenu.TABLETS)
+        self.main_menu_software = DropdownComponent(driver, LocatorsBasePageMainMenu.SOFTWARE)
+        self.main_menu_phones_pdas = DropdownComponent(driver, LocatorsBasePageMainMenu.PHONES_PDAS)
+        self.main_menu_cameras = DropdownComponent(driver, LocatorsBasePageMainMenu.CAMERAS)
+        self.main_menu_mp3players = DropdownComponent(driver, LocatorsBasePageMainMenu.MP3_PLAYERS)
 
 
 class ShopCartButtonComponent:
