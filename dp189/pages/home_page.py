@@ -18,7 +18,11 @@ class HomePage(BasePage):
         self.featured_products = ProductWidgetsListComponent(self._driver)
     
     def click_featured_product_title(self, product_name: str) -> object:
-        #
+        """Click on featured product on Home page.
+
+        :param product_name: str
+        :return: object
+        """
         for product in self.featured_products.get_list_product_widgets():
             if product.find_element(*LocatorsHomePage.PRODUCT_WIDGET_NAME).text == product_name:
                 product.find_element(*LocatorsHomePage.PRODUCT_WIDGET_NAME).click()
