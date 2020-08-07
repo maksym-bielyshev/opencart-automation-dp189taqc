@@ -14,10 +14,8 @@ class BasePage:
         :param driver: Remote.
         """
         self._driver = driver
-        # self.top_nav_bar = BasePageNavBarComponent(driver)
         self.my_account = driver.find_element(*LocatorsBasePageNavBar.MY_ACCOUNT)
         self.main_menu = MainMenuComponent(driver)
-        # self.your_store_link = driver.find_element(*LocatorYourStoreLink.YOUR_STORE)
         self.search_field = InputFieldComponent(driver, LocatorBasePageSearch.SEARCH_FIELD)
         self.shop_cart_button = ShopCartButtonComponent(driver)
         self.catch_info_message = CatchMessageComponent(self._driver)
