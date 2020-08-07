@@ -1,21 +1,20 @@
-from dp189.pages.base_page import BasePage
+"""Module for the 'Compare' page."""
+
 from selenium.webdriver import Remote
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
+from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsComparePage
-from selenium.webdriver import Chrome, ChromeOptions
-import time
-from dp189.constants import ComparePageConstants
-
-CHROME_DRIVER = '../driver/chromedriver'
 
 
 class ComparePage(BasePage):
     """Compare page class."""
 
     def __init__(self, driver: Remote) -> None:
+        """Initialise the 'Product Comparison' page.
+
+        :param driver: Remote
+        """
         super().__init__(driver)
         self.table_rows = []
 
@@ -100,12 +99,22 @@ class ComparePage(BasePage):
                 button[index].click()
         return ComparePage(self._driver)
 
-    def go_to_site(self):
+    def go_to_site(self) -> None:
+        """Go to the 'Product Comparison' page.
+
+        :return: None
+        """
         return self._driver.get('http://34.71.14.206/index.php?route=product/compare')
 
 
 class PropertyOfProduct:
+    """Get product properties."""
+
     def __init__(self, property: WebElement) -> None:
+        """Initialise the property of a product.
+
+        :param property: WebElement
+        """
         self._property = property
 
     def get_name(self) -> list:
@@ -142,5 +151,3 @@ class PropertyOfProduct:
         :return: list
         """
         return self._property.find_elements(*LocatorsComparePage.REMOVE_BUTTONS)
-
-
