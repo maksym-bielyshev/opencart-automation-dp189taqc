@@ -19,7 +19,6 @@ class TestAvailableOptions(BaseTest):
         :return: None
         """
 
-        self.driver.maximize_window()
         self.driver.get(get_product_url('42'))
         self.product_page = ProductPage(self.driver)
 

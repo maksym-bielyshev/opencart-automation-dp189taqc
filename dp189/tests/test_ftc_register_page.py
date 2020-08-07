@@ -20,7 +20,6 @@ class TestRegisterPage(BaseTest):
         :return: None
         """
 
-        self.driver.maximize_window()
         self.driver.get(HOME_PAGE_URL)
         self.home_page = HomePage(self.driver)
         self.home_page.click_account_and_go_to_register()

@@ -19,12 +19,6 @@ class TestCheckoutPage(BaseTest):
 
         :return: None
         """
-        # self.driver.maximize_window()
-        # self.driver.get(HOME_PAGE_URL)
-        # self.home_page = HomePage(self.driver)
-        # ProductWidgetComponent(self.driver, 'iPhone').click_add_to_shopping_cart_button()
-        # self.home_page.top_nav_bar.click_checkout_link()
-        # self.checkout_page = CheckoutPage(self.driver)
         self.driver.get(get_product_url('40'))
         ProductPage(self.driver).available_options.click_add_to_cart_button()
         self.driver.get(CHECKOUT_PAGE_URL)

@@ -11,7 +11,6 @@ from dp189.constants import ShoppingCartPageConstants
 @allure.severity(allure.severity_level.CRITICAL)
 class TestShoppingCart(BaseTest):
     def setup(self):
-        self.driver.maximize_window()
 
         self.driver.get(get_product_url('40'))
         product = ProductPage(self.driver)
@@ -26,9 +25,10 @@ class TestShoppingCart(BaseTest):
     def test_shopping_cart_change_quantity_positive(self):
         """Positive test to check correct changing quantity of product."""
 
-        self.cart.change_product_quantity(ShoppingCartPageConstants.TEST_ITEM1, '5')
+        self.cart.change_product_quantity(ShoppingCartPageConstants.IPHONE_ITEM, '5')
 
-        assert ShoppingCartPageConstants.SHOPPING_CART_MODIFIED_MESSAGE in self.cart.catch_info_message.get_success_message()
+        assert ShoppingCartPageConstants.SHOPPING_CART_MODIFIED_MESSAGE in \
+               self.cart.catch_info_message.get_success_message()
 
     @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('input_data,expected_result',
@@ -39,7 +39,7 @@ class TestShoppingCart(BaseTest):
         :param input_data: str
         :param expected_result: str
         """
-        self.cart.change_product_quantity(ShoppingCartPageConstants.IPHONE_ITEM, test_input)
+        self.cart.change_product_quantity(ShoppingCartPageConstants.IPHONE_ITEM, input_data)
 
         assert self.cart.get_text_empty_cart() == expected_result
 
