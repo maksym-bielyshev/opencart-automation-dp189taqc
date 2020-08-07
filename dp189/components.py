@@ -35,7 +35,8 @@ class ShopCartButtonComponent:
         :param driver: Remote driver
         """
         self._driver = driver
-        self._shop_cart_button = driver.find_element(*LocatorsShoppingCartButton.SHOP_CART_BUTTON)
+        self._shop_cart_button = WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable(LocatorsShoppingCartButton.SHOP_CART_BUTTON))
 
     def click_shop_cart_button(self):
         """Click shopping cart button."""

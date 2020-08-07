@@ -62,7 +62,7 @@ class LocatorsRightMenuRegisterPage:
 class LocatorsShoppingCartButton:
     """Locators for a black shop cart button."""
 
-    SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
+    SHOP_CART_BUTTON = (By.XPATH, "//div[@id='cart']")
     CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
     VIEW_CART = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[1]')
     CHECKOUT = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[2]')
