@@ -9,7 +9,7 @@ from dp189.pages.home_page import HomePage
 from dp189.constants import ComparePageConstants
 from dp189.tests.base_test import BaseTest
 from dp189.routes import HOME_PAGE_URL, COMPARE_PAGE_URL
-
+from dp189.components import ProductWidgetComponent
 
 class TestComparePage(BaseTest):
     """Class for the 'Compare' page testing."""
@@ -28,7 +28,8 @@ class TestComparePage(BaseTest):
         apple_cinema = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(LocatorsComparePageTest.CINEMA))
         apple_cinema.click()
 
-        self.driver.get(COMPARE_PAGE_URL)
+        compare_page = COMPARE_PAGE_URL
+        self.driver.get(compare_page)
         self.page = ComparePage(self.driver)
         self.page.get_rows_in_table()
 
