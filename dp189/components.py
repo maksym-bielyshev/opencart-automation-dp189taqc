@@ -315,6 +315,7 @@ class InputFieldComponent:
 
         :return: None
         """
+        WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable(self.input_field_locator))
         if self.parent_element:
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
@@ -515,7 +516,6 @@ class CatchPageTitleComponent:
 
         :return: str
         """
-        self._driver.title()
         WebDriverWait(self._driver, 5).until(EC.title_is(page_title))
         return page_title
 

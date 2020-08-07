@@ -11,7 +11,6 @@ from dp189.tests.conftest import get_test_data
 from dp189.routes import *
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestAvailableOptions(BaseTest):
     def setup(self) -> None:
         """Setup for the test.

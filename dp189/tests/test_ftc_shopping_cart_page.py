@@ -8,7 +8,6 @@ from dp189.routes import *
 from dp189.constants import ShoppingCartPageConstants
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestShoppingCart(BaseTest):
     def setup(self):
 
