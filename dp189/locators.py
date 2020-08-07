@@ -76,6 +76,7 @@ class LocatorsHomePage:
     FEATURED_PRODUCT = (By.CLASS_NAME, 'product-layout')
     CAPTION = (By.XPATH, './/div/div[2]/h4/a')
     ADD_TO_CART_BUTTON = (By.XPATH, '//*[@id="content"]/div[2]/div[4]/div/div[3]/button[1]')
+    PRODUCT_WIDGET_NAME = (By.XPATH, './/div[2]/h4/a')
 
 
 class LocatorProductCompareLink:
@@ -191,6 +192,7 @@ class LocatorsForgotPasswordPage:
 class LocatorsChangePasswordPage:
     """Locators for the 'Change password' page."""
 
+    YOUR_PASSWORD_PARENT = (By.XPATH, '//*[@id="content"]')
     BACK_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
     CONTINUE_BUTTON = (By.XPATH, '//input[@class="btn btn-primary"]')
 
