@@ -23,12 +23,18 @@ class MainMenuComponent:
 
 
 class ShopCartButtonComponent:
-    # TODO test functionality
-    def __init__(self, driver):
+    """Component to find and click shopping cart button."""
+
+    def __init__(self, driver: Remote):
+        """Initialise shopping cart button.
+
+        :param driver: Remote driver
+        """
         self._driver = driver
         self._shop_cart_button = driver.find_element(*LocatorsShoppingCartButton.SHOP_CART_BUTTON)
 
     def click_shop_cart_button(self):
+        """Click shopping cart button."""
         self._shop_cart_button.click()
         cart_items = self._driver.find_elements(*LocatorsShoppingCartButton.CART_ITEMS)
         if len(cart_items) == 0:
@@ -56,7 +62,6 @@ class ShopCartDropdownComponent:
 
     def click_remove_button(self, product_title: str) -> None:
         """Click on the remove from the shopping cart button.
-            return self._driver
 
         :return: None.
         """
@@ -79,71 +84,143 @@ class ShopCartDropdownComponent:
 
 
 class BasePageNavBarComponent:
-    """This class describes the top nav bar of the base page"""
+    """This class describes the top navigation bar of the base page."""
 
-    def __init__(self, driver):
+    def __init__(self, driver: Remote):
+        """Initialise Navigation Bar Component.
+
+        :param driver: Remote driver.
+        """
         self._driver = driver
         self.nav_bar = self.wait_load_nav_bar()
 
     def wait_load_nav_bar(self):
+        """Wait presence of Navigation Bar locators on the web-page."""
         return WebDriverWait(self._driver, 10).until(
             EC.presence_of_element_located(LocatorsBasePageNavBar.NAVBAR)
         )
 
-    def change_currency(self, specific_currency: str):
-        # """EUR, USD, GBP"""
+    def change_currency(self, specific_currency: str) -> None:
+        """Change currency in the top navigation bar..
+
+        :param specific_currency: str
+        :return: None.
+        """
         currency_button = WebDriverWait(self._driver, 10).until(
             EC.presence_of_element_located(LocatorsBasePageNavBar.CURRENCY)
         )
         currency_button.click()
         self._driver.find_element(By.XPATH, f"//button[@name='{specific_currency}']").click()
 
-    def click_contact_us_link(self):
+    def click_contact_us_link(self) -> None:
+        """Click 'Contact us' link in Navigation Bar.
+
+        :return: None.
+        """
         self.nav_bar.find_element(*LocatorsBasePageNavBar.CONTACT_US).click()
 
-    def click_wishlist_link(self):
+    def click_wishlist_link(self) -> None:
+        """Click 'Wish List' link in Navigation Bar.
+
+        :return: None.
+        """
         self.nav_bar.find_element(*LocatorsBasePageNavBar.WISH_LIST).click()
 
-    def click_shopping_cart_link(self):
+    def click_shopping_cart_link(self) -> None:
+        """Click 'Shopping cart' link in Navigation Bar.
+
+        :return: None.
+        """
         self.nav_bar.find_element(*LocatorsBasePageNavBar.SHOPPING_CART).click()
 
-    def click_checkout_link(self):
+    def click_checkout_link(self) -> None:
+        """Click 'Checkout' link in Navigation Bar.
+
+        :return: None.
+        """
         self.nav_bar.find_element(*LocatorsBasePageNavBar.CHECKOUT).click()
 
 
 class RegisterPageRightMenuComponent:
-    def __init__(self, driver) -> None:
+    """This class describes the right menu on register page."""
+
+    def __init__(self, driver: Remote) -> None:
+        """Initialise Right Menu Component on Register Page.
+
+        :param driver: Remote driver.
+        :return: None.
+        """
         self._driver = driver
         self._right_menu = driver.find_element_by_class_name('list-group')
 
-    def click_my_account(self):
+    def click_my_account(self) -> None:
+        """Click 'My account' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.MY_ACCOUNT).click()
 
-    def click_address_book(self):
+    def click_address_book(self) -> None:
+        """Click 'Address book' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ADDRESS_BOOK).click()
 
-    def click_wish_list(self):
+    def click_wish_list(self) -> None:
+        """Click 'Wish List' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.WISH_LIST).click()
 
-    def click_order_history(self):
+    def click_order_history(self) -> None:
+        """Click 'Order history' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.ORDER_HISTORY).click()
 
-    def click_downloads(self):
+    def click_downloads(self) -> None:
+        """Click 'Downloads' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.DOWNLOADS).click()
 
-    def click_recurring_payments(self):
+    def click_recurring_payments(self) -> None:
+        """Click 'Recurring payments' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RECURRING_PAYMENTS).click()
 
-    def click_reward_points(self):
+    def click_reward_points(self) -> None:
+        """Click 'Reward points' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.REWARD_POINTS).click()
 
-    def click_returns(self):
+    def click_returns(self) -> None:
+        """Click 'Returns' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.RETURNS).click()
 
-    def click_transactions(self):
+    def click_transactions(self) -> None:
+        """Click 'Transactions' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.TRANSACTIONS).click()
 
-    def click_newsletter(self):
+    def click_newsletter(self) -> None:
+        """Click 'Newsletter' link in right menu.
+
+        :return: None.
+        """
         self._right_menu.find_element(*LocatorsRightMenuRegisterPage.NEWSLETTER).click()
 
 
@@ -228,6 +305,11 @@ class ProductsViewModeComponent:
     """Two buttons to change the view of the products."""
 
     def __init__(self, driver: Remote) -> None:
+        """Initialise Products View Mode Component.
+
+        :param driver: Remote driver.
+        :return: None.
+        """
         self._driver = driver
 
     def click_list_view_button(self) -> None:
@@ -499,12 +581,17 @@ class ErrorMessageComponent:
 
 
 class CatchPageTitleComponent:
-    """This component created to get title of current page"""
+    """This component created to get title of current page."""
 
     def __init__(self, driver: Remote) -> None:
+        """Initialize CatchPageTitle Component.
+
+        :param driver: Remote
+        :return: None
+        """
         self._driver = driver
 
-    def get_title_page(self, page_title: str):
+    def get_title_page(self, page_title: str) -> str:
         """This method gets title page until it loads
 
         :return: str
