@@ -1,39 +1,56 @@
-from .base_page import BasePage
-from .product_page import ProductPage
-from ..components import ProductWidgetComponent, ProductWidgetsListComponent
+from selenium.webdriver import Remote
+from dp189.pages.base_page import BasePage
+from dp189.pages.product_page import ProductPage
+from dp189.components import ProductWidgetComponent, ProductWidgetsListComponent
+from dp189.locators import LocatorsHomePage
 
 
 class HomePage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
-        self._featured_products = ProductWidgetsListComponent(driver)
-    
-    def click_featured_product_title(self, product_name: str):
-        for product in self._featured_products:
-            if product.find_element_by_xpath('.//div[2]/h4/a').text == product_name:
-                product.find_element_by_xpath('div[3]/button/i').click()
-                if product_name == 'Apple Cinema 30"' or product_name == 'Canon EOS 5D':
-                    return ProductPage(self._driver)
-                else:
-                    return self._driver
-        return 'No product found'
+    """Home page class."""
 
-    def add_featured_product_to_cart(self, product_name: str):
+    def __init__(self, driver: Remote) -> None:
+        """Initialize objects to work with this page.
+
+        :param driver: Remote
+        :return: None
+        """
+        super().__init__(driver)
+        self.featured_products = ProductWidgetsListComponent(self._driver)
+    
+    def click_featured_product_title(self, product_name: str) -> object:
+        """Click on featured product on Home page.
+
+        :param product_name: str
+        :return: object
+        """
+        for product in self.featured_products.get_list_product_widgets():
+            if product.find_element(*LocatorsHomePage.PRODUCT_WIDGET_NAME).text == product_name:
+                product.find_element(*LocatorsHomePage.PRODUCT_WIDGET_NAME).click()
+                return ProductPage(self._driver)
+
+    def add_featured_product_to_cart(self, product_name: str) -> None:
+        """Click 'Add to Cart' button for adding featured product to Cart.
+
+        :param product_name: str
+        :return: None
+        """
         product = ProductWidgetComponent(self._driver, product_name)
         product.click_add_to_shopping_cart_button()
-        return self._driver
 
-    def add_featured_product_to_wish_list(self, product_name: str):
+    def add_featured_product_to_wish_list(self, product_name: str) -> None:
+        """Click 'Add to Wish List' button for adding featured product to Wish List.
+
+        :param product_name: str
+        :return: None
+        """
         product = ProductWidgetComponent(self._driver, product_name)
         product.click_add_to_wish_list_button()
-        return self._driver
 
-    def add_featured_product_to_compare_list(self,name: str):
-        product = ProductWidgetComponent(self._driver, name)
+    def add_featured_product_to_compare_list(self, product_name: str) -> None:
+        """Click 'Compare this product' button for adding featured product to compare list.
+
+        :param product_name: str
+        :return: None
+        """
+        product = ProductWidgetComponent(self._driver, product_name)
         product.click_add_to_compare_button()
-        return self._driver
-
-
-
-
-
