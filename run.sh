@@ -8,4 +8,4 @@ sleep 7
 
 # Run tests.
 cd /var/opencart-automation/dp189/tests \
-    && sudo pytest -v test_ftc_product_page.py --alluredir=/var/opencart-automation/dp189/reports
+    && sudo pytest -v --alluredir=/var/opencart-automation/dp189/reports
