@@ -6,9 +6,9 @@ class ComparePageConstants:
 
     IPHONE_ITEM = 'iPhone'
     APPLE_CINEMA_30_ITEM = 'Apple Cinema 30"'
-    IPHONE_SHOPPING_CART_ADDED_MESSAGE = 'Success: You have added iPhone to your shopping cart!\n×'
+    IPHONE_SHOPPING_CART_ADDED_MESSAGE = 'Success: You have added iPhone to your shopping cart!'
     APPLE_CINEMA_30_TITLE = 'Apple Cinema 30'
-    PRODUCT_COMPARISON_MODIFIED_MESSAGE = 'Success: You have modified your product comparison!\n×'
+    PRODUCT_COMPARISON_MODIFIED_MESSAGE = 'Success: You have modified your product comparison!'
 
 
 class ShoppingCartPageConstants:

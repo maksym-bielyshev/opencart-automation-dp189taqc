@@ -26,7 +26,7 @@ class TestComparePage(BaseTest):
     def test_add_product_to_cart_without_option(self):
         self.page.click_add_to_cart_button(ComparePageConstants.IPHONE_ITEM)
         message = self.page.catch_info_message.get_success_message()
-        assert message == ComparePageConstants.IPHONE_SHOPPING_CART_ADDED_MESSAGE
+        assert ComparePageConstants.IPHONE_SHOPPING_CART_ADDED_MESSAGE in message
 
     @allure.severity(allure.severity_level.NORMAL)
     def test_add_product_to_cart_with_option(self):
@@ -38,4 +38,4 @@ class TestComparePage(BaseTest):
     def test_remove_item_from_cart(self):
         self.page.click_remove_button(ComparePageConstants.IPHONE_ITEM)
         message = self.page.catch_info_message.get_success_message()
-        assert message == ComparePageConstants.PRODUCT_COMPARISON_MODIFIED_MESSAGE
+        assert ComparePageConstants.PRODUCT_COMPARISON_MODIFIED_MESSAGE in message
