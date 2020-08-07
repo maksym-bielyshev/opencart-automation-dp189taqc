@@ -10,7 +10,6 @@ from dp189.routes import *
 from dp189.constants import RegistrationPageConstants
 
 
-@allure.severity(allure.severity_level.NORMAL)
 class TestRegisterPage(BaseTest):
     """Class for the 'Register' page."""
 

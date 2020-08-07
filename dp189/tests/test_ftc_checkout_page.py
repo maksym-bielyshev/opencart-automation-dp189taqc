@@ -25,7 +25,6 @@ class TestCheckoutPage(BaseTest):
         self.checkout_page = CheckoutPage(self.driver)
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageGuest(TestCheckoutPage):
     """Class for the 'Checkout' page."""
 
@@ -333,7 +332,6 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .error_message.get_error_message() == CheckoutPageConstants.REGION_FIELD_ERROR_MESSAGE
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageRegister(TestCheckoutPage):
 
     def setup(self) -> None:

@@ -10,7 +10,6 @@ from dp189.tests.base_test import BaseTest
 from dp189.routes import HOME_PAGE_URL, COMPARE_PAGE_URL
 
 
-@allure.severity(allure.severity_level.NORMAL)
 class TestComparePage(BaseTest):
     """Class for the 'Compare' page testing."""
 
