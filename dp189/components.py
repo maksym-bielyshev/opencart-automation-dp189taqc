@@ -399,10 +399,8 @@ class InputFieldComponent:
         :return: None
         """
         if self.parent_element:
-            WebDriverWait(self._driver, 10).until(EC.presence_of_element_located(self.parent_element))
             self.input_field = self.parent_element.find_element(*self.input_field_locator)
         else:
-            WebDriverWait(self._driver, 10).until(EC.presence_of_element_located(self.input_field_locator))
             self.input_field = self._driver.find_element(*self.input_field_locator)
 
     def clear_and_fill_input_field(self, data: str) -> None:
