@@ -140,11 +140,11 @@ class AvailableOptions:
         """
         try:
             add_to_cart_button = WebDriverWait(self._driver, 15).until(
-                EC.presence_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
+                EC.visibility_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
             add_to_cart_button.click()
         except TimeoutException:
             add_to_cart_button = WebDriverWait(self._driver, 15).until(
-                EC.visibility_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
+                EC.presence_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
             add_to_cart_button.click()
 
 
