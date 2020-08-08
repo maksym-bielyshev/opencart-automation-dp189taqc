@@ -139,11 +139,11 @@ class AvailableOptions:
         :return: None
         """
         try:
-            add_to_cart_button = WebDriverWait(self._driver, 15).until(
+            add_to_cart_button = WebDriverWait(self._driver, 20).until(
                 EC.visibility_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
             add_to_cart_button.click()
         except TimeoutException:
-            add_to_cart_button = WebDriverWait(self._driver, 15).until(
+            add_to_cart_button = WebDriverWait(self._driver, 20).until(
                 EC.presence_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
             add_to_cart_button.click()
 
