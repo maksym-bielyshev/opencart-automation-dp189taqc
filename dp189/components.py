@@ -1,3 +1,5 @@
+import random
+import string
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Remote
@@ -35,11 +37,12 @@ class ShopCartButtonComponent:
         :param driver: Remote driver
         """
         self._driver = driver
-        self._shop_cart_button = driver.find_element(*LocatorsShoppingCartButton.SHOP_CART_BUTTON)
 
     def click_shop_cart_button(self):
         """Click shopping cart button."""
-        self._shop_cart_button.click()
+        shop_cart_button = WebDriverWait(self._driver, 10).until(
+            EC.element_to_be_clickable(LocatorsShoppingCartButton.SHOP_CART_BUTTON))
+        shop_cart_button.click()
         cart_items = self._driver.find_elements(*LocatorsShoppingCartButton.CART_ITEMS)
         if len(cart_items) == 0:
             return 'Your cart is empty!'
@@ -792,3 +795,11 @@ class LoginComponent:
         :return: None
         """
         self._driver.find_element(*LocatorsLoginComponent.LOGIN_BUTTON).click()
+
+
+def email_generator() -> str:
+    """Generate random email.
+
+    :return: str
+    """
+    return ''.join(random.choice(string.ascii_letters) for x in range(10)) + "@gmail.com"

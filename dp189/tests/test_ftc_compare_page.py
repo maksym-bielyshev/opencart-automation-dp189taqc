@@ -1,14 +1,15 @@
 """Module for the 'Compare' page tests."""
 
 import allure
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from dp189.locators import LocatorsComparePageTest
 from dp189.pages.compare_page import ComparePage
 from dp189.pages.home_page import HomePage
 from dp189.constants import ComparePageConstants
 from dp189.tests.base_test import BaseTest
 from dp189.routes import HOME_PAGE_URL, COMPARE_PAGE_URL
-
+from dp189.components import ProductWidgetComponent
 
 class TestComparePage(BaseTest):
     """Class for the 'Compare' page testing."""

@@ -206,7 +206,7 @@ class DeliveryDetails:
 
         :return: None
         """
-        continue_button = WebDriverWait(self._driver, 5).until(
+        continue_button = WebDriverWait(self._driver, 10).until(
             EC.element_to_be_clickable(LocatorsCheckoutPage.DELIVERY_DETAILS_CONTINUE_BUTTON))
         continue_button.click()
 

@@ -17,8 +17,8 @@ class TestAvailableOptions(BaseTest):
 
         :return: None
         """
-
-        self.driver.get(get_product_url('42'))
+        product_url = get_product_url('42')
+        self.driver.get(product_url)
         self.product_page = ProductPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)
