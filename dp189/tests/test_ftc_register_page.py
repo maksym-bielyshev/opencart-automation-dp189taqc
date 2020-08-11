@@ -10,6 +10,7 @@ from dp189.routes import *
 from dp189.constants import RegistrationPageConstants
 
 
+@allure.severity(allure.severity_level.NORMAL)
 class TestRegisterPage(BaseTest):
     """Class for the 'Register' page."""
 
@@ -36,6 +37,7 @@ class TestRegisterPage(BaseTest):
 
         assert not self.register_page.your_personal_details_form.first_name_field.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input', get_test_data('register_page/field_last_name.csv'))
     def test_check_last_name_field_valid_data(self, test_input: str) -> None:
         """Check the 'Last name' field with valid data on the register page.
@@ -50,6 +52,7 @@ class TestRegisterPage(BaseTest):
 
         assert not self.register_page.your_personal_details_form.last_name_field.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     def test_check_email_field_valid_data(self) -> None:
         """Check the 'Email' field with valid data on register page.
 
@@ -61,6 +64,7 @@ class TestRegisterPage(BaseTest):
 
         assert not self.register_page.your_personal_details_form.email_field.error_message.get_error_message()
 
+    @allure.severity(allure.severity_level.MINOR)
     @pytest.mark.parametrize('test_input', get_test_data('register_page/field_telephone-valid.csv'))
     def test_check_telephone_field_valid_data(self, test_input: str) -> None:
         """Check the 'Telephone' field with valid data on register page.
