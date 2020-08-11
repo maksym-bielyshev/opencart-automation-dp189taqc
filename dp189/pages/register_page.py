@@ -1,4 +1,6 @@
 from selenium.webdriver import Remote
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from dp189.pages.base_page import BasePage
 from dp189.components import YourPersonalDetailsComponent, YourPasswordComponent, NewsletterComponent, \
     PrivacyPolicyComponent
@@ -15,7 +17,8 @@ class RegisterPage(BasePage):
         :return: None
         """
         super().__init__(driver)
-        self.register_account_container = self._driver.find_element(*LocatorsRegisterPage.YOUR_PERSONAL_DETAILS_PARENT)
+        self.register_account_container = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsRegisterPage.YOUR_PERSONAL_DETAILS_PARENT))
         self.your_personal_details_form = YourPersonalDetailsComponent(self._driver, self.register_account_container)
         self.your_password_form = YourPasswordComponent(self._driver, self.register_account_container)
         self.subscribe_radio_buttons = NewsletterComponent(self._driver)

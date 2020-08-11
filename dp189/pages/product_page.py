@@ -4,6 +4,7 @@ Each field or button of the product page can be called using a separate method.
 """
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from dp189.pages.base_page import BasePage
 from dp189.locators import LocatorsProductPage, LocatorsReviewsTab, LocatorsAvailableOptions, LocatorsShoppingCartButton
 from dp189.components import InputFieldComponent, RadioButtonComponent, CheckboxComponent, DropdownComponent
@@ -122,7 +123,6 @@ class AvailableOptions:
         :param driver: Remote
         """
         self._driver = driver
-        self._all_options = driver.find_element(*LocatorsAvailableOptions.ALL_OPTIONS)
         self.text_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_FIELD)
         self.text_area_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.TEXT_AREA)
         self.data_field = InputFieldComponent(self._driver, LocatorsAvailableOptions.DATE)
@@ -138,7 +138,14 @@ class AvailableOptions:
 
         :return: None
         """
-        self._driver.find_element(*LocatorsAvailableOptions.ADD_TO_CART).click()
+        try:
+            add_to_cart_button = WebDriverWait(self._driver, 20).until(
+                EC.visibility_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
+            add_to_cart_button.click()
+        except TimeoutException:
+            add_to_cart_button = WebDriverWait(self._driver, 20).until(
+                EC.presence_of_element_located(LocatorsAvailableOptions.ADD_TO_CART))
+            add_to_cart_button.click()
 
 
 class ReviewsTab:

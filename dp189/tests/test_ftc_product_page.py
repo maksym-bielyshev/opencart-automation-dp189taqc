@@ -11,15 +11,14 @@ from dp189.tests.conftest import get_test_data
 from dp189.routes import *
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestAvailableOptions(BaseTest):
     def setup(self) -> None:
         """Setup for the test.
 
         :return: None
         """
-
-        self.driver.get(get_product_url('42'))
+        product_url = get_product_url('42')
+        self.driver.get(product_url)
         self.product_page = ProductPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)

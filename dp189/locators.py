@@ -11,11 +11,11 @@ class LocatorsBasePageNavBar:
     """Locators for top navbar links on base page"""
 
     NAVBAR = (By.CLASS_NAME, 'list-inline')
-    MY_ACCOUNT = (By.XPATH, '/html/body/nav/div/div[2]/ul/li[2]')
+    MY_ACCOUNT = (By.XPATH, '//a[@title="My Account"]')
     CURRENCY = (By.XPATH, '//span[text()="Currency"]/../..')
-    USD = (By.XPATH, './/ul/li[3]/button')
-    POUND = (By.XPATH, './/ul/li[2]/button')
-    EUR = (By.XPATH, './/ul/li[1]/button')
+    USD = (By.XPATH, './/button[@name="EUR"]')
+    POUND = (By.XPATH, './/button[@name="GBP"]')
+    EUR = (By.XPATH, './/button[@name="USD"]')
     CONTACT_US = (By.XPATH, './/li[1]/a')
     LOGIN = (By.XPATH, './/ul/li[2]/a')
     REGISTER = (By.XPATH, './/ul/li[1]/a')
@@ -62,8 +62,8 @@ class LocatorsRightMenuRegisterPage:
 class LocatorsShoppingCartButton:
     """Locators for a black shop cart button."""
 
-    SHOP_CART_BUTTON = (By.XPATH, '/html/body/header/div/div/div[3]/div/button')
-    CART_ITEMS = (By.XPATH, '/html/body/header/div/div/div[3]/div/ul/li[1]/table')
+    SHOP_CART_BUTTON = (By.XPATH, '//div[@id="cart"]/button')
+    CART_ITEMS = (By.XPATH, '//div[@id="cart"]//table')
     VIEW_CART = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[1]')
     CHECKOUT = (By.XPATH, '//ul[@class="dropdown-menu pull-right"]//li[2]//div//p//a[2]')
 
@@ -137,8 +137,7 @@ class LocatorsAvailableOptions:
     """Locators for Available options on 'Product Page'."""
 
     QUANTITY = (By.ID, 'input-quantity')
-    ADD_TO_CART = (By.ID, 'button-cart')
-    ALL_OPTIONS = (By.CSS_SELECTOR, '#product')
+    ADD_TO_CART = (By.XPATH, '//button[@id="button-cart"]')
     TEXT_FIELD = (By.XPATH, '//input[@value="test"]')
     DATE = (By.XPATH, '//input[@data-date-format="YYYY-MM-DD"]')
     TIME = (By.XPATH, '//input[@data-date-format="HH:mm"]')

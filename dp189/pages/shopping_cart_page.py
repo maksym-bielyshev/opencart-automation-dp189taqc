@@ -214,7 +214,9 @@ class EstimateShippingPanel:
 
         :return: None
         """
-        self._driver.find_element(*LocatorsShoppingCartPage.ESTIMATE_SHIPPING_PANEL).click()
+        estimate_shipping_panel = WebDriverWait(self._driver, 10).until(
+            EC.presence_of_element_located(LocatorsShoppingCartPage.ESTIMATE_SHIPPING_PANEL))
+        estimate_shipping_panel.click()
 
     def click_get_quotes_button(self) -> None:
         """Click on 'Get Quotes' button.

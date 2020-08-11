@@ -2,8 +2,8 @@
 
 import pytest
 import allure
+from dp189.components import email_generator
 from dp189.pages.register_page import RegisterPage
-from dp189.pages.home_page import HomePage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
 from dp189.routes import *
@@ -19,11 +19,7 @@ class TestRegisterPage(BaseTest):
 
         :return: None
         """
-
-        self.driver.get(HOME_PAGE_URL)
-        self.home_page = HomePage(self.driver)
-        self.home_page.click_account_and_go_to_register()
-
+        self.driver.get(REGISTER_PAGE_URL)
         self.register_page = RegisterPage(self.driver)
 
     @allure.severity(allure.severity_level.MINOR)
@@ -217,21 +213,21 @@ class TestRegisterPage(BaseTest):
         self.register_page.privacy_policy_checkbox.agree_with_privacy_policy()
         self.register_page.click_continue_button()
 
-        assert self.register_page.your_personal_details_form.first_name_field.error_message. \
+        assert self.register_page.your_personal_details_form.first_name_field.error_message.\
                    get_error_message() == expected
 
     @allure.severity(allure.severity_level.NORMAL)
-    @pytest.mark.parametrize('first_name_field,last_name_field,email_field,telephone_field,password_field,'
-                             'password_confirm_field', get_test_data('register_page/registration_form_positive.csv'))
-    def test_registration_form(self, first_name_field: str, last_name_field: str, email_field: str,
-                               telephone_field: str, password_field: str, password_confirm_field: str) -> None:
+    @pytest.mark.parametrize('first_name_field,last_name_field,telephone_field,password_field,'
+                             'password_confirm_field',get_test_data('register_page/registration_form_positive.csv'))
+    def test_registration_form(self, first_name_field: str, last_name_field: str, telephone_field: str,
+                               password_field: str, password_confirm_field: str) -> None:
         """Check the registration form on the registration page.
 
         :return: None
         """
         self.register_page.your_personal_details_form.first_name_field.clear_and_fill_input_field(first_name_field)
         self.register_page.your_personal_details_form.last_name_field.clear_and_fill_input_field(last_name_field)
-        self.register_page.your_personal_details_form.email_field.clear_and_fill_input_field(email_field)
+        self.register_page.your_personal_details_form.email_field.clear_and_fill_input_field(email_generator())
         self.register_page.your_personal_details_form.telephone_field.clear_and_fill_input_field(telephone_field)
         self.register_page.your_password_form.password_field.clear_and_fill_input_field(password_field)
         self.register_page.your_password_form.password_confirm_field.clear_and_fill_input_field(password_confirm_field)

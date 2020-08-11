@@ -2,10 +2,9 @@
 
 import pytest
 import allure
-from dp189.components import ProductWidgetComponent
+from dp189.components import email_generator
 from dp189.constants import CheckoutPageConstants
 from dp189.pages.checkout_page import CheckoutPage
-from dp189.pages.home_page import HomePage
 from dp189.pages.product_page import ProductPage
 from dp189.tests.base_test import BaseTest
 from dp189.tests.conftest import get_test_data
@@ -25,7 +24,6 @@ class TestCheckoutPage(BaseTest):
         checkout_page = CheckoutPage(self.driver)
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageGuest(TestCheckoutPage):
     """Class for the 'Checkout' page."""
 
@@ -333,7 +331,6 @@ class TestCheckoutPageGuest(TestCheckoutPage):
                    .error_message.get_error_message() == CheckoutPageConstants.REGION_FIELD_ERROR_MESSAGE
 
 
-@allure.severity(allure.severity_level.CRITICAL)
 class TestCheckoutPageRegister(TestCheckoutPage):
 
     def setup(self) -> None:
@@ -354,7 +351,7 @@ class TestCheckoutPageRegister(TestCheckoutPage):
         self.checkout_page.open_account_billing_details.your_personal_details_form.last_name_field. \
             clear_and_fill_input_field('Smith')
         self.checkout_page.open_account_billing_details.your_personal_details_form.email_field. \
-            clear_and_fill_input_field('jgoe202@gmail.com')
+            clear_and_fill_input_field(email_generator())
         self.checkout_page.open_account_billing_details.your_personal_details_form.telephone_field. \
             clear_and_fill_input_field('17777777777')
         self.checkout_page.open_account_billing_details.your_password_form.password_field.clear_and_fill_input_field(
