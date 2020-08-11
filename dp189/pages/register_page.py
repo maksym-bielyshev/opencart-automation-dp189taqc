@@ -26,5 +26,5 @@ class RegisterPage(BasePage):
 
         :return: None
         """
-        self.continue_button = self._driver.find_element(*LocatorsRegisterPage.CONTINUE_BUTTON)
-        self.continue_button.click()
+        continue_button = self._driver.find_element(*LocatorsRegisterPage.CONTINUE_BUTTON)
+        continue_button.click()

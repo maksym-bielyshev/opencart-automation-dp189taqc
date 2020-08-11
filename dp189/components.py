@@ -515,7 +515,6 @@ class CatchPageTitleComponent:
 
         :return: str
         """
-        self._driver.title()
         WebDriverWait(self._driver, 5).until(EC.title_is(page_title))
         return page_title
 
