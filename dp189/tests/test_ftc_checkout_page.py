@@ -21,7 +21,7 @@ class TestCheckoutPage(BaseTest):
         self.driver.get(get_product_url('40'))
         ProductPage(self.driver).available_options.click_add_to_cart_button()
         self.driver.get(CHECKOUT_PAGE_URL)
-        checkout_page = CheckoutPage(self.driver)
+        self.checkout_page = CheckoutPage(self.driver)
 
 
 class TestCheckoutPageGuest(TestCheckoutPage):
